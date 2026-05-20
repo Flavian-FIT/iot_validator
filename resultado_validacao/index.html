@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resultados - Processo Seletivo IoT</title>
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --gray-50: #f9fafb;
+            --gray-100: #f3f4f6;
+            --gray-200: #e5e7eb;
+            --gray-300: #d1d5db;
+            --gray-600: #4b5563;
+            --gray-700: #374151;
+            --gray-800: #1f2937;
+            --gray-900: #111827;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 2rem;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .header {
+            background: white;
+            border-radius: 1rem;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+        }
+
+        .header h1 {
+            color: var(--gray-800);
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .header p {
+            color: var(--gray-600);
+            font-size: 1.1rem;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .stat-card {
+            background: var(--gray-50);
+            padding: 1.5rem;
+            border-radius: 0.75rem;
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: var(--primary);
+        }
+
+        .stat-label {
+            color: var(--gray-600);
+            font-size: 0.875rem;
+            margin-top: 0.5rem;
+        }
+
+        .controls {
+            background: white;
+            border-radius: 1rem;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .search-box {
+            flex: 1;
+            min-width: 250px;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 2px solid var(--gray-200);
+            border-radius: 0.5rem;
+            font-size: 1rem;
+            transition: border-color 0.2s;
+        }
+
+        .search-box input:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        .filter-select {
+            padding: 0.75rem 1rem;
+            border: 2px solid var(--gray-200);
+            border-radius: 0.5rem;
+            font-size: 1rem;
+            background: white;
+            cursor: pointer;
+        }
+
+        .students-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .student-card {
+            background: white;
+            border-radius: 1rem;
+            padding: 1.5rem;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            transition: transform 0.2s, box-shadow 0.2s;
+            cursor: pointer;
+        }
+
+        .student-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+        }
+
+        .student-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+        }
+
+        .student-name {
+            font-weight: 600;
+            color: var(--gray-800);
+            font-size: 1.1rem;
+            flex: 1;
+            margin-right: 1rem;
+        }
+
+        .grade-badge {
+            padding: 0.5rem 1rem;
+            border-radius: 2rem;
+            font-weight: bold;
+            font-size: 1.25rem;
+            min-width: 80px;
+            text-align: center;
+        }
+
+        .grade-excellent { background: #d1fae5; color: #059669; }
+        .grade-good { background: #dbeafe; color: #2563eb; }
+        .grade-average { background: #fef3c7; color: #d97706; }
+        .grade-poor { background: #fee2e2; color: #dc2626; }
+
+        .student-info {
+            color: var(--gray-600);
+            font-size: 0.875rem;
+            margin-bottom: 1rem;
+        }
+
+        .student-info p {
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .criteria-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 0.5rem;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--gray-200);
+        }
+
+        .criterion {
+            text-align: center;
+        }
+
+        .criterion-value {
+            font-weight: bold;
+            font-size: 1.1rem;
+            color: var(--gray-800);
+        }
+
+        .criterion-label {
+            font-size: 0.7rem;
+            color: var(--gray-600);
+            text-transform: uppercase;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.7);
+            z-index: 1000;
+            overflow-y: auto;
+            padding: 2rem;
+        }
+
+        .modal.active {
+            display: block;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 1rem;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem;
+            position: relative;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: none;
+            border: none;
+            font-size: 2rem;
+            cursor: pointer;
+            color: var(--gray-600);
+        }
+
+        .modal-close:hover {
+            color: var(--gray-900);
+        }
+
+        .modal-header {
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--gray-200);
+        }
+
+        .modal-title {
+            font-size: 1.5rem;
+            color: var(--gray-800);
+            margin-bottom: 0.5rem;
+        }
+
+        .modal-grade {
+            font-size: 3rem;
+            font-weight: bold;
+        }
+
+        .modal-body {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+
+        .modal-section {
+            margin-bottom: 1.5rem;
+        }
+
+        .modal-section h3 {
+            color: var(--gray-800);
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .criteria-list {
+            list-style: none;
+        }
+
+        .criteria-list li {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.75rem;
+            background: var(--gray-50);
+            border-radius: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--gray-200);
+        }
+
+        .btn {
+            flex: 1;
+            padding: 1rem;
+            border: none;
+            border-radius: 0.5rem;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+            text-decoration: none;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+        }
+
+        .btn-secondary {
+            background: var(--gray-100);
+            color: var(--gray-800);
+        }
+
+        .btn-secondary:hover {
+            background: var(--gray-200);
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 1rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .status-success { background: #d1fae5; color: #059669; }
+        .status-error { background: #fee2e2; color: #dc2626; }
+
+        @media (max-width: 768px) {
+            .modal-body {
+                grid-template-columns: 1fr;
+            }
+            
+            .students-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .loading {
+            text-align: center;
+            padding: 3rem;
+            color: white;
+            font-size: 1.5rem;
+        }
+
+        .no-results {
+            text-align: center;
+            padding: 3rem;
+            color: var(--gray-600);
+            background: white;
+            border-radius: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎓 Resultados - Processo Seletivo IoT</h1>
+            <p>Validação automática de entregas - 77 alunos processados</p>
+            
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-value" id="total-students">77</div>
+                    <div class="stat-label">Total de Alunos</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" id="avg-grade">87.4</div>
+                    <div class="stat-label">Nota Média</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" id="approved">72</div>
+                    <div class="stat-label">Aprovados</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" id="top-grade">97.9</div>
+                    <div class="stat-label">Maior Nota</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="controls">
+            <div class="search-box">
+                <input type="text" id="search" placeholder="🔍 Buscar por nome do aluno...">
+            </div>
+            <select class="filter-select" id="grade-filter">
+                <option value="all">Todas as Notas</option>
+                <option value="excellent">Excelente (90-100)</option>
+                <option value="good">Bom (70-89)</option>
+                <option value="average">Médio (50-69)</option>
+                <option value="poor">Abaixo de 50</option>
+            </select>
+            <select class="filter-select" id="status-filter">
+                <option value="all">Todos Status</option>
+                <option value="success">Sucesso</option>
+                <option value="error">Erros</option>
+            </select>
+        </div>
+
+        <div class="students-grid" id="students-grid">
+            <!-- Cards serão inseridos via JavaScript -->
+        </div>
+
+        <div class="no-results" id="no-results" style="display: none;">
+            <h3>Nenhum aluno encontrado</h3>
+            <p>Tente ajustar os filtros de busca</p>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal" id="student-modal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal()">&times;</button>
+            
+            <div class="modal-header">
+                <h2 class="modal-title" id="modal-name">Nome do Aluno</h2>
+                <div class="modal-grade" id="modal-grade">0.0</div>
+            </div>
+
+            <div class="modal-body">
+                <div>
+                    <div class="modal-section">
+                        <h3>📊 Critérios de Avaliação</h3>
+                        <ul class="criteria-list" id="modal-criteria">
+                            <!-- Critérios inseridos via JS -->
+                        </ul>
+                    </div>
+
+                    <div class="modal-section">
+                        <h3>ℹ️ Informações</h3>
+                        <p><strong>Repositório:</strong> <a href="#" id="modal-repo" target="_blank">Link</a></p>
+                        <p><strong>Status:</strong> <span id="modal-status">Sucesso</span></p>
+                        <p><strong>Commits:</strong> <span id="modal-commits">0</span></p>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="modal-section">
+                        <h3>📝 Resumo do Projeto</h3>
+                        <p id="modal-summary">Resumo não disponível</p>
+                    </div>
+
+                    <div class="modal-section">
+                        <h3>✅ Feedback</h3>
+                        <p id="modal-feedback">Feedback não disponível</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="action-buttons">
+                <a class="btn btn-primary" id="btn-report" target="_blank">
+                    📄 Ver Relatório Completo
+                </a>
+                <a class="btn btn-secondary" id="btn-repo" target="_blank">
+                    🔗 Acessar Repositório
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Dados dos alunos - serão preenchidos com os dados do JSON
+        let students = [];
+
+        // Carregar dados do JSON
+        async function loadStudents() {
+            try {
+                const response = await fetch('avaliacoes_completas.json');
+                students = await response.json();
+                renderStudents(students);
+            } catch (error) {
+                console.error('Erro ao carregar dados:', error);
+                document.getElementById('students-grid').innerHTML = 
+                    '<div class="no-results"><h3>Erro ao carregar dados</h3><p>Verifique se o arquivo avaliacoes_completas.json existe</p></div>';
+            }
+        }
+
+        function getGradeClass(grade) {
+            if (grade >= 90) return 'grade-excellent';
+            if (grade >= 70) return 'grade-good';
+            if (grade >= 50) return 'grade-average';
+            return 'grade-poor';
+        }
+
+        function getStatusClass(status) {
+            return status === 'sucesso' ? 'status-success' : 'status-error';
+        }
+
+        function getStatusText(status) {
+            return status === 'sucesso' ? '✅ Sucesso' : '❌ Erro';
+        }
+
+        function renderStudents(studentsToRender) {
+            const grid = document.getElementById('students-grid');
+            const noResults = document.getElementById('no-results');
+            
+            if (studentsToRender.length === 0) {
+                grid.innerHTML = '';
+                noResults.style.display = 'block';
+                return;
+            }
+
+            noResults.style.display = 'none';
+            grid.innerHTML = studentsToRender.map(student => `
+                <div class="student-card" onclick="openModal('${student.nome}')">
+                    <div class="student-header">
+                        <div class="student-name">${student.nome}</div>
+                        <div class="grade-badge ${getGradeClass(student.nota_final)}">
+                            ${student.nota_final.toFixed(1)}
+                        </div>
+                    </div>
+                    
+                    <div class="student-info">
+                        <p>📧 ${student.email || 'N/A'}</p>
+                        <p>🔗 <a href="${student.github_url || '#'}" target="_blank" onclick="event.stopPropagation()">Acessar repo</a></p>
+                        <p>Status: <span class="status-badge ${getStatusClass(student.status)}">${getStatusText(student.status)}</span></p>
+                    </div>
+
+                    <div class="criteria-grid">
+                        <div class="criterion">
+                            <div class="criterion-value">${student.criterios?.logica_firmware?.score || 0}</div>
+                            <div class="criterion-label">Lógica</div>
+                        </div>
+                        <div class="criterion">
+                            <div class="criterion-value">${student.criterios?.metrica_wokwi?.score || 0}</div>
+                            <div class="criterion-label">Wokwi</div>
+                        </div>
+                        <div class="criterion">
+                            <div class="criterion-value">${student.criterios?.ci_cd?.score || 0}</div>
+                            <div class="criterion-label">CI/CD</div>
+                        </div>
+                        <div class="criterion">
+                            <div class="criterion-value">${student.criterios?.documentacao?.score || 0}</div>
+                            <div class="criterion-label">Docs</div>
+                        </div>
+                        <div class="criterion">
+                            <div class="criterion-value">${student.criterios?.estrutura?.score || 0}</div>
+                            <div class="criterion-label">Estrut.</div>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function openModal(studentName) {
+            const student = students.find(s => s.nome === studentName);
+            if (!student) return;
+
+            document.getElementById('modal-name').textContent = student.nome;
+            document.getElementById('modal-grade').textContent = `${student.nota_final.toFixed(1)}/100`;
+            document.getElementById('modal-grade').className = `modal-grade ${getGradeClass(student.nota_final)}`;
+            
+            // Critérios
+            const criteriaList = document.getElementById('modal-criteria');
+            const criterios = student.criterios || {};
+            criteriaList.innerHTML = `
+                <li><span>Lógica do Firmware</span><strong>${criterios.logica_firmware?.score || 0}/30</strong></li>
+                <li><span>Métrica (Wokwi)</span><strong>${criterios.metrica_wokwi?.score || 0}/20</strong></li>
+                <li><span>CI/CD</span><strong>${criterios.ci_cd?.score || 0}/25</strong></li>
+                <li><span>Documentação</span><strong>${criterios.documentacao?.score || 0}/10</strong></li>
+                <li><span>Estrutura</span><strong>${criterios.estrutura?.score || 0}/10</strong></li>
+            `;
+
+            // Informações
+            document.getElementById('modal-repo').href = student.github_url || '#';
+            document.getElementById('modal-repo').textContent = student.github_url || 'N/A';
+            document.getElementById('modal-status').textContent = getStatusText(student.status);
+            document.getElementById('modal-commits').textContent = student.commits?.length || 0;
+            document.getElementById('modal-summary').textContent = student.resumo || 'Não disponível';
+            document.getElementById('modal-feedback').textContent = 
+                student.criterios?.documentacao?.feedback || 'Não disponível';
+
+            // Botões
+            const nomeArquivo = student.nome.replace(/[^a-zA-Z0-9]/g, '_');
+            document.getElementById('btn-report').href = `relatorios/${nomeArquivo}_relatorio.md`;
+            document.getElementById('btn-repo').href = student.github_url || '#';
+
+            document.getElementById('student-modal').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            document.getElementById('student-modal').classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Filtros
+        function filterStudents() {
+            const searchTerm = document.getElementById('search').value.toLowerCase();
+            const gradeFilter = document.getElementById('grade-filter').value;
+            const statusFilter = document.getElementById('status-filter').value;
+
+            let filtered = students.filter(student => {
+                const matchSearch = student.nome.toLowerCase().includes(searchTerm);
+                
+                let matchGrade = true;
+                if (gradeFilter === 'excellent') matchGrade = student.nota_final >= 90;
+                else if (gradeFilter === 'good') matchGrade = student.nota_final >= 70 && student.nota_final < 90;
+                else if (gradeFilter === 'average') matchGrade = student.nota_final >= 50 && student.nota_final < 70;
+                else if (gradeFilter === 'poor') matchGrade = student.nota_final < 50;
+
+                let matchStatus = true;
+                if (statusFilter === 'success') matchStatus = student.status === 'sucesso';
+                else if (statusFilter === 'error') matchStatus = student.status !== 'sucesso';
+
+                return matchSearch && matchGrade && matchStatus;
+            });
+
+            renderStudents(filtered);
+        }
+
+        // Event listeners
+        document.getElementById('search').addEventListener('input', filterStudents);
+        document.getElementById('grade-filter').addEventListener('change', filterStudents);
+        document.getElementById('status-filter').addEventListener('change', filterStudents);
+
+        // Fechar modal com ESC
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeModal();
+        });
+
+        // Fechar modal clicando fora
+        document.getElementById('student-modal').addEventListener('click', (e) => {
+            if (e.target.id === 'student-modal') closeModal();
+        });
+
+        // Inicializar
+        loadStudents();
+    </script>
+</body>
+</html>
