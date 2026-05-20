@@ -1,0 +1,238 @@
+Nome,Email,Link do Repositório,Resumo do Projeto,Pontuação Detalhada,Nota Final
+Maria Madalena Silva_203,maria.madalena.silva_203@aluno.com,https://github.com/airaMada/processoseletivoIoT,"## 1️⃣ Visão Geral da Solução
+
+Descreva, em poucas palavras:
+
+- Qual é o objetivo do seu projeto  
+- O que o sistema embarcado simulado faz  
+- Como o usuário interage com ele (se aplicável)
+
+---
+## 5",logica_firmware: 27 pts | metrica_wokwi: 20 pts | ci_cd: 20 pts | documentacao: 10 pts | estrutura: 8 pts,89.5
+Leonardo Vieira_236,leonardo.vieira_236@aluno.com,https://github.com/leonardo897/processoseletivoIoT,"## 1️⃣ Visão Geral da Solução
+
+O projeto implementa um **semáforo inteligente com suporte à travessia de pedestres**, simulado em um ESP32 via Wokwi utilizando MicroPython.
+ 
+O sistema controla três L",logica_firmware: 30 pts | metrica_wokwi: 20 pts | ci_cd: 20 pts | documentacao: 10 pts | estrutura: 8 pts,92.6
+Lucas do Nascimento Souza_226,lucas.do.nascimento.souza_226@aluno.com,https://github.com/lucnsdev/ProcessoSeletivoIoT,"## 1️⃣ Visão Geral da Solução
+- O projeto atual visa a criação de um sistema capaz de realizar leituras de dados climáticos e enviar a um app.
+- Ele conecta o ESP32 virtual a internet e usa MQTT para ",logica_firmware: 30 pts | metrica_wokwi: 20 pts | ci_cd: 20 pts | documentacao: 10 pts | estrutura: 8 pts,92.6
+Raissa Rodrigues_217,raissa.rodrigues_217@aluno.com,https://github.com/RaissaKarolliny/processoseletivoIoT,"## 1️⃣ Visão Geral da Solução
+
+Este projeto tem como objetivo desenvolver um sistema embarcado assistivo para auxiliar pessoas autistas não verbais na comunicação de necessidades básicas.
+
+O sistema s",logica_firmware: 30 pts | metrica_wokwi: 20 pts | ci_cd: 20 pts | documentacao: 10 pts | estrutura: 8 pts,92.6
+PEDRO HENRIQUE BEZERRA SIME├ГO_212,pedro.henrique.bezerra.sime├гo_212@aluno.com,https://github.com/Hnnrik/processoseletivoIoT,"## 1️⃣ Visão Geral da Solução
+
+**Objetivo do projeto**  
+O objetivo é desenvolver um nó sensor de monitoramento ambiental focado na prevenção de incêndios florestais. O sistema avalia variáveis crític",logica_firmware: 30 pts | metrica_wokwi: 20 pts | ci_cd: 20 pts | documentacao: 10 pts | estrutura: 8 pts,92.6
+Marcus Vinicius Oliveira Ventura_132,marcus.vinicius.oliveira.ventura_132@aluno.com,https://github.com/MarcusVentura14/processoseletivoIoT,"## 1️⃣ Visão Geral da Solução
+
+O projeto implementa um Sensor de Proximidade Reativo (inspirado em radares de ré automotivos) utilizando um ESP32. Seu mecanismo utiliza ondas ultrassônicas para calcul",logica_firmware: 30 pts | metrica_wokwi: 20 pts | ci_cd: 20 pts | documentacao: 10 pts | estrutura: 8 pts,92.6
+Lucas Vinicius Santos Leonel_201,lucas.vinicius.santos.leonel_201@aluno.com,https://github.com/lucasvinisan/Iot_LucasLeonel,"## 1️⃣ Visão Geral da Solução
+
+`Objetivo:`
+
+ Simular o sistema de temperatura de um motor e gerar todas as temperaturas em um intervalo (para, posteriormente, ser usado na implemetação de algoritmos p",logica_firmware: 30 pts | metrica_wokwi: 20 pts | ci_cd: 20 pts | documentacao: 10 pts | estrutura: 8 pts,92.6
+LUANN DE LIMA_220,luann.de.lima_220@aluno.com,https://github.com/Lonalt/processoseletivoIoT-Lonnal,,,0
+Paulo Victor Santos Souza_150,paulo.victor.santos.souza_150@aluno.com,https://github.com/PauloVict0r/processoseletivoIoT,"## 1️⃣ Visão Geral da Solução
+
+O objetivo do projeto é fornecer um sistema inteligente de auxílio de estacionamento simples e barato que possa ser facilmente instalado em vagas residenciais ou comerci",logica_firmware: 30 pts | metrica_wokwi: 20 pts | ci_cd: 25 pts | documentacao: 10 pts | estrutura: 8 pts,97.9
+Riquelme Jatay Ribeiro Scarcela Bezerra_191,riquelme.jatay.ribeiro.scarcela.bezerra_191@aluno.com,https://github.com/RiquelmeJ/processoseletivoIoT,0/5 seções (insuficiente),logica_firmware: 0 pts | metrica_wokwi: 20 pts | ci_cd: 25 pts | documentacao: 0 pts | estrutura: 6 pts,53.7
+Irlan Barros_221,irlan.barros_221@aluno.com,https://github.com/IrlanBarros/processoseletivoIoT,"## 1️⃣ Visão Geral da Solução
+
+O **ArgosGuard** é um ecossistema de segurança vestível (*wearable*) inteligente, projetado para atuar como uma camada de proteção crítica contra a exaustão humana em am",logica_firmware: 30 pts | metrica_wokwi: 20 pts | ci_cd: 20 pts | documentacao: 10 pts | estrutura: 8 pts,92.6
+Paula H├вnnia Rocha Santana_254,paula.h├вnnia.rocha.santana_254@aluno.com,https://github.com/nothanni/processoseletivoIoT,"## 1️⃣ Visão Geral da Solução
+
+O projeto consiste em um **sistema embarcado simulado de monitoramento de temperatura**, desenvolvido para o desafio técnico do processo seletivo Intensivo Maker | IoT.
+",logica_firmware: 27 pts | metrica_wokwi: 20 pts | ci_cd: 20 pts | documentacao: 10 pts | estrutura: 8 pts,89.5
+Jonathas Levi_163,jonathas.levi_163@aluno.com,https://github.com/Aqu4tro/processoseletivoIoT,"## 1️⃣ Visão Geral da Solução
+
+Este projeto implementa um **sistema de controle de acesso avançado** simulado em hardware virtual (ESP32 via Wokwi). 
+
+Embora o escopo principal seja a simulação de um ",logica_firmware: 30 pts | metrica_wokwi: 20 pts | ci_cd: 20 pts | documentacao: 8 pts | estrutura: 8 pts,90.5
+Le├┤ncio Ferreira Flores Neto_188,le├┤ncio.ferreira.flores.neto_188@aluno.com,https://github.com/LeoncioFerreira/processoseletivoIoT-LeoncioFerreira,0/5 seções (insuficiente),logica_firmware: 30 pts | metrica_wokwi: 20 pts | ci_cd: 20 pts | documentacao: 0 pts | estrutura: 8 pts,82.1
+Let├нcia Maria dos Santos Dias_210,let├нcia.maria.dos.santos.dias_210@aluno.com,https://github.com/leticia-software-engineer/processoseletivoIoT,"## 1️⃣ Visão Geral da Solução
+ 
+O objetivo do Projeto de Semáforo usando ESP32 é desenvolver um firmware simples e leve para ser utilizado em sistema embarcado de Semáforo para controle de trânsito. A",logica_firmware: 30 pts | metrica_wokwi: 20 pts | ci_cd: 25 pts | documentacao: 10 pts | estrutura: 8 pts,97.9
+Pedro Yan Alcantara Palacio_149,pedro.yan.alcantara.palacio_149@aluno.com,https://github.com/pedropalacioo/processoseletivoIoT,0/5 seções (insuficiente),logica_firmware: 30 pts | metrica_wokwi: 20 pts | ci_cd: 20 pts | documentacao: 0 pts | estrutura: 8 pts,82.1
+Vit├│ria Maciel Bernardo_209,vit├│ria.maciel.bernardo_209@aluno.com,https://github.com/vitoriamb/processoseletivoIoT,"## 1️⃣ Visão Geral da Solução
+
+**Projeto:** Cofre Eletrônico em ESP32 + MicroPython, simulado no Wokwi.
+
+O sistema bloqueia uma trava (servo motor) até que o usuário digite uma senha de 4 dígitos em u",logica_firmware: 30 pts | metrica_wokwi: 20 pts | ci_cd: 25 pts | documentacao: 10 pts | estrutura: 8 pts,97.9
+Samuel Wagner Tiburi Silveira_144,samuel.wagner.tiburi.silveira_144@aluno.com,https://github.com/samsilveira/processoseletivoIoT,0/5 seções (insuficiente),logica_firmware: 30 pts | metrica_wokwi: 20 pts | ci_cd: 25 pts | documentacao: 0 pts | estrutura: 8 pts,87.4
+Sarah Mendes Teles_170,sarah.mendes.teles_170@aluno.com,https://github.com/sarahmendes-ufca/processoseletivoIoTSarah,"## 1️⃣ Visão Geral da Solução - Sistema de Monitoramento de Ambiente: Monitoramento de Temperatura e Umidade com ESP32
+
+
+Este projeto tem como objetivo de monitorrar o ambiente, realizando a leitura d",logica_firmware: 30 pts | metrica_wokwi: 20 pts | ci_cd: 20 pts | documentacao: 10 pts | estrutura: 8 pts,92.6
+Daniel Victor de Sousa_155,daniel.victor.de.sousa_155@aluno.com,https://github.com/danielvincks/processoseletivoIA,0/5 seções (insuficiente),logica_firmware: 0 pts | metrica_wokwi: 0 pts | ci_cd: 12 pts | documentacao: 0 pts | estrutura: 1 pts,13.7
+Jo├гo Kayque Pereira de Souza_227,jo├гo.kayque.pereira.de.souza_227@aluno.com,https://github.com/kaypes/processoseletivoIoT,0/5 seções (insuficiente),logica_firmware: 27 pts | metrica_wokwi: 20 pts | ci_cd: 20 pts | documentacao: 0 pts | estrutura: 8 pts,78.9
+Antonio Rafael Oliveira da Cunha_230,antonio.rafael.oliveira.da.cunha_230@aluno.com,https://github.com/devraffa/processoseletivoIoT,"## 1️⃣ Visão Geral da Solução
+
+- **Qual é o objetivo do seu projeto:** Desenvolver um sistema embarcado IoT de baixo custo focado na segurança ocupacional e na otimização logística de plantas industri",logica_firmware: 30 pts | metrica_wokwi: 20 pts | ci_cd: 20 pts | documentacao: 10 pts | estrutura: 8 pts,92.6
+Jetro Viana_204,jetro.viana_204@aluno.com,https://github.com/jetrokepler/processoseletivoIoT,"## 1️⃣ Visão Geral da Solução
+
+Este projeto implementa um **sistema embarcado de iluminação inteligente** simulado em ESP32 com MicroPython, voltado para ambientes industriais.
+
+O sistema monitora con",logica_firmware: 30 pts | metrica_wokwi: 20 pts | ci_cd: 20 pts | documentacao: 10 pts | estrutura: 8 pts,92.6
+Alan Mendes_160,alan.mendes_160@aluno.com,https://github.com/alan-mendes-ufca/processoseletivoIoT-Alan,0/5 seções (insuficiente),logica_firmware: 27 pts | metrica_wokwi: 20 pts | ci_cd: 20 pts | documentacao: 0 pts | estrutura: 8 pts,78.9
+Paulo Gabriel Leite Landim_202,paulo.gabriel.leite.landim_202@aluno.com,https://github.com/LandimPG/processoseletivoIoT,"## 1️⃣ Visão Geral da Solução
+O projeto desenvolvido é um **Temporizador de Foco Inteligente (Estilo Pomodoro)**. O sistema embarcado tem como objetivo auxiliar no gerenciamento de tempo e produtivida",logica_firmware: 30 pts | metrica_wokwi: 20 pts | ci_cd: 20 pts | documentacao: 10 pts | estrutura: 8 pts,92.6
+Gabriel Souza Santos_140,gabriel.souza.santos_140@aluno.com,https://github.com/gabriel-so-santos/pnaat-processo-seletivo-io,,,0
+Ra├нssa de Brito Duarte_245,ra├нssa.de.brito.duarte_245@aluno.com,https://github.com/raissabdrt/processoseletivoIoT,0/5 seções (insuficiente),logica_firmware: 30 pts | metrica_wokwi: 20 pts | ci_cd: 20 pts | documentacao: 0 pts | estrutura: 8 pts,82.1
+Luana Teles Alves_136,luana.teles.alves_136@aluno.com,https://github.com/lua-teles/processoseletivoIoT,"## 1️⃣ Visão Geral da Solução
+ 
+O projeto simula um sistema embarcado completo de **monitoramento de solo** com ESP32 e MicroPython.
+ 
+- **Objetivo:** monitorar umidade, pH e nível de NPK do solo, aci",logica_firmware: 30 pts | metrica_wokwi: 20 pts | ci_cd: 20 pts | documentacao: 10 pts | estrutura: 8 pts,92.6
+Diogo Gomes_211,diogo.gomes_211@aluno.com,https://github.com/diogogomes-ufca/processoseletivoIoT-DiogoFigueiredo,,,0
+Rafael da Silva Sousa_129,rafael.da.silva.sousa_129@aluno.com,https://github.com/RafaelLiufe/processoseletivoIoT,"## 1️⃣ Visão Geral da Solução
+
+Este projeto objetiva implementar um sistema de segurança de freio do tipo ABS (Antilock Braking System) utilizando um microcontrolador ESP32 como módulo ABS, potenciôme",logica_firmware: 30 pts | metrica_wokwi: 20 pts | ci_cd: 20 pts | documentacao: 10 pts | estrutura: 8 pts,92.6
+Levi Farias Leite_171,levi.farias.leite_171@aluno.com,https://github.com/lfariazzz/processoseletivoIoT-LeviFarias,"## 1️⃣ Visão Geral da Solução
+
+O projeto simula um sistema de segurança física em duas camadas: autenticação por dois fatores (2FA) para controle de acesso e detecção de intrusão (IDS) para monitorar ",logica_firmware: 30 pts | metrica_wokwi: 20 pts | ci_cd: 20 pts | documentacao: 10 pts | estrutura: 8 pts,92.6
+Thomas Magalh├гes_139,thomas.magalh├гes_139@aluno.com,https://github.com/thomasmagalhaes935-ai/projetoIo,,,0
+Amaro J├║nior Silva Luna_147,amaro.j├║nior.silva.luna_147@aluno.com,https://github.com/AmaroJL/processoseletivoIoT,"## 1️⃣ Visão Geral da Solução
+O projeto consiste em um **Monitor de Segurança Residencial IoT (Smart Alarm)** simulado.  
+O objetivo do sistema é detectar múltiplas ameaças: invasão de perímetro (arro",logica_firmware: 30 pts | metrica_wokwi: 20 pts | ci_cd: 20 pts | documentacao: 10 pts | estrutura: 8 pts,92.6
+Guido Xenofonte_206,guido.xenofonte_206@aluno.com,https://github.com/guidoxenofonte2005/processoseletivoIoT,"## 1️⃣ Visão Geral da Solução
+
+O objetivo do projeto é ser um sistema de detecção de vazamentos de gás em fogões caseiros e/ou máquinas industriais que utilizam queima de gás para funcionamento, com o",logica_firmware: 30 pts | metrica_wokwi: 20 pts | ci_cd: 20 pts | documentacao: 10 pts | estrutura: 8 pts,92.6
+Iza Francine Carvalho Vieira_193,iza.francine.carvalho.vieira_193@aluno.com,https://github.com/izafrancine/processoseletivoIoT,0/5 seções (insuficiente),logica_firmware: 30 pts | metrica_wokwi: 20 pts | ci_cd: 25 pts | documentacao: 0 pts | estrutura: 8 pts,87.4
+Francisco Guilherme Ces├бrio Alc├вntara_133,francisco.guilherme.ces├бrio.alc├вntara_133@aluno.com,https://github.com/frerpito/processoseletivoIoT,"## 1️⃣ Visão Geral da Solução
+
+O projeto consiste em um sistema embarcado para monitoramento de ambientes internos, capaz de analisar temperatura, umidade e concentração de gases, classificando o ambi",logica_firmware: 30 pts | metrica_wokwi: 20 pts | ci_cd: 20 pts | documentacao: 10 pts | estrutura: 8 pts,92.6
+Jos├й Adiel Calixto Serafim_200,jos├й.adiel.calixto.serafim_200@aluno.com,https://github.com/adiel-calixto/processoseletivoIoT,"## 1️⃣ Visão Geral da Solução
+
+Sistema de **monitoramento industrial** baseado em ESP32 com MicroPython. Detecta anomalias de vibração (acelerômetro MPU6050) e temperatura (sensor DS18B20), alertando ",logica_firmware: 30 pts | metrica_wokwi: 20 pts | ci_cd: 20 pts | documentacao: 10 pts | estrutura: 8 pts,92.6
+Gilvan Alves Pastor Junior_237,gilvan.alves.pastor.junior_237@aluno.com,https://github.com/GilvanTWS/processoseletivoIoT,"## 1️⃣ Visão Geral da Solução
+
+O projeto simula um semáforo de trânsito utilizando um microcontrolador ESP32 e três LEDs (vermelho, amarelo e verde). O sistema alterna automaticamente entre os estados",logica_firmware: 30 pts | metrica_wokwi: 20 pts | ci_cd: 20 pts | documentacao: 10 pts | estrutura: 8 pts,92.6
+Cicero Isac Da Silva Farias_142,cicero.isac.da.silva.farias_142@aluno.com,https://github.com/IsacNicolau/processoseletivoIoT,0/5 seções (insuficiente),logica_firmware: 30 pts | metrica_wokwi: 20 pts | ci_cd: 20 pts | documentacao: 0 pts | estrutura: 8 pts,82.1
+Heitor Lacerda Santana de Sousa_215,heitor.lacerda.santana.de.sousa_215@aluno.com,https://github.com/HeiLacerda/processoseletivoIoT,0/5 seções (insuficiente),logica_firmware: 30 pts | metrica_wokwi: 20 pts | ci_cd: 20 pts | documentacao: 0 pts | estrutura: 8 pts,82.1
+Gabriel Moreira Tavares Santana_218,gabriel.moreira.tavares.santana_218@aluno.com,https://github.com/Gabriel-Gamor/processoseletivoIoT,"## 1️⃣ Visão Geral da Solução
+
+Desenvolvi um sistema embarcado simulado utilizando um ESP32 com o objetivo de representar o funcionamento de um semáforo inteligente com controle de travessia de pedest",logica_firmware: 30 pts | metrica_wokwi: 20 pts | ci_cd: 20 pts | documentacao: 10 pts | estrutura: 8 pts,92.6
+Valdimiro Alves dos Santos Neto_146,valdimiro.alves.dos.santos.neto_146@aluno.com,https://github.com/ValdimiroAlves/processoseletivoIoT,"## 1️⃣ Visão Geral da Solução
+
+O projeto consiste em um Sistema de Iluminação Inteligente com Interrupção Manual. O objetivo é automatizar a ativação de uma luz ambiente com base na luminosidade exter",logica_firmware: 30 pts | metrica_wokwi: 20 pts | ci_cd: 20 pts | documentacao: 10 pts | estrutura: 8 pts,92.6
+Bruno Macedo_224,bruno.macedo_224@aluno.com,https://github.com/brunom-dev/processoseletivoIoT,"## 1️⃣ Visão Geral da Solução
+
+O projeto consiste no firmware para um painel de controle de uma máquina industrial. O objetivo do sistema é comandar com segurança os ciclos de operação do equipamento,",logica_firmware: 30 pts | metrica_wokwi: 20 pts | ci_cd: 20 pts | documentacao: 10 pts | estrutura: 8 pts,92.6
+Raphael Rates_192,raphael.rates_192@aluno.com,https://github.com/RaphaelRates/processoseletivoIoT,"## 1️⃣ Visão Geral da Solução
+
+O projeto consiste em um **sistema embarcado de monitoramento de solo** que mede três parâmetros fundamentais para o plantio: **umidade**, **pH** e **temperatura**. O si",logica_firmware: 27 pts | metrica_wokwi: 20 pts | ci_cd: 20 pts | documentacao: 10 pts | estrutura: 8 pts,89.5
+Andr├й Castro_205,andr├й.castro_205@aluno.com,https://github.com/AndreCastr0/processoseletivoIoT,"## 1️⃣ Visão Geral da Solução
+
+Descreva, em poucas palavras:
+
+- Qual é o objetivo do seu projeto  
+- O que o sistema embarcado simulado faz  
+- Como o usuário interage com ele (se aplicável)
+
+---
+## 5",logica_firmware: 27 pts | metrica_wokwi: 10 pts | ci_cd: 20 pts | documentacao: 10 pts | estrutura: 8 pts,78.9
+Guilherme Ven├вncio de Souza_165,guilherme.ven├вncio.de.souza_165@aluno.com,https://github.com/gvenancio12/processoseletivoIoT,0/5 seções (insuficiente),logica_firmware: 30 pts | metrica_wokwi: 20 pts | ci_cd: 20 pts | documentacao: 0 pts | estrutura: 8 pts,82.1
+Valney Maia Neto_208,valney.maia.neto_208@aluno.com,https://github.com/valneymaia/processoseletivoIoT-Valney-Maia,"## 1️⃣ Visão Geral da Solução
+
+O projeto é uma **central de monitoramento ambiental residencial** embarcada, simulada no Wokwi com ESP32 e MicroPython e integrada ao Telegram para alerta remoto em tem",logica_firmware: 30 pts | metrica_wokwi: 20 pts | ci_cd: 20 pts | documentacao: 10 pts | estrutura: 8 pts,92.6
+Dorian Feitosa_194,dorian.feitosa_194@aluno.com,https://github.com/OtherDinosaur/processoseletivoIoT,"## 1️⃣ Visão Geral da Solução
+
+O projeto desenvolvido consiste em um sistema embarcado automatizado de dosagem e transporte de recipientes, simulado na plataforma Wokwi, utilizando um ESP32 DevKit V1 ",logica_firmware: 30 pts | metrica_wokwi: 20 pts | ci_cd: 20 pts | documentacao: 10 pts | estrutura: 8 pts,92.6
+Guilherme Viana Batista_185,guilherme.viana.batista_185@aluno.com,https://github.com/guiogigo/PNAAT-processoseletivoIoT,"## 5️⃣ Resultados Obtidos
+A simulação cumpre os requisitos propostos:
+* Transições de estado precisas (Aguardando ➔ Configurando ➔ Aquecendo ➔ Pausado ➔ Finalizado).
+* O display LCD atualiza a formata",logica_firmware: 30 pts | metrica_wokwi: 20 pts | ci_cd: 20 pts | documentacao: 6 pts | estrutura: 8 pts,88.4
+Icaro Cavalcante_244,icaro.cavalcante_244@aluno.com,https://github.com/Icaro-Cavalcante/processoseletivoIoT,0/5 seções (insuficiente),logica_firmware: 30 pts | metrica_wokwi: 20 pts | ci_cd: 20 pts | documentacao: 0 pts | estrutura: 8 pts,82.1
+Elder Rayan Oliveira Silva_138,elder.rayan.oliveira.silva_138@aluno.com,https://github.com/eldrayan/processoseletivoIoT,0/5 seções (insuficiente),logica_firmware: 30 pts | metrica_wokwi: 20 pts | ci_cd: 25 pts | documentacao: 0 pts | estrutura: 8 pts,87.4
+Claylton Muniz_232,claylton.muniz_232@aluno.com,https://github.com/Claylton-Muniz/processoseletivoIoT,"## 1️⃣ Visão Geral da Solução
+
+![Representação](imgs/representacao.png)
+
+- **Objetivo do projeto**: Resolver um problema real e recorrente no varejo (especificamente projetado para um problema enfrent",logica_firmware: 30 pts | metrica_wokwi: 20 pts | ci_cd: 20 pts | documentacao: 10 pts | estrutura: 8 pts,92.6
+Andr├й Lima_162,andr├й.lima_162@aluno.com,https://github.com/AndreLucas23/processo-seletivo-IoT,"## 1️⃣ Visão Geral da Solução
+
+**Objetivo do Projeto:**
+O projeto consiste no desenvolvimento de um sistema embarcado de telemetria e segurança logística focado em **Edge Computing**. O objetivo é mon",logica_firmware: 30 pts | metrica_wokwi: 20 pts | ci_cd: 20 pts | documentacao: 10 pts | estrutura: 8 pts,92.6
+Ana Aisha Tomaz de Morais_251,ana.aisha.tomaz.de.morais_251@aluno.com,https://github.com/aishatomaz/processoseletivoIoT,0/5 seções (insuficiente),logica_firmware: 30 pts | metrica_wokwi: 20 pts | ci_cd: 25 pts | documentacao: 0 pts | estrutura: 8 pts,87.4
+Jo├гo Henrique de Brito Leandro Bitu Corr├кa_213,jo├гo.henrique.de.brito.leandro.bitu.corr├кa_213@aluno.com,https://github.com/joaohenriquebitu/processoseletivoIoT,0/5 seções (insuficiente),logica_firmware: 30 pts | metrica_wokwi: 20 pts | ci_cd: 20 pts | documentacao: 0 pts | estrutura: 8 pts,82.1
+Isaac Farias_158,isaac.farias_158@aluno.com,https://github.com/isaaclvf/processoseletivoIoT,"## 1️⃣ Visão Geral da Solução
+
+**Sistema de Alarme Residencial Simples** simulado em ESP32 com MicroPython no Wokwi.
+
+O sistema usa quatro componentes — sensor PIR (movimento), botão (armar/desarmar),",logica_firmware: 30 pts | metrica_wokwi: 20 pts | ci_cd: 20 pts | documentacao: 10 pts | estrutura: 8 pts,92.6
+Pedro Odillon Felicio Marques Mendon├зa Figueiredo_248,pedro.odillon.felicio.marques.mendon├зa.figueiredo_248@aluno.com,https://github.com/pedroodillon/processoseletivoIoT,"## 1️⃣ Visão Geral da Solução
+
+Este projeto implementa um sistema embarcado de inspeção baseado no conceito de Edge AI aplicado à Indústria 4.0.
+
+A solução foi desenvolvida em conjunto com um modelo d",logica_firmware: 30 pts | metrica_wokwi: 20 pts | ci_cd: 20 pts | documentacao: 10 pts | estrutura: 8 pts,92.6
+Rafael Feitosa_225,rafael.feitosa_225@aluno.com,https://github.com/RafaFeitos/projeto-IoT-PNAAT,"## 1️⃣ Visão Geral da Solução
+
+Em veículos autônomos, sensores como câmeras, LiDAR e radar produzem continuamente grandes volumes de dados que precisam ser processados em tempo real para que o veículo",logica_firmware: 30 pts | metrica_wokwi: 20 pts | ci_cd: 20 pts | documentacao: 10 pts | estrutura: 8 pts,92.6
+Thiago Nerton Macedo Alves_229,thiago.nerton.macedo.alves_229@aluno.com,https://github.com/Nertonm/processoseletivoIoT,"## 1️⃣ Visão Geral da Solução
+
+VaultSign é um cofre inteligente simulado em ESP32/MicroPython. O firmware
+recebe dígitos pela Serial, valida um PIN de 4 dígitos e controla os
+periféricos do cofre: rel",logica_firmware: 27 pts | metrica_wokwi: 20 pts | ci_cd: 20 pts | documentacao: 10 pts | estrutura: 8 pts,89.5
+Eduardo Roberto Pereira_177,eduardo.roberto.pereira_177@aluno.com,https://github.com/BluEduardo/processoseletivoIoT,"## 1️⃣ Visão Geral da Solução
+O **SmartCure IoT** é um sistema embarcado voltado para a digitalização do canteiro de obras, que nasce da intersecção entre a Engenharia Civil e a Tecnologia da Informaç",logica_firmware: 30 pts | metrica_wokwi: 20 pts | ci_cd: 20 pts | documentacao: 8 pts | estrutura: 8 pts,90.5
+Claudenir Rodrigues Araujo_228,claudenir.rodrigues.araujo_228@aluno.com,https://github.com/nikkodayo/MakerIoT,0/5 seções (insuficiente),logica_firmware: 30 pts | metrica_wokwi: 20 pts | ci_cd: 0 pts | documentacao: 0 pts | estrutura: 6 pts,58.9
+MANUELA MENEZES ALVES_223,manuela.menezes.alves_223@aluno.com,https://github.com/manuela-menezes/processoseletivoIoT,"## 1️⃣ Visão Geral da Solução
+  O projeto implementa um semáforo veicular com botão de pedestre simulado em MicroPython, executando sobre um ESP32 no ambiente Wokwi.
+  O sistema alterna ciclicamente e",logica_firmware: 27 pts | metrica_wokwi: 20 pts | ci_cd: 25 pts | documentacao: 10 pts | estrutura: 8 pts,94.7
+Elil├║cio Teixeira F├йlix Filho_247,elil├║cio.teixeira.f├йlix.filho_247@aluno.com,https://github.com/Elilucio7/IoT-_-PNAAT-_-Elilucio,"## 1️⃣ Visão Geral da Solução
+
+O projeto foi feito com a ideia de um sistema de alerta automático para superaquecimento de usinas nucleares, havendo também métodos para ativá-lo manualmente para casos",logica_firmware: 30 pts | metrica_wokwi: 20 pts | ci_cd: 20 pts | documentacao: 10 pts | estrutura: 8 pts,92.6
+Esdras Rodrigues de Andrade_240,esdras.rodrigues.de.andrade_240@aluno.com,https://github.com/esdrasrandrade/processoseletivoIoT,"## 1️⃣ Visão Geral da Solução
+
+O objetivo deste projeto é implementar uma interface embarcada de seleção interativa, inspirada em sistemas de navegação de menus de videogames, utilizando um joystick a",logica_firmware: 30 pts | metrica_wokwi: 20 pts | ci_cd: 20 pts | documentacao: 10 pts | estrutura: 8 pts,92.6
+Miguel Morais_207,miguel.morais_207@aluno.com,https://github.com/miguelw11/processoseletivoIoT-Miguel,"## 1️⃣ Visão Geral da Solução
+
+Este projeto apresenta um sistema embarcado simulado para **monitoramento inteligente de luminosidade em ambientes críticos**, utilizando ESP32, sensor LDR, LED de sinal",logica_firmware: 30 pts | metrica_wokwi: 20 pts | ci_cd: 20 pts | documentacao: 10 pts | estrutura: 8 pts,92.6
+Alexandro dos Santos Gois_243,alexandro.dos.santos.gois_243@aluno.com,https://github.com/AllexGois/processoseletivoIoT,"## 1️⃣ Visão Geral da Solução
+
+Descreva, em poucas palavras:
+
+- Qual é o objetivo do seu projeto  
+- O que o sistema embarcado simulado faz  
+- Como o usuário interage com ele (se aplicável)
+
+---
+## 5",logica_firmware: 0 pts | metrica_wokwi: 20 pts | ci_cd: 25 pts | documentacao: 10 pts | estrutura: 6 pts,64.2
+Weslley Fernandes_173,weslley.fernandes_173@aluno.com,https://github.com/thewesdev/processoseletivoIoT,"## 1️⃣ Visão Geral da Solução
+
+Meu projeto é um timer pomodoro com tempo de 25 minutos, mas sem a parte do descanço de 5 minutos.
+
+quando o circuito é energizado um circulo é desenhado, o timer, logo ",logica_firmware: 30 pts | metrica_wokwi: 20 pts | ci_cd: 20 pts | documentacao: 10 pts | estrutura: 8 pts,92.6
+Rodrigo Pinheiro Alcantara_199,rodrigo.pinheiro.alcantara_199@aluno.com,https://github.com/rodrigop07/processoseletivoIoT,"## 1️⃣ Visão Geral da Solução
+
+O projeto consiste num **Temporizador de Intervalos e Descanso** implementado com ESP32. O objetivo é oferecer um sistema de cronometragem para atividades que exigem tem",logica_firmware: 30 pts | metrica_wokwi: 20 pts | ci_cd: 20 pts | documentacao: 6 pts | estrutura: 8 pts,88.4
+Andr├й Wesley_172,andr├й.wesley_172@aluno.com,https://github.com/awesleyy/processoseletivoIoT,"## 1️⃣ Visão Geral da Solução
+O projeto consiste em um **Sistema de Monitoramento de Ciclos Operacionais** utilizando a placa ESP32. O objetivo é simular um processo de varredura ou verificação de sen",logica_firmware: 27 pts | metrica_wokwi: 10 pts | ci_cd: 20 pts | documentacao: 10 pts | estrutura: 8 pts,78.9
+Jos├й Dhonatan Fernandes de Almeida_176,jos├й.dhonatan.fernandes.de.almeida_176@aluno.com,https://github.com/sudo-invers/processoseletivoIoT_Jose_Dhonatan,0/5 seções (insuficiente),logica_firmware: 30 pts | metrica_wokwi: 20 pts | ci_cd: 20 pts | documentacao: 0 pts | estrutura: 8 pts,82.1
+Samuel Jackson_233,samuel.jackson_233@aluno.com,https://github.com/SJacksonML/ProcessoSeletivoIoT,0/5 seções (insuficiente),logica_firmware: 30 pts | metrica_wokwi: 20 pts | ci_cd: 20 pts | documentacao: 0 pts | estrutura: 8 pts,82.1
+Ana Beatriz Batista Caitano_181,ana.beatriz.batista.caitano_181@aluno.com,https://github.com/bcaitanoo/processoseletivoIoT,"## 1️⃣ Visão Geral da Solução
+
+O objetivo do projeto é monitorar a temperatura ambiente utilizando um sensor digital DS18B20 e exibir os dados em um display LCD 16x2, além de fornecer feedback visual ",logica_firmware: 30 pts | metrica_wokwi: 20 pts | ci_cd: 25 pts | documentacao: 10 pts | estrutura: 8 pts,97.9
+Pedro Henrique Fernandes Bezerra_249,pedro.henrique.fernandes.bezerra_249@aluno.com,https://github.com/dashboard/my_top_repositories,,,0
+Jhonatan Pereira_164,jhonatan.pereira_164@aluno.com,https://github.com/jhonatan-goncalves-pereira/processoseletivoIoT,"## 1️⃣ Visão Geral da Solução
+<img width=""1048"" height=""1159"" alt=""image"" src=""https://github.com/user-attachments/assets/24f7b692-1139-4fb9-8375-e32825fef75e"" />
+
+
+ 
+**Objetivo:** Implementar um semá",logica_firmware: 30 pts | metrica_wokwi: 20 pts | ci_cd: 20 pts | documentacao: 8 pts | estrutura: 8 pts,90.5
+Arthur Lobo Feitosa de Oliveira_234,arthur.lobo.feitosa.de.oliveira_234@aluno.com,https://github.com/OArthr/pnaatIoT_Arthur_Lobo,"## 1️⃣ Visão Geral da Solução
+
+Este projeto simula um **cruzamento inteligente de trânsito** utilizando um ESP32 no ambiente Wokwi.
+
+O objetivo é criar um sistema embarcado capaz de:
+
+* Controlar **4 ",logica_firmware: 30 pts | metrica_wokwi: 20 pts | ci_cd: 20 pts | documentacao: 10 pts | estrutura: 8 pts,92.6
+Guilherme Silva_195,guilherme.silva_195@aluno.com,https://github.com/silva-guilherme/processoseletivoIoT_G,"## 1️⃣ Visão Geral da Solução
+
+O projeto tem como objetivo desenvolver um sistema embarcado de automação residencial utilizando um **ESP32** para controle automático de dispositivos com base na temper",logica_firmware: 27 pts | metrica_wokwi: 20 pts | ci_cd: 20 pts | documentacao: 10 pts | estrutura: 8 pts,89.5
+Emily Fernanda da Silva Galv├гo Modesto_222,emily.fernanda.da.silva.galv├гo.modesto_222@aluno.com,https://github.com/lilyllia/processoseletivoIoT,"## 1️⃣ Visão Geral da Solução
+
+O projeto consiste no protótipo de um terminal IoT de Monitoramento Biométrico, voltado para pacientes acamados ou com mobilidade reduzida. o objetivo do sistema é permi",logica_firmware: 30 pts | metrica_wokwi: 10 pts | ci_cd: 20 pts | documentacao: 10 pts | estrutura: 8 pts,82.1

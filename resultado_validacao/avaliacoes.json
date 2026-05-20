@@ -1,0 +1,2629 @@
+[
+  {
+    "nome": "Maria Madalena Silva_203",
+    "criterios": {
+      "logica_firmware": {
+        "exists": true,
+        "score": 27,
+        "feedback": "Código presente; Lógica funcional",
+        "content_length": 1232
+      },
+      "metrica_wokwi": {
+        "exists": true,
+        "score": 20,
+        "feedback": "Componentes identificados; Diagrama organizado"
+      },
+      "ci_cd": {
+        "exists": true,
+        "score": 20,
+        "feedback": "1 workflow(s); Integration Wokwi",
+        "workflows": [
+          "ci.yml"
+        ]
+      },
+      "documentacao": {
+        "score": 10,
+        "feedback": "5/5 seções preenchidas",
+        "secoes_preenchidas": 5
+      },
+      "estrutura": {
+        "score": 8,
+        "feedback": "4/4 arquivos obrigatórios; Possui .gitignore"
+      }
+    },
+    "pontuacao_total": 85,
+    "nota_final": 89.5,
+    "feedback_geral": []
+  },
+  {
+    "nome": "Leonardo Vieira_236",
+    "criterios": {
+      "logica_firmware": {
+        "exists": true,
+        "score": 30,
+        "feedback": "Código presente; Lógica funcional; Com comentários",
+        "content_length": 9992
+      },
+      "metrica_wokwi": {
+        "exists": true,
+        "score": 20,
+        "feedback": "Componentes identificados; Diagrama organizado"
+      },
+      "ci_cd": {
+        "exists": true,
+        "score": 20,
+        "feedback": "1 workflow(s); Integration Wokwi",
+        "workflows": [
+          "ci.yml"
+        ]
+      },
+      "documentacao": {
+        "score": 10,
+        "feedback": "5/5 seções preenchidas",
+        "secoes_preenchidas": 5
+      },
+      "estrutura": {
+        "score": 8,
+        "feedback": "4/4 arquivos obrigatórios; Possui .gitignore"
+      }
+    },
+    "pontuacao_total": 88,
+    "nota_final": 92.6,
+    "feedback_geral": []
+  },
+  {
+    "nome": "Lucas do Nascimento Souza_226",
+    "criterios": {
+      "logica_firmware": {
+        "exists": true,
+        "score": 30,
+        "feedback": "Código presente; Lógica funcional; Com comentários",
+        "content_length": 4937
+      },
+      "metrica_wokwi": {
+        "exists": true,
+        "score": 20,
+        "feedback": "Componentes identificados; Diagrama organizado"
+      },
+      "ci_cd": {
+        "exists": true,
+        "score": 20,
+        "feedback": "1 workflow(s); Integration Wokwi",
+        "workflows": [
+          "ci.yml"
+        ]
+      },
+      "documentacao": {
+        "score": 10,
+        "feedback": "5/5 seções preenchidas",
+        "secoes_preenchidas": 5
+      },
+      "estrutura": {
+        "score": 8,
+        "feedback": "4/4 arquivos obrigatórios; Possui .gitignore"
+      }
+    },
+    "pontuacao_total": 88,
+    "nota_final": 92.6,
+    "feedback_geral": []
+  },
+  {
+    "nome": "Raissa Rodrigues_217",
+    "criterios": {
+      "logica_firmware": {
+        "exists": true,
+        "score": 30,
+        "feedback": "Código presente; Lógica funcional; Com comentários",
+        "content_length": 4614
+      },
+      "metrica_wokwi": {
+        "exists": true,
+        "score": 20,
+        "feedback": "Componentes identificados; Diagrama organizado"
+      },
+      "ci_cd": {
+        "exists": true,
+        "score": 20,
+        "feedback": "1 workflow(s); Integration Wokwi",
+        "workflows": [
+          "ci.yml"
+        ]
+      },
+      "documentacao": {
+        "score": 10,
+        "feedback": "5/5 seções preenchidas",
+        "secoes_preenchidas": 5
+      },
+      "estrutura": {
+        "score": 8,
+        "feedback": "4/4 arquivos obrigatórios; Possui .gitignore"
+      }
+    },
+    "pontuacao_total": 88,
+    "nota_final": 92.6,
+    "feedback_geral": []
+  },
+  {
+    "nome": "PEDRO HENRIQUE BEZERRA SIME├ГO_212",
+    "criterios": {
+      "logica_firmware": {
+        "exists": true,
+        "score": 30,
+        "feedback": "Código presente; Lógica funcional; Com comentários",
+        "content_length": 4249
+      },
+      "metrica_wokwi": {
+        "exists": true,
+        "score": 20,
+        "feedback": "Componentes identificados; Diagrama organizado"
+      },
+      "ci_cd": {
+        "exists": true,
+        "score": 20,
+        "feedback": "1 workflow(s); Integration Wokwi",
+        "workflows": [
+          "ci.yml"
+        ]
+      },
+      "documentacao": {
+        "score": 10,
+        "feedback": "5/5 seções preenchidas",
+        "secoes_preenchidas": 5
+      },
+      "estrutura": {
+        "score": 8,
+        "feedback": "4/4 arquivos obrigatórios; Possui .gitignore"
+      }
+    },
+    "pontuacao_total": 88,
+    "nota_final": 92.6,
+    "feedback_geral": []
+  },
+  {
+    "nome": "Marcus Vinicius Oliveira Ventura_132",
+    "criterios": {
+      "logica_firmware": {
+        "exists": true,
+        "score": 30,
+        "feedback": "Código presente; Lógica funcional; Com comentários",
+        "content_length": 8919
+      },
+      "metrica_wokwi": {
+        "exists": true,
+        "score": 20,
+        "feedback": "Componentes identificados; Diagrama organizado"
+      },
+      "ci_cd": {
+        "exists": true,
+        "score": 20,
+        "feedback": "1 workflow(s); Integration Wokwi",
+        "workflows": [
+          "ci.yml"
+        ]
+      },
+      "documentacao": {
+        "score": 10,
+        "feedback": "5/5 seções preenchidas",
+        "secoes_preenchidas": 5
+      },
+      "estrutura": {
+        "score": 8,
+        "feedback": "4/4 arquivos obrigatórios; Possui .gitignore"
+      }
+    },
+    "pontuacao_total": 88,
+    "nota_final": 92.6,
+    "feedback_geral": []
+  },
+  {
+    "nome": "Lucas Vinicius Santos Leonel_201",
+    "criterios": {
+      "logica_firmware": {
+        "exists": true,
+        "score": 30,
+        "feedback": "Código presente; Lógica funcional; Com comentários",
+        "content_length": 4066
+      },
+      "metrica_wokwi": {
+        "exists": true,
+        "score": 20,
+        "feedback": "Componentes identificados; Diagrama organizado"
+      },
+      "ci_cd": {
+        "exists": true,
+        "score": 20,
+        "feedback": "1 workflow(s); Integration Wokwi",
+        "workflows": [
+          "ci.yml"
+        ]
+      },
+      "documentacao": {
+        "score": 10,
+        "feedback": "5/5 seções preenchidas",
+        "secoes_preenchidas": 5
+      },
+      "estrutura": {
+        "score": 8,
+        "feedback": "4/4 arquivos obrigatórios; Possui .gitignore"
+      }
+    },
+    "pontuacao_total": 88,
+    "nota_final": 92.6,
+    "feedback_geral": []
+  },
+  {
+    "nome": "LUANN DE LIMA_220",
+    "criterios": {},
+    "pontuacao_total": 0,
+    "nota_final": 0,
+    "feedback_geral": [],
+    "erro": "erro_clone"
+  },
+  {
+    "nome": "Paulo Victor Santos Souza_150",
+    "criterios": {
+      "logica_firmware": {
+        "exists": true,
+        "score": 30,
+        "feedback": "Código presente; Lógica funcional; Com comentários",
+        "content_length": 3429
+      },
+      "metrica_wokwi": {
+        "exists": true,
+        "score": 20,
+        "feedback": "Componentes identificados; Diagrama organizado"
+      },
+      "ci_cd": {
+        "exists": true,
+        "score": 25,
+        "feedback": "1 workflow(s); Integration Wokwi; Usa secrets",
+        "workflows": [
+          "ci.yml"
+        ]
+      },
+      "documentacao": {
+        "score": 10,
+        "feedback": "5/5 seções preenchidas",
+        "secoes_preenchidas": 5
+      },
+      "estrutura": {
+        "score": 8,
+        "feedback": "4/4 arquivos obrigatórios; Possui .gitignore"
+      }
+    },
+    "pontuacao_total": 93,
+    "nota_final": 97.9,
+    "feedback_geral": []
+  },
+  {
+    "nome": "Riquelme Jatay Ribeiro Scarcela Bezerra_191",
+    "criterios": {
+      "logica_firmware": {
+        "exists": false,
+        "score": 0,
+        "feedback": "main.py não encontrado"
+      },
+      "metrica_wokwi": {
+        "exists": true,
+        "score": 20,
+        "feedback": "Componentes identificados; Diagrama organizado"
+      },
+      "ci_cd": {
+        "exists": true,
+        "score": 25,
+        "feedback": "2 workflow(s); Integration Wokwi; Usa secrets",
+        "workflows": [
+          "wokwi_ci.yml",
+          "ci.yml"
+        ]
+      },
+      "documentacao": {
+        "score": 0,
+        "feedback": "0/5 seções (insuficiente)",
+        "secoes_preenchidas": 0
+      },
+      "estrutura": {
+        "score": 6,
+        "feedback": "3/4 arquivos obrigatórios; Possui .gitignore"
+      }
+    },
+    "pontuacao_total": 51,
+    "nota_final": 53.7,
+    "feedback_geral": []
+  },
+  {
+    "nome": "Irlan Barros_221",
+    "criterios": {
+      "logica_firmware": {
+        "exists": true,
+        "score": 30,
+        "feedback": "Código presente; Lógica funcional; Com comentários",
+        "content_length": 10497
+      },
+      "metrica_wokwi": {
+        "exists": true,
+        "score": 20,
+        "feedback": "Componentes identificados; Diagrama organizado"
+      },
+      "ci_cd": {
+        "exists": true,
+        "score": 20,
+        "feedback": "1 workflow(s); Integration Wokwi",
+        "workflows": [
+          "ci.yml"
+        ]
+      },
+      "documentacao": {
+        "score": 10,
+        "feedback": "5/5 seções preenchidas",
+        "secoes_preenchidas": 5
+      },
+      "estrutura": {
+        "score": 8,
+        "feedback": "4/4 arquivos obrigatórios; Possui .gitignore"
+      }
+    },
+    "pontuacao_total": 88,
+    "nota_final": 92.6,
+    "feedback_geral": []
+  },
+  {
+    "nome": "Paula H├вnnia Rocha Santana_254",
+    "criterios": {
+      "logica_firmware": {
+        "exists": true,
+        "score": 27,
+        "feedback": "Código presente; Lógica funcional",
+        "content_length": 689
+      },
+      "metrica_wokwi": {
+        "exists": true,
+        "score": 20,
+        "feedback": "Componentes identificados; Diagrama organizado"
+      },
+      "ci_cd": {
+        "exists": true,
+        "score": 20,
+        "feedback": "1 workflow(s); Integration Wokwi",
+        "workflows": [
+          "ci.yml"
+        ]
+      },
+      "documentacao": {
+        "score": 10,
+        "feedback": "5/5 seções preenchidas",
+        "secoes_preenchidas": 5
+      },
+      "estrutura": {
+        "score": 8,
+        "feedback": "4/4 arquivos obrigatórios; Possui .gitignore"
+      }
+    },
+    "pontuacao_total": 85,
+    "nota_final": 89.5,
+    "feedback_geral": []
+  },
+  {
+    "nome": "Jonathas Levi_163",
+    "criterios": {
+      "logica_firmware": {
+        "exists": true,
+        "score": 30,
+        "feedback": "Código presente; Lógica funcional; Com comentários",
+        "content_length": 12733
+      },
+      "metrica_wokwi": {
+        "exists": true,
+        "score": 20,
+        "feedback": "Componentes identificados; Diagrama organizado"
+      },
+      "ci_cd": {
+        "exists": true,
+        "score": 20,
+        "feedback": "1 workflow(s); Integration Wokwi",
+        "workflows": [
+          "ci.yml"
+        ]
+      },
+      "documentacao": {
+        "score": 8,
+        "feedback": "4/5 seções preenchidas",
+        "secoes_preenchidas": 4
+      },
+      "estrutura": {
+        "score": 8,
+        "feedback": "4/4 arquivos obrigatórios; Possui .gitignore"
+      }
+    },
+    "pontuacao_total": 86,
+    "nota_final": 90.5,
+    "feedback_geral": []
+  },
+  {
+    "nome": "Le├┤ncio Ferreira Flores Neto_188",
+    "criterios": {
+      "logica_firmware": {
+        "exists": true,
+        "score": 30,
+        "feedback": "Código presente; Lógica funcional; Com comentários",
+        "content_length": 1524
+      },
+      "metrica_wokwi": {
+        "exists": true,
+        "score": 20,
+        "feedback": "Componentes identificados; Diagrama organizado"
+      },
+      "ci_cd": {
+        "exists": true,
+        "score": 20,
+        "feedback": "1 workflow(s); Integration Wokwi",
+        "workflows": [
+          "ci.yml"
+        ]
+      },
+      "documentacao": {
+        "score": 0,
+        "feedback": "0/5 seções (insuficiente)",
+        "secoes_preenchidas": 0
+      },
+      "estrutura": {
+        "score": 8,
+        "feedback": "4/4 arquivos obrigatórios; Possui .gitignore"
+      }
+    },
+    "pontuacao_total": 78,
+    "nota_final": 82.1,
+    "feedback_geral": []
+  },
+  {
+    "nome": "Let├нcia Maria dos Santos Dias_210",
+    "criterios": {
+      "logica_firmware": {
+        "exists": true,
+        "score": 30,
+        "feedback": "Código presente; Lógica funcional; Com comentários",
+        "content_length": 985
+      },
+      "metrica_wokwi": {
+        "exists": true,
+        "score": 20,
+        "feedback": "Componentes identificados; Diagrama organizado"
+      },
+      "ci_cd": {
+        "exists": true,
+        "score": 25,
+        "feedback": "1 workflow(s); Integration Wokwi; Usa secrets",
+        "workflows": [
+          "ci.yml"
+        ]
+      },
+      "documentacao": {
+        "score": 10,
+        "feedback": "5/5 seções preenchidas",
+        "secoes_preenchidas": 5
+      },
+      "estrutura": {
+        "score": 8,
+        "feedback": "4/4 arquivos obrigatórios; Possui .gitignore"
+      }
+    },
+    "pontuacao_total": 93,
+    "nota_final": 97.9,
+    "feedback_geral": []
+  },
+  {
+    "nome": "Pedro Yan Alcantara Palacio_149",
+    "criterios": {
+      "logica_firmware": {
+        "exists": true,
+        "score": 30,
+        "feedback": "Código presente; Lógica funcional; Com comentários",
+        "content_length": 4622
+      },
+      "metrica_wokwi": {
+        "exists": true,
+        "score": 20,
+        "feedback": "Componentes identificados; Diagrama organizado"
+      },
+      "ci_cd": {
+        "exists": true,
+        "score": 20,
+        "feedback": "1 workflow(s); Integration Wokwi",
+        "workflows": [
+          "ci.yml"
+        ]
+      },
+      "documentacao": {
+        "score": 0,
+        "feedback": "0/5 seções (insuficiente)",
+        "secoes_preenchidas": 0
+      },
+      "estrutura": {
+        "score": 8,
+        "feedback": "4/4 arquivos obrigatórios; Possui .gitignore"
+      }
+    },
+    "pontuacao_total": 78,
+    "nota_final": 82.1,
+    "feedback_geral": []
+  },
+  {
+    "nome": "Vit├│ria Maciel Bernardo_209",
+    "criterios": {
+      "logica_firmware": {
+        "exists": true,
+        "score": 30,
+        "feedback": "Código presente; Lógica funcional; Com comentários",
+        "content_length": 1791
+      },
+      "metrica_wokwi": {
+        "exists": true,
+        "score": 20,
+        "feedback": "Componentes identificados; Diagrama organizado"
+      },
+      "ci_cd": {
+        "exists": true,
+        "score": 25,
+        "feedback": "1 workflow(s); Integration Wokwi; Usa secrets",
+        "workflows": [
+          "ci.yml"
+        ]
+      },
+      "documentacao": {
+        "score": 10,
+        "feedback": "5/5 seções preenchidas",
+        "secoes_preenchidas": 5
+      },
+      "estrutura": {
+        "score": 8,
+        "feedback": "4/4 arquivos obrigatórios; Possui .gitignore"
+      }
+    },
+    "pontuacao_total": 93,
+    "nota_final": 97.9,
+    "feedback_geral": []
+  },
+  {
+    "nome": "Samuel Wagner Tiburi Silveira_144",
+    "criterios": {
+      "logica_firmware": {
+        "exists": true,
+        "score": 30,
+        "feedback": "Código presente; Lógica funcional; Com comentários",
+        "content_length": 2206
+      },
+      "metrica_wokwi": {
+        "exists": true,
+        "score": 20,
+        "feedback": "Componentes identificados; Diagrama organizado"
+      },
+      "ci_cd": {
+        "exists": true,
+        "score": 25,
+        "feedback": "1 workflow(s); Integration Wokwi; Usa secrets",
+        "workflows": [
+          "ci.yml"
+        ]
+      },
+      "documentacao": {
+        "score": 0,
+        "feedback": "0/5 seções (insuficiente)",
+        "secoes_preenchidas": 0
+      },
+      "estrutura": {
+        "score": 8,
+        "feedback": "4/4 arquivos obrigatórios; Possui .gitignore"
+      }
+    },
+    "pontuacao_total": 83,
+    "nota_final": 87.4,
+    "feedback_geral": []
+  },
+  {
+    "nome": "Sarah Mendes Teles_170",
+    "criterios": {
+      "logica_firmware": {
+        "exists": true,
+        "score": 30,
+        "feedback": "Código presente; Lógica funcional; Com comentários",
+        "content_length": 1627
+      },
+      "metrica_wokwi": {
+        "exists": true,
+        "score": 20,
+        "feedback": "Componentes identificados; Diagrama organizado"
+      },
+      "ci_cd": {
+        "exists": true,
+        "score": 20,
+        "feedback": "1 workflow(s); Integration Wokwi",
+        "workflows": [
+          "ci.yml"
+        ]
+      },
+      "documentacao": {
+        "score": 10,
+        "feedback": "5/5 seções preenchidas",
+        "secoes_preenchidas": 5
+      },
+      "estrutura": {
+        "score": 8,
+        "feedback": "4/4 arquivos obrigatórios; Possui .gitignore"
+      }
+    },
+    "pontuacao_total": 88,
+    "nota_final": 92.6,
+    "feedback_geral": []
+  },
+  {
+    "nome": "Daniel Victor de Sousa_155",
+    "criterios": {
+      "logica_firmware": {
+        "exists": false,
+        "score": 0,
+        "feedback": "main.py não encontrado"
+      },
+      "metrica_wokwi": {
+        "exists": false,
+        "score": 0,
+        "feedback": "diagram.json não encontrado"
+      },
+      "ci_cd": {
+        "exists": true,
+        "score": 12,
+        "feedback": "1 workflow(s)",
+        "workflows": [
+          "ci.yml"
+        ]
+      },
+      "documentacao": {
+        "score": 0,
+        "feedback": "0/5 seções (insuficiente)",
+        "secoes_preenchidas": 0
+      },
+      "estrutura": {
+        "score": 1,
+        "feedback": "1/4 arquivos obrigatórios"
+      }
+    },
+    "pontuacao_total": 13,
+    "nota_final": 13.7,
+    "feedback_geral": []
+  },
+  {
+    "nome": "Jo├гo Kayque Pereira de Souza_227",
+    "criterios": {
+      "logica_firmware": {
+        "exists": true,
+        "score": 27,
+        "feedback": "Código presente; Lógica funcional",
+        "content_length": 487
+      },
+      "metrica_wokwi": {
+        "exists": true,
+        "score": 20,
+        "feedback": "Componentes identificados; Diagrama organizado"
+      },
+      "ci_cd": {
+        "exists": true,
+        "score": 20,
+        "feedback": "1 workflow(s); Integration Wokwi",
+        "workflows": [
+          "ci.yml"
+        ]
+      },
+      "documentacao": {
+        "score": 0,
+        "feedback": "0/5 seções (insuficiente)",
+        "secoes_preenchidas": 0
+      },
+      "estrutura": {
+        "score": 8,
+        "feedback": "4/4 arquivos obrigatórios; Possui .gitignore"
+      }
+    },
+    "pontuacao_total": 75,
+    "nota_final": 78.9,
+    "feedback_geral": []
+  },
+  {
+    "nome": "Antonio Rafael Oliveira da Cunha_230",
+    "criterios": {
+      "logica_firmware": {
+        "exists": true,
+        "score": 30,
+        "feedback": "Código presente; Lógica funcional; Com comentários",
+        "content_length": 5751
+      },
+      "metrica_wokwi": {
+        "exists": true,
+        "score": 20,
+        "feedback": "Componentes identificados; Diagrama organizado"
+      },
+      "ci_cd": {
+        "exists": true,
+        "score": 20,
+        "feedback": "1 workflow(s); Integration Wokwi",
+        "workflows": [
+          "ci.yml"
+        ]
+      },
+      "documentacao": {
+        "score": 10,
+        "feedback": "5/5 seções preenchidas",
+        "secoes_preenchidas": 5
+      },
+      "estrutura": {
+        "score": 8,
+        "feedback": "4/4 arquivos obrigatórios; Possui .gitignore"
+      }
+    },
+    "pontuacao_total": 88,
+    "nota_final": 92.6,
+    "feedback_geral": []
+  },
+  {
+    "nome": "Jetro Viana_204",
+    "criterios": {
+      "logica_firmware": {
+        "exists": true,
+        "score": 30,
+        "feedback": "Código presente; Lógica funcional; Com comentários",
+        "content_length": 6945
+      },
+      "metrica_wokwi": {
+        "exists": true,
+        "score": 20,
+        "feedback": "Componentes identificados; Diagrama organizado"
+      },
+      "ci_cd": {
+        "exists": true,
+        "score": 20,
+        "feedback": "1 workflow(s); Integration Wokwi",
+        "workflows": [
+          "ci.yml"
+        ]
+      },
+      "documentacao": {
+        "score": 10,
+        "feedback": "5/5 seções preenchidas",
+        "secoes_preenchidas": 5
+      },
+      "estrutura": {
+        "score": 8,
+        "feedback": "4/4 arquivos obrigatórios; Possui .gitignore"
+      }
+    },
+    "pontuacao_total": 88,
+    "nota_final": 92.6,
+    "feedback_geral": []
+  },
+  {
+    "nome": "Alan Mendes_160",
+    "criterios": {
+      "logica_firmware": {
+        "exists": true,
+        "score": 27,
+        "feedback": "Código presente; Lógica funcional",
+        "content_length": 504
+      },
+      "metrica_wokwi": {
+        "exists": true,
+        "score": 20,
+        "feedback": "Componentes identificados; Diagrama organizado"
+      },
+      "ci_cd": {
+        "exists": true,
+        "score": 20,
+        "feedback": "1 workflow(s); Integration Wokwi",
+        "workflows": [
+          "ci.yml"
+        ]
+      },
+      "documentacao": {
+        "score": 0,
+        "feedback": "0/5 seções (insuficiente)",
+        "secoes_preenchidas": 0
+      },
+      "estrutura": {
+        "score": 8,
+        "feedback": "4/4 arquivos obrigatórios; Possui .gitignore"
+      }
+    },
+    "pontuacao_total": 75,
+    "nota_final": 78.9,
+    "feedback_geral": []
+  },
+  {
+    "nome": "Paulo Gabriel Leite Landim_202",
+    "criterios": {
+      "logica_firmware": {
+        "exists": true,
+        "score": 30,
+        "feedback": "Código presente; Lógica funcional; Com comentários",
+        "content_length": 1277
+      },
+      "metrica_wokwi": {
+        "exists": true,
+        "score": 20,
+        "feedback": "Componentes identificados; Diagrama organizado"
+      },
+      "ci_cd": {
+        "exists": true,
+        "score": 20,
+        "feedback": "1 workflow(s); Integration Wokwi",
+        "workflows": [
+          "ci.yml"
+        ]
+      },
+      "documentacao": {
+        "score": 10,
+        "feedback": "5/5 seções preenchidas",
+        "secoes_preenchidas": 5
+      },
+      "estrutura": {
+        "score": 8,
+        "feedback": "4/4 arquivos obrigatórios; Possui .gitignore"
+      }
+    },
+    "pontuacao_total": 88,
+    "nota_final": 92.6,
+    "feedback_geral": []
+  },
+  {
+    "nome": "Gabriel Souza Santos_140",
+    "criterios": {},
+    "pontuacao_total": 0,
+    "nota_final": 0,
+    "feedback_geral": [],
+    "erro": "erro_clone"
+  },
+  {
+    "nome": "Ra├нssa de Brito Duarte_245",
+    "criterios": {
+      "logica_firmware": {
+        "exists": true,
+        "score": 30,
+        "feedback": "Código presente; Lógica funcional; Com comentários",
+        "content_length": 4571
+      },
+      "metrica_wokwi": {
+        "exists": true,
+        "score": 20,
+        "feedback": "Componentes identificados; Diagrama organizado"
+      },
+      "ci_cd": {
+        "exists": true,
+        "score": 20,
+        "feedback": "1 workflow(s); Integration Wokwi",
+        "workflows": [
+          "ci.yml"
+        ]
+      },
+      "documentacao": {
+        "score": 0,
+        "feedback": "0/5 seções (insuficiente)",
+        "secoes_preenchidas": 0
+      },
+      "estrutura": {
+        "score": 8,
+        "feedback": "4/4 arquivos obrigatórios; Possui .gitignore"
+      }
+    },
+    "pontuacao_total": 78,
+    "nota_final": 82.1,
+    "feedback_geral": []
+  },
+  {
+    "nome": "Luana Teles Alves_136",
+    "criterios": {
+      "logica_firmware": {
+        "exists": true,
+        "score": 30,
+        "feedback": "Código presente; Lógica funcional; Com comentários",
+        "content_length": 5972
+      },
+      "metrica_wokwi": {
+        "exists": true,
+        "score": 20,
+        "feedback": "Componentes identificados; Diagrama organizado"
+      },
+      "ci_cd": {
+        "exists": true,
+        "score": 20,
+        "feedback": "1 workflow(s); Integration Wokwi",
+        "workflows": [
+          "ci.yml"
+        ]
+      },
+      "documentacao": {
+        "score": 10,
+        "feedback": "5/5 seções preenchidas",
+        "secoes_preenchidas": 5
+      },
+      "estrutura": {
+        "score": 8,
+        "feedback": "4/4 arquivos obrigatórios; Possui .gitignore"
+      }
+    },
+    "pontuacao_total": 88,
+    "nota_final": 92.6,
+    "feedback_geral": []
+  },
+  {
+    "nome": "Diogo Gomes_211",
+    "criterios": {},
+    "pontuacao_total": 0,
+    "nota_final": 0,
+    "feedback_geral": [],
+    "erro": "erro_clone"
+  },
+  {
+    "nome": "Rafael da Silva Sousa_129",
+    "criterios": {
+      "logica_firmware": {
+        "exists": true,
+        "score": 30,
+        "feedback": "Código presente; Lógica funcional; Com comentários",
+        "content_length": 3407
+      },
+      "metrica_wokwi": {
+        "exists": true,
+        "score": 20,
+        "feedback": "Componentes identificados; Diagrama organizado"
+      },
+      "ci_cd": {
+        "exists": true,
+        "score": 20,
+        "feedback": "1 workflow(s); Integration Wokwi",
+        "workflows": [
+          "ci.yml"
+        ]
+      },
+      "documentacao": {
+        "score": 10,
+        "feedback": "5/5 seções preenchidas",
+        "secoes_preenchidas": 5
+      },
+      "estrutura": {
+        "score": 8,
+        "feedback": "4/4 arquivos obrigatórios; Possui .gitignore"
+      }
+    },
+    "pontuacao_total": 88,
+    "nota_final": 92.6,
+    "feedback_geral": []
+  },
+  {
+    "nome": "Levi Farias Leite_171",
+    "criterios": {
+      "logica_firmware": {
+        "exists": true,
+        "score": 30,
+        "feedback": "Código presente; Lógica funcional; Com comentários",
+        "content_length": 1565
+      },
+      "metrica_wokwi": {
+        "exists": true,
+        "score": 20,
+        "feedback": "Componentes identificados; Diagrama organizado"
+      },
+      "ci_cd": {
+        "exists": true,
+        "score": 20,
+        "feedback": "1 workflow(s); Integration Wokwi",
+        "workflows": [
+          "ci.yml"
+        ]
+      },
+      "documentacao": {
+        "score": 10,
+        "feedback": "5/5 seções preenchidas",
+        "secoes_preenchidas": 5
+      },
+      "estrutura": {
+        "score": 8,
+        "feedback": "4/4 arquivos obrigatórios; Possui .gitignore"
+      }
+    },
+    "pontuacao_total": 88,
+    "nota_final": 92.6,
+    "feedback_geral": []
+  },
+  {
+    "nome": "Thomas Magalh├гes_139",
+    "criterios": {},
+    "pontuacao_total": 0,
+    "nota_final": 0,
+    "feedback_geral": [],
+    "erro": "erro_clone"
+  },
+  {
+    "nome": "Amaro J├║nior Silva Luna_147",
+    "criterios": {
+      "logica_firmware": {
+        "exists": true,
+        "score": 30,
+        "feedback": "Código presente; Lógica funcional; Com comentários",
+        "content_length": 5336
+      },
+      "metrica_wokwi": {
+        "exists": true,
+        "score": 20,
+        "feedback": "Componentes identificados; Diagrama organizado"
+      },
+      "ci_cd": {
+        "exists": true,
+        "score": 20,
+        "feedback": "1 workflow(s); Integration Wokwi",
+        "workflows": [
+          "ci.yml"
+        ]
+      },
+      "documentacao": {
+        "score": 10,
+        "feedback": "5/5 seções preenchidas",
+        "secoes_preenchidas": 5
+      },
+      "estrutura": {
+        "score": 8,
+        "feedback": "4/4 arquivos obrigatórios; Possui .gitignore"
+      }
+    },
+    "pontuacao_total": 88,
+    "nota_final": 92.6,
+    "feedback_geral": []
+  },
+  {
+    "nome": "Guido Xenofonte_206",
+    "criterios": {
+      "logica_firmware": {
+        "exists": true,
+        "score": 30,
+        "feedback": "Código presente; Lógica funcional; Com comentários",
+        "content_length": 2120
+      },
+      "metrica_wokwi": {
+        "exists": true,
+        "score": 20,
+        "feedback": "Componentes identificados; Diagrama organizado"
+      },
+      "ci_cd": {
+        "exists": true,
+        "score": 20,
+        "feedback": "1 workflow(s); Integration Wokwi",
+        "workflows": [
+          "ci.yml"
+        ]
+      },
+      "documentacao": {
+        "score": 10,
+        "feedback": "5/5 seções preenchidas",
+        "secoes_preenchidas": 5
+      },
+      "estrutura": {
+        "score": 8,
+        "feedback": "4/4 arquivos obrigatórios; Possui .gitignore"
+      }
+    },
+    "pontuacao_total": 88,
+    "nota_final": 92.6,
+    "feedback_geral": []
+  },
+  {
+    "nome": "Iza Francine Carvalho Vieira_193",
+    "criterios": {
+      "logica_firmware": {
+        "exists": true,
+        "score": 30,
+        "feedback": "Código presente; Lógica funcional; Com comentários",
+        "content_length": 1032
+      },
+      "metrica_wokwi": {
+        "exists": true,
+        "score": 20,
+        "feedback": "Componentes identificados; Diagrama organizado"
+      },
+      "ci_cd": {
+        "exists": true,
+        "score": 25,
+        "feedback": "1 workflow(s); Integration Wokwi; Usa secrets",
+        "workflows": [
+          "ci.yml"
+        ]
+      },
+      "documentacao": {
+        "score": 0,
+        "feedback": "0/5 seções (insuficiente)",
+        "secoes_preenchidas": 0
+      },
+      "estrutura": {
+        "score": 8,
+        "feedback": "4/4 arquivos obrigatórios; Possui .gitignore"
+      }
+    },
+    "pontuacao_total": 83,
+    "nota_final": 87.4,
+    "feedback_geral": []
+  },
+  {
+    "nome": "Francisco Guilherme Ces├бrio Alc├вntara_133",
+    "criterios": {
+      "logica_firmware": {
+        "exists": true,
+        "score": 30,
+        "feedback": "Código presente; Lógica funcional; Com comentários",
+        "content_length": 3558
+      },
+      "metrica_wokwi": {
+        "exists": true,
+        "score": 20,
+        "feedback": "Componentes identificados; Diagrama organizado"
+      },
+      "ci_cd": {
+        "exists": true,
+        "score": 20,
+        "feedback": "1 workflow(s); Integration Wokwi",
+        "workflows": [
+          "ci.yml"
+        ]
+      },
+      "documentacao": {
+        "score": 10,
+        "feedback": "5/5 seções preenchidas",
+        "secoes_preenchidas": 5
+      },
+      "estrutura": {
+        "score": 8,
+        "feedback": "4/4 arquivos obrigatórios; Possui .gitignore"
+      }
+    },
+    "pontuacao_total": 88,
+    "nota_final": 92.6,
+    "feedback_geral": []
+  },
+  {
+    "nome": "Jos├й Adiel Calixto Serafim_200",
+    "criterios": {
+      "logica_firmware": {
+        "exists": true,
+        "score": 30,
+        "feedback": "Código presente; Lógica funcional; Com comentários",
+        "content_length": 2636
+      },
+      "metrica_wokwi": {
+        "exists": true,
+        "score": 20,
+        "feedback": "Componentes identificados; Diagrama organizado"
+      },
+      "ci_cd": {
+        "exists": true,
+        "score": 20,
+        "feedback": "1 workflow(s); Integration Wokwi",
+        "workflows": [
+          "ci.yml"
+        ]
+      },
+      "documentacao": {
+        "score": 10,
+        "feedback": "5/5 seções preenchidas",
+        "secoes_preenchidas": 5
+      },
+      "estrutura": {
+        "score": 8,
+        "feedback": "4/4 arquivos obrigatórios; Possui .gitignore"
+      }
+    },
+    "pontuacao_total": 88,
+    "nota_final": 92.6,
+    "feedback_geral": []
+  },
+  {
+    "nome": "Gilvan Alves Pastor Junior_237",
+    "criterios": {
+      "logica_firmware": {
+        "exists": true,
+        "score": 30,
+        "feedback": "Código presente; Lógica funcional; Com comentários",
+        "content_length": 1352
+      },
+      "metrica_wokwi": {
+        "exists": true,
+        "score": 20,
+        "feedback": "Componentes identificados; Diagrama organizado"
+      },
+      "ci_cd": {
+        "exists": true,
+        "score": 20,
+        "feedback": "1 workflow(s); Integration Wokwi",
+        "workflows": [
+          "ci.yml"
+        ]
+      },
+      "documentacao": {
+        "score": 10,
+        "feedback": "5/5 seções preenchidas",
+        "secoes_preenchidas": 5
+      },
+      "estrutura": {
+        "score": 8,
+        "feedback": "4/4 arquivos obrigatórios; Possui .gitignore"
+      }
+    },
+    "pontuacao_total": 88,
+    "nota_final": 92.6,
+    "feedback_geral": []
+  },
+  {
+    "nome": "Cicero Isac Da Silva Farias_142",
+    "criterios": {
+      "logica_firmware": {
+        "exists": true,
+        "score": 30,
+        "feedback": "Código presente; Lógica funcional; Com comentários",
+        "content_length": 1155
+      },
+      "metrica_wokwi": {
+        "exists": true,
+        "score": 20,
+        "feedback": "Componentes identificados; Diagrama organizado"
+      },
+      "ci_cd": {
+        "exists": true,
+        "score": 20,
+        "feedback": "1 workflow(s); Integration Wokwi",
+        "workflows": [
+          "ci.yml"
+        ]
+      },
+      "documentacao": {
+        "score": 0,
+        "feedback": "0/5 seções (insuficiente)",
+        "secoes_preenchidas": 0
+      },
+      "estrutura": {
+        "score": 8,
+        "feedback": "4/4 arquivos obrigatórios; Possui .gitignore"
+      }
+    },
+    "pontuacao_total": 78,
+    "nota_final": 82.1,
+    "feedback_geral": []
+  },
+  {
+    "nome": "Heitor Lacerda Santana de Sousa_215",
+    "criterios": {
+      "logica_firmware": {
+        "exists": true,
+        "score": 30,
+        "feedback": "Código presente; Lógica funcional; Com comentários",
+        "content_length": 1469
+      },
+      "metrica_wokwi": {
+        "exists": true,
+        "score": 20,
+        "feedback": "Componentes identificados; Diagrama organizado"
+      },
+      "ci_cd": {
+        "exists": true,
+        "score": 20,
+        "feedback": "1 workflow(s); Integration Wokwi",
+        "workflows": [
+          "ci.yml"
+        ]
+      },
+      "documentacao": {
+        "score": 0,
+        "feedback": "0/5 seções (insuficiente)",
+        "secoes_preenchidas": 0
+      },
+      "estrutura": {
+        "score": 8,
+        "feedback": "4/4 arquivos obrigatórios; Possui .gitignore"
+      }
+    },
+    "pontuacao_total": 78,
+    "nota_final": 82.1,
+    "feedback_geral": []
+  },
+  {
+    "nome": "Gabriel Moreira Tavares Santana_218",
+    "criterios": {
+      "logica_firmware": {
+        "exists": true,
+        "score": 30,
+        "feedback": "Código presente; Lógica funcional; Com comentários",
+        "content_length": 2493
+      },
+      "metrica_wokwi": {
+        "exists": true,
+        "score": 20,
+        "feedback": "Componentes identificados; Diagrama organizado"
+      },
+      "ci_cd": {
+        "exists": true,
+        "score": 20,
+        "feedback": "1 workflow(s); Integration Wokwi",
+        "workflows": [
+          "ci.yml"
+        ]
+      },
+      "documentacao": {
+        "score": 10,
+        "feedback": "5/5 seções preenchidas",
+        "secoes_preenchidas": 5
+      },
+      "estrutura": {
+        "score": 8,
+        "feedback": "4/4 arquivos obrigatórios; Possui .gitignore"
+      }
+    },
+    "pontuacao_total": 88,
+    "nota_final": 92.6,
+    "feedback_geral": []
+  },
+  {
+    "nome": "Valdimiro Alves dos Santos Neto_146",
+    "criterios": {
+      "logica_firmware": {
+        "exists": true,
+        "score": 30,
+        "feedback": "Código presente; Lógica funcional; Com comentários",
+        "content_length": 2783
+      },
+      "metrica_wokwi": {
+        "exists": true,
+        "score": 20,
+        "feedback": "Componentes identificados; Diagrama organizado"
+      },
+      "ci_cd": {
+        "exists": true,
+        "score": 20,
+        "feedback": "1 workflow(s); Integration Wokwi",
+        "workflows": [
+          "ci.yml"
+        ]
+      },
+      "documentacao": {
+        "score": 10,
+        "feedback": "5/5 seções preenchidas",
+        "secoes_preenchidas": 5
+      },
+      "estrutura": {
+        "score": 8,
+        "feedback": "4/4 arquivos obrigatórios; Possui .gitignore"
+      }
+    },
+    "pontuacao_total": 88,
+    "nota_final": 92.6,
+    "feedback_geral": []
+  },
+  {
+    "nome": "Bruno Macedo_224",
+    "criterios": {
+      "logica_firmware": {
+        "exists": true,
+        "score": 30,
+        "feedback": "Código presente; Lógica funcional; Com comentários",
+        "content_length": 3678
+      },
+      "metrica_wokwi": {
+        "exists": true,
+        "score": 20,
+        "feedback": "Componentes identificados; Diagrama organizado"
+      },
+      "ci_cd": {
+        "exists": true,
+        "score": 20,
+        "feedback": "1 workflow(s); Integration Wokwi",
+        "workflows": [
+          "ci.yml"
+        ]
+      },
+      "documentacao": {
+        "score": 10,
+        "feedback": "5/5 seções preenchidas",
+        "secoes_preenchidas": 5
+      },
+      "estrutura": {
+        "score": 8,
+        "feedback": "4/4 arquivos obrigatórios; Possui .gitignore"
+      }
+    },
+    "pontuacao_total": 88,
+    "nota_final": 92.6,
+    "feedback_geral": []
+  },
+  {
+    "nome": "Raphael Rates_192",
+    "criterios": {
+      "logica_firmware": {
+        "exists": true,
+        "score": 27,
+        "feedback": "Código presente; Lógica funcional",
+        "content_length": 2835
+      },
+      "metrica_wokwi": {
+        "exists": true,
+        "score": 20,
+        "feedback": "Componentes identificados; Diagrama organizado"
+      },
+      "ci_cd": {
+        "exists": true,
+        "score": 20,
+        "feedback": "1 workflow(s); Integration Wokwi",
+        "workflows": [
+          "ci.yml"
+        ]
+      },
+      "documentacao": {
+        "score": 10,
+        "feedback": "5/5 seções preenchidas",
+        "secoes_preenchidas": 5
+      },
+      "estrutura": {
+        "score": 8,
+        "feedback": "4/4 arquivos obrigatórios; Possui .gitignore"
+      }
+    },
+    "pontuacao_total": 85,
+    "nota_final": 89.5,
+    "feedback_geral": []
+  },
+  {
+    "nome": "Andr├й Castro_205",
+    "criterios": {
+      "logica_firmware": {
+        "exists": true,
+        "score": 27,
+        "feedback": "Código presente; Lógica funcional",
+        "content_length": 14
+      },
+      "metrica_wokwi": {
+        "exists": true,
+        "score": 10,
+        "feedback": "Componentes identificados"
+      },
+      "ci_cd": {
+        "exists": true,
+        "score": 20,
+        "feedback": "1 workflow(s); Integration Wokwi",
+        "workflows": [
+          "ci.yml"
+        ]
+      },
+      "documentacao": {
+        "score": 10,
+        "feedback": "5/5 seções preenchidas",
+        "secoes_preenchidas": 5
+      },
+      "estrutura": {
+        "score": 8,
+        "feedback": "4/4 arquivos obrigatórios; Possui .gitignore"
+      }
+    },
+    "pontuacao_total": 75,
+    "nota_final": 78.9,
+    "feedback_geral": []
+  },
+  {
+    "nome": "Guilherme Ven├вncio de Souza_165",
+    "criterios": {
+      "logica_firmware": {
+        "exists": true,
+        "score": 30,
+        "feedback": "Código presente; Lógica funcional; Com comentários",
+        "content_length": 2417
+      },
+      "metrica_wokwi": {
+        "exists": true,
+        "score": 20,
+        "feedback": "Componentes identificados; Diagrama organizado"
+      },
+      "ci_cd": {
+        "exists": true,
+        "score": 20,
+        "feedback": "1 workflow(s); Integration Wokwi",
+        "workflows": [
+          "ci.yml"
+        ]
+      },
+      "documentacao": {
+        "score": 0,
+        "feedback": "0/5 seções (insuficiente)",
+        "secoes_preenchidas": 0
+      },
+      "estrutura": {
+        "score": 8,
+        "feedback": "4/4 arquivos obrigatórios; Possui .gitignore"
+      }
+    },
+    "pontuacao_total": 78,
+    "nota_final": 82.1,
+    "feedback_geral": []
+  },
+  {
+    "nome": "Valney Maia Neto_208",
+    "criterios": {
+      "logica_firmware": {
+        "exists": true,
+        "score": 30,
+        "feedback": "Código presente; Lógica funcional; Com comentários",
+        "content_length": 13995
+      },
+      "metrica_wokwi": {
+        "exists": true,
+        "score": 20,
+        "feedback": "Componentes identificados; Diagrama organizado"
+      },
+      "ci_cd": {
+        "exists": true,
+        "score": 20,
+        "feedback": "1 workflow(s); Integration Wokwi",
+        "workflows": [
+          "ci.yml"
+        ]
+      },
+      "documentacao": {
+        "score": 10,
+        "feedback": "5/5 seções preenchidas",
+        "secoes_preenchidas": 5
+      },
+      "estrutura": {
+        "score": 8,
+        "feedback": "4/4 arquivos obrigatórios; Possui .gitignore"
+      }
+    },
+    "pontuacao_total": 88,
+    "nota_final": 92.6,
+    "feedback_geral": []
+  },
+  {
+    "nome": "Dorian Feitosa_194",
+    "criterios": {
+      "logica_firmware": {
+        "exists": true,
+        "score": 30,
+        "feedback": "Código presente; Lógica funcional; Com comentários",
+        "content_length": 2919
+      },
+      "metrica_wokwi": {
+        "exists": true,
+        "score": 20,
+        "feedback": "Componentes identificados; Diagrama organizado"
+      },
+      "ci_cd": {
+        "exists": true,
+        "score": 20,
+        "feedback": "1 workflow(s); Integration Wokwi",
+        "workflows": [
+          "ci.yml"
+        ]
+      },
+      "documentacao": {
+        "score": 10,
+        "feedback": "5/5 seções preenchidas",
+        "secoes_preenchidas": 5
+      },
+      "estrutura": {
+        "score": 8,
+        "feedback": "4/4 arquivos obrigatórios; Possui .gitignore"
+      }
+    },
+    "pontuacao_total": 88,
+    "nota_final": 92.6,
+    "feedback_geral": []
+  },
+  {
+    "nome": "Guilherme Viana Batista_185",
+    "criterios": {
+      "logica_firmware": {
+        "exists": true,
+        "score": 30,
+        "feedback": "Código presente; Lógica funcional; Com comentários",
+        "content_length": 5458
+      },
+      "metrica_wokwi": {
+        "exists": true,
+        "score": 20,
+        "feedback": "Componentes identificados; Diagrama organizado"
+      },
+      "ci_cd": {
+        "exists": true,
+        "score": 20,
+        "feedback": "1 workflow(s); Integration Wokwi",
+        "workflows": [
+          "ci.yml"
+        ]
+      },
+      "documentacao": {
+        "score": 6,
+        "feedback": "3/5 seções (parcial)",
+        "secoes_preenchidas": 3
+      },
+      "estrutura": {
+        "score": 8,
+        "feedback": "4/4 arquivos obrigatórios; Possui .gitignore"
+      }
+    },
+    "pontuacao_total": 84,
+    "nota_final": 88.4,
+    "feedback_geral": []
+  },
+  {
+    "nome": "Icaro Cavalcante_244",
+    "criterios": {
+      "logica_firmware": {
+        "exists": true,
+        "score": 30,
+        "feedback": "Código presente; Lógica funcional; Com comentários",
+        "content_length": 3173
+      },
+      "metrica_wokwi": {
+        "exists": true,
+        "score": 20,
+        "feedback": "Componentes identificados; Diagrama organizado"
+      },
+      "ci_cd": {
+        "exists": true,
+        "score": 20,
+        "feedback": "1 workflow(s); Integration Wokwi",
+        "workflows": [
+          "ci.yml"
+        ]
+      },
+      "documentacao": {
+        "score": 0,
+        "feedback": "0/5 seções (insuficiente)",
+        "secoes_preenchidas": 0
+      },
+      "estrutura": {
+        "score": 8,
+        "feedback": "4/4 arquivos obrigatórios; Possui .gitignore"
+      }
+    },
+    "pontuacao_total": 78,
+    "nota_final": 82.1,
+    "feedback_geral": []
+  },
+  {
+    "nome": "Elder Rayan Oliveira Silva_138",
+    "criterios": {
+      "logica_firmware": {
+        "exists": true,
+        "score": 30,
+        "feedback": "Código presente; Lógica funcional; Com comentários",
+        "content_length": 580
+      },
+      "metrica_wokwi": {
+        "exists": true,
+        "score": 20,
+        "feedback": "Componentes identificados; Diagrama organizado"
+      },
+      "ci_cd": {
+        "exists": true,
+        "score": 25,
+        "feedback": "1 workflow(s); Integration Wokwi; Usa secrets",
+        "workflows": [
+          "ci.yml"
+        ]
+      },
+      "documentacao": {
+        "score": 0,
+        "feedback": "0/5 seções (insuficiente)",
+        "secoes_preenchidas": 0
+      },
+      "estrutura": {
+        "score": 8,
+        "feedback": "4/4 arquivos obrigatórios; Possui .gitignore"
+      }
+    },
+    "pontuacao_total": 83,
+    "nota_final": 87.4,
+    "feedback_geral": []
+  },
+  {
+    "nome": "Claylton Muniz_232",
+    "criterios": {
+      "logica_firmware": {
+        "exists": true,
+        "score": 30,
+        "feedback": "Código presente; Lógica funcional; Com comentários",
+        "content_length": 5044
+      },
+      "metrica_wokwi": {
+        "exists": true,
+        "score": 20,
+        "feedback": "Componentes identificados; Diagrama organizado"
+      },
+      "ci_cd": {
+        "exists": true,
+        "score": 20,
+        "feedback": "1 workflow(s); Integration Wokwi",
+        "workflows": [
+          "ci.yml"
+        ]
+      },
+      "documentacao": {
+        "score": 10,
+        "feedback": "5/5 seções preenchidas",
+        "secoes_preenchidas": 5
+      },
+      "estrutura": {
+        "score": 8,
+        "feedback": "4/4 arquivos obrigatórios; Possui .gitignore"
+      }
+    },
+    "pontuacao_total": 88,
+    "nota_final": 92.6,
+    "feedback_geral": []
+  },
+  {
+    "nome": "Andr├й Lima_162",
+    "criterios": {
+      "logica_firmware": {
+        "exists": true,
+        "score": 30,
+        "feedback": "Código presente; Lógica funcional; Com comentários",
+        "content_length": 926
+      },
+      "metrica_wokwi": {
+        "exists": true,
+        "score": 20,
+        "feedback": "Componentes identificados; Diagrama organizado"
+      },
+      "ci_cd": {
+        "exists": true,
+        "score": 20,
+        "feedback": "1 workflow(s); Integration Wokwi",
+        "workflows": [
+          "ci.yml"
+        ]
+      },
+      "documentacao": {
+        "score": 10,
+        "feedback": "5/5 seções preenchidas",
+        "secoes_preenchidas": 5
+      },
+      "estrutura": {
+        "score": 8,
+        "feedback": "4/4 arquivos obrigatórios; Possui .gitignore"
+      }
+    },
+    "pontuacao_total": 88,
+    "nota_final": 92.6,
+    "feedback_geral": []
+  },
+  {
+    "nome": "Ana Aisha Tomaz de Morais_251",
+    "criterios": {
+      "logica_firmware": {
+        "exists": true,
+        "score": 30,
+        "feedback": "Código presente; Lógica funcional; Com comentários",
+        "content_length": 6726
+      },
+      "metrica_wokwi": {
+        "exists": true,
+        "score": 20,
+        "feedback": "Componentes identificados; Diagrama organizado"
+      },
+      "ci_cd": {
+        "exists": true,
+        "score": 25,
+        "feedback": "1 workflow(s); Integration Wokwi; Usa secrets",
+        "workflows": [
+          "ci.yml"
+        ]
+      },
+      "documentacao": {
+        "score": 0,
+        "feedback": "0/5 seções (insuficiente)",
+        "secoes_preenchidas": 0
+      },
+      "estrutura": {
+        "score": 8,
+        "feedback": "4/4 arquivos obrigatórios; Possui .gitignore"
+      }
+    },
+    "pontuacao_total": 83,
+    "nota_final": 87.4,
+    "feedback_geral": []
+  },
+  {
+    "nome": "Jo├гo Henrique de Brito Leandro Bitu Corr├кa_213",
+    "criterios": {
+      "logica_firmware": {
+        "exists": true,
+        "score": 30,
+        "feedback": "Código presente; Lógica funcional; Com comentários",
+        "content_length": 3084
+      },
+      "metrica_wokwi": {
+        "exists": true,
+        "score": 20,
+        "feedback": "Componentes identificados; Diagrama organizado"
+      },
+      "ci_cd": {
+        "exists": true,
+        "score": 20,
+        "feedback": "1 workflow(s); Integration Wokwi",
+        "workflows": [
+          "ci.yml"
+        ]
+      },
+      "documentacao": {
+        "score": 0,
+        "feedback": "0/5 seções (insuficiente)",
+        "secoes_preenchidas": 0
+      },
+      "estrutura": {
+        "score": 8,
+        "feedback": "4/4 arquivos obrigatórios; Possui .gitignore"
+      }
+    },
+    "pontuacao_total": 78,
+    "nota_final": 82.1,
+    "feedback_geral": []
+  },
+  {
+    "nome": "Isaac Farias_158",
+    "criterios": {
+      "logica_firmware": {
+        "exists": true,
+        "score": 30,
+        "feedback": "Código presente; Lógica funcional; Com comentários",
+        "content_length": 6118
+      },
+      "metrica_wokwi": {
+        "exists": true,
+        "score": 20,
+        "feedback": "Componentes identificados; Diagrama organizado"
+      },
+      "ci_cd": {
+        "exists": true,
+        "score": 20,
+        "feedback": "1 workflow(s); Integration Wokwi",
+        "workflows": [
+          "ci.yml"
+        ]
+      },
+      "documentacao": {
+        "score": 10,
+        "feedback": "5/5 seções preenchidas",
+        "secoes_preenchidas": 5
+      },
+      "estrutura": {
+        "score": 8,
+        "feedback": "4/4 arquivos obrigatórios; Possui .gitignore"
+      }
+    },
+    "pontuacao_total": 88,
+    "nota_final": 92.6,
+    "feedback_geral": []
+  },
+  {
+    "nome": "Pedro Odillon Felicio Marques Mendon├зa Figueiredo_248",
+    "criterios": {
+      "logica_firmware": {
+        "exists": true,
+        "score": 30,
+        "feedback": "Código presente; Lógica funcional; Com comentários",
+        "content_length": 2307
+      },
+      "metrica_wokwi": {
+        "exists": true,
+        "score": 20,
+        "feedback": "Componentes identificados; Diagrama organizado"
+      },
+      "ci_cd": {
+        "exists": true,
+        "score": 20,
+        "feedback": "1 workflow(s); Integration Wokwi",
+        "workflows": [
+          "ci.yml"
+        ]
+      },
+      "documentacao": {
+        "score": 10,
+        "feedback": "5/5 seções preenchidas",
+        "secoes_preenchidas": 5
+      },
+      "estrutura": {
+        "score": 8,
+        "feedback": "4/4 arquivos obrigatórios; Possui .gitignore"
+      }
+    },
+    "pontuacao_total": 88,
+    "nota_final": 92.6,
+    "feedback_geral": []
+  },
+  {
+    "nome": "Rafael Feitosa_225",
+    "criterios": {
+      "logica_firmware": {
+        "exists": true,
+        "score": 30,
+        "feedback": "Código presente; Lógica funcional; Com comentários",
+        "content_length": 7549
+      },
+      "metrica_wokwi": {
+        "exists": true,
+        "score": 20,
+        "feedback": "Componentes identificados; Diagrama organizado"
+      },
+      "ci_cd": {
+        "exists": true,
+        "score": 20,
+        "feedback": "1 workflow(s); Integration Wokwi",
+        "workflows": [
+          "ci.yml"
+        ]
+      },
+      "documentacao": {
+        "score": 10,
+        "feedback": "5/5 seções preenchidas",
+        "secoes_preenchidas": 5
+      },
+      "estrutura": {
+        "score": 8,
+        "feedback": "4/4 arquivos obrigatórios; Possui .gitignore"
+      }
+    },
+    "pontuacao_total": 88,
+    "nota_final": 92.6,
+    "feedback_geral": []
+  },
+  {
+    "nome": "Thiago Nerton Macedo Alves_229",
+    "criterios": {
+      "logica_firmware": {
+        "exists": true,
+        "score": 27,
+        "feedback": "Código presente; Lógica funcional",
+        "content_length": 636
+      },
+      "metrica_wokwi": {
+        "exists": true,
+        "score": 20,
+        "feedback": "Componentes identificados; Diagrama organizado"
+      },
+      "ci_cd": {
+        "exists": true,
+        "score": 20,
+        "feedback": "1 workflow(s); Integration Wokwi",
+        "workflows": [
+          "ci.yml"
+        ]
+      },
+      "documentacao": {
+        "score": 10,
+        "feedback": "5/5 seções preenchidas",
+        "secoes_preenchidas": 5
+      },
+      "estrutura": {
+        "score": 8,
+        "feedback": "4/4 arquivos obrigatórios; Possui .gitignore"
+      }
+    },
+    "pontuacao_total": 85,
+    "nota_final": 89.5,
+    "feedback_geral": []
+  },
+  {
+    "nome": "Eduardo Roberto Pereira_177",
+    "criterios": {
+      "logica_firmware": {
+        "exists": true,
+        "score": 30,
+        "feedback": "Código presente; Lógica funcional; Com comentários",
+        "content_length": 3568
+      },
+      "metrica_wokwi": {
+        "exists": true,
+        "score": 20,
+        "feedback": "Componentes identificados; Diagrama organizado"
+      },
+      "ci_cd": {
+        "exists": true,
+        "score": 20,
+        "feedback": "1 workflow(s); Integration Wokwi",
+        "workflows": [
+          "ci.yml"
+        ]
+      },
+      "documentacao": {
+        "score": 8,
+        "feedback": "4/5 seções preenchidas",
+        "secoes_preenchidas": 4
+      },
+      "estrutura": {
+        "score": 8,
+        "feedback": "4/4 arquivos obrigatórios; Possui .gitignore"
+      }
+    },
+    "pontuacao_total": 86,
+    "nota_final": 90.5,
+    "feedback_geral": []
+  },
+  {
+    "nome": "Claudenir Rodrigues Araujo_228",
+    "criterios": {
+      "logica_firmware": {
+        "exists": true,
+        "score": 30,
+        "feedback": "Código presente; Lógica funcional; Com comentários",
+        "content_length": 2554
+      },
+      "metrica_wokwi": {
+        "exists": true,
+        "score": 20,
+        "feedback": "Componentes identificados; Diagrama organizado"
+      },
+      "ci_cd": {
+        "exists": false,
+        "score": 0,
+        "feedback": "GitHub Actions não configurado"
+      },
+      "documentacao": {
+        "score": 0,
+        "feedback": "0/5 seções (insuficiente)",
+        "secoes_preenchidas": 0
+      },
+      "estrutura": {
+        "score": 6,
+        "feedback": "4/4 arquivos obrigatórios"
+      }
+    },
+    "pontuacao_total": 56,
+    "nota_final": 58.9,
+    "feedback_geral": []
+  },
+  {
+    "nome": "MANUELA MENEZES ALVES_223",
+    "criterios": {
+      "logica_firmware": {
+        "exists": true,
+        "score": 27,
+        "feedback": "Código presente; Lógica funcional",
+        "content_length": 14
+      },
+      "metrica_wokwi": {
+        "exists": true,
+        "score": 20,
+        "feedback": "Componentes identificados; Diagrama organizado"
+      },
+      "ci_cd": {
+        "exists": true,
+        "score": 25,
+        "feedback": "1 workflow(s); Integration Wokwi; Usa secrets",
+        "workflows": [
+          "ci.yml"
+        ]
+      },
+      "documentacao": {
+        "score": 10,
+        "feedback": "5/5 seções preenchidas",
+        "secoes_preenchidas": 5
+      },
+      "estrutura": {
+        "score": 8,
+        "feedback": "4/4 arquivos obrigatórios; Possui .gitignore"
+      }
+    },
+    "pontuacao_total": 90,
+    "nota_final": 94.7,
+    "feedback_geral": []
+  },
+  {
+    "nome": "Elil├║cio Teixeira F├йlix Filho_247",
+    "criterios": {
+      "logica_firmware": {
+        "exists": true,
+        "score": 30,
+        "feedback": "Código presente; Lógica funcional; Com comentários",
+        "content_length": 6565
+      },
+      "metrica_wokwi": {
+        "exists": true,
+        "score": 20,
+        "feedback": "Componentes identificados; Diagrama organizado"
+      },
+      "ci_cd": {
+        "exists": true,
+        "score": 20,
+        "feedback": "1 workflow(s); Integration Wokwi",
+        "workflows": [
+          "ci.yml"
+        ]
+      },
+      "documentacao": {
+        "score": 10,
+        "feedback": "5/5 seções preenchidas",
+        "secoes_preenchidas": 5
+      },
+      "estrutura": {
+        "score": 8,
+        "feedback": "4/4 arquivos obrigatórios; Possui .gitignore"
+      }
+    },
+    "pontuacao_total": 88,
+    "nota_final": 92.6,
+    "feedback_geral": []
+  },
+  {
+    "nome": "Esdras Rodrigues de Andrade_240",
+    "criterios": {
+      "logica_firmware": {
+        "exists": true,
+        "score": 30,
+        "feedback": "Código presente; Lógica funcional; Com comentários",
+        "content_length": 2388
+      },
+      "metrica_wokwi": {
+        "exists": true,
+        "score": 20,
+        "feedback": "Componentes identificados; Diagrama organizado"
+      },
+      "ci_cd": {
+        "exists": true,
+        "score": 20,
+        "feedback": "1 workflow(s); Integration Wokwi",
+        "workflows": [
+          "ci.yml"
+        ]
+      },
+      "documentacao": {
+        "score": 10,
+        "feedback": "5/5 seções preenchidas",
+        "secoes_preenchidas": 5
+      },
+      "estrutura": {
+        "score": 8,
+        "feedback": "4/4 arquivos obrigatórios; Possui .gitignore"
+      }
+    },
+    "pontuacao_total": 88,
+    "nota_final": 92.6,
+    "feedback_geral": []
+  },
+  {
+    "nome": "Miguel Morais_207",
+    "criterios": {
+      "logica_firmware": {
+        "exists": true,
+        "score": 30,
+        "feedback": "Código presente; Lógica funcional; Com comentários",
+        "content_length": 13697
+      },
+      "metrica_wokwi": {
+        "exists": true,
+        "score": 20,
+        "feedback": "Componentes identificados; Diagrama organizado"
+      },
+      "ci_cd": {
+        "exists": true,
+        "score": 20,
+        "feedback": "1 workflow(s); Integration Wokwi",
+        "workflows": [
+          "ci.yml"
+        ]
+      },
+      "documentacao": {
+        "score": 10,
+        "feedback": "5/5 seções preenchidas",
+        "secoes_preenchidas": 5
+      },
+      "estrutura": {
+        "score": 8,
+        "feedback": "4/4 arquivos obrigatórios; Possui .gitignore"
+      }
+    },
+    "pontuacao_total": 88,
+    "nota_final": 92.6,
+    "feedback_geral": []
+  },
+  {
+    "nome": "Alexandro dos Santos Gois_243",
+    "criterios": {
+      "logica_firmware": {
+        "exists": false,
+        "score": 0,
+        "feedback": "main.py não encontrado"
+      },
+      "metrica_wokwi": {
+        "exists": true,
+        "score": 20,
+        "feedback": "Componentes identificados; Diagrama organizado"
+      },
+      "ci_cd": {
+        "exists": true,
+        "score": 25,
+        "feedback": "1 workflow(s); Integration Wokwi; Usa secrets",
+        "workflows": [
+          "ci.yml"
+        ]
+      },
+      "documentacao": {
+        "score": 10,
+        "feedback": "5/5 seções preenchidas",
+        "secoes_preenchidas": 5
+      },
+      "estrutura": {
+        "score": 6,
+        "feedback": "3/4 arquivos obrigatórios; Possui .gitignore"
+      }
+    },
+    "pontuacao_total": 61,
+    "nota_final": 64.2,
+    "feedback_geral": []
+  },
+  {
+    "nome": "Weslley Fernandes_173",
+    "criterios": {
+      "logica_firmware": {
+        "exists": true,
+        "score": 30,
+        "feedback": "Código presente; Lógica funcional; Com comentários",
+        "content_length": 43688
+      },
+      "metrica_wokwi": {
+        "exists": true,
+        "score": 20,
+        "feedback": "Componentes identificados; Diagrama organizado"
+      },
+      "ci_cd": {
+        "exists": true,
+        "score": 20,
+        "feedback": "1 workflow(s); Integration Wokwi",
+        "workflows": [
+          "ci.yml"
+        ]
+      },
+      "documentacao": {
+        "score": 10,
+        "feedback": "5/5 seções preenchidas",
+        "secoes_preenchidas": 5
+      },
+      "estrutura": {
+        "score": 8,
+        "feedback": "4/4 arquivos obrigatórios; Possui .gitignore"
+      }
+    },
+    "pontuacao_total": 88,
+    "nota_final": 92.6,
+    "feedback_geral": []
+  },
+  {
+    "nome": "Rodrigo Pinheiro Alcantara_199",
+    "criterios": {
+      "logica_firmware": {
+        "exists": true,
+        "score": 30,
+        "feedback": "Código presente; Lógica funcional; Com comentários",
+        "content_length": 14572
+      },
+      "metrica_wokwi": {
+        "exists": true,
+        "score": 20,
+        "feedback": "Componentes identificados; Diagrama organizado"
+      },
+      "ci_cd": {
+        "exists": true,
+        "score": 20,
+        "feedback": "1 workflow(s); Integration Wokwi",
+        "workflows": [
+          "ci.yml"
+        ]
+      },
+      "documentacao": {
+        "score": 6,
+        "feedback": "3/5 seções (parcial)",
+        "secoes_preenchidas": 3
+      },
+      "estrutura": {
+        "score": 8,
+        "feedback": "4/4 arquivos obrigatórios; Possui .gitignore"
+      }
+    },
+    "pontuacao_total": 84,
+    "nota_final": 88.4,
+    "feedback_geral": []
+  },
+  {
+    "nome": "Andr├й Wesley_172",
+    "criterios": {
+      "logica_firmware": {
+        "exists": true,
+        "score": 27,
+        "feedback": "Código presente; Lógica funcional",
+        "content_length": 222
+      },
+      "metrica_wokwi": {
+        "exists": true,
+        "score": 10,
+        "feedback": "Componentes identificados"
+      },
+      "ci_cd": {
+        "exists": true,
+        "score": 20,
+        "feedback": "1 workflow(s); Integration Wokwi",
+        "workflows": [
+          "ci.yml"
+        ]
+      },
+      "documentacao": {
+        "score": 10,
+        "feedback": "5/5 seções preenchidas",
+        "secoes_preenchidas": 5
+      },
+      "estrutura": {
+        "score": 8,
+        "feedback": "4/4 arquivos obrigatórios; Possui .gitignore"
+      }
+    },
+    "pontuacao_total": 75,
+    "nota_final": 78.9,
+    "feedback_geral": []
+  },
+  {
+    "nome": "Jos├й Dhonatan Fernandes de Almeida_176",
+    "criterios": {
+      "logica_firmware": {
+        "exists": true,
+        "score": 30,
+        "feedback": "Código presente; Lógica funcional; Com comentários",
+        "content_length": 1329
+      },
+      "metrica_wokwi": {
+        "exists": true,
+        "score": 20,
+        "feedback": "Componentes identificados; Diagrama organizado"
+      },
+      "ci_cd": {
+        "exists": true,
+        "score": 20,
+        "feedback": "1 workflow(s); Integration Wokwi",
+        "workflows": [
+          "ci.yml"
+        ]
+      },
+      "documentacao": {
+        "score": 0,
+        "feedback": "0/5 seções (insuficiente)",
+        "secoes_preenchidas": 0
+      },
+      "estrutura": {
+        "score": 8,
+        "feedback": "4/4 arquivos obrigatórios; Possui .gitignore"
+      }
+    },
+    "pontuacao_total": 78,
+    "nota_final": 82.1,
+    "feedback_geral": []
+  },
+  {
+    "nome": "Samuel Jackson_233",
+    "criterios": {
+      "logica_firmware": {
+        "exists": true,
+        "score": 30,
+        "feedback": "Código presente; Lógica funcional; Com comentários",
+        "content_length": 8149
+      },
+      "metrica_wokwi": {
+        "exists": true,
+        "score": 20,
+        "feedback": "Componentes identificados; Diagrama organizado"
+      },
+      "ci_cd": {
+        "exists": true,
+        "score": 20,
+        "feedback": "1 workflow(s); Integration Wokwi",
+        "workflows": [
+          "ci.yml"
+        ]
+      },
+      "documentacao": {
+        "score": 0,
+        "feedback": "0/5 seções (insuficiente)",
+        "secoes_preenchidas": 0
+      },
+      "estrutura": {
+        "score": 8,
+        "feedback": "4/4 arquivos obrigatórios; Possui .gitignore"
+      }
+    },
+    "pontuacao_total": 78,
+    "nota_final": 82.1,
+    "feedback_geral": []
+  },
+  {
+    "nome": "Ana Beatriz Batista Caitano_181",
+    "criterios": {
+      "logica_firmware": {
+        "exists": true,
+        "score": 30,
+        "feedback": "Código presente; Lógica funcional; Com comentários",
+        "content_length": 3032
+      },
+      "metrica_wokwi": {
+        "exists": true,
+        "score": 20,
+        "feedback": "Componentes identificados; Diagrama organizado"
+      },
+      "ci_cd": {
+        "exists": true,
+        "score": 25,
+        "feedback": "1 workflow(s); Integration Wokwi; Usa secrets",
+        "workflows": [
+          "ci.yml"
+        ]
+      },
+      "documentacao": {
+        "score": 10,
+        "feedback": "5/5 seções preenchidas",
+        "secoes_preenchidas": 5
+      },
+      "estrutura": {
+        "score": 8,
+        "feedback": "4/4 arquivos obrigatórios; Possui .gitignore"
+      }
+    },
+    "pontuacao_total": 93,
+    "nota_final": 97.9,
+    "feedback_geral": []
+  },
+  {
+    "nome": "Pedro Henrique Fernandes Bezerra_249",
+    "criterios": {},
+    "pontuacao_total": 0,
+    "nota_final": 0,
+    "feedback_geral": [],
+    "erro": "erro_clone"
+  },
+  {
+    "nome": "Jhonatan Pereira_164",
+    "criterios": {
+      "logica_firmware": {
+        "exists": true,
+        "score": 30,
+        "feedback": "Código presente; Lógica funcional; Com comentários",
+        "content_length": 1704
+      },
+      "metrica_wokwi": {
+        "exists": true,
+        "score": 20,
+        "feedback": "Componentes identificados; Diagrama organizado"
+      },
+      "ci_cd": {
+        "exists": true,
+        "score": 20,
+        "feedback": "1 workflow(s); Integration Wokwi",
+        "workflows": [
+          "ci.yml"
+        ]
+      },
+      "documentacao": {
+        "score": 8,
+        "feedback": "4/5 seções preenchidas",
+        "secoes_preenchidas": 4
+      },
+      "estrutura": {
+        "score": 8,
+        "feedback": "4/4 arquivos obrigatórios; Possui .gitignore"
+      }
+    },
+    "pontuacao_total": 86,
+    "nota_final": 90.5,
+    "feedback_geral": []
+  },
+  {
+    "nome": "Arthur Lobo Feitosa de Oliveira_234",
+    "criterios": {
+      "logica_firmware": {
+        "exists": true,
+        "score": 30,
+        "feedback": "Código presente; Lógica funcional; Com comentários",
+        "content_length": 6465
+      },
+      "metrica_wokwi": {
+        "exists": true,
+        "score": 20,
+        "feedback": "Componentes identificados; Diagrama organizado"
+      },
+      "ci_cd": {
+        "exists": true,
+        "score": 20,
+        "feedback": "1 workflow(s); Integration Wokwi",
+        "workflows": [
+          "ci.yml"
+        ]
+      },
+      "documentacao": {
+        "score": 10,
+        "feedback": "5/5 seções preenchidas",
+        "secoes_preenchidas": 5
+      },
+      "estrutura": {
+        "score": 8,
+        "feedback": "4/4 arquivos obrigatórios; Possui .gitignore"
+      }
+    },
+    "pontuacao_total": 88,
+    "nota_final": 92.6,
+    "feedback_geral": []
+  },
+  {
+    "nome": "Guilherme Silva_195",
+    "criterios": {
+      "logica_firmware": {
+        "exists": true,
+        "score": 27,
+        "feedback": "Código presente; Lógica funcional",
+        "content_length": 1514
+      },
+      "metrica_wokwi": {
+        "exists": true,
+        "score": 20,
+        "feedback": "Componentes identificados; Diagrama organizado"
+      },
+      "ci_cd": {
+        "exists": true,
+        "score": 20,
+        "feedback": "1 workflow(s); Integration Wokwi",
+        "workflows": [
+          "ci.yml"
+        ]
+      },
+      "documentacao": {
+        "score": 10,
+        "feedback": "5/5 seções preenchidas",
+        "secoes_preenchidas": 5
+      },
+      "estrutura": {
+        "score": 8,
+        "feedback": "4/4 arquivos obrigatórios; Possui .gitignore"
+      }
+    },
+    "pontuacao_total": 85,
+    "nota_final": 89.5,
+    "feedback_geral": []
+  },
+  {
+    "nome": "Emily Fernanda da Silva Galv├гo Modesto_222",
+    "criterios": {
+      "logica_firmware": {
+        "exists": true,
+        "score": 30,
+        "feedback": "Código presente; Lógica funcional; Com comentários",
+        "content_length": 2751
+      },
+      "metrica_wokwi": {
+        "exists": true,
+        "score": 10,
+        "feedback": "Componentes identificados"
+      },
+      "ci_cd": {
+        "exists": true,
+        "score": 20,
+        "feedback": "1 workflow(s); Integration Wokwi",
+        "workflows": [
+          "ci.yml"
+        ]
+      },
+      "documentacao": {
+        "score": 10,
+        "feedback": "5/5 seções preenchidas",
+        "secoes_preenchidas": 5
+      },
+      "estrutura": {
+        "score": 8,
+        "feedback": "4/4 arquivos obrigatórios; Possui .gitignore"
+      }
+    },
+    "pontuacao_total": 78,
+    "nota_final": 82.1,
+    "feedback_geral": []
+  }
+]
