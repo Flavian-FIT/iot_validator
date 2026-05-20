@@ -1,0 +1,924 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Processo Seletivo IoT</title>
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --gray-50: #f9fafb;
+            --gray-100: #f3f4f6;
+            --gray-200: #e5e7eb;
+            --gray-300: #d1d5db;
+            --gray-600: #4b5563;
+            --gray-700: #374151;
+            --gray-800: #1f2937;
+            --gray-900: #111827;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 2rem;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .header {
+            background: white;
+            border-radius: 1rem;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+        }
+
+        .header h1 {
+            color: var(--gray-800);
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .header p {
+            color: var(--gray-600);
+            font-size: 1.1rem;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .stat-card {
+            background: var(--gray-50);
+            padding: 1.5rem;
+            border-radius: 0.75rem;
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: var(--primary);
+        }
+
+        .stat-label {
+            color: var(--gray-600);
+            font-size: 0.875rem;
+            margin-top: 0.5rem;
+        }
+
+        .controls {
+            background: white;
+            border-radius: 1rem;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .search-box {
+            flex: 1;
+            min-width: 250px;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 2px solid var(--gray-200);
+            border-radius: 0.5rem;
+            font-size: 1rem;
+            transition: border-color 0.2s;
+        }
+
+        .search-box input:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        .filter-select {
+            padding: 0.75rem 1rem;
+            border: 2px solid var(--gray-200);
+            border-radius: 0.5rem;
+            font-size: 1rem;
+            background: white;
+            cursor: pointer;
+        }
+
+        .students-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .student-card {
+            background: white;
+            border-radius: 1rem;
+            padding: 1.5rem;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            transition: transform 0.2s, box-shadow 0.2s;
+            cursor: pointer;
+        }
+
+        .student-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+        }
+
+        .student-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+        }
+
+        .student-name {
+            font-weight: 600;
+            color: var(--gray-800);
+            font-size: 1.1rem;
+            flex: 1;
+            margin-right: 1rem;
+        }
+
+        .grade-badge {
+            padding: 0.5rem 1rem;
+            border-radius: 2rem;
+            font-weight: bold;
+            font-size: 1.25rem;
+            min-width: 80px;
+            text-align: center;
+        }
+
+        .grade-excellent { background: #d1fae5; color: #059669; }
+        .grade-good { background: #dbeafe; color: #2563eb; }
+        .grade-average { background: #fef3c7; color: #d97706; }
+        .grade-poor { background: #fee2e2; color: #dc2626; }
+
+        .student-info {
+            color: var(--gray-600);
+            font-size: 0.875rem;
+            margin-bottom: 1rem;
+        }
+
+        .student-info p {
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .criteria-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 0.5rem;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--gray-200);
+        }
+
+        .criterion {
+            text-align: center;
+        }
+
+        .criterion-value {
+            font-weight: bold;
+            font-size: 1.1rem;
+            color: var(--gray-800);
+        }
+
+        .criterion-label {
+            font-size: 0.7rem;
+            color: var(--gray-600);
+            text-transform: uppercase;
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.7);
+            z-index: 1000;
+            overflow-y: auto;
+            padding: 2rem;
+        }
+
+        .modal.active {
+            display: block;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 1rem;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+            position: relative;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: none;
+            border: none;
+            font-size: 2rem;
+            cursor: pointer;
+            color: var(--gray-600);
+            z-index: 10;
+        }
+
+        .modal-close:hover {
+            color: var(--gray-900);
+        }
+
+        .modal-header {
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--gray-200);
+        }
+
+        .modal-title {
+            font-size: 1.5rem;
+            color: var(--gray-800);
+            margin-bottom: 0.5rem;
+        }
+
+        .modal-grade {
+            font-size: 3rem;
+            font-weight: bold;
+        }
+
+        .modal-body {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+
+        .modal-section {
+            margin-bottom: 1.5rem;
+        }
+
+        .modal-section h3 {
+            color: var(--gray-800);
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        /* Criteria List with Feedback */
+        .criteria-list {
+            list-style: none;
+        }
+
+        .criterion-item {
+            background: var(--gray-50);
+            border-radius: 0.5rem;
+            margin-bottom: 1rem;
+            overflow: hidden;
+            border: 1px solid var(--gray-200);
+        }
+
+        .criterion-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .criterion-header:hover {
+            background: var(--gray-100);
+        }
+
+        .criterion-name {
+            font-weight: 600;
+            color: var(--gray-800);
+        }
+
+        .criterion-score {
+            font-weight: bold;
+            padding: 0.25rem 0.75rem;
+            border-radius: 1rem;
+            font-size: 0.9rem;
+        }
+
+        .criterion-feedback {
+            padding: 1rem;
+            border-top: 1px solid var(--gray-200);
+            color: var(--gray-700);
+            line-height: 1.6;
+            font-size: 0.9rem;
+        }
+
+        /* Commits List */
+        .commits-list {
+            list-style: none;
+            max-height: 200px;
+            overflow-y: auto;
+            background: var(--gray-50);
+            border-radius: 0.5rem;
+            padding: 0.5rem;
+        }
+
+        .commit-item {
+            padding: 0.75rem;
+            background: white;
+            border-radius: 0.375rem;
+            margin-bottom: 0.5rem;
+            font-size: 0.85rem;
+            border-left: 3px solid var(--primary);
+        }
+
+        .commit-hash {
+            font-family: monospace;
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        .commit-message {
+            color: var(--gray-700);
+            margin-top: 0.25rem;
+        }
+
+        .no-commits {
+            text-align: center;
+            color: var(--gray-600);
+            padding: 2rem;
+        }
+
+        /* Expandable Text */
+        .expandable-text {
+            max-height: 150px;
+            overflow-y: auto;
+            background: var(--gray-50);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            border: 1px solid var(--gray-200);
+            transition: max-height 0.3s ease;
+            position: relative;
+        }
+
+        .expandable-text.expanded {
+            max-height: none;
+        }
+
+        .expandable-text.expanded::after {
+            display: none;
+        }
+
+        .expandable-text:not(.expanded) {
+            mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
+            -webkit-mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
+        }
+
+        .expand-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.25rem;
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 0.375rem;
+            cursor: pointer;
+            margin-top: 0.5rem;
+            font-size: 0.875rem;
+            transition: background 0.2s;
+        }
+
+        .expand-btn:hover {
+            background: var(--primary-dark);
+        }
+
+        .expand-icon {
+            transition: transform 0.3s;
+        }
+
+        .expand-btn .expand-icon {
+            transform: rotate(180deg);
+        }
+
+        /* Action Buttons */
+        .action-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--gray-200);
+        }
+
+        .btn {
+            flex: 1;
+            padding: 1rem;
+            border: none;
+            border-radius: 0.5rem;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+            text-decoration: none;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+        }
+
+        .btn-secondary {
+            background: var(--gray-100);
+            color: var(--gray-800);
+        }
+
+        .btn-secondary:hover {
+            background: var(--gray-200);
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 1rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .status-success { background: #d1fae5; color: #059669; }
+        .status-error { background: #fee2e2; color: #dc2626; }
+
+        /* Project Analysis */
+        .analysis-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .analysis-item {
+            padding: 0.75rem;
+            background: var(--gray-50);
+            border-radius: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .analysis-item strong {
+            color: var(--gray-800);
+        }
+
+        .analysis-item.positive {
+            background: #d1fae5;
+            color: #059669;
+        }
+
+        .analysis-item.warning {
+            background: #fef3c7;
+            color: #d97706;
+        }
+
+        @media (max-width: 768px) {
+            .modal-body {
+                grid-template-columns: 1fr;
+            }
+            
+            .students-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .no-results {
+            text-align: center;
+            padding: 3rem;
+            color: var(--gray-600);
+            background: white;
+            border-radius: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎓 Resultados - Processo Seletivo IoT</h1>
+            <p>Validação automática de entregas - 77 alunos processados</p>
+            
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-value" id="total-students">77</div>
+                    <div class="stat-label">Total de Alunos</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" id="avg-grade">87.4</div>
+                    <div class="stat-label">Nota Média</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" id="approved">72</div>
+                    <div class="stat-label">Aprovados</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" id="top-grade">97.9</div>
+                    <div class="stat-label">Maior Nota</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="controls">
+            <div class="search-box">
+                <input type="text" id="search" placeholder="🔍 Buscar por nome do aluno...">
+            </div>
+            <select class="filter-select" id="grade-filter">
+                <option value="all">Todas as Notas</option>
+                <option value="excellent">Excelente (90-100)</option>
+                <option value="good">Bom (70-89)</option>
+                <option value="average">Médio (50-69)</option>
+                <option value="poor">Abaixo de 50</option>
+            </select>
+            <select class="filter-select" id="status-filter">
+                <option value="all">Todos Status</option>
+                <option value="success">Sucesso</option>
+                <option value="error">Erros</option>
+            </select>
+        </div>
+
+        <div class="students-grid" id="students-grid">
+            <!-- Cards serão inseridos via JavaScript -->
+        </div>
+
+        <div class="no-results" id="no-results" style="display: none;">
+            <h3>Nenhum aluno encontrado</h3>
+            <p>Tente ajustar os filtros de busca</p>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal" id="student-modal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal()">&times;</button>
+            
+            <div class="modal-header">
+                <h2 class="modal-title" id="modal-name">Nome do Aluno</h2>
+                <div class="modal-grade" id="modal-grade">0.0</div>
+            </div>
+
+            <div class="modal-body">
+                <div>
+                    <div class="modal-section">
+                        <h3>📊 Critérios de Avaliação (com feedback)</h3>
+                        <ul class="criteria-list" id="modal-criteria">
+                            <!-- Critérios com feedback inseridos via JS -->
+                        </ul>
+                    </div>
+
+                    <div class="modal-section">
+                        <h3>📝 Resumo do Projeto</h3>
+                        <div class="expandable-text" id="modal-summary-container">
+                            <p id="modal-summary">Resumo não disponível</p>
+                        </div>
+                        <button class="expand-btn" onclick="toggleExpand(this)">
+                            <span>Ler mais</span>
+                            <span class="expand-icon">▼</span>
+                        </button>
+                    </div>
+
+                    <div class="modal-section">
+                        <h3>📜 Histórico de Commits</h3>
+                        <div id="modal-commits-container">
+                            <p class="no-commits">Nenhum commit encontrado</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="modal-section">
+                        <h3>ℹ️ Informações</h3>
+                        <div class="analysis-grid">
+                            <div class="analysis-item positive" id="modal-repo-status">
+                                <strong>Repositório:</strong> <span id="modal-repo">Link</span>
+                            </div>
+                            <div class="analysis-item" id="modal-status-container">
+                                <strong>Status:</strong> <span id="modal-status">Sucesso</span>
+                            </div>
+                        </div>
+                        <p><strong>Commits:</strong> <span id="modal-commits-count">0</span></p>
+                        <p><strong>main.py:</strong> <span id="modal-main-py">Não</span></p>
+                        <p><strong>diagram.json:</strong> <span id="modal-diagram">Não</span></p>
+                        <p><strong>wokwi.toml:</strong> <span id="modal-wokwi">Não</span></p>
+                        <p><strong>GitHub Actions:</strong> <span id="modal-actions">Não</span></p>
+                    </div>
+
+                    <div class="modal-section">
+                        <h3>✅ Análise do Projeto</h3>
+                        <div id="modal-analysis">
+                            <p>Análise não disponível</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="action-buttons">
+                <a class="btn btn-primary" id="btn-report" target="_blank">
+                    📄 Ver Relatório Completo
+                </a>
+                <a class="btn btn-secondary" id="btn-repo" target="_blank">
+                    🔗 Acessar Repositório
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Dados dos alunos - serão substituídos pelo script de build
+        let students = [];
+
+        function getGradeClass(grade) {
+            if (grade >= 90) return 'grade-excellent';
+            if (grade >= 70) return 'grade-good';
+            if (grade >= 50) return 'grade-average';
+            return 'grade-poor';
+        }
+
+        function getStatusClass(status) {
+            return status === 'sucesso' ? 'status-success' : 'status-error';
+        }
+
+        function getStatusText(status) {
+            return status === 'sucesso' ? '✅ Sucesso' : '❌ Erro';
+        }
+
+        function getScoreClass(score, maxScore) {
+            const percentage = score / maxScore;
+            if (percentage >= 0.8) return 'positive';
+            if (percentage >= 0.5) return '';
+            return 'warning';
+        }
+
+        function renderStudents(studentsToRender) {
+            const grid = document.getElementById('students-grid');
+            const noResults = document.getElementById('no-results');
+            
+            if (studentsToRender.length === 0) {
+                grid.innerHTML = '';
+                noResults.style.display = 'block';
+                return;
+            }
+
+            noResults.style.display = 'none';
+            grid.innerHTML = studentsToRender.map(student => `
+                <div class="student-card" onclick="openModal('${student.nome}')">
+                    <div class="student-header">
+                        <div class="student-name">${student.nome}</div>
+                        <div class="grade-badge ${getGradeClass(student.nota_final)}">
+                            ${student.nota_final.toFixed(1)}
+                        </div>
+                    </div>
+                    
+                    <div class="student-info">
+                        <p>📧 ${student.email || 'N/A'}</p>
+                        <p>🔗 <a href="${student.github_url || '#'}" target="_blank" onclick="event.stopPropagation()">Acessar repo</a></p>
+                        <p>Status: <span class="status-badge ${getStatusClass(student.status)}">${getStatusText(student.status)}</span></p>
+                    </div>
+
+                    <div class="criteria-grid">
+                        <div class="criterion">
+                            <div class="criterion-value">${student.criterios?.logica_firmware?.score || 0}</div>
+                            <div class="criterion-label">Lógica</div>
+                        </div>
+                        <div class="criterion">
+                            <div class="criterion-value">${student.criterios?.metrica_wokwi?.score || 0}</div>
+                            <div class="criterion-label">Wokwi</div>
+                        </div>
+                        <div class="criterion">
+                            <div class="criterion-value">${student.criterios?.ci_cd?.score || 0}</div>
+                            <div class="criterion-label">CI/CD</div>
+                        </div>
+                        <div class="criterion">
+                            <div class="criterion-value">${student.criterios?.documentacao?.score || 0}</div>
+                            <div class="criterion-label">Docs</div>
+                        </div>
+                        <div class="criterion">
+                            <div class="criterion-value">${student.criterios?.estrutura?.score || 0}</div>
+                            <div class="criterion-label">Estrut.</div>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function openModal(studentName) {
+            const student = students.find(s => s.nome === studentName);
+            if (!student) return;
+
+            document.getElementById('modal-name').textContent = student.nome;
+            document.getElementById('modal-grade').textContent = `${student.nota_final.toFixed(1)}/100`;
+            document.getElementById('modal-grade').className = `modal-grade ${getGradeClass(student.nota_final)}`;
+            
+            // Critérios com feedback
+            const criteriaList = document.getElementById('modal-criteria');
+            const criterios = student.criterios || {};
+            const maxScores = {
+                'logica_firmware': { name: 'Lógica do Firmware', max: 30 },
+                'metrica_wokwi': { name: 'Métrica (Wokwi)', max: 20 },
+                'ci_cd': { name: 'CI/CD', max: 25 },
+                'documentacao': { name: 'Documentação', max: 10 },
+                'estrutura': { name: 'Estrutura', max: 10 }
+            };
+
+            criteriaList.innerHTML = Object.entries(maxScores).map(([key, data]) => {
+                const criterio = criterios[key] || {};
+                const score = criterio.score || 0;
+                const feedback = criterio.feedback_detalhado || criterio.feedback || 'Sem feedback';
+                const scoreClass = getScoreClass(score, data.max);
+                
+                return `
+                    <li class="criterion-item">
+                        <div class="criterion-header" onclick="toggleCriterionFeedback(this)">
+                            <span class="criterion-name">${data.name}</span>
+                            <span class="criterion-score" style="background: var(--${scoreClass === 'positive' ? 'success' : scoreClass === 'warning' ? 'danger' : 'warning'}); color: white;">
+                                ${score}/${data.max}
+                            </span>
+                        </div>
+                        <div class="criterion-feedback" style="display: none;">
+                            ${feedback}
+                        </div>
+                    </li>
+                `;
+            }).join('');
+
+            // Resumo do projeto
+            const resumo = student.resumo || 'Resumo não disponível';
+            document.getElementById('modal-summary').textContent = resumo;
+            document.getElementById('modal-summary-container').classList.remove('expanded');
+
+            // Commits
+            const commits = student.commits || [];
+            const commitsContainer = document.getElementById('modal-commits-container');
+            if (commits.length > 0) {
+                commitsContainer.innerHTML = `
+                    <ul class="commits-list">
+                        ${commits.map(commit => {
+                            const parts = commit.split(' - ');
+                            const hash = parts[0] ? parts[0].split(' ')[0] : '';
+                            const message = parts.slice(1).join(' - ');
+                            return `
+                                <li class="commit-item">
+                                    <div class="commit-hash">${hash}</div>
+                                    <div class="commit-message">${message || commit}</div>
+                                </li>
+                            `;
+                        }).join('')}
+                    </ul>
+                `;
+                document.getElementById('modal-commits-count').textContent = commits.length;
+            } else {
+                commitsContainer.innerHTML = '<p class="no-commits">Nenhum commit encontrado</p>';
+                document.getElementById('modal-commits-count').textContent = '0';
+            }
+
+            // Informações
+            document.getElementById('modal-repo').href = student.github_url || '#';
+            document.getElementById('modal-repo').textContent = student.github_url || 'N/A';
+            document.getElementById('modal-status').textContent = getStatusText(student.status);
+            document.getElementById('modal-status-container').className = `analysis-item ${student.status === 'sucesso' ? 'positive' : 'warning'}`;
+            
+            // Arquivos presentes
+            document.getElementById('modal-main-py').textContent = student.main_py_exists ? '✅ Presente' : '❌ Ausente';
+            document.getElementById('modal-diagram').textContent = student.diagram_json_exists ? '✅ Presente' : '❌ Ausente';
+            document.getElementById('modal-wokwi').textContent = student.wokwi_toml_exists ? '✅ Presente' : '❌ Ausente';
+            document.getElementById('modal-actions').textContent = student.github_actions_exists ? '✅ Configurado' : '❌ Não';
+
+            // Análise do projeto
+            const analise = student.analise_projeto || {};
+            const analiseContainer = document.getElementById('modal-analysis');
+            if (analise.pontos_fortes?.length || analise.pontos_melhoria?.length) {
+                analiseContainer.innerHTML = `
+                    <div style="margin-bottom: 1rem;">
+                        <strong>Pontos Fortes:</strong>
+                        <ul>
+                            ${(analise.pontos_fortes || []).map(p => `<li>${p}</li>`).join('')}
+                        </ul>
+                    </div>
+                    ${(analise.pontos_melhoria?.length > 0) ? `
+                    <div>
+                        <strong>Pontos a Melhorar:</strong>
+                        <ul>
+                            ${analise.pontos_melhoria.map(p => `<li>${p}</li>`).join('')}
+                        </ul>
+                    </div>
+                    ` : ''}
+                `;
+            } else {
+                analiseContainer.innerHTML = '<p>Análise não disponível</p>';
+            }
+
+            // Botões
+            const nomeArquivo = student.nome.replace(/[^a-zA-Z0-9]/g, '_');
+            document.getElementById('btn-report').href = `relatorios/${nomeArquivo}_relatorio.md`;
+            document.getElementById('btn-repo').href = student.github_url || '#';
+
+            document.getElementById('student-modal').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            document.getElementById('student-modal').classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        function toggleCriterionFeedback(element) {
+            const feedback = element.nextElementSibling;
+            if (feedback.style.display === 'none') {
+                feedback.style.display = 'block';
+            } else {
+                feedback.style.display = 'none';
+            }
+        }
+
+        function toggleExpand(button) {
+            const container = button.previousElementSibling;
+            const isExpanded = container.classList.contains('expanded');
+            
+            if (isExpanded) {
+                container.classList.remove('expanded');
+                button.querySelector('span:first-child').textContent = 'Ler mais';
+            } else {
+                container.classList.add('expanded');
+                button.querySelector('span:first-child').textContent = 'Ler menos';
+            }
+        }
+
+        // Filtros
+        function filterStudents() {
+            const searchTerm = document.getElementById('search').value.toLowerCase();
+            const gradeFilter = document.getElementById('grade-filter').value;
+            const statusFilter = document.getElementById('status-filter').value;
+
+            let filtered = students.filter(student => {
+                const matchSearch = student.nome.toLowerCase().includes(searchTerm);
+                
+                let matchGrade = true;
+                if (gradeFilter === 'excellent') matchGrade = student.nota_final >= 90;
+                else if (gradeFilter === 'good') matchGrade = student.nota_final >= 70 && student.nota_final < 90;
+                else if (gradeFilter === 'average') matchGrade = student.nota_final >= 50 && student.nota_final < 70;
+                else if (gradeFilter === 'poor') matchGrade = student.nota_final < 50;
+
+                let matchStatus = true;
+                if (statusFilter === 'success') matchStatus = student.status === 'sucesso';
+                else if (statusFilter === 'error') matchStatus = student.status !== 'sucesso';
+
+                return matchSearch && matchGrade && matchStatus;
+            });
+
+            renderStudents(filtered);
+        }
+
+        // Event listeners
+        document.getElementById('search').addEventListener('input', filterStudents);
+        document.getElementById('grade-filter').addEventListener('change', filterStudents);
+        document.getElementById('status-filter').addEventListener('change', filterStudents);
+
+        // Fechar modal com ESC
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeModal();
+        });
+
+        // Fechar modal clicando fora
+        document.getElementById('student-modal').addEventListener('click', (e) => {
+            if (e.target.id === 'student-modal') closeModal();
+        });
+
+        // Inicializar
+        // Students will be loaded from the embedded JSON
+    </script>
+</body>
+</html>
