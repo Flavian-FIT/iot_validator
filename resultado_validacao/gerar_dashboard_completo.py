@@ -43,63 +43,33 @@ class PipelineValidacao:
             'menor_nota': 100
         }
     
-    def clean_name(self, name):
-        """Corrige problemas de encoding em nomes"""
-        if not name: return name
+    def sanitize_string(self, text):
+        """Corrige problemas de encoding em strings (nomes, emails, etc)"""
+        if not text: return text
         
-        # Mapa de substituições comuns de encoding quebrado
+        # Mapa de substituições comuns de encoding quebrado (UTF-8 interpretado como CP850/Outros)
         replacements = {
-            '├│': 'ó',
-            '├║': 'ú',
-            '├й': 'é',
-            '├б': 'á',
-            '├н': 'í',
-            '├г': 'ã',
-            '├к': 'ê',
-            '├з': 'ç',
-            '├┤': 'ô',
-            '├в': 'â',
-            '├и': 'è',
-            '├Т': 'ò',
-            '├п': 'ï',
-            '├Б': 'Á',
-            '├И': 'É',
-            '├Н': 'Í',
-            '├У': 'Ó',
-            '├Ъ': 'Ú',
-            '├З': 'Ç',
-            '├Ф': 'Ô',
-            '├Х': 'Õ',
-            '├А': 'À',
-            '├Г': 'Ã',
-            '├Д': 'Ä',
-            '├К': 'Ê',
-            '├Р': 'Ð',
-            '├С': 'Ñ',
-            '├Т': 'Ò',
-            '├Ш': 'Ø',
-            '├Ь': 'Ü',
-            '├Э': 'Ý',
-            '├Ю': 'Þ',
-            '├Я': 'ß',
-            '├а': 'à',
-            '├в': 'â',
-            '├д': 'ä',
-            '├е': 'å',
-            '├ж': 'æ',
-            '├з': 'ç',
-            '├ш': 'ø',
-            '├╣': 'ù',
-            '├ы': 'û',
-            '├ь': 'ü',
-            '├б': 'á',
+            '├│': 'ó', '├║': 'ú', '├й': 'é', '├б': 'á', '├н': 'í', 
+            '├г': 'ã', '├к': 'ê', '├з': 'ç', '├┤': 'ô', '├в': 'â',
+            '├и': 'è', '├Т': 'ò', '├п': 'ï', '├Б': 'Á', '├И': 'É',
+            '├Н': 'Í', '├У': 'Ó', '├Ъ': 'Ú', '├З': 'Ç', '├Ф': 'Ô',
+            '├Х': 'Õ', '├А': 'À', '├Г': 'Ã', '├д': 'ä', '├е': 'å',
+            '├ж': 'æ', '├ш': 'ø', '├╣': 'ù', '├ы': 'û', '├ь': 'ü',
             '├с': 'ñ'
         }
         
+        # Tentar primeiro uma limpeza sistemática se possível
+        try:
+            # Muitos desses erros vêm de UTF-8 lido como CP850
+            # Mas como há caracteres estranhos no meio, o map é mais seguro
+            pass
+        except:
+            pass
+
         for old, new in replacements.items():
-            name = name.replace(old, new)
+            text = text.replace(old, new)
             
-        return name
+        return text
 
     def load_data(self):
         """Carrega dados iniciais dos alunos"""
@@ -113,9 +83,11 @@ class PipelineValidacao:
         with open(arquivo_avaliacoes, 'r', encoding='utf-8') as f:
             dados = json.load(f)
             
-        # Adicionar nome de exibição limpo
+        # Limpar nomes e emails ao carregar
         for aluno in dados:
-            aluno['nome_exibicao'] = self.clean_name(aluno.get('nome'))
+            aluno['nome_exibicao'] = self.sanitize_string(aluno.get('nome'))
+            if 'email' in aluno:
+                aluno['email'] = self.sanitize_string(aluno['email'])
             
         return dados
 
@@ -177,10 +149,10 @@ class PipelineValidacao:
                                         seen_hashes.add(h)
                                         commits.append({
                                             'hash': h,
-                                            'author': parts[1],
-                                            'email': parts[2],
+                                            'author': self.sanitize_string(parts[1]),
+                                            'email': self.sanitize_string(parts[2]),
                                             'date': parts[3],
-                                            'message': '|'.join(parts[4:])
+                                            'message': self.sanitize_string('|'.join(parts[4:]))
                                         })
                         aluno['commits_detalhados'] = commits
                         aluno['total_commits'] = len(commits)
@@ -262,6 +234,7 @@ class PipelineValidacao:
             # Melhorar extração de email
             email = self._extract_student_email(aluno, repo_dir)
             if email:
+                email = self.sanitize_string(email)
                 aluno['email'] = email
                 print(f"Email: {email}")
             else:
@@ -386,7 +359,7 @@ class PipelineValidacao:
                             aluno['criterios'][crit_id]['is_manual'] = True
                 
                 aluno['nota_final'] = aluno['nota_manual']
-                print(f"✓ {nome}: Nota Manual {aluno['nota_manual']:.1f}")
+                print(f"✓ {aluno['nome_exibicao']}: Nota Manual {aluno['nota_manual']:.1f}")
             else:
                 aluno['tem_avaliacao_manual'] = False
                 aluno['checklist_manual'] = {}
