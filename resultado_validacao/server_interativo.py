@@ -41,9 +41,15 @@ class DashboardHandler(http.server.SimpleHTTPRequestHandler):
         return super().do_GET()
 
     def do_POST(self):
-        content_length = int(self.headers['Content-Length'])
-        post_data = self.rfile.read(content_length)
-        data = json.loads(post_data)
+        content_length = int(self.headers.get('Content-Length', 0))
+        post_data = self.rfile.read(content_length) if content_length > 0 else b''
+        
+        data = {}
+        if post_data:
+            try:
+                data = json.loads(post_data)
+            except json.JSONDecodeError:
+                pass
 
         if self.path == '/api/update_grade':
             self.update_grade(data)
