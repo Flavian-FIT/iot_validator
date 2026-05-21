@@ -277,6 +277,33 @@ class PipelineValidacao:
         
         return True
 
+    def reanalisar_aluno(self, nome_aluno):
+        """Reanalisa um aluno específico e retorna os dados atualizados"""
+        # Carregar dados atuais
+        self.dados = self.load_data()
+        aluno = next((a for a in self.dados if a['nome'] == nome_aluno), None)
+        
+        if not aluno:
+            return None
+            
+        print(f"Reanalisando aluno: {nome_aluno}")
+        
+        # 1. Aplicar dados manuais primeiro para garantir que o LLM veja o conteúdo atualizado
+        self.aplicar_dados_manuais()
+        
+        # 2. Gerar feedback para este aluno específico
+        self._gerar_feedback(aluno)
+        
+        # 3. Recalcular nota final se não houver nota manual
+        if not aluno.get('tem_avaliacao_manual'):
+            criterios = aluno.get('criterios', {})
+            aluno['nota_final'] = sum(d.get('score', 0) for d in criterios.values())
+            
+        # 4. Salvar estado atualizado
+        self.salvar_resultados()
+        
+        return aluno
+
     def consolidar_json(self):
         """Consolida dados em JSON para dashboard"""
         print("\n" + "="*60)

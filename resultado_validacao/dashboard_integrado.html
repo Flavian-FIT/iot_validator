@@ -213,18 +213,25 @@
         .btn-secondary { background: var(--gray-100); color: var(--gray-800); }
         .btn-edit { background: var(--warning); color: white; width: 100%; margin-top: 1rem; }
 
-        /* Edit Form in Modal */
-        .edit-form { display: none; margin-top: 2rem; padding-top: 2rem; border-top: 2px solid var(--gray-200); }
-        .edit-form.active { display: block; }
-        .form-group { margin-bottom: 1.5rem; }
-        .form-group label { display: block; margin-bottom: 0.5rem; font-weight: 600; }
-        .form-group input, .form-group textarea {
-            width: 100%; padding: 0.75rem;
-            border: 1px solid var(--gray-300); border-radius: 0.5rem;
-            font-family: inherit;
+        /* Integrated Edit Section */
+        .edit-section {
+            background: #fffbeb;
+            padding: 1.5rem;
+            border-radius: 1rem;
+            border: 1px solid #fef3c7;
+            margin-top: 1rem;
         }
-        .form-group textarea { min-height: 100px; }
-        .code-editor { font-family: monospace !important; min-height: 200px !important; }
+        .edit-section h3 { color: #92400e; margin-bottom: 1rem; }
+        .edit-section label { font-size: 0.85rem; color: #92400e; font-weight: 600; }
+
+        .action-buttons {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 1rem;
+            margin-top: 2rem;
+            border-top: 1px solid var(--gray-200);
+            padding-top: 1.5rem;
+        }
 
         .status-badge { display: inline-block; padding: 0.25rem 0.75rem; border-radius: 1rem; font-size: 0.75rem; font-weight: 600; }
         .status-success { background: #d1fae5; color: #059669; }
@@ -350,7 +357,34 @@
                                     <span><strong>Estrutura:</strong> Arquivos/Organização</span>
                                 </label>
                             </div>
-                            <button class="btn btn-success" style="width: 100%; margin-top: 1rem; font-size: 0.9rem;" onclick="saveChecklistOnly()">💾 Salvar Checklist</button>
+                        </div>
+
+                        <div class="edit-section">
+                            <h3>✏️ Edição Manual</h3>
+                            <div style="display: grid; grid-template-columns: 1fr; gap: 1rem;">
+                                <div class="form-group">
+                                    <label>Nota Manual (0-100)</label>
+                                    <input type="number" id="main-edit-manual-grade" min="0" max="100" step="0.1">
+                                </div>
+                                <div class="form-group">
+                                    <label>Comentário do Professor</label>
+                                    <textarea id="main-edit-professor-comment" placeholder="Feedback para o aluno..." style="min-height: 80px;"></textarea>
+                                </div>
+                                <details style="cursor: pointer; font-size: 0.85rem; color: var(--gray-600);">
+                                    <summary>Inserir README/Código Manual</summary>
+                                    <div style="padding-top: 1rem;">
+                                        <div class="form-group">
+                                            <label>README.md Manual</label>
+                                            <textarea id="main-edit-readme" class="code-editor" placeholder="Cole o README aqui..." style="min-height: 150px;"></textarea>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>main.py Manual</label>
+                                            <textarea id="main-edit-main-py" class="code-editor" placeholder="Cole o main.py aqui..." style="min-height: 150px;"></textarea>
+                                        </div>
+                                    </div>
+                                </details>
+                            </div>
+                            <button class="btn btn-success" style="width: 100%; margin-top: 1rem;" onclick="saveAllStudentChanges()">💾 Salvar Todas Alterações</button>
                         </div>
 
                         <div style="font-size: 0.9rem; line-height: 1.8; margin-top: 1.5rem;">
@@ -373,40 +407,10 @@
                 </div>
             </div>
 
-            <div class="action-buttons" style="display: flex; gap: 1rem; margin-top: 2rem; border-top: 1px solid var(--gray-200); padding-top: 1.5rem;">
-                <button class="btn btn-primary" style="flex: 1;" onclick="toggleEdit()">✏️ Editar Nota e Conteúdo</button>
-                <a class="btn btn-secondary" id="btn-github" target="_blank" style="flex: 1;">🌐 GitHub</a>
-                <a class="btn btn-secondary" id="btn-report" target="_blank" style="flex: 1;">📄 Relatório</a>
-            </div>
-
-            <!-- Edit Form (Hidden by default) -->
-            <div id="edit-form" class="edit-form">
-                <h3 style="margin-bottom: 1.5rem;">Edição de Avaliação</h3>
-                <div style="display: grid; grid-template-columns: 1fr 2fr; gap: 1.5rem;">
-                    <div class="form-group">
-                        <label>Nota Manual (0-100)</label>
-                        <input type="number" id="edit-manual-grade" min="0" max="100" step="0.1">
-                    </div>
-                    <div class="form-group">
-                        <label>Comentário do Professor</label>
-                        <textarea id="edit-professor-comment" placeholder="Feedback para o aluno..."></textarea>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label>README.md Manual (Sobrescreve extração automática)</label>
-                    <textarea id="edit-readme" class="code-editor" placeholder="Cole o README aqui..."></textarea>
-                </div>
-
-                <div class="form-group">
-                    <label>main.py Manual (Sobrescreve extração automática)</label>
-                    <textarea id="edit-main-py" class="code-editor" placeholder="Cole o main.py aqui..."></textarea>
-                </div>
-
-                <div style="display: flex; gap: 1rem; justify-content: flex-end;">
-                    <button class="btn btn-secondary" onclick="toggleEdit()">Cancelar</button>
-                    <button class="btn btn-success" onclick="saveStudentChanges()">💾 Salvar Alterações</button>
-                </div>
+            <div class="action-buttons" style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1rem; margin-top: 2rem; border-top: 1px solid var(--gray-200); padding-top: 1.5rem;">
+                <button class="btn btn-primary" onclick="updateAIAnalysis()">🤖 Atualizar Feedback IA</button>
+                <a class="btn btn-secondary" id="btn-github" target="_blank">🌐 GitHub</a>
+                <a class="btn btn-secondary" id="btn-report" target="_blank">📄 Relatório</a>
             </div>
         </div>
     </div>
@@ -469,7 +473,6 @@
                         <div class="criterion"><div class="criterion-value">${s.criterios?.documentacao?.score || 0}</div><div class="criterion-label">Docs</div></div>
                         <div class="criterion"><div class="criterion-value">${s.criterios?.estrutura?.score || 0}</div><div class="criterion-label">Estrut.</div></div>
                     </div>
-                    <button class="btn btn-edit" onclick="event.stopPropagation(); openModal('${s.nome}'); toggleEdit();">✏️ Editar Avaliação</button>
                     ${s.tem_avaliacao_manual ? '<div style="margin-top: 1rem; font-size: 0.75rem; color: var(--warning); font-weight: bold;">📝 Nota Manual Aplicada</div>' : ''}
                 </div>
             `).join('');
@@ -562,10 +565,18 @@
             document.getElementById('main-check-docs').checked = !!cl.docs;
             document.getElementById('main-check-structure').checked = !!cl.structure;
 
-            // Reset Edit Form
-            document.getElementById('edit-form').classList.remove('active');
-            document.getElementById('modal-view-content').style.display = 'grid';
+            // Manual Fields
+            document.getElementById('main-edit-manual-grade').value = s.nota_manual || s.nota_final;
+            document.getElementById('main-edit-professor-comment').value = s.comentario_professor || '';
             
+            // Fetch manual content for the fields
+            fetch(`/api/get_content?name=${encodeURIComponent(s.nome)}`)
+                .then(r => r.json())
+                .then(data => {
+                    document.getElementById('main-edit-readme').value = data.readme || '';
+                    document.getElementById('main-edit-main-py').value = data.main_py || '';
+                });
+
             document.getElementById('student-modal').classList.add('active');
         }
 
@@ -573,62 +584,15 @@
             document.getElementById('student-modal').classList.remove('active');
         }
 
-        function toggleEdit() {
-            const form = document.getElementById('edit-form');
-            const view = document.getElementById('modal-view-content');
-            const isEditing = form.classList.toggle('active');
-            view.style.display = isEditing ? 'none' : 'grid';
-
-            if (isEditing) {
-                document.getElementById('edit-manual-grade').value = currentStudent.nota_manual || currentStudent.nota_final;
-                document.getElementById('edit-professor-comment').value = currentStudent.comentario_professor || '';
-                
-                // Fetch manual content
-                fetch(`/api/get_content?name=${encodeURIComponent(currentStudent.nome)}`)
-                    .then(r => r.json())
-                    .then(data => {
-                        document.getElementById('edit-readme').value = data.readme || '';
-                        document.getElementById('edit-main-py').value = data.main_py || '';
-                    });
-            }
-        }
-
-        async function saveChecklistOnly() {
+        async function saveAllStudentChanges() {
             if (!currentStudent) return;
-            const name = currentStudent.nome;
-            const grade = currentStudent.nota_manual || currentStudent.nota_final;
-            const comment = currentStudent.comentario_professor || '';
             
-            const checklist = {
-                firmware: document.getElementById('main-check-firmware').checked,
-                wokwi: document.getElementById('main-check-wokwi').checked,
-                cicd: document.getElementById('main-check-cicd').checked,
-                docs: document.getElementById('main-check-docs').checked,
-                structure: document.getElementById('main-check-structure').checked
-            };
-
-            showToast("Salvando checklist...");
-            try {
-                await fetch('/api/update_grade', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ name, grade, comment, checklist })
-                });
-                showToast("Checklist salvo!");
-                loadData();
-            } catch (e) {
-                showToast("Erro ao salvar checklist.");
-            }
-        }
-
-        async function saveStudentChanges() {
             const name = currentStudent.nome;
-            const grade = parseFloat(document.getElementById('edit-manual-grade').value);
-            const comment = document.getElementById('edit-professor-comment').value;
-            const readme = document.getElementById('edit-readme').value;
-            const main_py = document.getElementById('edit-main-py').value;
+            const grade = parseFloat(document.getElementById('main-edit-manual-grade').value);
+            const comment = document.getElementById('main-edit-professor-comment').value;
+            const readme = document.getElementById('main-edit-readme').value;
+            const main_py = document.getElementById('main-edit-main-py').value;
 
-            // Use current checklist state
             const checklist = {
                 firmware: document.getElementById('main-check-firmware').checked,
                 wokwi: document.getElementById('main-check-wokwi').checked,
@@ -637,26 +601,59 @@
                 structure: document.getElementById('main-check-structure').checked
             };
 
-            showToast("Salvando...");
+            showToast("Salvando alterações...");
 
             try {
+                // Save Grade, Comment, Checklist
                 await fetch('/api/update_grade', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ name, grade, comment, checklist })
                 });
 
+                // Save Manual Content
                 await fetch('/api/update_content', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ name, readme, main_py })
                 });
 
-                showToast("Dados salvos! Clique em 'Consolidar' para atualizar o ranking.");
-                toggleEdit();
+                showToast("Sucesso! Clique em 'Consolidar Tudo' para atualizar estatísticas gerais.");
                 loadData();
             } catch (e) {
-                showToast("Erro ao salvar.");
+                showToast("Erro ao salvar alterações.");
+            }
+        }
+
+        async function updateAIAnalysis() {
+            if (!currentStudent) return;
+            
+            const name = currentStudent.nome;
+            showToast("Solicitando Reanálise IA... Isso pode levar alguns segundos.");
+            
+            try {
+                const res = await fetch('/api/analyze_student', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ name })
+                });
+                
+                if (res.ok) {
+                    const updatedData = await res.json();
+                    showToast("IA concluiu a análise!");
+                    
+                    // Update current local data and refresh modal
+                    const idx = students.findIndex(s => s.nome === name);
+                    if (idx !== -1) {
+                        students[idx] = updatedData;
+                    }
+                    openModal(name);
+                    updateStats();
+                } else {
+                    showToast("Erro na análise IA.");
+                }
+            } catch (e) {
+                showToast("Erro de conexão com o servidor.");
             }
         }
 

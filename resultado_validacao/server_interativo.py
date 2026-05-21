@@ -6,6 +6,7 @@ import os
 import subprocess
 import urllib.parse
 from datetime import datetime
+from gerar_dashboard_completo import PipelineValidacao
 
 PORT = 8000
 RESULTADO_PATH = "/workspace/resultado_validacao"
@@ -59,6 +60,13 @@ class DashboardHandler(http.server.SimpleHTTPRequestHandler):
             self.update_content(data)
             self.send_success()
             
+        elif self.path == '/api/analyze_student':
+            result = self.analyze_student(data)
+            if result:
+                self.send_json(result)
+            else:
+                self.send_error(500, "Analysis failed")
+                
         elif self.path == '/api/consolidate':
             success = self.run_consolidation()
             if success:
@@ -124,14 +132,14 @@ class DashboardHandler(http.server.SimpleHTTPRequestHandler):
         if name not in conteudos:
             conteudos[name] = {}
         
-        if readme:
+        if readme is not None:
             conteudos[name]['readme'] = {
                 'conteudo': readme,
                 'data_insercao': datetime.now().isoformat(),
                 'tamanho': len(readme)
             }
         
-        if main_py:
+        if main_py is not None:
             conteudos[name]['main_py'] = {
                 'conteudo': main_py,
                 'data_insercao': datetime.now().isoformat(),
@@ -139,6 +147,19 @@ class DashboardHandler(http.server.SimpleHTTPRequestHandler):
             }
             
         self.save_json('conteudos_manuais.json', conteudos)
+
+    def analyze_student(self, data):
+        name = data.get('name')
+        if not name:
+            return None
+        
+        try:
+            pipeline = PipelineValidacao()
+            student_data = pipeline.reanalisar_aluno(name)
+            return student_data
+        except Exception as e:
+            print(f"Error analyzing student: {e}")
+            return None
 
     def run_consolidation(self):
         try:
