@@ -140,6 +140,49 @@ class PipelineValidacao:
         print(f"\nTotal de commits extraídos: {commits_count}")
         return True
     
+    def _extract_student_email(self, aluno, repo_dir):
+        """Extrai o email real do aluno a partir dos commits ou README"""
+        # 1. Tentar extrair dos commits (mais confiável)
+        if os.path.exists(repo_dir) and os.path.isdir(os.path.join(repo_dir, '.git')):
+            try:
+                # Pegar todos os emails dos autores de commits, exceto o template
+                cmd = ['git', 'log', '--all', '--format=%ae']
+                result = subprocess.run(cmd, capture_output=True, text=True, cwd=repo_dir)
+                if result.returncode == 0:
+                    emails = result.stdout.strip().split('\n')
+                    # Filtrar emails de sistema/template
+                    exclude_patterns = ['noreply@github.com', 'support@github.com', '@fit-tecnologia.org.br']
+                    valid_emails = []
+                    for e in emails:
+                        e = e.strip()
+                        if not e: continue
+                        is_excluded = False
+                        for pattern in exclude_patterns:
+                            if pattern in e:
+                                is_excluded = True
+                                break
+                        if not is_excluded:
+                            valid_emails.append(e)
+                    
+                    if valid_emails:
+                        # Retornar o email mais frequente
+                        from collections import Counter
+                        most_common = Counter(valid_emails).most_common(1)
+                        if most_common:
+                            return most_common[0][0]
+            except Exception:
+                pass
+
+        # 2. Tentar extrair do README
+        readme_content = aluno.get('readme_content', '')
+        if readme_content:
+            email_readme = self._extract_email_from_readme(readme_content)
+            if email_readme:
+                return email_readme
+
+        # 3. Retornar o que já tem se nada novo for encontrado
+        return aluno.get('email')
+
     def processar_dados_completos(self):
         """Processa dados completos (emails, imagens, artefatos)"""
         print("\n" + "="*60)
@@ -150,15 +193,18 @@ class PipelineValidacao:
             nome = aluno['nome']
             repo_dir = os.path.join(self.repos_path, f"{nome.replace('/', '_').replace(' ', '_')}")
             
-            print(f"[{i+1}/{len(self.dados)}] {nome}...")
+            print(f"[{i+1}/{len(self.dados)}] {nome}...", end=" ")
             
-            # Extrair email do README
-            readme_content = aluno.get('readme_content', '')
-            email = self._extract_email_from_readme(readme_content)
+            # Melhorar extração de email
+            email = self._extract_student_email(aluno, repo_dir)
             if email:
-                aluno['email_github'] = email
+                aluno['email'] = email
+                print(f"Email: {email}")
+            else:
+                print("Email não encontrado")
             
             # Extrair imagens
+            readme_content = aluno.get('readme_content', '')
             repo_url = aluno.get('github_url', '')
             imagens = self._extract_images_from_readme(readme_content, repo_url)
             aluno['imagens'] = imagens
