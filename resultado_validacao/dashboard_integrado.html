@@ -337,54 +337,57 @@
                             <h3 style="margin-bottom: 1rem;">✅ Checklist de Validação</h3>
                             <div style="display: grid; grid-template-columns: 1fr; gap: 0.75rem;">
                                 <label style="display: flex; align-items: center; gap: 0.75rem; cursor: pointer; padding: 0.5rem; background: white; border-radius: 0.5rem; border: 1px solid var(--gray-200);">
-                                    <input type="checkbox" id="main-check-firmware" style="width: 1.2rem; height: 1.2rem;"> 
+                                    <input type="checkbox" id="main-check-firmware" style="width: 1.2rem; height: 1.2rem;" onchange="autoSave()"> 
                                     <span><strong>Firmware:</strong> Lógica/MicroPython</span>
                                 </label>
                                 <label style="display: flex; align-items: center; gap: 0.75rem; cursor: pointer; padding: 0.5rem; background: white; border-radius: 0.5rem; border: 1px solid var(--gray-200);">
-                                    <input type="checkbox" id="main-check-wokwi" style="width: 1.2rem; height: 1.2rem;"> 
+                                    <input type="checkbox" id="main-check-wokwi" style="width: 1.2rem; height: 1.2rem;" onchange="autoSave()"> 
                                     <span><strong>Wokwi:</strong> Circuito/Diagrama</span>
                                 </label>
                                 <label style="display: flex; align-items: center; gap: 0.75rem; cursor: pointer; padding: 0.5rem; background: white; border-radius: 0.5rem; border: 1px solid var(--gray-200);">
-                                    <input type="checkbox" id="main-check-cicd" style="width: 1.2rem; height: 1.2rem;"> 
+                                    <input type="checkbox" id="main-check-cicd" style="width: 1.2rem; height: 1.2rem;" onchange="autoSave()"> 
                                     <span><strong>CI/CD:</strong> GitHub Actions</span>
                                 </label>
                                 <label style="display: flex; align-items: center; gap: 0.75rem; cursor: pointer; padding: 0.5rem; background: white; border-radius: 0.5rem; border: 1px solid var(--gray-200);">
-                                    <input type="checkbox" id="main-check-docs" style="width: 1.2rem; height: 1.2rem;"> 
+                                    <input type="checkbox" id="main-check-docs" style="width: 1.2rem; height: 1.2rem;" onchange="autoSave()"> 
                                     <span><strong>Documentação:</strong> README</span>
                                 </label>
                                 <label style="display: flex; align-items: center; gap: 0.75rem; cursor: pointer; padding: 0.5rem; background: white; border-radius: 0.5rem; border: 1px solid var(--gray-200);">
-                                    <input type="checkbox" id="main-check-structure" style="width: 1.2rem; height: 1.2rem;"> 
+                                    <input type="checkbox" id="main-check-structure" style="width: 1.2rem; height: 1.2rem;" onchange="autoSave()"> 
                                     <span><strong>Estrutura:</strong> Arquivos/Organização</span>
                                 </label>
                             </div>
                         </div>
 
                         <div class="edit-section">
-                            <h3>✏️ Edição Manual</h3>
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                                <h3>✏️ Edição Manual</h3>
+                                <span id="save-status" style="font-size: 0.75rem; color: #92400e; font-weight: bold; opacity: 0; transition: opacity 0.3s;">Saving...</span>
+                            </div>
                             <div style="display: grid; grid-template-columns: 1fr; gap: 1rem;">
                                 <div class="form-group">
                                     <label>Nota Manual (0-100)</label>
-                                    <input type="number" id="main-edit-manual-grade" min="0" max="100" step="0.1">
+                                    <input type="number" id="main-edit-manual-grade" min="0" max="100" step="0.1" onchange="autoSave()">
                                 </div>
                                 <div class="form-group">
                                     <label>Comentário do Professor</label>
-                                    <textarea id="main-edit-professor-comment" placeholder="Feedback para o aluno..." style="min-height: 80px;"></textarea>
+                                    <textarea id="main-edit-professor-comment" placeholder="Feedback para o aluno..." style="min-height: 80px;" oninput="debouncedAutoSave()"></textarea>
                                 </div>
                                 <details style="cursor: pointer; font-size: 0.85rem; color: var(--gray-600);">
                                     <summary>Inserir README/Código Manual</summary>
                                     <div style="padding-top: 1rem;">
                                         <div class="form-group">
                                             <label>README.md Manual</label>
-                                            <textarea id="main-edit-readme" class="code-editor" placeholder="Cole o README aqui..." style="min-height: 150px;"></textarea>
+                                            <textarea id="main-edit-readme" class="code-editor" placeholder="Cole o README aqui..." style="min-height: 150px;" oninput="debouncedAutoSave()"></textarea>
                                         </div>
                                         <div class="form-group">
                                             <label>main.py Manual</label>
-                                            <textarea id="main-edit-main-py" class="code-editor" placeholder="Cole o main.py aqui..." style="min-height: 150px;"></textarea>
+                                            <textarea id="main-edit-main-py" class="code-editor" placeholder="Cole o main.py aqui..." style="min-height: 150px;" oninput="debouncedAutoSave()"></textarea>
                                         </div>
                                     </div>
                                 </details>
                             </div>
-                            <button class="btn btn-success" style="width: 100%; margin-top: 1rem;" onclick="saveAllStudentChanges()">💾 Salvar Todas Alterações</button>
+                            <button class="btn btn-success" style="width: 100%; margin-top: 1rem;" onclick="saveAllStudentChanges()">💾 Forçar Salvamento</button>
                         </div>
 
                         <div style="font-size: 0.9rem; line-height: 1.8; margin-top: 1.5rem;">
@@ -593,6 +596,16 @@
             document.getElementById('student-modal').classList.remove('active');
         }
 
+        let saveTimeout;
+        function debouncedAutoSave() {
+            clearTimeout(saveTimeout);
+            saveTimeout = setTimeout(autoSave, 1000);
+        }
+
+        async function autoSave() {
+            await saveAllStudentChanges(true);
+        }
+
         function calculateTotalFromCriteria() {
             const inputs = document.querySelectorAll('.manual-crit-input');
             let total = 0;
@@ -601,9 +614,10 @@
             });
             document.getElementById('main-edit-manual-grade').value = total.toFixed(1);
             document.getElementById('modal-grade').textContent = total.toFixed(1);
+            autoSave();
         }
 
-        async function saveAllStudentChanges() {
+        async function saveAllStudentChanges(isAuto = false) {
             if (!currentStudent) return;
             
             const name = currentStudent.nome;
@@ -625,7 +639,9 @@
                 criterios[input.dataset.crit] = parseFloat(input.value || 0);
             });
 
-            showToast("Salvando alterações...");
+            const statusLabel = document.getElementById('save-status');
+            statusLabel.style.opacity = '1';
+            if (!isAuto) showToast("Salvando alterações...");
 
             try {
                 // Save Grade, Comment, Checklist, Criterios
@@ -642,10 +658,17 @@
                     body: JSON.stringify({ name, readme, main_py })
                 });
 
-                showToast("Sucesso! Clique em 'Consolidar Tudo' para atualizar estatísticas gerais.");
-                loadData();
+                statusLabel.textContent = 'Saved!';
+                setTimeout(() => { statusLabel.style.opacity = '0'; statusLabel.textContent = 'Saving...'; }, 2000);
+                
+                // Silent refresh of data in the background
+                const res = await fetch('/api/students');
+                students = await res.json();
+                updateStats();
             } catch (e) {
-                showToast("Erro ao salvar alterações.");
+                statusLabel.textContent = 'Error!';
+                statusLabel.style.color = 'var(--danger)';
+                if (!isAuto) showToast("Erro ao salvar alterações.");
             }
         }
 
