@@ -43,6 +43,64 @@ class PipelineValidacao:
             'menor_nota': 100
         }
     
+    def clean_name(self, name):
+        """Corrige problemas de encoding em nomes"""
+        if not name: return name
+        
+        # Mapa de substituições comuns de encoding quebrado
+        replacements = {
+            '├│': 'ó',
+            '├║': 'ú',
+            '├й': 'é',
+            '├б': 'á',
+            '├н': 'í',
+            '├г': 'ã',
+            '├к': 'ê',
+            '├з': 'ç',
+            '├┤': 'ô',
+            '├в': 'â',
+            '├и': 'è',
+            '├Т': 'ò',
+            '├п': 'ï',
+            '├Б': 'Á',
+            '├И': 'É',
+            '├Н': 'Í',
+            '├У': 'Ó',
+            '├Ъ': 'Ú',
+            '├З': 'Ç',
+            '├Ф': 'Ô',
+            '├Х': 'Õ',
+            '├А': 'À',
+            '├Г': 'Ã',
+            '├Д': 'Ä',
+            '├К': 'Ê',
+            '├Р': 'Ð',
+            '├С': 'Ñ',
+            '├Т': 'Ò',
+            '├Ш': 'Ø',
+            '├Ь': 'Ü',
+            '├Э': 'Ý',
+            '├Ю': 'Þ',
+            '├Я': 'ß',
+            '├а': 'à',
+            '├в': 'â',
+            '├д': 'ä',
+            '├е': 'å',
+            '├ж': 'æ',
+            '├з': 'ç',
+            '├ш': 'ø',
+            '├╣': 'ù',
+            '├ы': 'û',
+            '├ь': 'ü',
+            '├б': 'á',
+            '├с': 'ñ'
+        }
+        
+        for old, new in replacements.items():
+            name = name.replace(old, new)
+            
+        return name
+
     def load_data(self):
         """Carrega dados iniciais dos alunos"""
         arquivo_avaliacoes = os.path.join(self.resultado_path, 'avaliacoes_com_feedback.json')
@@ -53,7 +111,13 @@ class PipelineValidacao:
             return []
             
         with open(arquivo_avaliacoes, 'r', encoding='utf-8') as f:
-            return json.load(f)
+            dados = json.load(f)
+            
+        # Adicionar nome de exibição limpo
+        for aluno in dados:
+            aluno['nome_exibicao'] = self.clean_name(aluno.get('nome'))
+            
+        return dados
 
     def carregar_dados_existentes(self):
         """Carrega dados já processados"""
@@ -78,7 +142,7 @@ class PipelineValidacao:
             nome = aluno['nome']
             repo_dir = os.path.join(self.repos_path, f"{nome.replace('/', '_').replace(' ', '_')}")
             
-            print(f"[{i+1}/{len(self.dados)}] {nome}...", end=" ")
+            print(f"[{i+1}/{len(self.dados)}] {aluno['nome_exibicao']}...", end=" ")
             
             if os.path.exists(repo_dir) and os.path.isdir(os.path.join(repo_dir, '.git')):
                 try:
@@ -193,7 +257,7 @@ class PipelineValidacao:
             nome = aluno['nome']
             repo_dir = os.path.join(self.repos_path, f"{nome.replace('/', '_').replace(' ', '_')}")
             
-            print(f"[{i+1}/{len(self.dados)}] {nome}...", end=" ")
+            print(f"[{i+1}/{len(self.dados)}] {aluno['nome_exibicao']}...", end=" ")
             
             # Melhorar extração de email
             email = self._extract_student_email(aluno, repo_dir)

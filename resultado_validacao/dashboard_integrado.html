@@ -462,7 +462,7 @@
             grid.innerHTML = toRender.map(s => `
                 <div class="student-card" onclick="openModal('${s.nome}')">
                     <div class="student-header">
-                        <div class="student-name">${s.nome}</div>
+                        <div class="student-name">${s.nome_exibicao || s.nome}</div>
                         <div class="grade-badge ${getGradeClass(s.nota_final)}">${s.nota_final.toFixed(1)}</div>
                     </div>
                     <div class="student-info">
@@ -486,7 +486,7 @@
             if (!s) return;
             currentStudent = s;
 
-            document.getElementById('modal-name').textContent = s.nome;
+            document.getElementById('modal-name').textContent = s.nome_exibicao || s.nome;
             document.getElementById('modal-email').textContent = s.email || '';
             document.getElementById('modal-grade').textContent = s.nota_final.toFixed(1);
             document.getElementById('modal-grade').className = 'modal-grade ' + getGradeClass(s.nota_final);
@@ -732,7 +732,8 @@
             const status = document.getElementById('status-filter').value;
 
             const filtered = students.filter(s => {
-                const matchSearch = s.nome.toLowerCase().includes(search);
+                const searchName = (s.nome_exibicao || s.nome).toLowerCase();
+                const matchSearch = searchName.includes(search);
                 let matchGrade = true;
                 if (grade === 'excellent') matchGrade = s.nota_final >= 90;
                 else if (grade === 'good') matchGrade = s.nota_final >= 70 && s.nota_final < 90;
