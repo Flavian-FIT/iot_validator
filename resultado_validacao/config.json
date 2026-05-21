@@ -1,0 +1,39 @@
+{
+  "nome": "Pipeline de Validação IoT",
+  "versao": "1.0.0",
+  "data_limite": "2026-05-04 23:59:59",
+  "commit_inicial": "e560365081a8497c2e5dafba60c1430a7f31cdb7",
+  "criterios": {
+    "logica_firmware": {
+      "peso": 30,
+      "descricao": "Lógica do Firmware"
+    },
+    "metrica_wokwi": {
+      "peso": 20,
+      "descricao": "Métrica/Wokwi"
+    },
+    "ci_cd": {
+      "peso": 25,
+      "descricao": "CI/CD"
+    },
+    "documentacao": {
+      "peso": 10,
+      "descricao": "Documentação"
+    },
+    "estrutura": {
+      "peso": 10,
+      "descricao": "Estrutura/Versionamento"
+    }
+  },
+  "faixas_nota": {
+    "excelente": [90, 100],
+    "bom": [70, 89],
+    "medio": [50, 69],
+    "ruim": [0, 49]
+  },
+  "saidas": {
+    "dashboard": "dashboard_final.html",
+    "json_completo": "avaliacoes_melhoradas.json",
+    "json_consolidado": "avaliacoes_completas.json"
+  }
+}

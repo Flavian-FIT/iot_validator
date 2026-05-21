@@ -1,0 +1,177 @@
+================================================================================
+  COMO USAR - Pipeline de Validação IoT
+================================================================================
+
+✅ STATUS: PRONTO PARA USO
+
+O pipeline foi configurado e testado com sucesso. 
+Abaixo estão as instruções para usar.
+
+================================================================================
+  1. EXECUTAR O PIPELINE
+================================================================================
+
+Opção A: Pipeline Completo (RECOMENDADO)
+-----------------------------------------
+cd /workspace/resultado_validacao
+python3 gerar_dashboard_completo.py
+
+O que acontece:
+  - Processa todos os 77 alunos
+  - Extrai commits dos repositórios
+  - Gera feedbacks detalhados
+  - Cria ranking e estatísticas
+  - Gera dashboard HTML final
+
+Opção B: Script Bash
+--------------------
+cd /workspace/resultado_validacao
+./run.sh
+
+Opção C: Script Mestre
+----------------------
+cd /workspace/resultado_validacao
+python3 00_run_all.py
+
+================================================================================
+  2. VISUALIZAR O DASHBOARD
+================================================================================
+
+Opção A: Abrir Localmente
+--------------------------
+xdg-open /workspace/resultado_validacao/dashboard_final.html
+
+Opção B: Windows (via WSL)
+--------------------------
+explorer.exe file:///workspace/resultado_validacao/dashboard_final.html
+
+Opção C: Servidor HTTP
+----------------------
+cd /workspace/resultado_validacao
+python3 -m http.server 8080
+# Acesse: http://localhost:8080/dashboard_final.html
+
+================================================================================
+  3. VERIFICAR INTEGRIDADE DOS DADOS
+================================================================================
+
+python3 /workspace/resultado_validacao/verificar_integridade.py
+
+O que verifica:
+  - Campos obrigatórios
+  - Faixas de nota válidas
+  - Critérios presentes
+  - Arquivo HTML gerado
+
+================================================================================
+  4. ACESSAR DOCUMENTAÇÃO
+================================================================================
+
+Documentação Principal:
+  - INICIO_RAPIDO.md      - Comece aqui
+  - README.md             - Documentação completa
+  - DOCUMENTACAO.md       - Detalhes técnicos
+  - INDICE.md             - Índice remissivo
+
+Resumos:
+  - RESUMO.txt            - Visão geral em texto
+  - RESUMO_EXECUCAO.md    - Resumo da execução
+
+Dashboard:
+  - README_DASHBOARD.md   - Detalhes do dashboard
+
+================================================================================
+  5. ARQUIVOS DE SAÍDA PRINCIPAIS
+================================================================================
+
+✅ dashboard_final.html         - Dashboard interativo (use este!)
+✅ avaliacoes_melhoradas.json   - Dados processados
+✅ avaliacoes_completas.json    - JSON consolidado
+
+================================================================================
+  6. ESTRUTURA DE PASTAS
+================================================================================
+
+/workspace/resultado_validacao/
+├── 📄 Scripts Principais
+│   ├── gerar_dashboard_completo.py  (USE ESTE)
+│   ├── 00_run_all.py
+│   ├── run.sh
+│   └── verificar_integridade.py
+│
+├── 📊 Saídas
+│   ├── dashboard_final.html
+│   ├── avaliacoes_melhoradas.json
+│   └── avaliacoes_completas.json
+│
+├── 📄 Documentação
+│   ├── INICIO_RAPIDO.md
+│   ├── README.md
+│   ├── DOCUMENTACAO.md
+│   └── INDICE.md
+│
+└── 📁 Dados
+    ├── repos/ (repositórios clonados)
+    └── relatorios/ (relatórios individuais)
+
+================================================================================
+  7. SOLUÇÃO DE PROBLEMAS
+================================================================================
+
+Problema: "Arquivo não encontrado"
+Solução:  Verifique se está em /workspace/resultado_validacao
+
+Problema: "Dashboard não carrega"
+Solução:  Tente outro navegador ou limple o cache (Ctrl+F5)
+
+Problema: "Dados não aparecem"
+Solução:  Execute verificar_integridade.py
+
+Problema: "Erros na execução"
+Solução:  Veja README.md#solução-de-problemas
+
+================================================================================
+  8. PRÓXIMOS PASSOS
+================================================================================
+
+1. ✅ Executar pipeline (se ainda não executou)
+   python3 gerar_dashboard_completo.py
+
+2. 🌐 Abrir dashboard
+   xdg-open dashboard_final.html
+
+3. 📊 Analisar resultados
+   - Ver ranking
+   - Ver estatísticas
+   - Filtrar por nota
+
+4. 📤 Compartilhar
+   - Enviar dashboard_final.html
+   - Ou disponibilizar via HTTP
+
+================================================================================
+  9. COMANDOS RÁPIDOS
+================================================================================
+
+# Executar tudo
+python3 gerar_dashboard_completo.py
+
+# Abrir dashboard
+xdg-open dashboard_final.html
+
+# Verificar dados
+python3 verificar_integridade.py
+
+# Servidor HTTP
+python3 -m http.server 8080
+
+================================================================================
+  PRECISA DE AJUDA?
+================================================================================
+
+1. Consulte INICIO_RAPIDO.md
+2. Veja INDICE.md para navegar
+3. Leia README.md#solução-de-problemas
+4. Execute verificar_integridade.py
+
+================================================================================

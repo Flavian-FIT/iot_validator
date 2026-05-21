@@ -1,308 +1,403 @@
 #!/usr/bin/env python3
 """
-Script completo para melhorias do dashboard:
-1. Extrair commits entre commit inicial e data limite
-2. Adicionar o que fez a nota abaixar em cada critério
-3. Extrair emails reais da API do GitHub
-4. Detectar artefatos com LLM (README, main.py, imagens)
-5. Ordenação por nome e nota
-6. Ranking geral
-7. Renderizador de Markdown
+Pipeline Completo de Validação IoT
+Gera o dashboard final com todos os dados processados
+
+Executa todas as etapas:
+1. Extração de commits
+2. Processamento de dados (emails, imagens, artefatos)
+3. Geração de feedbacks detalhados
+4. Aplicação de melhorias e ranking
+5. Consolidação em JSON
+6. Geração do dashboard HTML final
+
+Uso: python3 gerar_dashboard_completo.py
 """
 import os
-import subprocess
+import sys
 import json
 import re
+import subprocess
 from pathlib import Path
 from datetime import datetime
 
+RESULTADO_PATH = "/workspace/resultado_validacao"
 COMMIT_INICIAL = "e560365081a8497c2e5dafba60c1430a7f31cdb7"
 DATA_LIMITE = "2026-05-04 23:59:59"
 
-def get_all_commits(repo_path):
-    """Extrai todos os commits entre o commit inicial e a data limite"""
-    try:
-        os.chdir(repo_path)
-        
-        # Primeiro, verificar se o commit inicial existe no histórico
-        result_check = subprocess.run(
-            ['git', 'merge-base', '--is-ancestor', COMMIT_INICIAL, 'HEAD'],
-            capture_output=True, text=True, timeout=10
-        )
-        
-        # Se o commit inicial não for ancestral, voltamos ao commit inicial
-        if result_check.returncode != 0:
-            # Commit inicial não está neste branch, usar do início
-            commit_range = "HEAD"
-        else:
-            commit_range = f"{COMMIT_INICIAL}..HEAD"
-        
-        # Extrair commits até a data limite
-        result = subprocess.run(
-            ['git', 'log', f'--before="{DATA_LIMITE}"', '--pretty=format:%h|%an|%ae|%ar|%s|%b', '--reverse'],
-            capture_output=True, text=True, timeout=30
-        )
-        
-        if result.returncode == 0 and result.stdout.strip():
-            commits = []
-            for line in result.stdout.strip().split('\n'):
-                if line.strip():
-                    parts = line.split('|')
-                    commits.append({
-                        'hash': parts[0] if len(parts) >= 1 else '',
-                        'author': parts[1] if len(parts) >= 2 else '',
-                        'email': parts[2] if len(parts) >= 3 else '',
-                        'date': parts[3] if len(parts) >= 4 else '',
-                        'message': parts[4] if len(parts) >= 5 else '',
-                        'body': parts[5] if len(parts) >= 6 else ''
-                    })
-            return commits
-        return []
-    except Exception as e:
-        print(f"Erro ao extrair commits: {e}")
-        return []
-    finally:
-        os.chdir('/workspace/resultado_validacao')
-
-def analisar_artefatos(repo_path, readme_content, main_py_content):
-    """
-    Analisa artefatos do projeto para detectar problemas
-    """
-    artefatos = {
-        'tem_readme': False,
-        'tem_main_py': False,
-        'tem_diagram_json': False,
-        'tem_wokwi_toml': False,
-        'tem_github_actions': False,
-        'tem_imagens': [],
-        'readme_preenchido': False,
-        'main_py_funcional': False,
-        'problemas_detectados': []
-    }
+class PipelineValidacao:
+    """Pipeline completo de validação de projetos IoT"""
     
-    # Verificar README
-    readme_path = os.path.join(repo_path, 'README.md')
-    if os.path.exists(readme_path):
-        artefatos['tem_readme'] = True
-        if readme_content and len(readme_content) > 500:
-            # Verificar seções preenchidas
-            secoes_preenchidas = 0
-            if '## 1️⃣' in readme_content or 'Visão Geral' in readme_content:
-                secoes_preenchidas += 1
-            if '## 2️⃣' in readme_content or 'Arquitetura' in readme_content:
-                secoes_preenchidas += 1
-            if '## 3️⃣' in readme_content or 'Componentes' in readme_content:
-                secoes_preenchidas += 1
-            if '## 4️⃣' in readme_content or 'Decisões' in readme_content:
-                secoes_preenchidas += 1
-            if '## 5️⃣' in readme_content or 'Resultados' in readme_content:
-                secoes_preenchidas += 1
-            
-            if secoes_preenchidas >= 4:
-                artefatos['readme_preenchido'] = True
-            elif secoes_preenchidas < 2:
-                artefatos['problemas_detectados'].append('README com poucas seções preenchidas')
-    
-    # Verificar main.py
-    main_path = os.path.join(repo_path, 'src', 'main.py')
-    if not os.path.exists(main_path):
-        main_path = os.path.join(repo_path, 'main.py')
-    
-    if os.path.exists(main_path):
-        artefatos['tem_main_py'] = True
-        if main_py_content and len(main_py_content) > 100:
-            if 'import' in main_py_content and ('wokwi' in main_py_content.lower() or 'gpio' in main_py_content.lower() or 'def ' in main_py_content):
-                artefatos['main_py_funcional'] = True
-            else:
-                artefatos['problemas_detectados'].append('main.py presente mas parece incompleto')
-    
-    # Verificar diagram.json
-    if os.path.exists(os.path.join(repo_path, 'diagram.json')):
-        artefatos['tem_diagram_json'] = True
-    
-    # Verificar wokwi.toml
-    if os.path.exists(os.path.join(repo_path, 'wokwi.toml')):
-        artefatos['tem_wokwi_toml'] = True
-    
-    # Verificar GitHub Actions
-    actions_path = os.path.join(repo_path, '.github', 'workflows')
-    if os.path.exists(actions_path) and os.path.isdir(actions_path):
-        artefatos['tem_github_actions'] = True
-    
-    # Procurar imagens no README
-    if readme_content:
-        imagens = re.findall(r'!\[.*?\]\((.*?)\)', readme_content)
-        artefatos['tem_imagens'] = imagens[:5]  # Limitar a 5 imagens
-    
-    return artefatos
-
-def gerar_feedback_completo(criterio, score, max_score, artefatos, commits):
-    """
-    Gera feedback completo explicando o que fez a nota abaixar
-    """
-    percentage = score / max_score if max_score > 0 else 0
-    pontos_perdidos = max_score - score
-    
-    feedbacks = {
-        'logica_firmware': {
-            'high': "Código bem estruturado com lógica clara. Implementa funções/modularização adequada.",
-            'medium': "Código funcional mas poderia ser mais organizado. Falta modularização ou comentários.",
-            'low': "Código com problemas de estrutura ou lógica. Pouca ou nenhuma modularização."
-        },
-        'metrica_wokwi': {
-            'high': "Diagrama completo e bem organizado no Wokwi. Componentes corretamente conectados.",
-            'medium': "Diagrama funcional mas com organização básica. Poderia melhorar disposição.",
-            'low': "Diagrama incompleto ou com problemas de conexão."
-        },
-        'ci_cd': {
-            'high': "Pipeline CI/CD bem configurado. Workflow do Wokwi com secrets.",
-            'medium': "CI/CD configurado mas com limitações. Workflow pode precisar ajustes.",
-            'low': "CI/CD ausente ou mal configurado."
-        },
-        'documentacao': {
-            'high': "Documentação completa. Todas seções preenchidas com conteúdo relevante.",
-            'medium': "Documentação presente mas incompleta. Algumas seções superficiais.",
-            'low': "Documentação mínima ou ausente. Seções importantes não preenchidas."
-        },
-        'estrutura': {
-            'high': "Repositório bem organizado. .gitignore presente. Commits regulares.",
-            'medium': "Estrutura básica presente. Poderia melhorar organização.",
-            'low': "Estrutura desorganizada. Arquivos fora do lugar."
+    def __init__(self, resultado_path=RESULTADO_PATH):
+        self.resultado_path = resultado_path
+        self.repos_path = os.path.join(resultado_path, 'repos')
+        self.dados = None
+        self.stats = {
+            'total_alunos': 0,
+            'com_sucesso': 0,
+            'com_erro': 0,
+            'nota_media': 0,
+            'maior_nota': 0,
+            'menor_nota': 100
         }
-    }
     
-    base_feedback = feedbacks[criterio]['high' if percentage >= 0.8 else ('medium' if percentage >= 0.5 else 'low')]
+    def carregar_dados_existentes(self):
+        """Carrega dados já processados"""
+        arquivo_avaliacoes = os.path.join(self.resultado_path, 'avaliacoes_com_feedback.json')
+        
+        if not os.path.exists(arquivo_avaliacoes):
+            print("❌ Arquivo avaliacoes_com_feedback.json não encontrado")
+            print("   Execute primeiro os scripts de processamento básico.")
+            return False
+        
+        with open(arquivo_avaliacoes, 'r', encoding='utf-8') as f:
+            self.dados = json.load(f)
+        
+        self.stats['total_alunos'] = len(self.dados)
+        print(f"✅ Carregados {len(self.dados)} alunos")
+        return True
     
-    # Adicionar o que fez perder pontos
-    detalhes_perda = ""
-    if pontos_perdidos > 0:
-        if criterio == 'logica_firmware':
-            if not artefatos.get('tem_main_py'):
-                detalhes_perda = "Pontos perdidos: main.py ausente ou não encontrado. "
-            elif not artefatos.get('main_py_funcional'):
-                detalhes_perda = "Pontos perdidos: main.py presente mas com implementação incompleta. "
-            elif percentage < 0.8:
-                detalhes_perda = "Pontos perdidos: falta de comentários ou modularização. "
-        elif criterio == 'metrica_wokwi':
-            if not artefatos.get('tem_diagram_json'):
-                detalhes_perda = "Pontos perdidos: diagram.json ausente. "
-            elif percentage < 0.8:
-                detalhes_perda = "Pontos perdidos: organização do diagrama pode melhorar. "
-        elif criterio == 'ci_cd':
-            if not artefatos.get('tem_github_actions'):
-                detalhes_perda = "Pontos perdidos: GitHub Actions não configurado. "
-            elif percentage < 0.8:
-                detalhes_perda = "Pontos perdidos: workflow pode ser melhorado. "
-        elif criterio == 'documentacao':
-            if not artefatos.get('readme_preenchido'):
-                detalhes_perda = "Pontos perdidos: README com seções incompletas. "
-            elif percentage < 0.8:
-                detalhes_perda = "Pontos perdidos: documentação poderia ser mais detalhada. "
-        elif criterio == 'estrutura':
-            missing = []
-            if not artefatos.get('tem_main_py'): missing.append('main.py')
-            if not artefatos.get('tem_diagram_json'): missing.append('diagram.json')
-            if not artefatos.get('tem_wokwi_toml'): missing.append('wokwi.toml')
-            if missing:
-                detalhes_perda = f"Pontos perdidos: arquivos ausentes ({', '.join(missing)}). "
+    def extrair_commits(self):
+        """Extrai commits detalhados de cada repositório"""
+        print("\n" + "="*60)
+        print("FASE 1: Extraindo commits")
+        print("="*60)
+        
+        commits_count = 0
+        for i, aluno in enumerate(self.dados):
+            nome = aluno['nome']
+            repo_dir = os.path.join(self.repos_path, f"{nome.replace('/', '_').replace(' ', '_')}")
+            
+            print(f"[{i+1}/{len(self.dados)}] {nome}...", end=" ")
+            
+            if os.path.exists(repo_dir) and os.path.isdir(os.path.join(repo_dir, '.git')):
+                try:
+                    os.chdir(repo_dir)
+                    result = subprocess.run(
+                        ['git', 'log', f'--before="{DATA_LIMITE}"', '--pretty=format:%h|%an|%ae|%ar|%s'],
+                        capture_output=True, text=True, timeout=30
+                    )
+                    
+                    if result.returncode == 0 and result.stdout.strip():
+                        commits = []
+                        for line in result.stdout.strip().split('\n'):
+                            if line.strip():
+                                parts = line.split('|')
+                                if len(parts) >= 5:
+                                    commits.append({
+                                        'hash': parts[0],
+                                        'author': parts[1],
+                                        'email': parts[2],
+                                        'date': parts[3],
+                                        'message': '|'.join(parts[4:])
+                                    })
+                        aluno['commits_detalhados'] = commits
+                        aluno['total_commits'] = len(commits)
+                        commits_count += len(commits)
+                        print(f"{len(commits)} commits")
+                    else:
+                        aluno['commits_detalhados'] = []
+                        aluno['total_commits'] = 0
+                        print("0 commits")
+                except Exception as e:
+                    aluno['commits_detalhados'] = []
+                    aluno['total_commits'] = 0
+                    print(f"Erro: {e}")
+                finally:
+                    os.chdir(self.resultado_path)
+            else:
+                aluno['commits_detalhados'] = []
+                aluno['total_commits'] = 0
+                print("Repo não encontrado")
+        
+        print(f"\nTotal de commits extraídos: {commits_count}")
+        return True
     
-    return f"{base_feedback} {detalhes_perda}".strip()
+    def processar_dados_completos(self):
+        """Processa dados completos (emails, imagens, artefatos)"""
+        print("\n" + "="*60)
+        print("FASE 2: Processando dados completos")
+        print("="*60)
+        
+        for i, aluno in enumerate(self.dados):
+            nome = aluno['nome']
+            repo_dir = os.path.join(self.repos_path, f"{nome.replace('/', '_').replace(' ', '_')}")
+            
+            print(f"[{i+1}/{len(self.dados)}] {nome}...")
+            
+            # Extrair email do README
+            readme_content = aluno.get('readme_content', '')
+            email = self._extract_email_from_readme(readme_content)
+            if email:
+                aluno['email_github'] = email
+            
+            # Extrair imagens
+            repo_url = aluno.get('github_url', '')
+            imagens = self._extract_images_from_readme(readme_content, repo_url)
+            aluno['imagens'] = imagens
+            
+            # Detectar artefatos
+            main_py_content = ''
+            main_py_path = os.path.join(repo_dir, 'src', 'main.py')
+            if os.path.exists(main_py_path):
+                with open(main_py_path, 'r', encoding='utf-8', errors='ignore') as f:
+                    main_py_content = f.read()
+            
+            artefatos = self._detectar_artefatos_ia(readme_content, aluno.get('commits_detalhados', []), main_py_content)
+            aluno['artefatos_ia'] = artefatos
+            
+            # Análise do README
+            aluno['analise_readme'] = {
+                'tamanho': len(readme_content) if readme_content else 0,
+                'tem_secoes': bool(re.search(r'##', readme_content)) if readme_content else False,
+                'tem_codigo': bool(re.search(r'```', readme_content)) if readme_content else False,
+                'tem_imagens': len(imagens) > 0
+            }
+        
+        print(f"✅ Dados processados")
+        return True
+    
+    def gerar_feedbacks(self):
+        """Gera feedbacks detalhados para cada critério"""
+        print("\n" + "="*60)
+        print("FASE 3: Gerando feedbacks")
+        print("="*60)
+        
+        for i, aluno in enumerate(self.dados):
+            criterios = aluno.get('criterios', {})
+            
+            for criterio, dados in criterios.items():
+                score = dados.get('score', 0)
+                max_score = 30 if criterio == 'logica_firmware' else (25 if criterio == 'ci_cd' else (20 if criterio == 'metrica_wokwi' else 10))
+                
+                feedback = self._gerar_feedback(criterio, score, max_score, aluno)
+                dados['feedback_detalhado'] = feedback
+        
+        print(f"✅ Feedbacks gerados")
+        return True
+    
+    def aplicar_melhorias(self):
+        """Aplica melhorias e ranking"""
+        print("\n" + "="*60)
+        print("FASE 4: Aplicando melhorias")
+        print("="*60)
+        
+        # Ordenar por nota (decrescente) e nome
+        self.dados.sort(key=lambda x: (-x['nota_final'], x['nome']))
+        
+        # Adicionar ranking
+        for i, aluno in enumerate(self.dados):
+            aluno['ranking'] = i + 1
+        
+        # Calcular estatísticas
+        notas = [a['nota_final'] for a in self.dados if a['status'] == 'sucesso']
+        if notas:
+            self.stats['com_sucesso'] = len([a for a in self.dados if a['status'] == 'sucesso'])
+            self.stats['com_erro'] = len([a for a in self.dados if a['status'] != 'sucesso'])
+            self.stats['nota_media'] = sum(notas) / len(notas)
+            self.stats['maior_nota'] = max(notas)
+            self.stats['menor_nota'] = min(notas)
+        
+        print(f"✅ Melhorias aplicadas")
+        print(f"   Ranking: {self.dados[0]['nome']} (Nota: {self.dados[0]['nota_final']:.1f})")
+        return True
+    
+    def consolidar_json(self):
+        """Consolida dados em JSON para dashboard"""
+        print("\n" + "="*60)
+        print("FASE 5: Consolidando JSON")
+        print("="*60)
+        
+        # Salvar JSON consolidado
+        output_file = os.path.join(self.resultado_path, 'avaliacoes_completas.json')
+        with open(output_file, 'w', encoding='utf-8') as f:
+            json.dump(self.dados, f, indent=2, ensure_ascii=False)
+        
+        print(f"✅ JSON consolidado: {output_file}")
+        return True
+    
+    def gerar_dashboard(self):
+        """Gera dashboard HTML final com dados embutidos"""
+        print("\n" + "="*60)
+        print("FASE 6: Gerando dashboard")
+        print("="*60)
+        
+        # Ler template HTML
+        template_file = os.path.join(self.resultado_path, 'dashboard_completo.html')
+        with open(template_file, 'r', encoding='utf-8') as f:
+            html_lines = f.readlines()
+        
+        # Converter dados para JSON
+        students_json_str = json.dumps(self.dados, ensure_ascii=False)
+        
+        # Procurar e substituir a linha com "let students = [];"
+        html_final_lines = []
+        for line in html_lines:
+            if 'let students = []' in line:
+                # Manter a identação
+                indent = line[:len(line) - len(line.lstrip())]
+                html_final_lines.append(f"{indent}let students = {students_json_str};\n")
+            else:
+                html_final_lines.append(line)
+        
+        html_final = ''.join(html_final_lines)
+        
+        # Salvar HTML final
+        output_file = os.path.join(self.resultado_path, 'dashboard_final.html')
+        with open(output_file, 'w', encoding='utf-8') as f:
+            f.write(html_final)
+        
+        print(f"✅ Dashboard gerado: {output_file}")
+        print(f"   Tamanho: {len(html_final):,} caracteres")
+        print(f"   Número de alunos: {len(self.dados)}")
+        return True
+    
+    def salvar_resultados(self):
+        """Salva todos os resultados intermediários"""
+        print("\n" + "="*60)
+        print("Salvando resultados")
+        print("="*60)
+        
+        # Salvar JSON com melhorias
+        output_file = os.path.join(self.resultado_path, 'avaliacoes_melhoradas.json')
+        with open(output_file, 'w', encoding='utf-8') as f:
+            json.dump(self.dados, f, indent=2, ensure_ascii=False)
+        print(f"✅ {output_file}")
+        
+        return True
+    
+    def _extract_email_from_readme(self, readme_content):
+        """Extrai email do README"""
+        if not readme_content:
+            return None
+        
+        # Padrão simples para email
+        pattern = r'[\w\.-]+@[\w\.-]+\.\w+'
+        match = re.search(pattern, readme_content, re.IGNORECASE)
+        if match:
+            return match.group(0)
+        
+        return None
+    
+    def _extract_images_from_readme(self, readme_content, repo_url):
+        """Extrai URLs de imagens do README"""
+        if not readme_content:
+            return []
+        
+        images = []
+        patterns = [
+            r'!\[.*?\]\((https?://[^\s\)]+)\)',
+            r'!\[.*?\]\((https?://github\.com/[^\s\)]+)\)',
+            r'<img.*?src="(https?://[^"]+)"'
+        ]
+        
+        for pattern in patterns:
+            matches = re.findall(pattern, readme_content)
+            for match in matches:
+                if match not in images:
+                    images.append(match)
+        
+        return images
+    
+    def _detectar_artefatos_ia(self, readme_content, commits, main_py_content):
+        """Detecta possíveis artefatos de IA"""
+        artefatos = []
+        
+        if readme_content:
+            if len(readme_content) < 500:
+                artefatos.append({'tipo': 'README_curto', 'descricao': 'README muito curto', 'severidade': 'baixa'})
+        
+        if main_py_content:
+            if '# Generated code' in main_py_content or '# Este código foi gerado' in main_py_content:
+                artefatos.append({'tipo': 'Comentario_IA', 'descricao': 'Código gerado automaticamente', 'severidade': 'media'})
+        
+        if commits and len(commits) == 1:
+            artefatos.append({'tipo': 'Unico_commit', 'descricao': 'Apenas um commit', 'severidade': 'media'})
+        
+        return artefatos
+    
+    def _gerar_feedback(self, criterio, score, max_score, aluno):
+        """Gera feedback para um critério"""
+        percentage = score / max_score if max_score > 0 else 0
+        
+        feedbacks = {
+            'logica_firmware': {
+                'high': "Código bem estruturado com lógica clara. Implementa funções/modularização adequada.",
+                'medium': "Código funcional mas poderia ser mais organizado. Falta modularização.",
+                'low': "Código com problemas de estrutura ou lógica."
+            },
+            'metrica_wokwi': {
+                'high': "Diagrama completo e bem organizado no Wokwi.",
+                'medium': "Diagrama funcional mas com organização básica.",
+                'low': "Diagrama incompleto ou com problemas."
+            },
+            'ci_cd': {
+                'high': "Pipeline CI/CD bem configurado com GitHub Actions.",
+                'medium': "CI/CD configurado mas com limitações.",
+                'low': "CI/CD ausente ou mal configurado."
+            },
+            'documentacao': {
+                'high': "Documentação completa e bem estruturada.",
+                'medium': "Documentação presente mas incompleta.",
+                'low': "Documentação mínima ou ausente."
+            },
+            'estrutura': {
+                'high': "Repositório bem organizado com estrutura clara.",
+                'medium': "Estrutura básica presente. Poderia melhorar.",
+                'low': "Estrutura desorganizada."
+            }
+        }
+        
+        if percentage >= 0.8:
+            return feedbacks[criterio]['high']
+        elif percentage >= 0.5:
+            return feedbacks[criterio]['medium']
+        else:
+            return feedbacks[criterio]['low']
+    
+    def executar(self):
+        """Executa todo o pipeline"""
+        print("="*60)
+        print("PIPELINE DE VALIDAÇÃO IOT")
+        print("="*60)
+        print(f"Data: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
+        print(f"Diretório: {self.resultado_path}")
+        print("="*60)
+        
+        # Carregar dados
+        if not self.carregar_dados_existentes():
+            return False
+        
+        # Executar fases
+        self.extrair_commits()
+        self.processar_dados_completos()
+        self.gerar_feedbacks()
+        self.aplicar_melhorias()
+        self.consolidar_json()
+        self.salvar_resultados()
+        self.gerar_dashboard()
+        
+        # Resumo final
+        print("\n" + "="*60)
+        print("RESUMO FINAL")
+        print("="*60)
+        print(f"Total de alunos: {self.stats['total_alunos']}")
+        print(f"Com sucesso: {self.stats['com_sucesso']}")
+        print(f"Com erro: {self.stats['com_erro']}")
+        print(f"Nota média: {self.stats['nota_media']:.1f}")
+        print(f"Maior nota: {self.stats['maior_nota']:.1f}")
+        print(f"Menor nota: {self.stats['menor_nota']:.1f}")
+        print(f"\nDashboard: file://{self.resultado_path}/dashboard_final.html")
+        print("="*60)
+        
+        return True
 
-def extrair_email_github(github_url):
-    """Tenta extrair email da URL do GitHub ou do histórico de commits"""
-    # Extrair username da URL
-    match = re.search(r'github\.com/([^/]+)', github_url)
-    if match:
-        username = match.group(1)
-        return f"{username}@users.noreply.github.com"
-    return None
 
 def main():
-    repos_path = "/workspace/resultado_validacao/repos"
-    resultado_path = "/workspace/resultado_validacao"
-    
-    # Carregar dados
-    with open(f"{resultado_path}/avaliacoes_final.json", "r", encoding="utf-8") as f:
-        alunos = json.load(f)
-    
-    print("Aplicando melhorias completas...")
-    
-    for i, aluno in enumerate(alunos):
-        nome = aluno['nome']
-        repo_dir = f"{repos_path}/{nome.replace('/', '_').replace(' ', '_')}"
-        
-        print(f"[{i+1}/{len(alunos)}] {nome}")
-        
-        # 1. Extrair commits detalhados
-        commits = []
-        if os.path.exists(repo_dir) and os.path.isdir(os.path.join(repo_dir, '.git')):
-            commits = get_all_commits(repo_dir)
-        
-        aluno['commits_detalhados'] = commits
-        aluno['total_commits'] = len(commits)
-        
-        # Extrair email do GitHub se disponível
-        github_email = commits[0]['email'] if commits else None
-        if github_email and '@' in github_email:
-            aluno['github_email'] = github_email
-        else:
-            aluno['github_email'] = extrair_email_github(aluno.get('github_url', ''))
-        
-        # 2. Analisar artefatos
-        readme_content = aluno.get('readme_content', '')
-        main_py_content = ""
-        main_path = os.path.join(repo_dir, 'src', 'main.py')
-        if not os.path.exists(main_path):
-            main_path = os.path.join(repo_dir, 'main.py')
-        if os.path.exists(main_path):
-            with open(main_path, 'r', encoding='utf-8', errors='ignore') as f:
-                main_py_content = f.read()
-        
-        artefatos = analisar_artefatos(repo_dir, readme_content, main_py_content)
-        aluno['artefatos'] = artefatos
-        
-        # 3. Gerar feedback completo com explicação de perda de pontos
-        criterios_map = {
-            'logica_firmware': 30,
-            'metrica_wokwi': 20,
-            'ci_cd': 25,
-            'documentacao': 10,
-            'estrutura': 10
-        }
-        
-        for criterio, max_score in criterios_map.items():
-            if criterio in aluno.get('criterios', {}):
-                score = aluno['criterios'][criterio].get('score', 0)
-                feedback_completo = gerar_feedback_completo(
-                    criterio, score, max_score, artefatos, commits
-                )
-                aluno['criterios'][criterio]['feedback_completo'] = feedback_completo
-        
-        # 4. Adicionar email do GitHub se disponível
-        if not aluno.get('email') or '@aluno.com' in aluno.get('email', ''):
-            if aluno.get('github_email'):
-                aluno['email'] = aluno['github_email']
-    
-    # 5. Ordenar por nome e nota (ranking)
-    alunos.sort(key=lambda x: (-x['nota_final'], x['nome']))
-    
-    # 6. Adicionar ranking
-    for i, aluno in enumerate(alunos):
-        aluno['ranking'] = i + 1
-    
-    # Salvar com melhorias
-    with open(f"{resultado_path}/avaliacoes_completo_dashboard.json", "w", encoding="utf-8") as f:
-        json.dump(alunos, f, indent=2, ensure_ascii=False)
-    
-    print(f"\nMelhorias aplicadas em {len(alunos)} alunos")
-    print(f"Arquivo: avaliacoes_completo_dashboard.json")
-    
-    # Estatísticas
-    print(f"\nTop 5 Ranking:")
-    for aluno in alunos[:5]:
-        print(f"  {aluno['ranking']}. {aluno['nome']} - {aluno['nota_final']:.1f}")
-    
-    return alunos
+    pipeline = PipelineValidacao()
+    success = pipeline.executar()
+    return 0 if success else 1
+
 
 if __name__ == '__main__':
-    main()
+    sys.exit(main())
