@@ -184,25 +184,26 @@ class PipelineValidacao:
         print(f"✅ Dados processados")
         return True
     
+    def _processar_aluno_feedbacks(self, aluno):
+        """Processa feedbacks para todos os critérios de um aluno"""
+        criterios = aluno.get('criterios', {})
+        for criterio, dados in criterios.items():
+            score = dados.get('score', 0)
+            max_score = 30 if criterio == 'logica_firmware' else (25 if criterio == 'ci_cd' else (20 if criterio == 'metrica_wokwi' else 10))
+            feedback = self._gerar_feedback(criterio, score, max_score, aluno)
+            dados['feedback_detalhado'] = feedback
+
     def gerar_feedbacks(self):
         """Gera feedbacks detalhados para cada critério"""
         print("\n" + "="*60)
         print("FASE 3: Gerando feedbacks")
         print("="*60)
-        
-        for i, aluno in enumerate(self.dados):
-            criterios = aluno.get('criterios', {})
-            
-            for criterio, dados in criterios.items():
-                score = dados.get('score', 0)
-                max_score = 30 if criterio == 'logica_firmware' else (25 if criterio == 'ci_cd' else (20 if criterio == 'metrica_wokwi' else 10))
-                
-                feedback = self._gerar_feedback(criterio, score, max_score, aluno)
-                dados['feedback_detalhado'] = feedback
-        
+
+        for aluno in self.dados:
+            self._processar_aluno_feedbacks(aluno)
+
         print(f"✅ Feedbacks gerados")
         return True
-    
     def aplicar_melhorias(self):
         """Aplica melhorias e ranking"""
         print("\n" + "="*60)
@@ -310,7 +311,7 @@ class PipelineValidacao:
         self.aplicar_dados_manuais()
         
         # 2. Gerar feedback para este aluno específico
-        self._gerar_feedback(aluno)
+        self._processar_aluno_feedbacks(aluno)
         
         # 3. Recalcular nota final se não houver nota manual
         if not aluno.get('tem_avaliacao_manual'):
