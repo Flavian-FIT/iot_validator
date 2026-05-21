@@ -325,11 +325,35 @@
                                 <strong>Status:</strong> <span id="modal-status-text"></span>
                             </div>
                         </div>
-                        <div id="modal-checklist-view" style="margin-bottom: 1rem; padding: 0.75rem; background: var(--gray-50); border-radius: 0.5rem; border: 1px solid var(--gray-200); display: none;">
-                            <strong>✅ Checklist de Validação:</strong>
-                            <div id="modal-checklist-items" style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; font-size: 0.8rem; margin-top: 0.5rem;"></div>
+
+                        <div class="modal-section" style="background: var(--gray-50); padding: 1.5rem; border-radius: 1rem; border: 1px solid var(--gray-200); margin-top: 1rem;">
+                            <h3 style="margin-bottom: 1rem;">✅ Checklist de Validação</h3>
+                            <div style="display: grid; grid-template-columns: 1fr; gap: 0.75rem;">
+                                <label style="display: flex; align-items: center; gap: 0.75rem; cursor: pointer; padding: 0.5rem; background: white; border-radius: 0.5rem; border: 1px solid var(--gray-200);">
+                                    <input type="checkbox" id="main-check-firmware" style="width: 1.2rem; height: 1.2rem;"> 
+                                    <span><strong>Firmware:</strong> Lógica/MicroPython</span>
+                                </label>
+                                <label style="display: flex; align-items: center; gap: 0.75rem; cursor: pointer; padding: 0.5rem; background: white; border-radius: 0.5rem; border: 1px solid var(--gray-200);">
+                                    <input type="checkbox" id="main-check-wokwi" style="width: 1.2rem; height: 1.2rem;"> 
+                                    <span><strong>Wokwi:</strong> Circuito/Diagrama</span>
+                                </label>
+                                <label style="display: flex; align-items: center; gap: 0.75rem; cursor: pointer; padding: 0.5rem; background: white; border-radius: 0.5rem; border: 1px solid var(--gray-200);">
+                                    <input type="checkbox" id="main-check-cicd" style="width: 1.2rem; height: 1.2rem;"> 
+                                    <span><strong>CI/CD:</strong> GitHub Actions</span>
+                                </label>
+                                <label style="display: flex; align-items: center; gap: 0.75rem; cursor: pointer; padding: 0.5rem; background: white; border-radius: 0.5rem; border: 1px solid var(--gray-200);">
+                                    <input type="checkbox" id="main-check-docs" style="width: 1.2rem; height: 1.2rem;"> 
+                                    <span><strong>Documentação:</strong> README</span>
+                                </label>
+                                <label style="display: flex; align-items: center; gap: 0.75rem; cursor: pointer; padding: 0.5rem; background: white; border-radius: 0.5rem; border: 1px solid var(--gray-200);">
+                                    <input type="checkbox" id="main-check-structure" style="width: 1.2rem; height: 1.2rem;"> 
+                                    <span><strong>Estrutura:</strong> Arquivos/Organização</span>
+                                </label>
+                            </div>
+                            <button class="btn btn-success" style="width: 100%; margin-top: 1rem; font-size: 0.9rem;" onclick="saveChecklistOnly()">💾 Salvar Checklist</button>
                         </div>
-                        <div style="font-size: 0.9rem; line-height: 1.8;">
+
+                        <div style="font-size: 0.9rem; line-height: 1.8; margin-top: 1.5rem;">
                             <p><strong>Commits:</strong> <span id="modal-commits-count">0</span></p>
                             <p><strong>main.py:</strong> <span id="modal-main-exists"></span></p>
                             <p><strong>diagram.json:</strong> <span id="modal-diag-exists"></span></p>
@@ -366,27 +390,6 @@
                     <div class="form-group">
                         <label>Comentário do Professor</label>
                         <textarea id="edit-professor-comment" placeholder="Feedback para o aluno..."></textarea>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label>✅ Checklist de Validação</label>
-                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; background: var(--gray-50); padding: 1rem; border-radius: 0.5rem; border: 1px solid var(--gray-200);">
-                        <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer; font-weight: normal;">
-                            <input type="checkbox" id="check-firmware"> Firmware (Lógica/MicroPython)
-                        </label>
-                        <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer; font-weight: normal;">
-                            <input type="checkbox" id="check-wokwi"> Wokwi (Circuito/Diagrama)
-                        </label>
-                        <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer; font-weight: normal;">
-                            <input type="checkbox" id="check-cicd"> CI/CD (GitHub Actions)
-                        </label>
-                        <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer; font-weight: normal;">
-                            <input type="checkbox" id="check-docs"> Documentação (README)
-                        </label>
-                        <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer; font-weight: normal;">
-                            <input type="checkbox" id="check-structure"> Estrutura de Arquivos
-                        </label>
                     </div>
                 </div>
 
@@ -551,26 +554,13 @@
                 profNote.style.display = 'none';
             }
 
-            // Checklist View
-            const checklist = s.checklist_manual || {};
-            const checklistView = document.getElementById('modal-checklist-view');
-            const checklistItems = document.getElementById('modal-checklist-items');
-            const hasChecklist = Object.values(checklist).some(v => v);
-
-            if (hasChecklist) {
-                checklistView.style.display = 'block';
-                const labels = {
-                    firmware: 'Firmware', wokwi: 'Wokwi', cicd: 'CI/CD', 
-                    docs: 'Documentação', structure: 'Estrutura'
-                };
-                checklistItems.innerHTML = Object.entries(labels).map(([k, v]) => `
-                    <div style="color: ${checklist[k] ? 'var(--success)' : 'var(--gray-300)'}">
-                        ${checklist[k] ? '✅' : '⬜'} ${v}
-                    </div>
-                `).join('');
-            } else {
-                checklistView.style.display = 'none';
-            }
+            // Checklist State
+            const cl = s.checklist_manual || {};
+            document.getElementById('main-check-firmware').checked = !!cl.firmware;
+            document.getElementById('main-check-wokwi').checked = !!cl.wokwi;
+            document.getElementById('main-check-cicd').checked = !!cl.cicd;
+            document.getElementById('main-check-docs').checked = !!cl.docs;
+            document.getElementById('main-check-structure').checked = !!cl.structure;
 
             // Reset Edit Form
             document.getElementById('edit-form').classList.remove('active');
@@ -593,14 +583,6 @@
                 document.getElementById('edit-manual-grade').value = currentStudent.nota_manual || currentStudent.nota_final;
                 document.getElementById('edit-professor-comment').value = currentStudent.comentario_professor || '';
                 
-                // Set Checklist checkboxes
-                const cl = currentStudent.checklist_manual || {};
-                document.getElementById('check-firmware').checked = !!cl.firmware;
-                document.getElementById('check-wokwi').checked = !!cl.wokwi;
-                document.getElementById('check-cicd').checked = !!cl.cicd;
-                document.getElementById('check-docs').checked = !!cl.docs;
-                document.getElementById('check-structure').checked = !!cl.structure;
-
                 // Fetch manual content
                 fetch(`/api/get_content?name=${encodeURIComponent(currentStudent.nome)}`)
                     .then(r => r.json())
@@ -611,6 +593,34 @@
             }
         }
 
+        async function saveChecklistOnly() {
+            if (!currentStudent) return;
+            const name = currentStudent.nome;
+            const grade = currentStudent.nota_manual || currentStudent.nota_final;
+            const comment = currentStudent.comentario_professor || '';
+            
+            const checklist = {
+                firmware: document.getElementById('main-check-firmware').checked,
+                wokwi: document.getElementById('main-check-wokwi').checked,
+                cicd: document.getElementById('main-check-cicd').checked,
+                docs: document.getElementById('main-check-docs').checked,
+                structure: document.getElementById('main-check-structure').checked
+            };
+
+            showToast("Salvando checklist...");
+            try {
+                await fetch('/api/update_grade', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ name, grade, comment, checklist })
+                });
+                showToast("Checklist salvo!");
+                loadData();
+            } catch (e) {
+                showToast("Erro ao salvar checklist.");
+            }
+        }
+
         async function saveStudentChanges() {
             const name = currentStudent.nome;
             const grade = parseFloat(document.getElementById('edit-manual-grade').value);
@@ -618,13 +628,13 @@
             const readme = document.getElementById('edit-readme').value;
             const main_py = document.getElementById('edit-main-py').value;
 
-            // Checklist state
+            // Use current checklist state
             const checklist = {
-                firmware: document.getElementById('check-firmware').checked,
-                wokwi: document.getElementById('check-wokwi').checked,
-                cicd: document.getElementById('check-cicd').checked,
-                docs: document.getElementById('check-docs').checked,
-                structure: document.getElementById('check-structure').checked
+                firmware: document.getElementById('main-check-firmware').checked,
+                wokwi: document.getElementById('main-check-wokwi').checked,
+                cicd: document.getElementById('main-check-cicd').checked,
+                docs: document.getElementById('main-check-docs').checked,
+                structure: document.getElementById('main-check-structure').checked
             };
 
             showToast("Salvando...");

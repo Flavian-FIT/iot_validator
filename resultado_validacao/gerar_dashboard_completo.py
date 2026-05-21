@@ -75,35 +75,41 @@ class PipelineValidacao:
             if os.path.exists(repo_dir) and os.path.isdir(os.path.join(repo_dir, '.git')):
                 try:
                     os.chdir(repo_dir)
-                    # Usar range de commits: do COMMIT_INICIAL até HEAD, filtrando pela data limite
-                    # Tenta primeiro com o range, se falhar (ex: COMMIT_INICIAL não encontrado), pega todos até a data
-                    range_spec = f"{COMMIT_INICIAL}..HEAD"
+                    # Usar range de commits: do COMMIT_INICIAL até o final (incluindo todas as branches)
+                    # Filtrando pela data limite
+                    range_spec = f"{COMMIT_INICIAL}.."
                     
+                    # --all garante que pegamos commits em qualquer branch
                     result = subprocess.run(
-                        ['git', 'log', range_spec, f'--before="{DATA_LIMITE}"', '--pretty=format:%h|%an|%ae|%ar|%s'],
+                        ['git', 'log', '--all', range_spec, f'--before="{DATA_LIMITE}"', '--pretty=format:%h|%an|%ae|%ar|%s'],
                         capture_output=True, text=True, timeout=30
                     )
                     
                     if result.returncode != 0:
-                        # Fallback se o range falhar
+                        # Fallback se o range falhar (ex: COMMIT_INICIAL não encontrado)
                         result = subprocess.run(
-                            ['git', 'log', f'--before="{DATA_LIMITE}"', '--pretty=format:%h|%an|%ae|%ar|%s'],
+                            ['git', 'log', '--all', f'--before="{DATA_LIMITE}"', '--pretty=format:%h|%an|%ae|%ar|%s'],
                             capture_output=True, text=True, timeout=30
                         )
                     
                     if result.returncode == 0 and result.stdout.strip():
                         commits = []
+                        # Usar um set para evitar duplicatas se o mesmo commit estiver em múltiplas branches
+                        seen_hashes = set()
                         for line in result.stdout.strip().split('\n'):
                             if line.strip():
                                 parts = line.split('|')
                                 if len(parts) >= 5:
-                                    commits.append({
-                                        'hash': parts[0],
-                                        'author': parts[1],
-                                        'email': parts[2],
-                                        'date': parts[3],
-                                        'message': '|'.join(parts[4:])
-                                    })
+                                    h = parts[0]
+                                    if h not in seen_hashes:
+                                        seen_hashes.add(h)
+                                        commits.append({
+                                            'hash': h,
+                                            'author': parts[1],
+                                            'email': parts[2],
+                                            'date': parts[3],
+                                            'message': '|'.join(parts[4:])
+                                        })
                         aluno['commits_detalhados'] = commits
                         aluno['total_commits'] = len(commits)
                         commits_count += len(commits)
