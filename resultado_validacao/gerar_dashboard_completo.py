@@ -75,10 +75,21 @@ class PipelineValidacao:
             if os.path.exists(repo_dir) and os.path.isdir(os.path.join(repo_dir, '.git')):
                 try:
                     os.chdir(repo_dir)
+                    # Usar range de commits: do COMMIT_INICIAL até HEAD, filtrando pela data limite
+                    # Tenta primeiro com o range, se falhar (ex: COMMIT_INICIAL não encontrado), pega todos até a data
+                    range_spec = f"{COMMIT_INICIAL}..HEAD"
+                    
                     result = subprocess.run(
-                        ['git', 'log', f'--before="{DATA_LIMITE}"', '--pretty=format:%h|%an|%ae|%ar|%s'],
+                        ['git', 'log', range_spec, f'--before="{DATA_LIMITE}"', '--pretty=format:%h|%an|%ae|%ar|%s'],
                         capture_output=True, text=True, timeout=30
                     )
+                    
+                    if result.returncode != 0:
+                        # Fallback se o range falhar
+                        result = subprocess.run(
+                            ['git', 'log', f'--before="{DATA_LIMITE}"', '--pretty=format:%h|%an|%ae|%ar|%s'],
+                            capture_output=True, text=True, timeout=30
+                        )
                     
                     if result.returncode == 0 and result.stdout.strip():
                         commits = []
@@ -239,10 +250,12 @@ class PipelineValidacao:
                 aluno['tem_avaliacao_manual'] = True
                 aluno['nota_manual'] = dados_manuais.get('nota_final_manual', nota_auto)
                 aluno['comentario_professor'] = dados_manuais.get('comentario', '')
+                aluno['checklist_manual'] = dados_manuais.get('checklist', {})
                 aluno['nota_final'] = aluno['nota_manual']
                 print(f"✓ {nome}: Nota Manual {aluno['nota_manual']:.1f}")
             else:
                 aluno['tem_avaliacao_manual'] = False
+                aluno['checklist_manual'] = {}
                 aluno['nota_final'] = nota_auto
                 
             # Aplicar conteúdo manual se existir
