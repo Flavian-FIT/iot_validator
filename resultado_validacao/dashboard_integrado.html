@@ -497,15 +497,24 @@
                 { id: 'estrutura', name: 'Estrutura', max: 10 }
             ];
 
+            const manualCriterios = s.criterios_manuais || {};
+
             document.getElementById('modal-criteria').innerHTML = criteria.map(c => {
                 const data = s.criterios?.[c.id] || {};
                 const score = data.score || 0;
                 const feedback = data.feedback_detalhado || data.feedback || 'Sem feedback';
+                const isManual = !!manualCriterios[c.id];
+                
                 return `
                     <li class="criterion-item">
                         <div class="criterion-header" onclick="this.nextElementSibling.style.display = this.nextElementSibling.style.display === 'none' ? 'block' : 'none'">
-                            <span class="criterion-name">${c.name}</span>
-                            <span class="criterion-score" style="background: ${score/c.max >= 0.7 ? 'var(--success)' : 'var(--warning)'}; color: white;">${score}/${c.max}</span>
+                            <span class="criterion-name">${c.name} ${isManual ? '✏️' : ''}</span>
+                            <div style="display: flex; align-items: center; gap: 0.5rem;" onclick="event.stopPropagation()">
+                                <input type="number" class="manual-crit-input" data-crit="${c.id}" value="${score}" max="${c.max}" min="0" step="0.5" 
+                                    style="width: 50px; padding: 2px 5px; border-radius: 4px; border: 1px solid var(--gray-300); font-weight: bold; text-align: center;"
+                                    onchange="calculateTotalFromCriteria()">
+                                <span class="criterion-score" style="background: ${score/c.max >= 0.7 ? 'var(--success)' : 'var(--warning)'}; color: white;">/ ${c.max}</span>
+                            </div>
                         </div>
                         <div class="criterion-feedback" style="display: none;">${feedback}</div>
                     </li>
@@ -584,6 +593,16 @@
             document.getElementById('student-modal').classList.remove('active');
         }
 
+        function calculateTotalFromCriteria() {
+            const inputs = document.querySelectorAll('.manual-crit-input');
+            let total = 0;
+            inputs.forEach(input => {
+                total += parseFloat(input.value || 0);
+            });
+            document.getElementById('main-edit-manual-grade').value = total.toFixed(1);
+            document.getElementById('modal-grade').textContent = total.toFixed(1);
+        }
+
         async function saveAllStudentChanges() {
             if (!currentStudent) return;
             
@@ -601,14 +620,19 @@
                 structure: document.getElementById('main-check-structure').checked
             };
 
+            const criterios = {};
+            document.querySelectorAll('.manual-crit-input').forEach(input => {
+                criterios[input.dataset.crit] = parseFloat(input.value || 0);
+            });
+
             showToast("Salvando alterações...");
 
             try {
-                // Save Grade, Comment, Checklist
+                // Save Grade, Comment, Checklist, Criterios
                 await fetch('/api/update_grade', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ name, grade, comment, checklist })
+                    body: JSON.stringify({ name, grade, comment, checklist, criterios })
                 });
 
                 // Save Manual Content

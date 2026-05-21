@@ -113,12 +113,14 @@ class DashboardHandler(http.server.SimpleHTTPRequestHandler):
         grade = data['grade']
         comment = data['comment']
         checklist = data.get('checklist', {})
+        criterios = data.get('criterios', {})
         
         notas = self.load_json('notas_manuais.json', {})
         notas[name] = {
             'nota_final_manual': grade,
             'comentario': comment,
             'checklist': checklist,
+            'criterios': criterios,
             'data_avaliacao': datetime.now().isoformat()
         }
         self.save_json('notas_manuais.json', notas)

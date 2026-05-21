@@ -43,17 +43,25 @@ class PipelineValidacao:
             'menor_nota': 100
         }
     
+    def load_data(self):
+        """Carrega dados iniciais dos alunos"""
+        arquivo_avaliacoes = os.path.join(self.resultado_path, 'avaliacoes_com_feedback.json')
+        if not os.path.exists(arquivo_avaliacoes):
+            arquivo_avaliacoes = os.path.join(self.resultado_path, 'avaliacoes.json')
+            
+        if not os.path.exists(arquivo_avaliacoes):
+            return []
+            
+        with open(arquivo_avaliacoes, 'r', encoding='utf-8') as f:
+            return json.load(f)
+
     def carregar_dados_existentes(self):
         """Carrega dados já processados"""
-        arquivo_avaliacoes = os.path.join(self.resultado_path, 'avaliacoes_com_feedback.json')
+        self.dados = self.load_data()
         
-        if not os.path.exists(arquivo_avaliacoes):
-            print("❌ Arquivo avaliacoes_com_feedback.json não encontrado")
-            print("   Execute primeiro os scripts de processamento básico.")
+        if not self.dados:
+            print("❌ Arquivo de avaliações não encontrado")
             return False
-        
-        with open(arquivo_avaliacoes, 'r', encoding='utf-8') as f:
-            self.dados = json.load(f)
         
         self.stats['total_alunos'] = len(self.dados)
         print(f"✅ Carregados {len(self.dados)} alunos")
@@ -257,11 +265,21 @@ class PipelineValidacao:
                 aluno['nota_manual'] = dados_manuais.get('nota_final_manual', nota_auto)
                 aluno['comentario_professor'] = dados_manuais.get('comentario', '')
                 aluno['checklist_manual'] = dados_manuais.get('checklist', {})
+                aluno['criterios_manuais'] = dados_manuais.get('criterios', {})
+                
+                # Mesclar scores manuais nos critérios se existirem
+                if aluno['criterios_manuais']:
+                    for crit_id, manual_score in aluno['criterios_manuais'].items():
+                        if crit_id in aluno.get('criterios', {}):
+                            aluno['criterios'][crit_id]['score'] = manual_score
+                            aluno['criterios'][crit_id]['is_manual'] = True
+                
                 aluno['nota_final'] = aluno['nota_manual']
                 print(f"✓ {nome}: Nota Manual {aluno['nota_manual']:.1f}")
             else:
                 aluno['tem_avaliacao_manual'] = False
                 aluno['checklist_manual'] = {}
+                aluno['criterios_manuais'] = {}
                 aluno['nota_final'] = nota_auto
                 
             # Aplicar conteúdo manual se existir
