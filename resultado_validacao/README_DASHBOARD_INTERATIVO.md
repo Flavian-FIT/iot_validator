@@ -1,13 +1,14 @@
-# 🚀 Dashboard Interativo IoT
+# 🚀 Dashboard Integrado IoT
 
-Este sistema permite gerenciar as avaliações dos alunos de forma visual e interativa.
+Este sistema unifica a visualização detalhada das avaliações com a capacidade de gerenciamento manual.
 
 ## 🎯 Funcionalidades
 
-1.  **Visualizar Alunos**: Lista completa com notas automáticas e manuais.
-2.  **Adicionar Notas Manuais**: Interface simples para inserir notas (0-100) e comentários.
-3.  **Inserir Conteúdo Manual**: Editor para adicionar `README.md` e `main.py` de alunos que não enviaram ou possuem repositórios privados.
-4.  **Consolidação Automática**: Botão para atualizar todos os dados e gerar o dashboard final.
+1.  **Visualização Completa**: Acesso a commits, feedbacks detalhados, análise de artefatos e ranking.
+2.  **Edição Ágil**: Botão "Editar" disponível diretamente no card do aluno ou no modal de detalhes.
+3.  **Gestão de Notas**: Interface para inserir notas manuais (0-100) e comentários que sobrescrevem a avaliação automática.
+4.  **Correção de Conteúdo**: Editor para adicionar `README.md` e `main.py` manualmente, útil para repositórios privados ou incompletos.
+5.  **Pipeline Integrado**: Botão de consolidação que executa todo o processo de validação, ranking e geração do dashboard estático.
 
 ## 🚀 Como Executar
 
@@ -22,13 +23,11 @@ O dashboard estará disponível em: **http://localhost:8000**
 
 ## 🔄 Fluxo de Trabalho
 
-1.  Abra o dashboard no navegador.
-2.  Use a busca para encontrar um aluno.
-3.  Clique em **✏️ Editar Notas/Conteúdo**.
-4.  Insira a nota, comentário ou código manual.
-5.  Clique em **Salvar Alterações**.
-6.  Após editar todos os alunos desejados, clique em **🔄 Consolidar e Atualizar** no topo da página.
-7.  Os dados serão processados e o dashboard principal (`dashboard_final.html`) será atualizado automaticamente.
+1.  **Exploração**: Navegue pelos alunos, use a busca e os filtros de nota/status.
+2.  **Análise**: Clique no card de um aluno para ver o feedback da IA, histórico de commits e pontos fortes/fracos.
+3.  **Ajuste**: Se necessário, clique em **✏️ Editar** para aplicar uma nota manual ou corrigir o comentário.
+4.  **Salvamento**: Clique em **Salvar Alterações** para gravar os dados nos arquivos JSON.
+5.  **Atualização**: Clique em **🔄 Consolidar Tudo** para regerar o ranking e o `dashboard_final.html`.
 
 ## 📁 Arquivos Relacionados
 

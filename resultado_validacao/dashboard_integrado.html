@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Integrado - IoT</title>
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --gray-50: #f9fafb;
+            --gray-100: #f3f4f6;
+            --gray-200: #e5e7eb;
+            --gray-300: #d1d5db;
+            --gray-600: #4b5563;
+            --gray-700: #374151;
+            --gray-800: #1f2937;
+            --gray-900: #111827;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 2rem;
+        }
+
+        .container { max-width: 1400px; margin: 0 auto; }
+
+        .header {
+            background: white;
+            border-radius: 1rem;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header h1 { color: var(--gray-800); font-size: 2rem; margin-bottom: 0.5rem; }
+        .header p { color: var(--gray-600); font-size: 1.1rem; }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            margin-top: 1.5rem;
+            flex: 1;
+            margin-left: 2rem;
+            margin-right: 2rem;
+        }
+
+        .stat-card {
+            background: var(--gray-50);
+            padding: 1rem;
+            border-radius: 0.75rem;
+            text-align: center;
+        }
+
+        .stat-value { font-size: 1.5rem; font-weight: bold; color: var(--primary); }
+        .stat-label { color: var(--gray-600); font-size: 0.75rem; margin-top: 0.25rem; }
+
+        .controls {
+            background: white;
+            border-radius: 1rem;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .search-box { flex: 1; min-width: 250px; }
+        .search-box input {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 2px solid var(--gray-200);
+            border-radius: 0.5rem;
+            font-size: 1rem;
+            transition: border-color 0.2s;
+        }
+        .search-box input:focus { outline: none; border-color: var(--primary); }
+
+        .filter-select {
+            padding: 0.75rem 1rem;
+            border: 2px solid var(--gray-200);
+            border-radius: 0.5rem;
+            font-size: 1rem;
+            background: white;
+            cursor: pointer;
+        }
+
+        .students-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .student-card {
+            background: white;
+            border-radius: 1rem;
+            padding: 1.5rem;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            transition: transform 0.2s, box-shadow 0.2s;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .student-card:hover { transform: translateY(-4px); box-shadow: 0 20px 60px rgba(0,0,0,0.15); }
+
+        .student-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1rem; }
+        .student-name { font-weight: 600; color: var(--gray-800); font-size: 1.1rem; flex: 1; margin-right: 1rem; }
+
+        .grade-badge {
+            padding: 0.5rem 1rem;
+            border-radius: 2rem;
+            font-weight: bold;
+            font-size: 1.25rem;
+            min-width: 80px;
+            text-align: center;
+        }
+
+        .grade-excellent { background: #d1fae5; color: #059669; }
+        .grade-good { background: #dbeafe; color: #2563eb; }
+        .grade-average { background: #fef3c7; color: #d97706; }
+        .grade-poor { background: #fee2e2; color: #dc2626; }
+
+        .student-info { color: var(--gray-600); font-size: 0.875rem; margin-bottom: 1rem; }
+        .student-info p { margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem; }
+
+        .criteria-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 0.5rem;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--gray-200);
+        }
+
+        .criterion { text-align: center; }
+        .criterion-value { font-weight: bold; font-size: 1.1rem; color: var(--gray-800); }
+        .criterion-label { font-size: 0.7rem; color: var(--gray-600); text-transform: uppercase; }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.7);
+            z-index: 1000;
+            overflow-y: auto;
+            padding: 2rem;
+            justify-content: center;
+            align-items: flex-start;
+        }
+
+        .modal.active { display: flex; }
+
+        .modal-content {
+            background: white;
+            border-radius: 1rem;
+            max-width: 1000px;
+            width: 100%;
+            padding: 2rem;
+            position: relative;
+            margin: auto;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 1rem; right: 1rem;
+            background: none; border: none;
+            font-size: 2rem; cursor: pointer;
+            color: var(--gray-600); z-index: 10;
+        }
+
+        .modal-header { margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 2px solid var(--gray-200); display: flex; justify-content: space-between; align-items: center; }
+        .modal-title { font-size: 1.5rem; color: var(--gray-800); }
+        .modal-grade { font-size: 3rem; font-weight: bold; }
+
+        .modal-body { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+        .modal-section { margin-bottom: 1.5rem; }
+        .modal-section h3 { color: var(--gray-800); margin-bottom: 1rem; font-size: 1.1rem; display: flex; align-items: center; gap: 0.5rem; }
+
+        .criteria-list { list-style: none; }
+        .criterion-item { background: var(--gray-50); border-radius: 0.5rem; margin-bottom: 1rem; overflow: hidden; border: 1px solid var(--gray-200); }
+        .criterion-header { display: flex; justify-content: space-between; align-items: center; padding: 1rem; cursor: pointer; }
+        .criterion-header:hover { background: var(--gray-100); }
+        .criterion-name { font-weight: 600; }
+        .criterion-score { font-weight: bold; padding: 0.25rem 0.75rem; border-radius: 1rem; font-size: 0.9rem; }
+        .criterion-feedback { padding: 1rem; border-top: 1px solid var(--gray-200); color: var(--gray-700); font-size: 0.9rem; }
+
+        .commits-list { list-style: none; max-height: 200px; overflow-y: auto; background: var(--gray-50); border-radius: 0.5rem; padding: 0.5rem; }
+        .commit-item { padding: 0.75rem; background: white; border-radius: 0.375rem; margin-bottom: 0.5rem; font-size: 0.85rem; border-left: 3px solid var(--primary); }
+        .commit-hash { font-family: monospace; color: var(--primary); font-weight: 600; }
+
+        .btn {
+            padding: 0.75rem 1.5rem; border-radius: 0.5rem; border: none;
+            cursor: pointer; font-weight: 600; transition: all 0.2s;
+            display: inline-flex; align-items: center; gap: 0.5rem;
+            text-decoration: none; justify-content: center;
+        }
+        .btn-primary { background: var(--primary); color: white; }
+        .btn-primary:hover { background: var(--primary-dark); }
+        .btn-success { background: var(--success); color: white; }
+        .btn-secondary { background: var(--gray-100); color: var(--gray-800); }
+        .btn-edit { background: var(--warning); color: white; width: 100%; margin-top: 1rem; }
+
+        /* Edit Form in Modal */
+        .edit-form { display: none; margin-top: 2rem; padding-top: 2rem; border-top: 2px solid var(--gray-200); }
+        .edit-form.active { display: block; }
+        .form-group { margin-bottom: 1.5rem; }
+        .form-group label { display: block; margin-bottom: 0.5rem; font-weight: 600; }
+        .form-group input, .form-group textarea {
+            width: 100%; padding: 0.75rem;
+            border: 1px solid var(--gray-300); border-radius: 0.5rem;
+            font-family: inherit;
+        }
+        .form-group textarea { min-height: 100px; }
+        .code-editor { font-family: monospace !important; min-height: 200px !important; }
+
+        .status-badge { display: inline-block; padding: 0.25rem 0.75rem; border-radius: 1rem; font-size: 0.75rem; font-weight: 600; }
+        .status-success { background: #d1fae5; color: #059669; }
+        .status-error { background: #fee2e2; color: #dc2626; }
+
+        .toast {
+            position: fixed; bottom: 2rem; right: 2rem;
+            padding: 1rem 2rem; background: var(--gray-800); color: white;
+            border-radius: 0.5rem; display: none; z-index: 2000;
+        }
+
+        .analysis-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem; }
+        .analysis-item { padding: 0.75rem; background: var(--gray-50); border-radius: 0.5rem; font-size: 0.9rem; }
+        .positive { background: #d1fae5; color: #059669; }
+        .warning { background: #fef3c7; color: #d97706; }
+
+        @media (max-width: 768px) {
+            .modal-body { grid-template-columns: 1fr; }
+            .header { flex-direction: column; text-align: center; }
+            .stats-grid { margin: 1rem 0; width: 100%; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div>
+                <h1>🚀 Dashboard Integrado</h1>
+                <p id="sub-header">Visualização e Edição de Avaliações</p>
+            </div>
+            
+            <div class="stats-grid">
+                <div class="stat-card"><div class="stat-value" id="total-students">-</div><div class="stat-label">Alunos</div></div>
+                <div class="stat-card"><div class="stat-value" id="avg-grade">-</div><div class="stat-label">Média</div></div>
+                <div class="stat-card"><div class="stat-value" id="approved-count">-</div><div class="stat-label">Aprovados</div></div>
+            </div>
+
+            <button class="btn btn-success" onclick="consolidateAll()">🔄 Consolidar Tudo</button>
+        </div>
+
+        <div class="controls">
+            <div class="search-box">
+                <input type="text" id="search" placeholder="🔍 Buscar por nome do aluno..." oninput="filterStudents()">
+            </div>
+            <select class="filter-select" id="grade-filter" onchange="filterStudents()">
+                <option value="all">Todas as Notas</option>
+                <option value="excellent">Excelente (90-100)</option>
+                <option value="good">Bom (70-89)</option>
+                <option value="average">Médio (50-69)</option>
+                <option value="poor">Abaixo de 50</option>
+            </select>
+            <select class="filter-select" id="status-filter" onchange="filterStudents()">
+                <option value="all">Todos Status</option>
+                <option value="success">Sucesso</option>
+                <option value="error">Erros</option>
+            </select>
+        </div>
+
+        <div class="students-grid" id="students-grid">
+            <!-- Cards via JS -->
+        </div>
+    </div>
+
+    <!-- Student Detail & Edit Modal -->
+    <div class="modal" id="student-modal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal()">&times;</button>
+            
+            <div class="modal-header">
+                <div>
+                    <h2 class="modal-title" id="modal-name">Nome do Aluno</h2>
+                    <p id="modal-email" style="color: var(--gray-600);"></p>
+                </div>
+                <div class="modal-grade" id="modal-grade">0.0</div>
+            </div>
+
+            <div class="modal-body" id="modal-view-content">
+                <div>
+                    <div class="modal-section">
+                        <h3>📊 Critérios de Avaliação</h3>
+                        <ul class="criteria-list" id="modal-criteria"></ul>
+                    </div>
+
+                    <div class="modal-section">
+                        <h3>📜 Commits Recentes</h3>
+                        <div id="modal-commits-container"></div>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="modal-section">
+                        <h3>ℹ️ Detalhes Técnicos</h3>
+                        <div class="analysis-grid">
+                            <div class="analysis-item" id="modal-repo-status">
+                                <strong>Repo:</strong> <a id="modal-repo-link" target="_blank">Link</a>
+                            </div>
+                            <div class="analysis-item" id="modal-status-item">
+                                <strong>Status:</strong> <span id="modal-status-text"></span>
+                            </div>
+                        </div>
+                        <div style="font-size: 0.9rem; line-height: 1.8;">
+                            <p><strong>Commits:</strong> <span id="modal-commits-count">0</span></p>
+                            <p><strong>main.py:</strong> <span id="modal-main-exists"></span></p>
+                            <p><strong>diagram.json:</strong> <span id="modal-diag-exists"></span></p>
+                            <p><strong>GitHub Actions:</strong> <span id="modal-actions-exists"></span></p>
+                        </div>
+                    </div>
+
+                    <div class="modal-section">
+                        <h3>✅ Pontos da Análise</h3>
+                        <div id="modal-analysis-content" style="font-size: 0.9rem;"></div>
+                    </div>
+
+                    <div id="professor-note-section" class="modal-section" style="display: none; background: #fffbeb; padding: 1rem; border-radius: 0.5rem; border: 1px solid #fef3c7;">
+                        <h3>📝 Nota do Professor</h3>
+                        <p id="modal-professor-comment" style="font-style: italic; color: #92400e;"></p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="action-buttons" style="display: flex; gap: 1rem; margin-top: 2rem; border-top: 1px solid var(--gray-200); padding-top: 1.5rem;">
+                <button class="btn btn-primary" style="flex: 1;" onclick="toggleEdit()">✏️ Editar Nota e Conteúdo</button>
+                <a class="btn btn-secondary" id="btn-github" target="_blank" style="flex: 1;">🌐 GitHub</a>
+                <a class="btn btn-secondary" id="btn-report" target="_blank" style="flex: 1;">📄 Relatório</a>
+            </div>
+
+            <!-- Edit Form (Hidden by default) -->
+            <div id="edit-form" class="edit-form">
+                <h3 style="margin-bottom: 1.5rem;">Edição de Avaliação</h3>
+                <div style="display: grid; grid-template-columns: 1fr 2fr; gap: 1.5rem;">
+                    <div class="form-group">
+                        <label>Nota Manual (0-100)</label>
+                        <input type="number" id="edit-manual-grade" min="0" max="100" step="0.1">
+                    </div>
+                    <div class="form-group">
+                        <label>Comentário do Professor</label>
+                        <textarea id="edit-professor-comment" placeholder="Feedback para o aluno..."></textarea>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>README.md Manual (Sobrescreve extração automática)</label>
+                    <textarea id="edit-readme" class="code-editor" placeholder="Cole o README aqui..."></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label>main.py Manual (Sobrescreve extração automática)</label>
+                    <textarea id="edit-main-py" class="code-editor" placeholder="Cole o main.py aqui..."></textarea>
+                </div>
+
+                <div style="display: flex; gap: 1rem; justify-content: flex-end;">
+                    <button class="btn btn-secondary" onclick="toggleEdit()">Cancelar</button>
+                    <button class="btn btn-success" onclick="saveStudentChanges()">💾 Salvar Alterações</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="toast" class="toast"></div>
+
+    <script>
+        let students = [];
+        let currentStudent = null;
+
+        async function loadData() {
+            try {
+                const res = await fetch('/api/students');
+                students = await res.json();
+                updateStats();
+                renderStudents(students);
+            } catch (e) {
+                console.error("Erro ao carregar dados:", e);
+                showToast("Erro ao carregar dados do servidor.");
+            }
+        }
+
+        function updateStats() {
+            const successStudents = students.filter(s => s.status === 'sucesso');
+            const total = students.length;
+            const avg = successStudents.length > 0 
+                ? successStudents.reduce((acc, s) => acc + s.nota_final, 0) / successStudents.length 
+                : 0;
+            const approved = students.filter(s => s.nota_final >= 70).length;
+
+            document.getElementById('total-students').textContent = total;
+            document.getElementById('avg-grade').textContent = avg.toFixed(1);
+            document.getElementById('approved-count').textContent = approved;
+            document.getElementById('sub-header').textContent = `Processados ${total} alunos`;
+        }
+
+        function getGradeClass(grade) {
+            if (grade >= 90) return 'grade-excellent';
+            if (grade >= 70) return 'grade-good';
+            if (grade >= 50) return 'grade-average';
+            return 'grade-poor';
+        }
+
+        function renderStudents(toRender) {
+            const grid = document.getElementById('students-grid');
+            grid.innerHTML = toRender.map(s => `
+                <div class="student-card" onclick="openModal('${s.nome}')">
+                    <div class="student-header">
+                        <div class="student-name">${s.nome}</div>
+                        <div class="grade-badge ${getGradeClass(s.nota_final)}">${s.nota_final.toFixed(1)}</div>
+                    </div>
+                    <div class="student-info">
+                        <p>📧 ${s.email || 'N/A'}</p>
+                        <p>Status: <span class="status-badge ${s.status === 'sucesso' ? 'status-success' : 'status-error'}">${s.status}</span></p>
+                    </div>
+                    <div class="criteria-grid">
+                        <div class="criterion"><div class="criterion-value">${s.criterios?.logica_firmware?.score || 0}</div><div class="criterion-label">Lógica</div></div>
+                        <div class="criterion"><div class="criterion-value">${s.criterios?.metrica_wokwi?.score || 0}</div><div class="criterion-label">Wokwi</div></div>
+                        <div class="criterion"><div class="criterion-value">${s.criterios?.ci_cd?.score || 0}</div><div class="criterion-label">CI/CD</div></div>
+                        <div class="criterion"><div class="criterion-value">${s.criterios?.documentacao?.score || 0}</div><div class="criterion-label">Docs</div></div>
+                        <div class="criterion"><div class="criterion-value">${s.criterios?.estrutura?.score || 0}</div><div class="criterion-label">Estrut.</div></div>
+                    </div>
+                    <button class="btn btn-edit" onclick="event.stopPropagation(); openModal('${s.nome}'); toggleEdit();">✏️ Editar Avaliação</button>
+                    ${s.tem_avaliacao_manual ? '<div style="margin-top: 1rem; font-size: 0.75rem; color: var(--warning); font-weight: bold;">📝 Nota Manual Aplicada</div>' : ''}
+                </div>
+            `).join('');
+        }
+
+        function openModal(name) {
+            const s = students.find(x => x.nome === name);
+            if (!s) return;
+            currentStudent = s;
+
+            document.getElementById('modal-name').textContent = s.nome;
+            document.getElementById('modal-email').textContent = s.email || '';
+            document.getElementById('modal-grade').textContent = s.nota_final.toFixed(1);
+            document.getElementById('modal-grade').className = 'modal-grade ' + getGradeClass(s.nota_final);
+            
+            // Criteria
+            const criteria = [
+                { id: 'logica_firmware', name: 'Lógica', max: 30 },
+                { id: 'metrica_wokwi', name: 'Wokwi', max: 20 },
+                { id: 'ci_cd', name: 'CI/CD', max: 25 },
+                { id: 'documentacao', name: 'Docs', max: 10 },
+                { id: 'estrutura', name: 'Estrutura', max: 10 }
+            ];
+
+            document.getElementById('modal-criteria').innerHTML = criteria.map(c => {
+                const data = s.criterios?.[c.id] || {};
+                const score = data.score || 0;
+                const feedback = data.feedback_detalhado || data.feedback || 'Sem feedback';
+                return `
+                    <li class="criterion-item">
+                        <div class="criterion-header" onclick="this.nextElementSibling.style.display = this.nextElementSibling.style.display === 'none' ? 'block' : 'none'">
+                            <span class="criterion-name">${c.name}</span>
+                            <span class="criterion-score" style="background: ${score/c.max >= 0.7 ? 'var(--success)' : 'var(--warning)'}; color: white;">${score}/${c.max}</span>
+                        </div>
+                        <div class="criterion-feedback" style="display: none;">${feedback}</div>
+                    </li>
+                `;
+            }).join('');
+
+            // Commits
+            const commits = s.commits_detalhados || s.commits || [];
+            document.getElementById('modal-commits-container').innerHTML = commits.length > 0 
+                ? `<ul class="commits-list">${commits.slice(0, 5).map(c => `
+                    <li class="commit-item">
+                        <div class="commit-hash">${typeof c === 'string' ? c.split(' ')[0] : c.hash}</div>
+                        <div>${typeof c === 'string' ? c.split(' ').slice(1).join(' ') : c.message}</div>
+                    </li>`).join('')}</ul>`
+                : '<p style="color: var(--gray-600);">Nenhum commit encontrado</p>';
+            
+            document.getElementById('modal-commits-count').textContent = commits.length;
+
+            // Links
+            document.getElementById('modal-repo-link').href = s.github_url || '#';
+            document.getElementById('btn-github').href = s.github_url || '#';
+            const fileName = s.nome.replace(/[^a-zA-Z0-9]/g, '_');
+            document.getElementById('btn-report').href = `relatorios/${fileName}_relatorio.md`;
+
+            // Status
+            document.getElementById('modal-status-text').textContent = s.status;
+            document.getElementById('modal-status-item').className = 'analysis-item ' + (s.status === 'sucesso' ? 'positive' : 'warning');
+            document.getElementById('modal-main-exists').textContent = s.main_py_exists ? '✅' : '❌';
+            document.getElementById('modal-diag-exists').textContent = s.diagram_json_exists ? '✅' : '❌';
+            document.getElementById('modal-actions-exists').textContent = s.github_actions_exists ? '✅' : '❌';
+
+            // Analysis
+            const analise = s.analise_projeto || {};
+            let analysisHtml = '';
+            if (analise.pontos_fortes?.length) {
+                analysisHtml += '<strong>Pontos Fortes:</strong><ul>' + analise.pontos_fortes.map(p => `<li>${p}</li>`).join('') + '</ul>';
+            }
+            if (analise.pontos_melhoria?.length) {
+                analysisHtml += '<br><strong>Melhorias:</strong><ul>' + analise.pontos_melhoria.map(p => `<li>${p}</li>`).join('') + '</ul>';
+            }
+            document.getElementById('modal-analysis-content').innerHTML = analysisHtml || 'Sem análise detalhada';
+
+            // Professor Comment
+            const profNote = document.getElementById('professor-note-section');
+            if (s.comentario_professor) {
+                profNote.style.display = 'block';
+                document.getElementById('modal-professor-comment').textContent = s.comentario_professor;
+            } else {
+                profNote.style.display = 'none';
+            }
+
+            // Reset Edit Form
+            document.getElementById('edit-form').classList.remove('active');
+            document.getElementById('modal-view-content').style.display = 'grid';
+            
+            document.getElementById('student-modal').classList.add('active');
+        }
+
+        function closeModal() {
+            document.getElementById('student-modal').classList.remove('active');
+        }
+
+        function toggleEdit() {
+            const form = document.getElementById('edit-form');
+            const view = document.getElementById('modal-view-content');
+            const isEditing = form.classList.toggle('active');
+            view.style.display = isEditing ? 'none' : 'grid';
+
+            if (isEditing) {
+                document.getElementById('edit-manual-grade').value = currentStudent.nota_manual || currentStudent.nota_final;
+                document.getElementById('edit-professor-comment').value = currentStudent.comentario_professor || '';
+                
+                // Fetch manual content
+                fetch(`/api/get_content?name=${encodeURIComponent(currentStudent.nome)}`)
+                    .then(r => r.json())
+                    .then(data => {
+                        document.getElementById('edit-readme').value = data.readme || '';
+                        document.getElementById('edit-main-py').value = data.main_py || '';
+                    });
+            }
+        }
+
+        async function saveStudentChanges() {
+            const name = currentStudent.nome;
+            const grade = parseFloat(document.getElementById('edit-manual-grade').value);
+            const comment = document.getElementById('edit-professor-comment').value;
+            const readme = document.getElementById('edit-readme').value;
+            const main_py = document.getElementById('edit-main-py').value;
+
+            showToast("Salvando...");
+
+            try {
+                await fetch('/api/update_grade', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ name, grade, comment })
+                });
+
+                await fetch('/api/update_content', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ name, readme, main_py })
+                });
+
+                showToast("Dados salvos! Clique em 'Consolidar' para atualizar o ranking.");
+                toggleEdit();
+                loadData();
+            } catch (e) {
+                showToast("Erro ao salvar.");
+            }
+        }
+
+        async function consolidateAll() {
+            showToast("Consolidando dados e regerando dashboard... Isso pode levar alguns segundos.");
+            try {
+                const res = await fetch('/api/consolidate', { method: 'POST' });
+                if (res.ok) {
+                    showToast("Sucesso! Dashboard atualizado.");
+                    loadData();
+                } else {
+                    showToast("Erro na consolidação.");
+                }
+            } catch (e) {
+                showToast("Erro de conexão.");
+            }
+        }
+
+        function filterStudents() {
+            const search = document.getElementById('search').value.toLowerCase();
+            const grade = document.getElementById('grade-filter').value;
+            const status = document.getElementById('status-filter').value;
+
+            const filtered = students.filter(s => {
+                const matchSearch = s.nome.toLowerCase().includes(search);
+                let matchGrade = true;
+                if (grade === 'excellent') matchGrade = s.nota_final >= 90;
+                else if (grade === 'good') matchGrade = s.nota_final >= 70 && s.nota_final < 90;
+                else if (grade === 'average') matchGrade = s.nota_final >= 50 && s.nota_final < 70;
+                else if (grade === 'poor') matchGrade = s.nota_final < 50;
+
+                const matchStatus = status === 'all' || (status === 'success' ? s.status === 'sucesso' : s.status !== 'sucesso');
+                
+                return matchSearch && matchGrade && matchStatus;
+            });
+
+            renderStudents(filtered);
+        }
+
+        function showToast(msg) {
+            const t = document.getElementById('toast');
+            t.textContent = msg;
+            t.style.display = 'block';
+            setTimeout(() => t.style.display = 'none', 4000);
+        }
+
+        loadData();
+    </script>
+</body>
+</html>

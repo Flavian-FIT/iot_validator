@@ -9,9 +9,10 @@ Este pipeline processa as submissões de alunos do processo seletivo de IoT e ge
 ```
 /workspace/resultado_validacao/
 ├── 00_run_all.py                    # Script mestre (executa tudo)
-├── server_interativo.py             # NOVO: Servidor do Dashboard Interativo ⭐
-├── dashboard_interativo.html        # NOVO: Interface do Dashboard Interativo ⭐
-├── gerar_dashboard_completo.py      # Pipeline completo (recomendado)
+├── server_interativo.py             # Servidor do Dashboard Integrado ⭐
+├── dashboard_integrado.html         # NOVO: Interface Integrada (Visualização + Edição) ⭐
+├── dashboard_interativo.html        # Interface de Edição (Legada)
+├── gerar_dashboard_completo.py      # Pipeline completo (Usa o Dashboard Integrado)
 ├── extrair_commits.py               # Fase 1: Extrai commits
 ├── processar_dados_completos.py     # Fase 2: Processa dados
 ├── gerar_feedbacks_llm.py           # Fase 3: Gera feedbacks
@@ -91,9 +92,9 @@ python3 gerar_dashboard_final.py
 - `avaliacoes_melhoradas.json` - Com melhorias e ranking
 - `avaliacoes_completas.json` - JSON consolidado final
 
-## 🌐 Dashboard Interativo (Modo Edição)
+## 🌐 Dashboard Integrado (Visualização + Edição)
 
-Para visualizar os alunos e **adicionar notas ou conteúdos manualmente** via interface web:
+Para visualizar os alunos com detalhes completos e **adicionar notas ou conteúdos manualmente** na mesma interface:
 
 ```bash
 cd /workspace/resultado_validacao
@@ -102,9 +103,10 @@ python3 server_interativo.py
 Acesse: `http://localhost:8000`
 
 Recursos:
-- ✅ Edição de notas manuais e comentários.
-- ✅ Inserção de README e código main.py.
-- ✅ Botão de consolidação automática.
+- ✅ **Interface Unificada**: Visualize commits, feedbacks e análise técnica.
+- ✅ **Edição Direta**: Botão de edição em cada card e dentro do modal.
+- ✅ **Sobrescrita de Conteúdo**: Insira README e código main.py manualmente.
+- ✅ **Consolidação Total**: Botão para regerar o pipeline completo e atualizar o ranking.
 
 ---
 

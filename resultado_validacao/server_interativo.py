@@ -13,10 +13,11 @@ RESULTADO_PATH = "/workspace/resultado_validacao"
 class DashboardHandler(http.server.SimpleHTTPRequestHandler):
     def do_GET(self):
         if self.path == '/':
-            self.path = '/dashboard_interativo.html'
+            self.path = '/dashboard_integrado.html'
         
         if self.path == '/api/students':
-            self.send_json_file('avaliacoes_completas.json')
+            # Use avaliacoes_melhoradas.json as it's the most complete
+            self.send_json_file('avaliacoes_melhoradas.json')
             return
         
         if self.path.startswith('/api/get_content'):
@@ -133,10 +134,9 @@ class DashboardHandler(http.server.SimpleHTTPRequestHandler):
 
     def run_consolidation(self):
         try:
-            # 1. Consolidar avaliações
-            subprocess.run(['python3', 'consolidar_avaliacoes.py'], cwd=RESULTADO_PATH, check=True)
-            # 2. Gerar dashboard final
-            subprocess.run(['python3', 'gerar_dashboard_final.py'], cwd=RESULTADO_PATH, check=True)
+            # Execute the full pipeline to ensure everything is updated
+            print("Running full pipeline consolidation...")
+            subprocess.run(['python3', 'gerar_dashboard_completo.py'], cwd=RESULTADO_PATH, check=True)
             return True
         except Exception as e:
             print(f"Error in consolidation: {e}")

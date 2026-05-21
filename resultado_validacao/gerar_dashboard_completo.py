@@ -22,6 +22,8 @@ from pathlib import Path
 from datetime import datetime
 
 RESULTADO_PATH = "/workspace/resultado_validacao"
+ARQUIVO_NOTAS_MANUAIS = "notas_manuais.json"
+ARQUIVO_CONTEUDOS_MANUAIS = "conteudos_manuais.json"
 COMMIT_INICIAL = "e560365081a8497c2e5dafba60c1430a7f31cdb7"
 DATA_LIMITE = "2026-05-04 23:59:59"
 
@@ -183,7 +185,7 @@ class PipelineValidacao:
         print("="*60)
         
         # Ordenar por nota (decrescente) e nome
-        self.dados.sort(key=lambda x: (-x['nota_final'], x['nome']))
+        self.dados.sort(key=lambda x: (-x.get('nota_final', 0), x['nome']))
         
         # Adicionar ranking
         for i, aluno in enumerate(self.dados):
@@ -199,9 +201,63 @@ class PipelineValidacao:
             self.stats['menor_nota'] = min(notas)
         
         print(f"✅ Melhorias aplicadas")
-        print(f"   Ranking: {self.dados[0]['nome']} (Nota: {self.dados[0]['nota_final']:.1f})")
         return True
-    
+
+    def aplicar_dados_manuais(self):
+        """Aplica notas e conteúdos manuais do professor"""
+        print("\n" + "="*60)
+        print("FASE EXTRA: Aplicando dados manuais")
+        print("="*60)
+        
+        # Carregar notas manuais
+        notas_manuais_path = os.path.join(self.resultado_path, ARQUIVO_NOTAS_MANUAIS)
+        notas_manuais = {}
+        if os.path.exists(notas_manuais_path):
+            with open(notas_manuais_path, 'r', encoding='utf-8') as f:
+                notas_manuais = json.load(f)
+            print(f"📝 {len(notas_manuais)} notas manuais carregadas")
+        
+        # Carregar conteúdos manuais
+        conteudos_manuais_path = os.path.join(self.resultado_path, ARQUIVO_CONTEUDOS_MANUAIS)
+        conteudos_manuais = {}
+        if os.path.exists(conteudos_manuais_path):
+            with open(conteudos_manuais_path, 'r', encoding='utf-8') as f:
+                conteudos_manuais = json.load(f)
+            print(f"📝 {len(conteudos_manuais)} conteúdos manuais carregadas")
+            
+        for aluno in self.dados:
+            nome = aluno['nome']
+            
+            # Nota Automática original
+            criterios = aluno.get('criterios', {})
+            nota_auto = sum(d.get('score', 0) for d in criterios.values())
+            aluno['nota_automatica'] = nota_auto
+            
+            # Aplicar nota manual se existir
+            if nome in notas_manuais:
+                dados_manuais = notas_manuais[nome]
+                aluno['tem_avaliacao_manual'] = True
+                aluno['nota_manual'] = dados_manuais.get('nota_final_manual', nota_auto)
+                aluno['comentario_professor'] = dados_manuais.get('comentario', '')
+                aluno['nota_final'] = aluno['nota_manual']
+                print(f"✓ {nome}: Nota Manual {aluno['nota_manual']:.1f}")
+            else:
+                aluno['tem_avaliacao_manual'] = False
+                aluno['nota_final'] = nota_auto
+                
+            # Aplicar conteúdo manual se existir
+            if nome in conteudos_manuais:
+                c_manuais = conteudos_manuais[nome]
+                if 'readme' in c_manuais and c_manuais['readme'].get('conteudo'):
+                    aluno['readme_content'] = c_manuais['readme']['conteudo']
+                    aluno['manual_readme'] = True
+                if 'main_py' in c_manuais and c_manuais['main_py'].get('conteudo'):
+                    aluno['main_py_content'] = c_manuais['main_py']['conteudo']
+                    aluno['manual_main_py'] = True
+                    aluno['main_py_exists'] = True
+        
+        return True
+
     def consolidar_json(self):
         """Consolida dados em JSON para dashboard"""
         print("\n" + "="*60)
@@ -222,8 +278,11 @@ class PipelineValidacao:
         print("FASE 6: Gerando dashboard")
         print("="*60)
         
-        # Ler template HTML
-        template_file = os.path.join(self.resultado_path, 'dashboard_completo.html')
+        # Ler template HTML (usar o integrado)
+        template_file = os.path.join(self.resultado_path, 'dashboard_integrado.html')
+        if not os.path.exists(template_file):
+            template_file = os.path.join(self.resultado_path, 'dashboard_completo.html')
+            
         with open(template_file, 'r', encoding='utf-8') as f:
             html_lines = f.readlines()
         
@@ -372,6 +431,7 @@ class PipelineValidacao:
         self.extrair_commits()
         self.processar_dados_completos()
         self.gerar_feedbacks()
+        self.aplicar_dados_manuais()
         self.aplicar_melhorias()
         self.consolidar_json()
         self.salvar_resultados()
