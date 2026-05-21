@@ -17,8 +17,8 @@ class DashboardHandler(http.server.SimpleHTTPRequestHandler):
             self.path = '/dashboard_integrado.html'
         
         if self.path == '/api/students':
-            # Use avaliacoes_melhoradas.json as it's the most complete
-            self.send_json_file('avaliacoes_melhoradas.json')
+            # Serve merged data on the fly
+            self.send_students_data()
             return
         
         if self.path.startswith('/api/get_content'):
@@ -81,6 +81,60 @@ class DashboardHandler(http.server.SimpleHTTPRequestHandler):
         self.send_header('Content-type', 'application/json')
         self.end_headers()
         self.wfile.write(json.dumps(data).encode())
+
+    def send_students_data(self):
+        # 1. Load the most recent fully processed data
+        path = os.path.join(RESULTADO_PATH, 'avaliacoes_melhoradas.json')
+        if not os.path.exists(path):
+            path = os.path.join(RESULTADO_PATH, 'avaliacoes_com_feedback.json')
+        
+        students = []
+        if os.path.exists(path):
+            with open(path, 'r', encoding='utf-8') as f:
+                students = json.load(f)
+        
+        # 2. Patch with latest manual notes
+        notas_manuais = self.load_json('notas_manuais.json', {})
+        conteudos_manuais = self.load_json('conteudos_manuais.json', {})
+        
+        for aluno in students:
+            nome = aluno['nome']
+            
+            # Apply latest manual notes/checklist/criterios
+            if nome in notas_manuais:
+                dados_manuais = notas_manuais[nome]
+                aluno['tem_avaliacao_manual'] = True
+                
+                # Recalculate automatic grade based on base criteria scores
+                criterios = aluno.get('criterios', {})
+                nota_auto = sum(d.get('score', 0) for crit_id, d in criterios.items() if not d.get('is_manual'))
+                
+                aluno['nota_manual'] = dados_manuais.get('nota_final_manual', aluno.get('nota_final'))
+                aluno['comentario_professor'] = dados_manuais.get('comentario', aluno.get('comentario_professor'))
+                aluno['checklist_manual'] = dados_manuais.get('checklist', aluno.get('checklist_manual', {}))
+                aluno['criterios_manuais'] = dados_manuais.get('criterios', aluno.get('criterios_manuais', {}))
+                
+                # Patch criteria scores
+                if aluno['criterios_manuais']:
+                    for crit_id, manual_score in aluno['criterios_manuais'].items():
+                        if crit_id in criterios:
+                            criterios[crit_id]['score'] = manual_score
+                            criterios[crit_id]['is_manual'] = True
+                
+                aluno['nota_final'] = aluno['nota_manual']
+            
+            # Apply latest manual content
+            if nome in conteudos_manuais:
+                c_manuais = conteudos_manuais[nome]
+                if 'readme' in c_manuais and c_manuais['readme'].get('conteudo'):
+                    aluno['readme_content'] = c_manuais['readme']['conteudo']
+                    aluno['manual_readme'] = True
+                if 'main_py' in c_manuais and c_manuais['main_py'].get('conteudo'):
+                    aluno['main_py_content'] = c_manuais['main_py']['conteudo']
+                    aluno['manual_main_py'] = True
+                    aluno['main_py_exists'] = True
+
+        self.send_json(students)
 
     def send_json_file(self, filename):
         path = os.path.join(RESULTADO_PATH, filename)

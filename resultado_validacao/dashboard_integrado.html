@@ -664,6 +664,13 @@
                 // Silent refresh of data in the background
                 const res = await fetch('/api/students');
                 students = await res.json();
+                
+                // Update currentStudent reference if modal still open
+                if (currentStudent) {
+                    const updated = students.find(s => s.nome === currentStudent.nome);
+                    if (updated) currentStudent = updated;
+                }
+                
                 updateStats();
             } catch (e) {
                 statusLabel.textContent = 'Error!';
