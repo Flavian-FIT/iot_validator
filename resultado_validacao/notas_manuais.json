@@ -3,5 +3,43 @@
     "nota_final_manual": 88,
     "comentario": "",
     "data_avaliacao": "2026-05-21T14:18:54.323749"
+  },
+  "Riquelme Jatay Ribeiro Scarcela Bezerra_191": {
+    "nota_final_manual": 51,
+    "comentario": "",
+    "checklist": {
+      "firmware": true,
+      "wokwi": false,
+      "cicd": false,
+      "docs": false,
+      "structure": false
+    },
+    "criterios": {
+      "logica_firmware": 0,
+      "metrica_wokwi": 20,
+      "ci_cd": 25,
+      "documentacao": 0,
+      "estrutura": 6
+    },
+    "data_avaliacao": "2026-05-21T16:38:11.466164"
+  },
+  "Ana Beatriz Batista Caitano_181": {
+    "nota_final_manual": 95,
+    "comentario": "",
+    "checklist": {
+      "firmware": false,
+      "wokwi": true,
+      "cicd": false,
+      "docs": false,
+      "structure": false
+    },
+    "criterios": {
+      "logica_firmware": 30,
+      "metrica_wokwi": 20,
+      "ci_cd": 25,
+      "documentacao": 10,
+      "estrutura": 10
+    },
+    "data_avaliacao": "2026-05-21T16:40:19.506709"
   }
 }

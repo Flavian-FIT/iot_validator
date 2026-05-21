@@ -488,8 +488,15 @@
 
             document.getElementById('modal-name').textContent = s.nome_exibicao || s.nome;
             document.getElementById('modal-email').textContent = s.email || '';
-            document.getElementById('modal-grade').textContent = s.nota_final.toFixed(1);
-            document.getElementById('modal-grade').className = 'modal-grade ' + getGradeClass(s.nota_final);
+            const notaAuto = s.nota_automatica !== undefined ? s.nota_automatica : s.nota_final;
+            const notaFinal = s.nota_final;
+
+            document.getElementById('modal-grade').innerHTML = `
+                <div style="display: flex; flex-direction: column; align-items: flex-end;">
+                    <div class="grade-badge ${getGradeClass(notaFinal)}">${notaFinal.toFixed(1)}</div>
+                    <div style="font-size: 0.8rem; color: var(--gray-600); margin-top: 0.25rem;">Auto: ${notaAuto.toFixed(1)}</div>
+                </div>
+            `;
             
             // Criteria
             const criteria = [
@@ -504,19 +511,25 @@
 
             document.getElementById('modal-criteria').innerHTML = criteria.map(c => {
                 const data = s.criterios?.[c.id] || {};
-                const score = data.score || 0;
+                const scoreAuto = data.score_auto !== undefined ? data.score_auto : (data.score || 0);
+                const scoreCurrent = data.score || 0;
                 const feedback = data.feedback_detalhado || data.feedback || 'Sem feedback';
-                const isManual = !!manualCriterios[c.id];
+                const isManual = !!(s.criterios_manuais && s.criterios_manuais[c.id] !== undefined);
                 
                 return `
                     <li class="criterion-item">
                         <div class="criterion-header" onclick="this.nextElementSibling.style.display = this.nextElementSibling.style.display === 'none' ? 'block' : 'none'">
-                            <span class="criterion-name">${c.name} ${isManual ? '✏️' : ''}</span>
-                            <div style="display: flex; align-items: center; gap: 0.5rem;" onclick="event.stopPropagation()">
-                                <input type="number" class="manual-crit-input" data-crit="${c.id}" value="${score}" max="${c.max}" min="0" step="0.5" 
-                                    style="width: 50px; padding: 2px 5px; border-radius: 4px; border: 1px solid var(--gray-300); font-weight: bold; text-align: center;"
-                                    onchange="calculateTotalFromCriteria()">
-                                <span class="criterion-score" style="background: ${score/c.max >= 0.7 ? 'var(--success)' : 'var(--warning)'}; color: white;">/ ${c.max}</span>
+                            <span class="criterion-name">${c.name}</span>
+                            <div style="display: flex; align-items: center; gap: 0.75rem;" onclick="event.stopPropagation()">
+                                <div style="font-size: 0.8rem; color: var(--gray-600); display: flex; flex-direction: column; align-items: flex-end;">
+                                    <span>Auto: <strong>${scoreAuto}</strong></span>
+                                </div>
+                                <div style="display: flex; align-items: center; gap: 0.25rem;">
+                                    <input type="number" class="manual-crit-input" data-crit="${c.id}" value="${scoreCurrent}" max="${c.max}" min="0" step="0.5" 
+                                        style="width: 55px; padding: 2px 5px; border-radius: 4px; border: 2px solid ${isManual ? 'var(--warning)' : 'var(--gray-300)'}; font-weight: bold; text-align: center;"
+                                        onchange="calculateTotalFromCriteria()">
+                                    <span style="font-size: 0.8rem; color: var(--gray-600); font-weight: bold;">/ ${c.max}</span>
+                                </div>
                             </div>
                         </div>
                         <div class="criterion-feedback" style="display: none;">${feedback}</div>
@@ -613,7 +626,14 @@
                 total += parseFloat(input.value || 0);
             });
             document.getElementById('main-edit-manual-grade').value = total.toFixed(1);
-            document.getElementById('modal-grade').textContent = total.toFixed(1);
+            
+            const notaAuto = currentStudent.nota_automatica !== undefined ? currentStudent.nota_automatica : total;
+            document.getElementById('modal-grade').innerHTML = `
+                <div style="display: flex; flex-direction: column; align-items: flex-end;">
+                    <div class="grade-badge ${getGradeClass(total)}">${total.toFixed(1)}</div>
+                    <div style="font-size: 0.8rem; color: var(--gray-600); margin-top: 0.25rem;">Auto: ${notaAuto.toFixed(1)}</div>
+                </div>
+            `;
             autoSave();
         }
 

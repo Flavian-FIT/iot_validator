@@ -105,9 +105,11 @@ class DashboardHandler(http.server.SimpleHTTPRequestHandler):
                 dados_manuais = notas_manuais[nome]
                 aluno['tem_avaliacao_manual'] = True
                 
-                # Recalculate automatic grade based on base criteria scores
+                # Ensure each criterion has score_auto before patching
                 criterios = aluno.get('criterios', {})
-                nota_auto = sum(d.get('score', 0) for crit_id, d in criterios.items() if not d.get('is_manual'))
+                for crit_id, d in criterios.items():
+                    if 'score_auto' not in d:
+                        d['score_auto'] = d.get('score', 0)
                 
                 aluno['nota_manual'] = dados_manuais.get('nota_final_manual', aluno.get('nota_final'))
                 aluno['comentario_professor'] = dados_manuais.get('comentario', aluno.get('comentario_professor'))
@@ -118,10 +120,19 @@ class DashboardHandler(http.server.SimpleHTTPRequestHandler):
                 if aluno['criterios_manuais']:
                     for crit_id, manual_score in aluno['criterios_manuais'].items():
                         if crit_id in criterios:
-                            criterios[crit_id]['score'] = manual_score
-                            criterios[crit_id]['is_manual'] = True
+                            aluno['criterios'][crit_id]['score_manual'] = manual_score
+                            aluno['criterios'][crit_id]['score'] = manual_score
+                            aluno['criterios'][crit_id]['is_manual'] = True
                 
                 aluno['nota_final'] = aluno['nota_manual']
+            else:
+                # Ensure score_auto exists even if no manual note yet
+                criterios = aluno.get('criterios', {})
+                for crit_id, d in criterios.items():
+                    if 'score_auto' not in d:
+                        d['score_auto'] = d.get('score', 0)
+                    d['score'] = d['score_auto']
+                    d['is_manual'] = False
             
             # Apply latest manual content
             if nome in conteudos_manuais:

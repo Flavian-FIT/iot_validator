@@ -337,9 +337,13 @@ class PipelineValidacao:
         for aluno in self.dados:
             nome = aluno['nome']
             
-            # Nota Automática original
+            # Garantir que todos os critérios tenham score_auto
             criterios = aluno.get('criterios', {})
-            nota_auto = sum(d.get('score', 0) for d in criterios.values())
+            for crit_id, crit_data in criterios.items():
+                if 'score_auto' not in crit_data:
+                    crit_data['score_auto'] = crit_data.get('score', 0)
+            
+            nota_auto = sum(d.get('score_auto', 0) for d in criterios.values())
             aluno['nota_automatica'] = nota_auto
             
             # Aplicar nota manual se existir
@@ -355,6 +359,7 @@ class PipelineValidacao:
                 if aluno['criterios_manuais']:
                     for crit_id, manual_score in aluno['criterios_manuais'].items():
                         if crit_id in aluno.get('criterios', {}):
+                            aluno['criterios'][crit_id]['score_manual'] = manual_score
                             aluno['criterios'][crit_id]['score'] = manual_score
                             aluno['criterios'][crit_id]['is_manual'] = True
                 
@@ -365,6 +370,10 @@ class PipelineValidacao:
                 aluno['checklist_manual'] = {}
                 aluno['criterios_manuais'] = {}
                 aluno['nota_final'] = nota_auto
+                # Resetar para auto se não for manual
+                for crit_data in criterios.values():
+                    crit_data['score'] = crit_data.get('score_auto', 0)
+                    crit_data['is_manual'] = False
                 
             # Aplicar conteúdo manual se existir
             if nome in conteudos_manuais:
