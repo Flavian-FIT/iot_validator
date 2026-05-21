@@ -9,6 +9,8 @@ Este pipeline processa as submissões de alunos do processo seletivo de IoT e ge
 ```
 /workspace/resultado_validacao/
 ├── 00_run_all.py                    # Script mestre (executa tudo)
+├── server_interativo.py             # NOVO: Servidor do Dashboard Interativo ⭐
+├── dashboard_interativo.html        # NOVO: Interface do Dashboard Interativo ⭐
 ├── gerar_dashboard_completo.py      # Pipeline completo (recomendado)
 ├── extrair_commits.py               # Fase 1: Extrai commits
 ├── processar_dados_completos.py     # Fase 2: Processa dados
@@ -89,9 +91,24 @@ python3 gerar_dashboard_final.py
 - `avaliacoes_melhoradas.json` - Com melhorias e ranking
 - `avaliacoes_completas.json` - JSON consolidado final
 
-## 🌐 Visualizar Dashboard
+## 🌐 Dashboard Interativo (Modo Edição)
 
-### Abrir Localmente
+Para visualizar os alunos e **adicionar notas ou conteúdos manualmente** via interface web:
+
+```bash
+cd /workspace/resultado_validacao
+python3 server_interativo.py
+```
+Acesse: `http://localhost:8000`
+
+Recursos:
+- ✅ Edição de notas manuais e comentários.
+- ✅ Inserção de README e código main.py.
+- ✅ Botão de consolidação automática.
+
+---
+
+## 🌐 Visualizar Dashboard (Estático)
 ```bash
 # Linux
 xdg-open /workspace/resultado_validacao/dashboard_final.html
