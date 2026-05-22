@@ -2,13 +2,18 @@
 """
 Script mestre para executar todo o pipeline de validação IoT
 Organiza a execução de todos os scripts em sequência
+Versão Reorganizada - Scripts em ./scripts/ e Dados em ./data/
 """
 import os
 import sys
 import subprocess
 from pathlib import Path
 
-RESULTADO_PATH = "/workspace/resultado_validacao"
+# Adicionar pasta raiz ao path para importar config.py
+ROOT_PATH = os.path.dirname(os.path.abspath(__file__))
+sys.path.append(ROOT_PATH)
+
+import config
 
 scripts_order = [
     {
@@ -44,8 +49,8 @@ scripts_order = [
 ]
 
 def run_script(script_name):
-    """Executa um script Python e retorna o resultado"""
-    script_path = os.path.join(RESULTADO_PATH, script_name)
+    """Executa um script Python na pasta scripts/ e retorna o resultado"""
+    script_path = os.path.join(config.SCRIPTS_PATH, script_name)
     
     if not os.path.exists(script_path):
         print(f"❌ Script não encontrado: {script_path}")
@@ -56,12 +61,17 @@ def run_script(script_name):
     print(f"{'='*60}\n")
     
     try:
+        # Passar a pasta raiz para que os scripts encontrem config.py
+        env = os.environ.copy()
+        env["PYTHONPATH"] = ROOT_PATH + os.pathsep + env.get("PYTHONPATH", "")
+        
         result = subprocess.run(
             [sys.executable, script_path],
             capture_output=True,
             text=True,
             timeout=300,  # 5 minutos de timeout
-            cwd=RESULTADO_PATH
+            cwd=ROOT_PATH, # Executar da raiz para caminhos relativos funcionarem se não usarem config.py
+            env=env
         )
         
         if result.returncode == 0:
@@ -84,22 +94,12 @@ def run_script(script_name):
 
 def main():
     print("="*60)
-    print("PIPELINE DE VALIDAÇÃO IOT")
+    print("PIPELINE DE VALIDAÇÃO IOT (ORGANIZADO)")
     print("="*60)
-    print("\nEste script executa todo o pipeline de validação em sequência.")
-    print("Cada fase depende dos resultados da fase anterior.\n")
     
-    # Verificar pré-requisitos
-    print("Verificando pré-requisitos...")
-    required_files = [
-        'avaliacoes_com_feedback.json',
-        'repositorios_processados.json'
-    ]
-    
-    for file in required_files:
-        if not os.path.exists(os.path.join(RESULTADO_PATH, file)):
-            print(f"⚠️  Arquivo base não encontrado: {file}")
-            print("   Certifique-se de ter executado as fases iniciais primeiro.")
+    # Criar pastas se não existirem
+    os.makedirs(config.DATA_PATH, exist_ok=True)
+    os.makedirs(config.REPORTS_PATH, exist_ok=True)
     
     # Executar scripts em sequência
     results = []
@@ -119,7 +119,6 @@ def main():
         
         if not success:
             print(f"\n❌ Pipeline interrompido na fase {i}: {phase['name']}")
-            print("   Verifique os logs acima para detalhes.")
             return 1
     
     # Resumo final
@@ -127,25 +126,14 @@ def main():
     print("RESUMO DA EXECUÇÃO")
     print("="*60)
     
-    all_success = all(r['success'] for r in results)
-    
     for r in results:
         status = "✅" if r['success'] else "❌"
         print(f"{status} Fase {r['phase']}: {r['name']}")
     
-    if all_success:
+    if all(r['success'] for r in results):
         print("\n🎉 Pipeline concluído com sucesso!")
-        print(f"\n📁 Arquivos de saída:")
-        print(f"   - {RESULTADO_PATH}/avaliacoes_com_commits.json")
-        print(f"   - {RESULTADO_PATH}/avaliacoes_completo.json")
-        print(f"   - {RESULTADO_PATH}/avaliacoes_com_feedback.json")
-        print(f"   - {RESULTADO_PATH}/avaliacoes_melhoradas.json")
-        print(f"   - {RESULTADO_PATH}/avaliacoes_completas.json")
-        print(f"   - {RESULTADO_PATH}/dashboard_final.html")
-        print(f"\n🌐 Dashboard: file://{RESULTADO_PATH}/dashboard_final.html")
-    else:
-        print("\n❌ Algumas fases falharam. Verifique os logs.")
-        return 1
+        print(f"\n📁 Resultados disponíveis em: {config.DATA_PATH}")
+        print(f"🌐 Dashboard gerado em: {config.SAIDAS['dashboard']}")
     
     return 0
 

@@ -104,7 +104,8 @@ def extrair_secoes_relatorio(readme_content):
 def processar_aluno(dados_repositorio):
     """Processa um único aluno"""
     nome = dados_repositorio['nome']
-    repo_dir = f"/workspace/resultado_validacao/repos/{nome.replace('/', '_').replace(' ', '_')}"
+    base_path = os.path.dirname(os.path.abspath(__file__))
+    repo_dir = os.path.join(base_path, "repos", nome.replace('/', '_').replace(' ', '_'))
     
     resultado = {
         'nome': nome,
@@ -153,7 +154,8 @@ def processar_aluno(dados_repositorio):
     return resultado
 
 if __name__ == '__main__':
-    resultado_path = "/workspace/resultado_validacao"
+    base_path = os.path.dirname(os.path.abspath(__file__))
+    resultado_path = base_path
     
     # Carregar repositórios processados
     with open(f"{resultado_path}/repositorios_processados.json", "r", encoding="utf-8") as f:

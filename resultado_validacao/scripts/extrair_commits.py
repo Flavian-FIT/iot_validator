@@ -1,20 +1,25 @@
 #!/usr/bin/env python3
 """
-Extrair commits entre e560365081a8497c2e5dafba60c1430a7f31cdb7 e May 4, 2026
+Extrair commits entre commit inicial e data limite
+Versão Reorganizada - Usa config.py
 """
 import os
 import subprocess
 import json
+import sys
 from pathlib import Path
 
-COMMIT_INICIAL = "e560365081a8497c2e5dafba60c1430a7f31cdb7"
-DATA_LIMITE = "2026-05-04 23:59:59"
+# Adicionar pasta pai ao path para importar config.py
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+import config
 
 def get_all_commits_between(repo_path, start_commit, end_date):
     """
     Extrai todos os commits entre um commit específico e uma data
     """
     try:
+        # Salvar diretório atual
+        original_cwd = os.getcwd()
         os.chdir(repo_path)
         
         # Primeiro, verificar se o commit inicial existe neste repositório
@@ -44,6 +49,9 @@ def get_all_commits_between(repo_path, start_commit, end_date):
                     capture_output=True, text=True, timeout=10
                 )
         
+        # Voltar para o diretório original
+        os.chdir(original_cwd)
+
         if result.returncode == 0 and result.stdout.strip():
             commits = []
             for line in result.stdout.strip().split('\n'):
@@ -62,15 +70,19 @@ def get_all_commits_between(repo_path, start_commit, end_date):
     except Exception as e:
         print(f"Erro ao extrair commits: {e}")
         return []
-    finally:
-        os.chdir('/workspace/resultado_validacao')
 
 if __name__ == '__main__':
-    repos_path = "/workspace/resultado_validacao/repos"
-    resultado_path = "/workspace/resultado_validacao"
+    # Caminhos baseados no config.py
+    repos_path = config.REPOS_PATH
+    input_json = os.path.join(config.DATA_PATH, "avaliacoes_com_feedback.json")
+    output_json = os.path.join(config.DATA_PATH, "avaliacoes_com_commits.json")
     
     # Carregar dados existentes
-    with open(f"{resultado_path}/avaliacoes_com_feedback.json", "r", encoding="utf-8") as f:
+    if not os.path.exists(input_json):
+        print(f"❌ Arquivo de entrada não encontrado: {input_json}")
+        sys.exit(1)
+
+    with open(input_json, "r", encoding="utf-8") as f:
         alunos = json.load(f)
     
     print(f"Extraindo commits para {len(alunos)} alunos...")
@@ -82,7 +94,7 @@ if __name__ == '__main__':
         print(f"[{i+1}/{len(alunos)}] {nome}")
         
         if os.path.exists(repo_dir) and os.path.isdir(os.path.join(repo_dir, '.git')):
-            commits = get_all_commits_between(repo_dir, COMMIT_INICIAL, DATA_LIMITE)
+            commits = get_all_commits_between(repo_dir, config.COMMIT_INICIAL, config.DATA_LIMITE)
             aluno['commits_detalhados'] = commits
             aluno['total_commits'] = len(commits)
             print(f"  → {len(commits)} commits encontrados")
@@ -92,7 +104,7 @@ if __name__ == '__main__':
             print(f"  → Repositório não encontrado")
     
     # Salvar com commits atualizados
-    with open(f"{resultado_path}/avaliacoes_com_commits.json", "w", encoding="utf-8") as f:
+    with open(output_json, "w", encoding="utf-8") as f:
         json.dump(alunos, f, indent=2, ensure_ascii=False)
     
-    print(f"\nCommits extraídos e salvos em: avaliacoes_com_commits.json")
+    print(f"\n✅ Commits extraídos e salvos em: {output_json}")

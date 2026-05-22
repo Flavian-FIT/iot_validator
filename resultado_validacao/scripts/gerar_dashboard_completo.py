@@ -21,7 +21,7 @@ import subprocess
 from pathlib import Path
 from datetime import datetime
 
-RESULTADO_PATH = "/workspace/resultado_validacao"
+RESULTADO_PATH = os.path.dirname(os.path.abspath(__file__))
 ARQUIVO_NOTAS_MANUAIS = "notas_manuais.json"
 ARQUIVO_CONTEUDOS_MANUAIS = "conteudos_manuais.json"
 COMMIT_INICIAL = "e560365081a8497c2e5dafba60c1430a7f31cdb7"
@@ -118,7 +118,6 @@ class PipelineValidacao:
             
             if os.path.exists(repo_dir) and os.path.isdir(os.path.join(repo_dir, '.git')):
                 try:
-                    os.chdir(repo_dir)
                     # Usar range de commits: do COMMIT_INICIAL até o final (incluindo todas as branches)
                     # Filtrando pela data limite
                     range_spec = f"{COMMIT_INICIAL}.."
@@ -126,14 +125,14 @@ class PipelineValidacao:
                     # --all garante que pegamos commits em qualquer branch
                     result = subprocess.run(
                         ['git', 'log', '--all', range_spec, f'--before="{DATA_LIMITE}"', '--pretty=format:%h|%an|%ae|%ar|%s'],
-                        capture_output=True, text=True, timeout=30
+                        capture_output=True, text=True, timeout=30, cwd=repo_dir
                     )
                     
                     if result.returncode != 0:
                         # Fallback se o range falhar (ex: COMMIT_INICIAL não encontrado)
                         result = subprocess.run(
                             ['git', 'log', '--all', f'--before="{DATA_LIMITE}"', '--pretty=format:%h|%an|%ae|%ar|%s'],
-                            capture_output=True, text=True, timeout=30
+                            capture_output=True, text=True, timeout=30, cwd=repo_dir
                         )
                     
                     if result.returncode == 0 and result.stdout.strip():
@@ -166,8 +165,6 @@ class PipelineValidacao:
                     aluno['commits_detalhados'] = []
                     aluno['total_commits'] = 0
                     print(f"Erro: {e}")
-                finally:
-                    os.chdir(self.resultado_path)
             else:
                 aluno['commits_detalhados'] = []
                 aluno['total_commits'] = 0

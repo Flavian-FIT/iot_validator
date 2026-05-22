@@ -60,6 +60,19 @@
         "Apenas um commit ou nenhum"
       ],
       "observacoes": []
+    },
+    "commits_detalhados": [],
+    "num_commits": 0,
+    "imagens": [
+      "https://github.com/user-attachments/assets/5d629626-513a-445c-ba0f-e5bb3e225187",
+      "https://github.com/user-attachments/assets/abbd331b-a005-4633-89c6-afd16acbe828"
+    ],
+    "artefatos_ia": [],
+    "analise_readme": {
+      "tamanho": 8319,
+      "tem_secoes": true,
+      "tem_codigo": true,
+      "tem_imagens": true
     }
   },
   {
@@ -123,6 +136,19 @@
         "Apenas um commit ou nenhum"
       ],
       "observacoes": []
+    },
+    "commits_detalhados": [],
+    "num_commits": 0,
+    "imagens": [
+      "https://github.com/user-attachments/assets/5d629626-513a-445c-ba0f-e5bb3e225187",
+      "https://github.com/user-attachments/assets/abbd331b-a005-4633-89c6-afd16acbe828"
+    ],
+    "artefatos_ia": [],
+    "analise_readme": {
+      "tamanho": 11832,
+      "tem_secoes": true,
+      "tem_codigo": true,
+      "tem_imagens": true
     }
   },
   {
@@ -186,6 +212,22 @@
         "Apenas um commit ou nenhum"
       ],
       "observacoes": []
+    },
+    "commits_detalhados": [],
+    "num_commits": 0,
+    "imagens": [
+      "https://github.com/user-attachments/assets/54547d9b-73a4-44f0-9d83-cae41c8efea3",
+      "https://github.com/user-attachments/assets/86dfe8db-120e-4852-9888-e25d82bcf82d",
+      "https://github.com/user-attachments/assets/903a7e83-9beb-46eb-9c6a-27d928594d0f",
+      "https://github.com/user-attachments/assets/0f7ec971-1ac0-44c2-b2a1-438b9d3b9825",
+      "https://github.com/user-attachments/assets/fce0e2ee-1189-41ce-835e-31b116f0b740"
+    ],
+    "artefatos_ia": [],
+    "analise_readme": {
+      "tamanho": 7327,
+      "tem_secoes": true,
+      "tem_codigo": false,
+      "tem_imagens": true
     }
   },
   {
@@ -249,7 +291,9 @@
         "Apenas um commit ou nenhum"
       ],
       "observacoes": []
-    }
+    },
+    "commits_detalhados": [],
+    "num_commits": 0
   },
   {
     "nome": "PEDRO HENRIQUE BEZERRA SIME├ГO_212",
@@ -312,6 +356,20 @@
         "Apenas um commit ou nenhum"
       ],
       "observacoes": []
+    },
+    "commits_detalhados": [],
+    "num_commits": 0,
+    "imagens": [
+      "https://github.com/user-attachments/assets/a8617d0a-5b43-4d91-8a7c-485d355c2875",
+      "https://github.com/user-attachments/assets/bb33e44f-20ae-4e61-88d9-dab21de65ac8",
+      "https://github.com/user-attachments/assets/2536dcf9-76a3-446a-aeff-946b6366e3fa"
+    ],
+    "artefatos_ia": [],
+    "analise_readme": {
+      "tamanho": 5771,
+      "tem_secoes": true,
+      "tem_codigo": true,
+      "tem_imagens": true
     }
   },
   {
@@ -375,6 +433,19 @@
         "Apenas um commit ou nenhum"
       ],
       "observacoes": []
+    },
+    "commits_detalhados": [],
+    "num_commits": 0,
+    "imagens": [
+      "https://github.com/user-attachments/assets/5d629626-513a-445c-ba0f-e5bb3e225187",
+      "https://github.com/user-attachments/assets/abbd331b-a005-4633-89c6-afd16acbe828"
+    ],
+    "artefatos_ia": [],
+    "analise_readme": {
+      "tamanho": 13679,
+      "tem_secoes": true,
+      "tem_codigo": true,
+      "tem_imagens": true
     }
   },
   {
@@ -438,31 +509,55 @@
         "Apenas um commit ou nenhum"
       ],
       "observacoes": []
+    },
+    "commits_detalhados": [],
+    "num_commits": 0,
+    "imagens": [],
+    "artefatos_ia": [],
+    "analise_readme": {
+      "tamanho": 9466,
+      "tem_secoes": true,
+      "tem_codigo": true,
+      "tem_imagens": false
     }
   },
   {
     "nome": "LUANN DE LIMA_220",
     "email": "luann.de.lima_220@aluno.com",
-    "github_url": "https://github.com/Lonalt/processoseletivoIoT-Lonnal",
-    "status": "erro_clone",
+    "github_url": "https://github.com/Lonalt/processoseletivoIoT-Lonnalt",
+    "status": "sucesso",
     "nota_final": 0,
     "criterios": {},
-    "commits": [],
+    "commits": [
+      "11d8e71 \tmodified:   README.md"
+    ],
     "resumo": "",
-    "readme_content": null,
-    "main_py_exists": false,
-    "diagram_json_exists": false,
-    "wokwi_toml_exists": false,
-    "github_actions_exists": false,
+    "readme_content": "# 📝 Relatório do Candidato: Sistema de Limpador Automatizado IoT\n\nEste documento detalha o desenvolvimento do sistema embarcado de monitoramento climático e atuação automática, desenvolvido para a etapa prática do processo seletivo Intensivo Maker | IoT.\n\n---\n\n### 👤 Identificação do Candidato\n\n*   **Nome completo:** LUANN ALVES PEREIRA DE LIMA\n*   **GitHub:** https://github.com/Lonalt\n\n---\n\n### 1️⃣ Visão Geral da Solução\n\nO projeto consiste em um sistema inteligente de segurança veicular ou residencial que utiliza sensores para detecção de umidade elevada (simulando chuva) e acionamento automático de um braço mecânico.\n*   **Objetivo:** Automatizar o acionamento de limpadores baseado em dados ambientais reais, reduzindo a necessidade de intervenção humana.\n*   **Funcionamento:** O dispositivo monitora constantemente o ambiente. Ao detectar umidade acima de 70%, o sistema ativa um servo motor e reporta o estado em tempo real para uma interface física (OLED) e uma plataforma de telemetria (MQTT).\n\n---\n\n### 2️⃣ Arquitetura do Sistema Embarcado\n\nA arquitetura lógica foi projetada para ser modular e resiliente, operando em um fluxo cíclico:\n\n*   **Fluxo Principal (`main.py`):**\n    1.  Inicialização de periféricos e protocolos de comunicação.\n    2.  Conexão à rede WiFi virtual do Wokwi.\n    3.  Loop infinito de monitoramento (leitura do sensor DHT22 a cada 2 segundos).\n    4.  Processamento lógico: se `Umidade > Threshold`, dispara a rotina de atuação do servo.\n    5.  Atualização da interface local (OLED) e envio de dados via MQTT para o Broker HiveMQ.\n*   **Temporizações:** Utilização de `time.sleep` para controle de frequência de amostragem e para suavização do movimento do servo motor.\n\n\n---\n\n### 3️⃣ Componentes Utilizados na Simulação\n\nO hardware foi estruturado no arquivo `diagram.json` com os seguintes componentes:\n\n*   **Microcontrolador ESP32:** Placa de desenvolvimento central com suporte a WiFi nativo.\n*   **Sensor DHT22 (Pino 4):** Medição digital de alta precisão de temperatura e umidade.\n*   **Servo Motor (Pino 23):** Atuador responsável pelo movimento físico do limpador (controlado via PWM).\n*   **Display OLED SSD1306 (I2C - Pinos 21/22):** Interface visual para exibir telemetria local e mensagens de status.\n\n---\n\n### 4️⃣ Decisões Técnicas Relevantes\n\n*   **Modularidade de Drivers:** Os drivers `ssd1306.py` e `umqtt/simple.py` foram isolados em uma pasta `lib/`, seguindo as melhores práticas de organização de sistemas embarcados para facilitar a portabilidade do projeto.\n*   **Configuração Centralizada:** Utilização de um dicionário `CONFIG` no `main.py` para gerenciar credenciais de rede e parâmetros de hardware em um único lugar.\n*   **Controle de Fluxo para CI:** Implementação de um comando `print(\"Teste\")` na primeira linha do programa para garantir a validação instantânea pelo workflow de integração contínua do GitHub Actions.\n*   **Robustez de Rede:** A função de telemetria foi envolvida em um bloco `try-except` para garantir que falhas de conexão MQTT não interrompam a lógica de atuação local (o limpador deve funcionar mesmo sem internet).\n\n---\n\n### 5️⃣ Resultados Obtidos\n\n*   **Validação de Hardware:** O circuito no Wokwi reflete todas as conexões necessárias para o funcionamento estável dos componentes I2C e PWM.\n*   **Lógica de Controle:** O sistema ativa o servo motor com precisão ao atingir o limiar de umidade configurado.\n*   **Telemetria:** Dados de temperatura e umidade são publicados corretamente no broker MQTT, permitindo monitoramento remoto.\n*   **Interface:** O display OLED fornece feedback instantâneo sobre o estado do \"Limpador\" (ATIVO/DESLIGADO).\n\n---\n\n### 6️⃣ Comentários Adicionais (Opcional)\n\n*   **Limitações:** Devido ao timeout estrito de 10 segundos em ambientes de CI, o movimento do servo e os intervalos de loop foram otimizados para garantir que o sistema inicie e reporte status rapidamente.\n*   **Aprendizado:** O desafio reforçou a importância de criar códigos \"auto-contidos\" através do uso de pastas de bibliotecas e configurações globais desacopladas da lógica de negócio.\n\n---",
+    "main_py_exists": true,
+    "diagram_json_exists": true,
+    "wokwi_toml_exists": true,
+    "github_actions_exists": true,
     "analise_projeto": {
-      "pontos_fortes": [],
+      "pontos_fortes": [
+        "Possui main.py implementado",
+        "Diagrama do Wokwi presente",
+        "Configuração do Wokwi (wokwi.toml) presente",
+        "GitHub Actions configurado"
+      ],
       "pontos_melhoria": [
-        "main.py ausente ou não encontrado",
-        "diagram.json ausente",
-        "GitHub Actions não configurado",
         "Apenas um commit ou nenhum"
       ],
       "observacoes": []
+    },
+    "commits_detalhados": [],
+    "num_commits": 0,
+    "imagens": [],
+    "artefatos_ia": [],
+    "analise_readme": {
+      "tamanho": 4094,
+      "tem_secoes": true,
+      "tem_codigo": false,
+      "tem_imagens": false
     }
   },
   {
@@ -526,6 +621,16 @@
         "Apenas um commit ou nenhum"
       ],
       "observacoes": []
+    },
+    "commits_detalhados": [],
+    "num_commits": 0,
+    "imagens": [],
+    "artefatos_ia": [],
+    "analise_readme": {
+      "tamanho": 5208,
+      "tem_secoes": true,
+      "tem_codigo": false,
+      "tem_imagens": false
     }
   },
   {
@@ -589,6 +694,16 @@
         "Apenas um commit ou nenhum"
       ],
       "observacoes": []
+    },
+    "commits_detalhados": [],
+    "num_commits": 0,
+    "imagens": [],
+    "artefatos_ia": [],
+    "analise_readme": {
+      "tamanho": 2920,
+      "tem_secoes": true,
+      "tem_codigo": false,
+      "tem_imagens": false
     }
   },
   {
@@ -652,6 +767,25 @@
         "Apenas um commit ou nenhum"
       ],
       "observacoes": []
+    },
+    "commits_detalhados": [],
+    "num_commits": 0,
+    "imagens": [
+      "https://github.com/user-attachments/assets/5d629626-513a-445c-ba0f-e5bb3e225187",
+      "https://github.com/user-attachments/assets/abbd331b-a005-4633-89c6-afd16acbe828"
+    ],
+    "artefatos_ia": [
+      {
+        "tipo": "Texto_generico",
+        "descricao": "Frase genérica detectada: \"tecnologia de ponta\"",
+        "severidade": "baixa"
+      }
+    ],
+    "analise_readme": {
+      "tamanho": 13227,
+      "tem_secoes": true,
+      "tem_codigo": true,
+      "tem_imagens": true
     }
   },
   {
@@ -715,6 +849,16 @@
         "Apenas um commit ou nenhum"
       ],
       "observacoes": []
+    },
+    "commits_detalhados": [],
+    "num_commits": 0,
+    "imagens": [],
+    "artefatos_ia": [],
+    "analise_readme": {
+      "tamanho": 6769,
+      "tem_secoes": true,
+      "tem_codigo": false,
+      "tem_imagens": false
     }
   },
   {
@@ -778,6 +922,18 @@
         "Apenas um commit ou nenhum"
       ],
       "observacoes": []
+    },
+    "commits_detalhados": [],
+    "num_commits": 0,
+    "imagens": [
+      "https://github.com/user-attachments/assets/ad554375-6485-44b0-bbed-4c04f375caff"
+    ],
+    "artefatos_ia": [],
+    "analise_readme": {
+      "tamanho": 12653,
+      "tem_secoes": true,
+      "tem_codigo": true,
+      "tem_imagens": true
     }
   },
   {
@@ -841,6 +997,20 @@
         "Apenas um commit ou nenhum"
       ],
       "observacoes": []
+    },
+    "commits_detalhados": [],
+    "num_commits": 0,
+    "imagens": [
+      "https://img.shields.io/badge/Python-MicroPython-3776AB?logo=python&logoColor=white",
+      "https://img.shields.io/badge/ESP32-DevKitC-E7352C?logo=espressif&logoColor=white",
+      "https://img.shields.io/badge/Wokwi-Simula%C3%A7%C3%A3o-00B894"
+    ],
+    "artefatos_ia": [],
+    "analise_readme": {
+      "tamanho": 17534,
+      "tem_secoes": true,
+      "tem_codigo": true,
+      "tem_imagens": true
     }
   },
   {
@@ -904,6 +1074,18 @@
         "Apenas um commit ou nenhum"
       ],
       "observacoes": []
+    },
+    "commits_detalhados": [],
+    "num_commits": 0,
+    "imagens": [
+      "https://github.com/user-attachments/assets/73866048-5eee-45eb-b824-28572e1c8cd5"
+    ],
+    "artefatos_ia": [],
+    "analise_readme": {
+      "tamanho": 8535,
+      "tem_secoes": true,
+      "tem_codigo": true,
+      "tem_imagens": true
     }
   },
   {
@@ -967,6 +1149,20 @@
         "Apenas um commit ou nenhum"
       ],
       "observacoes": []
+    },
+    "commits_detalhados": [],
+    "num_commits": 0,
+    "imagens": [
+      "https://img.shields.io/badge/status-stable-brightgreen",
+      "https://img.shields.io/badge/micropython-1.x-blue",
+      "https://img.shields.io/badge/license-MIT-green"
+    ],
+    "artefatos_ia": [],
+    "analise_readme": {
+      "tamanho": 14930,
+      "tem_secoes": true,
+      "tem_codigo": true,
+      "tem_imagens": true
     }
   },
   {
@@ -1030,6 +1226,16 @@
         "Apenas um commit ou nenhum"
       ],
       "observacoes": []
+    },
+    "commits_detalhados": [],
+    "num_commits": 0,
+    "imagens": [],
+    "artefatos_ia": [],
+    "analise_readme": {
+      "tamanho": 11982,
+      "tem_secoes": true,
+      "tem_codigo": true,
+      "tem_imagens": false
     }
   },
   {
@@ -1093,6 +1299,21 @@
         "Apenas um commit ou nenhum"
       ],
       "observacoes": []
+    },
+    "commits_detalhados": [],
+    "num_commits": 0,
+    "imagens": [
+      "https://img.shields.io/badge/build-passing-brightgreen",
+      "https://img.shields.io/badge/micropython-1.x-blue",
+      "https://img.shields.io/badge/simulator-Wokwi-orange",
+      "https://github.com/SamuelSilveira/processoseletivoIoT/actions"
+    ],
+    "artefatos_ia": [],
+    "analise_readme": {
+      "tamanho": 6962,
+      "tem_secoes": true,
+      "tem_codigo": true,
+      "tem_imagens": true
     }
   },
   {
@@ -1156,6 +1377,16 @@
         "Apenas um commit ou nenhum"
       ],
       "observacoes": []
+    },
+    "commits_detalhados": [],
+    "num_commits": 0,
+    "imagens": [],
+    "artefatos_ia": [],
+    "analise_readme": {
+      "tamanho": 10256,
+      "tem_secoes": true,
+      "tem_codigo": true,
+      "tem_imagens": false
     }
   },
   {
@@ -1217,6 +1448,22 @@
         "Apenas um commit ou nenhum"
       ],
       "observacoes": []
+    },
+    "commits_detalhados": [],
+    "num_commits": 0,
+    "imagens": [
+      "https://github.com/user-attachments/assets/5d629626-513a-445c-ba0f-e5bb3e225187",
+      "https://github.com/user-attachments/assets/abbd331b-a005-4633-89c6-afd16acbe828",
+      "https://github.com/user-attachments/assets/37a1e99d-66d2-4730-b824-26f834bd8cc3",
+      "https://github.com/user-attachments/assets/f323b4cc-d759-4e05-bb58-13e4d6dc7e5b",
+      "https://github.com/user-attachments/assets/d991d35b-2bc2-48f7-9ac7-cf5ca9dc452a"
+    ],
+    "artefatos_ia": [],
+    "analise_readme": {
+      "tamanho": 9969,
+      "tem_secoes": true,
+      "tem_codigo": true,
+      "tem_imagens": true
     }
   },
   {
@@ -1280,6 +1527,16 @@
         "Apenas um commit ou nenhum"
       ],
       "observacoes": []
+    },
+    "commits_detalhados": [],
+    "num_commits": 0,
+    "imagens": [],
+    "artefatos_ia": [],
+    "analise_readme": {
+      "tamanho": 8128,
+      "tem_secoes": true,
+      "tem_codigo": true,
+      "tem_imagens": false
     }
   },
   {
@@ -1343,6 +1600,16 @@
         "Apenas um commit ou nenhum"
       ],
       "observacoes": []
+    },
+    "commits_detalhados": [],
+    "num_commits": 0,
+    "imagens": [],
+    "artefatos_ia": [],
+    "analise_readme": {
+      "tamanho": 12358,
+      "tem_secoes": true,
+      "tem_codigo": true,
+      "tem_imagens": false
     }
   },
   {
@@ -1406,6 +1673,24 @@
         "Apenas um commit ou nenhum"
       ],
       "observacoes": []
+    },
+    "commits_detalhados": [],
+    "num_commits": 0,
+    "imagens": [
+      "https://img.shields.io/badge/versão-v1.0.0-light?style=for-the-badge",
+      "https://img.shields.io/badge/micropython-3776AB?style=for-the-badge&logo=micropython&logoColor=white",
+      "https://img.shields.io/badge/ESP32-E7352C?style=for-the-badge&logo=espressif&logoColor=white",
+      "https://img.shields.io/badge/Wokwi-005A00?style=for-the-badge&logo=wokwi&logoColor=white",
+      "https://img.shields.io/badge/mpremote_--_1.28.0-991664?style=for-the-badge&logo=mpremote&logoColor=white",
+      "https://img.shields.io/badge/Dev_Container-2496ED?style=for-the-badge&logo=docker&logoColor=white",
+      "https://github.com/user-attachments/assets/65528964-4982-413b-920d-f4253b301c67"
+    ],
+    "artefatos_ia": [],
+    "analise_readme": {
+      "tamanho": 9665,
+      "tem_secoes": true,
+      "tem_codigo": true,
+      "tem_imagens": true
     }
   },
   {
@@ -1469,6 +1754,16 @@
         "Apenas um commit ou nenhum"
       ],
       "observacoes": []
+    },
+    "commits_detalhados": [],
+    "num_commits": 0,
+    "imagens": [],
+    "artefatos_ia": [],
+    "analise_readme": {
+      "tamanho": 5406,
+      "tem_secoes": true,
+      "tem_codigo": true,
+      "tem_imagens": false
     }
   },
   {
@@ -1532,31 +1827,55 @@
         "Apenas um commit ou nenhum"
       ],
       "observacoes": []
+    },
+    "commits_detalhados": [],
+    "num_commits": 0,
+    "imagens": [],
+    "artefatos_ia": [],
+    "analise_readme": {
+      "tamanho": 3593,
+      "tem_secoes": true,
+      "tem_codigo": false,
+      "tem_imagens": false
     }
   },
   {
     "nome": "Gabriel Souza Santos_140",
     "email": "gabriel.souza.santos_140@aluno.com",
-    "github_url": "https://github.com/gabriel-so-santos/pnaat-processo-seletivo-io",
-    "status": "erro_clone",
+    "github_url": "https://github.com/gabriel-so-santos/pnaat-processo-seletivo-iot",
+    "status": "sucesso",
     "nota_final": 0,
     "criterios": {},
-    "commits": [],
+    "commits": [
+      "2688e71 docs: update `README.md`"
+    ],
     "resumo": "",
-    "readme_content": null,
-    "main_py_exists": false,
-    "diagram_json_exists": false,
-    "wokwi_toml_exists": false,
-    "github_actions_exists": false,
+    "readme_content": "# Processo Seletivo – Intensivo Maker | IoT  \n## Etapa Prática – Sistemas Embarcados  \n\n---\n\n### 👤 Identificação  \n\n- **Nome completo:** Gabriel Souza Santos  \n- **GitHub:** https://github.com/gabriel-soantos  \n- **Projeto no WOKWI:** https://wokwi.com/projects/462374093468124161\n\n---\n\n## 1️⃣ Visão Geral da Solução  \n\nO projeto consiste em um sistema embarcado simulado para monitoramento ambiental utilizando ESP32.\nO sistema realiza leitura de temperatura e umidade através do sensor DHT22, permitindo configuração dinâmica de um\nlimite de temperatura via potenciômetro (ADC).\n\nAs informações são processadas em tempo real e exibidas em um display OLED SSD1306, incluindo:\n\n- Temperatura atual  \n- Umidade relativa do ar  \n- Limite de temperatura configurado  \n- Variação entre leituras consecutivas  \n- Tendência de comportamento das variáveis (+, -, =, ~)  \n\nAlém disso, o sistema mantém um histórico eficiente de medições utilizando um **buffer circular (O(1))**, permitindo\nanálise de variação sem crescimento de memória.\n\nUm LED é utilizado como atuador, sendo acionado quando a temperatura ultrapassa o limite configurado.\n\n---\n\n## 2️⃣ Arquitetura do Sistema Embarcado  \n\nO sistema segue um modelo de execução sequencial baseado em loop com temporização não bloqueante.\n\nA cada ciclo, o fluxo é dividido em etapas bem definidas:\n\n### 🔹 Aquisição de Dados\n- Leitura de temperatura e umidade via DHT22  \n- Leitura do potenciômetro via ADC  \n\n### 🔹 Processamento\n- Mapeamento do ADC para faixa de temperatura (-40°C a 80°C)  \n- Cálculo da variação entre leituras consecutivas  \n- Análise de tendência (increasing, decreasing, stable, oscillation)  \n\n### 🔹 Controle\n- Comparação da temperatura atual com o limite definido  \n- Ativação/desativação do LED conforme condição  \n\n### 🔹 Histórico\n- Armazenamento em buffer circular (estrutura O(1))  \n- Manutenção de tamanho fixo em memória  \n\n### 🔹 Apresentação\n- Atualização do display OLED em tempo real  \n- Exibição de valores, deltas e tendências  \n\n---\n\n## 3️⃣ Componentes Utilizados na Simulação  \n\n- **Sensor DHT22:**  \n  Responsável pela medição de temperatura e umidade do ambiente.\n\n- **Potenciômetro (ADC):**  \n  Interface analógica para ajuste dinâmico do limite de temperatura.\n\n- **Display OLED SSD1306:**  \n  Exibição dos dados em tempo real.\n\n- **LED:**  \n  Atuador visual de alerta térmico.\n\n- **ESP32 (simulado no Wokwi):**  \n  Plataforma de execução do sistema embarcado.\n\n---\n\n## 4️⃣ Melhorias Arquiteturais Implementadas  \n\n### 🔹 Modularização do sistema  \nO projeto foi refatorado em módulos independentes:\n\n- `analysis.py` → cálculo de tendências  \n- `display.py` → abstração da interface OLED  \n- `circular_buffer.py` → estrutura de dados O(1)  \n- `main.py` → orquestração do sistema  \n\n---\n\n### 🔹 Buffer circular (O(1))  \nSubstituição de listas dinâmicas por estrutura circular fixa, garantindo:\n\n- Inserção O(1)  \n- Uso controlado de memória  \n- Sem realocação de lista  \n\n---\n\n### 🔹 Análise de tendência  \nFoi adicionada lógica para identificar comportamento das variáveis:\n\n- `+` → crescente  \n- `-` → decrescente  \n- `=` → estável  \n- `~` → oscilação  \n\n---\n\n### 🔹 Separação de responsabilidades  \nO sistema foi reorganizado seguindo princípios de engenharia de software:\n\n- Sensor layer  \n- Processing layer  \n- Control layer  \n- Presentation layer  \n\n---\n\n## 5️⃣ Resultados Obtidos  \n\nO sistema foi capaz de:\n\n- Realizar leituras consistentes de sensores  \n- Permitir ajuste dinâmico de limite via potenciômetro  \n- Detectar tendências de variação das variáveis  \n- Acionar corretamente o LED de alerta  \n- Exibir dados completos em tempo real no OLED  \n- Manter histórico eficiente com uso de buffer circular  \n\nDurante a simulação no Wokwi, o comportamento se manteve estável e coerente com os requisitos definidos.\n\n---\n\n## 6️⃣ Comentários Adicionais\n\nDevido às limitações de tempo da execução no ambiente de CI, o loop principal foi implementado com um número finito de\niterações. O intervalo de atualização também foi reduzido para garantir a execução completa dentro do tempo disponível.\n\nAtualmente, os dados históricos são mantidos apenas em memória volátil, sendo descartados conforme o buffer atinge seu\nlimite máximo. Como melhorias futuras, poderiam ser implementados:\n\n- Persistência de dados\n- Tratamento de falhas de leitura do sensor\n- Comunicação via MQTT ou Wi-Fi (IoT real)  \n- Substituição do loop por máquina de estados  \n- Logging estruturado de métricas",
+    "main_py_exists": true,
+    "diagram_json_exists": true,
+    "wokwi_toml_exists": true,
+    "github_actions_exists": true,
     "analise_projeto": {
-      "pontos_fortes": [],
+      "pontos_fortes": [
+        "Possui main.py implementado",
+        "Diagrama do Wokwi presente",
+        "Configuração do Wokwi (wokwi.toml) presente",
+        "GitHub Actions configurado"
+      ],
       "pontos_melhoria": [
-        "main.py ausente ou não encontrado",
-        "diagram.json ausente",
-        "GitHub Actions não configurado",
         "Apenas um commit ou nenhum"
       ],
       "observacoes": []
+    },
+    "commits_detalhados": [],
+    "num_commits": 0,
+    "imagens": [],
+    "artefatos_ia": [],
+    "analise_readme": {
+      "tamanho": 4458,
+      "tem_secoes": true,
+      "tem_codigo": false,
+      "tem_imagens": false
     }
   },
   {
@@ -1620,6 +1939,16 @@
         "Apenas um commit ou nenhum"
       ],
       "observacoes": []
+    },
+    "commits_detalhados": [],
+    "num_commits": 0,
+    "imagens": [],
+    "artefatos_ia": [],
+    "analise_readme": {
+      "tamanho": 4361,
+      "tem_secoes": false,
+      "tem_codigo": false,
+      "tem_imagens": false
     }
   },
   {
@@ -1683,6 +2012,16 @@
         "Apenas um commit ou nenhum"
       ],
       "observacoes": []
+    },
+    "commits_detalhados": [],
+    "num_commits": 0,
+    "imagens": [],
+    "artefatos_ia": [],
+    "analise_readme": {
+      "tamanho": 5794,
+      "tem_secoes": true,
+      "tem_codigo": true,
+      "tem_imagens": false
     }
   },
   {
@@ -1771,6 +2110,16 @@
         "Apenas um commit ou nenhum"
       ],
       "observacoes": []
+    },
+    "commits_detalhados": [],
+    "num_commits": 0,
+    "imagens": [],
+    "artefatos_ia": [],
+    "analise_readme": {
+      "tamanho": 10127,
+      "tem_secoes": true,
+      "tem_codigo": false,
+      "tem_imagens": false
     }
   },
   {
@@ -1834,31 +2183,58 @@
         "Apenas um commit ou nenhum"
       ],
       "observacoes": []
+    },
+    "commits_detalhados": [],
+    "num_commits": 0,
+    "imagens": [],
+    "artefatos_ia": [],
+    "analise_readme": {
+      "tamanho": 7847,
+      "tem_secoes": true,
+      "tem_codigo": true,
+      "tem_imagens": false
     }
   },
   {
     "nome": "Thomas Magalh├гes_139",
     "email": "thomas.magalh├гes_139@aluno.com",
-    "github_url": "https://github.com/thomasmagalhaes935-ai/projetoIo",
-    "status": "erro_clone",
+    "github_url": "https://github.com/thomasmagalhaes935-ai/projetoIot",
+    "status": "sucesso",
     "nota_final": 0,
     "criterios": {},
-    "commits": [],
+    "commits": [
+      "21a8912 Update README.md"
+    ],
     "resumo": "",
-    "readme_content": null,
-    "main_py_exists": false,
-    "diagram_json_exists": false,
-    "wokwi_toml_exists": false,
-    "github_actions_exists": false,
+    "readme_content": "# Processo Seletivo – Intensivo Maker | IoT\n## Etapa Prática – Sistemas Embarcados\n\nBem-vindo(a) à **etapa prática do processo seletivo para o Intensivo Maker | IoT**.\n\nEsta atividade tem como objetivo avaliar suas competências em **Sistemas Embarcados**, com foco em **organização de projeto, lógica de firmware e simulação de hardware**, a partir da aplicação prática dos conhecimentos adquiridos nos cursos EAD da etapa anterior.\n\n> 🎯 **Objetivo principal**  \n> Avaliar sua capacidade de **planejar, estruturar e desenvolver** uma solução funcional de sistemas embarcados, seguindo boas práticas de engenharia.\n\n---\n\n## 🏁 Passo 0 – Antes de Tudo\n\nSe você **nunca utilizou Git ou GitHub**, não se preocupe.  \nSiga atentamente os passos abaixo — eles fazem parte do processo de aprendizagem esperado.\n\n---\n\n### 1️⃣ Criação de Conta no GitHub\n\n1. Acesse: https://github.com  \n2. Clique em **Sign up**  \n3. Crie sua conta gratuita seguindo as instruções da plataforma  \n\n> 📌 O GitHub será utilizado para:\n> - Envio do seu projeto  \n> - Versionamento do código  \n> - Correção e validação automática via GitHub Actions  \n\n---\n\n### 2️⃣ Instalação do Git\n\nO **Git** é a ferramenta responsável pelo controle de versões do seu código.\n\n### Windows\nBaixe e instale o **Git Bash**:  \nhttps://git-scm.com/downloads\n\n### Linux / macOS\nVerifique se o Git já está instalado:\n\n```bash\ngit --version\n```\n> Caso não esteja, instale pelo gerenciador de pacotes do seu sistema.\n\n## ⚙ Passo 1 – Preparando o Ambiente\n\nPara desenvolver o desafio, você deverá criar uma cópia deste repositório no seu GitHub.\n\n### 1️⃣ Fork do Repositório\nNo canto superior direito desta página, clique em Fork\n\n<img width=\"219\" height=\"45\" alt=\"image\" src=\"https://github.com/user-attachments/assets/5d629626-513a-445c-ba0f-e5bb3e225187\" />\n\n\nUma cópia do repositório será criada no seu perfil do GitHub\n\n> 🔎 O Fork permite que você trabalhe de forma independente, sem alterar o repositório original do processo seletivo.\n\n### 2️⃣ Clone do Repositório\n\nNo repositório do seu Fork, clique em **<> Code**\n\n<img width=\"149\" height=\"52\" alt=\"image\" src=\"https://github.com/user-attachments/assets/abbd331b-a005-4633-89c6-afd16acbe828\" />\n\nCopie a URL e execute no terminal:\n\n```bash\ngit clone https://github.com/SEU_USUARIO/nome-do-repositorio.git\ncd nome-do-repositorio\n```\n\n> O comando git clone cria uma cópia local do repositório para desenvolvimento.\n\n### 3️⃣ Preparação do Ambiente de Execução\n\nVocê pode executar o projeto de duas formas. Escolha apenas uma.\n\n#### 🔹 Opção A – Ambiente Python Local\n\n**Requisitos:**\n\n- Python 3.10 ou 3.11\n- pip\n\n**Instale as dependências:**\n\n```bash\npip install -r requirements.txt\n```\n\n#### 🔹 Opção B – Dev Container (Recomendado)\n\nEste repositório inclui um Dev Container, garantindo um ambiente padronizado.\n\n**Requisitos:**\n\n- VS Code\n- Docker instalado\n- Extensão Dev Containers\n\n**Passos:**\n\n1. Abra o repositório no VS Code\n2. Clique em “Reopen in Container”\n3. Aguarde a criação automática do ambiente\n\n> ➡️ Todas as dependências serão instaladas automaticamente.\n\n## 🔐 Passo 2 – Criando sua API Key do Wokwi\n\nA simulação do projeto será executada automaticamente via GitHub Actions, utilizando o Wokwi CLI.\n\nPara isso, você precisa gerar uma API Key.\n\n1. Acesse: https://wokwi.com/dashboard/ci\n2. Faça login (Google ou GitHub)\n3. Clique em Generate API Token\n4. Copie a chave gerada (exemplo: wokwi-xxxxxxxx)\n\n>⚠️ Importante\n- Nunca faça commit dessa chave\n- Ela deve ser armazenada apenas como secret no GitHub\n\n## 🔒 Passo 3 – Configurando a API Key no GitHub (Secrets)\n\n**No repositório do seu Fork:**\n\n1. Vá em Settings\n2. Acesse Secrets and variables → Actions\n3. Clique em New repository secret\n4. Nome: WOKWI_API_KEY\n5. Valor: sua chave gerada\n6. Salve\n\n> ✔️ As GitHub Actions do template já estão preparadas para usar essa variável automaticamente.\n\n## 🧠 Passo 4 – Desafio Técnico\n\nVocê deverá desenvolver um projeto de sistemas embarcados simulados, utilizando Python e Wokwi.\n\n### 📁 Estrutura mínima esperada\n\n```text\n/project\n ├── src/\n │   └── main.py        # Código principal do projeto\n ├── wokwi.toml         # Configuração da simulação\n ├── diagram.json       # Circuito no Wokwi\n └── README.md          # Explicação do seu projeto\n```\n\n> Você pode expandir essa estrutura se desejar, desde que mantenha os arquivos essenciais.\n\n### 🛠 Como Desenvolver seu Projeto\n\nO desenvolvimento acontece principalmente nos arquivos abaixo:\n\n#### 1️⃣ src/main.py\n\n- Código Python executado na simulação\n- Implementa a lógica do sistema embarcado\n- Exemplos: controle de LEDs, leitura de sensores, estados, temporizações, etc.\n\n#### 2️⃣ diagram.json\n\n- Define o hardware virtual do projeto\n- Componentes como:\n  - LEDs\n  - Botões\n  - Sensores\n  - Placa microcontroladora\n\n#### 3️⃣ wokwi.toml\n\n- Configura a simulação:\n  - Tipo de placa\n  - Framework\n  - Dependências adicionais\n\n#### 4️⃣ Commit e Push\n\nApós suas alterações:\n\n```bash\ngit add .\ngit commit -m \"Descrição clara do que foi feito\"\ngit push\n```\n### ⚙ Execução Automática (GitHub Actions)\n\nA cada push, o GitHub Actions irá automaticamente:\n\n- Executar o pipeline de build\n- Rodar a simulação via Wokwi CLI\n- Validar que o projeto executa sem erros\n\n### 📌 Caso algo falhe:\n\n- Vá até a aba Actions\n- Analise os logs da execução\n- Corrija e envie novamente\n\n## 📊 Critérios de Avaliação\n\nEsta etapa será avaliada considerando:\n\n- Funcionamento correto da simulação\n- Código organizado e legível\n- Estrutura de arquivos correta\n- Uso adequado do Wokwi\n- Commits claros e bem descritos\n- Projeto executando sem falhas nas Actions\n\n---\n\n## 📎 Submissão Final\n\nApós concluir o desenvolvimento:\n\n1. Verifique se o projeto **executa sem erros** nas GitHub Actions  \n2. Confirme que todos os arquivos obrigatórios estão presentes  \n3. Copie o link do **seu repositório no GitHub**\n\n📤 Envie o link conforme as orientações do processo seletivo na plataforma **Moodle**.\n\n---\n\n## 📝 Relatório do Candidato\n\nO arquivo **`README.md` do seu repositório** deve ser utilizado como o  \n**relatório final do desafio técnico**.\n\nPreencha todas as seções abaixo de forma **clara, objetiva e técnica**.\n\n> 💡 **Dica importante**  \n> Não é necessário um relatório extenso.  \n> O principal critério é demonstrar **clareza nas decisões técnicas**, organização e entendimento do sistema embarcado desenvolvido.\n\n---\nSistema Inteligente de Monitoramento e Rega Simulada de Plantas\n\n### 👤 Identificação do Candidato\n\n- **Nome completo: Thomas de Sousa Magalhães \n- **GitHub:* thomasmagalhaes935-ai\n\n---\n\n## 1️⃣ Visão Geral da Solução\n\nO projeto desenvolvido consiste em um **sistema embarcado inteligente para monitoramento de umidade e controle de rega de múltiplas plantas**, utilizando simulação no Wokwi com microcontrolador ESP32.\n\nA solução representa quatro tipos de plantas com necessidades hídricas diferentes:\n\n- Cacto  \n- Suculenta  \n- Samambaia  \n- Horta  \n\nCada planta possui comportamento próprio de secagem e volume de rega.\n\nO sistema permite ao usuário:\n\n- Selecionar a planta monitorada por botão  \n- Regar manualmente a planta selecionada  \n- Alterar as condições climáticas usando o potenciômetro  \n- Visualizar o estado da planta através de LED RGB  \n- Identificar plantas em estados críticos através de LEDs individuais piscantes  \n- Acompanhar dados detalhados via terminal  \n\nO objetivo foi simular um sistema de automação para cuidar de plantas em casa, utilizando conceitos básicos de sistemas embarcados, como leitura de entradas, controle de saídas, uso de estados, temporização e interação com o usuário.\n\nO projeto foi desenvolvido e testado no Wokwi via navegador e depois sua estrutura foi organizada no VS Code para poder ser subida para o github. \n\n---\n\n## 2️⃣ Arquitetura do Sistema Embarcado\n\nO flux do programa opera em **loop infinito**, realizando continuamente:\n\n1. Leitura dos botões  \n2. Controle de debounce \n3. Atualização do pisca-alerta dos LEDs em estado críticos  \n4. Leitura do potenciômetro (clima externo)  \n5. Simulação de perda de umidade das plantas  \n6. Atualização dos LEDs indicadores  \n7. Atualização do LED RGB da planta focada  \n8. Impressão de informações no terminal serial  \n\n\n### Entradas:\n\n- **Botão 1 (Azul) :** Regar planta selecionada  \n- **Botão 2 (Preto) :** Alternar planta selecionada   \n- **Potenciômetro:** Simula clima ambiente (Muito Seco/ Seco / Ideal / Umido/ Muito umido)\n\n\nCada planta possui atributos independentes:\n\n- Nome  \n- Umidade atual  \n- Taxa base de secagem  \n- Quantidade de água quando regada  \n- Última vez regada  \n\nA taxa de secagem é influenciada pelo potenciômetro\n\nO sistema classifica a planta em cinco estados, o estado atual é representado pela cor no LED RGB:\n\n - Seco_Critico (Vermelho)\n - Seco (Laranja)\n - Ideal (Verde)\n - Umido (Azul)\n - Excesso (Roxo)\n\nCaracterísticas dos Leds individuais:\n\n- LED aceso fixo = planta selecionada\n- LED piscando = planta em estado crítico\n- LED apagado = planta não selecionada\n\n\n\n\n## 3️⃣ Componentes Utilizados na Simulação\n\n| Componente | Quantidade | Função no Sistema |  Ligação |\n|-----------|-----------|------------------|---------------|\n| ESP32  | 1 | Microcontrolador principal responsável pelo processamento do sistema | — |\n| Push Button | 2 | Um botão para rega manual e outro para seleção de planta |  33 /  26 |\n| Potenciômetro | 1 | Simula condições climáticas que afetam a secagem das plantas |  34 |\n| LED RGB (Cátodo Comum) | 1 | Indica o estado da planta selecionada por cores |  4, 5 e 18 |\n| LED Laranja | 1 | Indicador da planta 1 | 12 |\n| LED Branco | 1 | Indicador da planta 2 | 13 |\n| LED Roxo | 1 | Indicador da planta 3 | 14 |\n| LED Ciano | 1 | Indicador da planta 4 |  27 |\n\n## 4️⃣ Decisões Técnicas Relevantes\n\nFunções com responsabilidades especificas:\n\n - interpretar_clima()\n - determinar_estado()\n - set_color()\n - atualizar_led_rgb()\n - verificar_botoes()\n\nUso de dicionário para o armazenamento dos dados das plantas\n\nUso de time.ticks_ms() para evitar variaveis bloqueantes como o sleep()\n\n\n\n## 5️⃣ Resultados Obtidos\n\nO sistema executa de forma perfeita na simulação Wokwi do navegador\n\nFuncionalidades Implementadas:\n\n - Seleção entre 4 plantas\n - Rega individual por botão\n - Controle climático por meio do potenciômetro\n - Simulação dinâmica de secagem\n - Indicação visual por LED RGB\n - Alertas críticos com leds piscantes\n - Terminal informativo com dados técnicos\n\nDurante a simulação:\n\n - Plantas perdem umidade ao longo do tempo\n - Clima seco acelera perda de água\n - Regar recupera a umidade\n - LEDs respondem em tempo real\n - Mudança de planta ocorre instantaneamente\n\n## 6️⃣ Comentários Adicionais (Opcional)\n\nA maior dificuldade foi em ajustar corretamente a lógica botões e temporizações.\nO projeto foi refeito 3 vezes para poder compilar perfeitamente no gitActions.\n\nPossiveis melhorias futuras:\n\n - Display OLED com os dados mais relevantes\n - Rega automática por limite mínimo\n - Histórico de umidade\n - Sensores reais de solo e temperatura\n\n> ✅ Este relatório faz parte da avaliação técnica.  \n> Clareza, objetividade e organização são tão importantes quanto o funcionamento do código.\n\n---\n\n## 🆘 Suporte\n\nEm caso de dúvidas:\n\n- Consulte o material dos cursos EAD\n- Leia atentamente este README\n- Analise os logs das GitHub Actions\n- Utilize os canais oficiais para contato com os instrutores\n\nBoa sorte no processo seletivo.\nMostre sua capacidade de pensar como um engenheiro de sistemas embarcados.\n****\n",
+    "main_py_exists": true,
+    "diagram_json_exists": true,
+    "wokwi_toml_exists": true,
+    "github_actions_exists": true,
     "analise_projeto": {
-      "pontos_fortes": [],
+      "pontos_fortes": [
+        "Possui main.py implementado",
+        "Diagrama do Wokwi presente",
+        "Configuração do Wokwi (wokwi.toml) presente",
+        "GitHub Actions configurado"
+      ],
       "pontos_melhoria": [
-        "main.py ausente ou não encontrado",
-        "diagram.json ausente",
-        "GitHub Actions não configurado",
         "Apenas um commit ou nenhum"
       ],
       "observacoes": []
+    },
+    "commits_detalhados": [],
+    "num_commits": 0,
+    "imagens": [
+      "https://github.com/user-attachments/assets/5d629626-513a-445c-ba0f-e5bb3e225187",
+      "https://github.com/user-attachments/assets/abbd331b-a005-4633-89c6-afd16acbe828"
+    ],
+    "artefatos_ia": [],
+    "analise_readme": {
+      "tamanho": 11440,
+      "tem_secoes": true,
+      "tem_codigo": true,
+      "tem_imagens": true
     }
   },
   {
@@ -1922,6 +2298,16 @@
         "Apenas um commit ou nenhum"
       ],
       "observacoes": []
+    },
+    "commits_detalhados": [],
+    "num_commits": 0,
+    "imagens": [],
+    "artefatos_ia": [],
+    "analise_readme": {
+      "tamanho": 6368,
+      "tem_secoes": true,
+      "tem_codigo": true,
+      "tem_imagens": false
     }
   },
   {
@@ -1985,6 +2371,19 @@
         "Apenas um commit ou nenhum"
       ],
       "observacoes": []
+    },
+    "commits_detalhados": [],
+    "num_commits": 0,
+    "imagens": [
+      "https://github.com/user-attachments/assets/5d629626-513a-445c-ba0f-e5bb3e225187",
+      "https://github.com/user-attachments/assets/abbd331b-a005-4633-89c6-afd16acbe828"
+    ],
+    "artefatos_ia": [],
+    "analise_readme": {
+      "tamanho": 10946,
+      "tem_secoes": true,
+      "tem_codigo": true,
+      "tem_imagens": true
     }
   },
   {
@@ -2048,6 +2447,16 @@
         "Apenas um commit ou nenhum"
       ],
       "observacoes": []
+    },
+    "commits_detalhados": [],
+    "num_commits": 0,
+    "imagens": [],
+    "artefatos_ia": [],
+    "analise_readme": {
+      "tamanho": 3606,
+      "tem_secoes": true,
+      "tem_codigo": false,
+      "tem_imagens": false
     }
   },
   {
@@ -2111,6 +2520,19 @@
         "Apenas um commit ou nenhum"
       ],
       "observacoes": []
+    },
+    "commits_detalhados": [],
+    "num_commits": 0,
+    "imagens": [
+      "https://github.com/user-attachments/assets/5d629626-513a-445c-ba0f-e5bb3e225187",
+      "https://github.com/user-attachments/assets/abbd331b-a005-4633-89c6-afd16acbe828"
+    ],
+    "artefatos_ia": [],
+    "analise_readme": {
+      "tamanho": 10781,
+      "tem_secoes": true,
+      "tem_codigo": true,
+      "tem_imagens": true
     }
   },
   {
@@ -2174,6 +2596,19 @@
         "Apenas um commit ou nenhum"
       ],
       "observacoes": []
+    },
+    "commits_detalhados": [],
+    "num_commits": 0,
+    "imagens": [
+      "https://github.com/user-attachments/assets/5d629626-513a-445c-ba0f-e5bb3e225187",
+      "https://github.com/user-attachments/assets/abbd331b-a005-4633-89c6-afd16acbe828"
+    ],
+    "artefatos_ia": [],
+    "analise_readme": {
+      "tamanho": 9266,
+      "tem_secoes": true,
+      "tem_codigo": true,
+      "tem_imagens": true
     }
   },
   {
@@ -2237,6 +2672,16 @@
         "Apenas um commit ou nenhum"
       ],
       "observacoes": []
+    },
+    "commits_detalhados": [],
+    "num_commits": 0,
+    "imagens": [],
+    "artefatos_ia": [],
+    "analise_readme": {
+      "tamanho": 4076,
+      "tem_secoes": true,
+      "tem_codigo": false,
+      "tem_imagens": false
     }
   },
   {
@@ -2300,6 +2745,16 @@
         "Apenas um commit ou nenhum"
       ],
       "observacoes": []
+    },
+    "commits_detalhados": [],
+    "num_commits": 0,
+    "imagens": [],
+    "artefatos_ia": [],
+    "analise_readme": {
+      "tamanho": 1114,
+      "tem_secoes": true,
+      "tem_codigo": false,
+      "tem_imagens": false
     }
   },
   {
@@ -2363,6 +2818,16 @@
         "Apenas um commit ou nenhum"
       ],
       "observacoes": []
+    },
+    "commits_detalhados": [],
+    "num_commits": 0,
+    "imagens": [],
+    "artefatos_ia": [],
+    "analise_readme": {
+      "tamanho": 2753,
+      "tem_secoes": false,
+      "tem_codigo": false,
+      "tem_imagens": false
     }
   },
   {
@@ -2426,6 +2891,16 @@
         "Apenas um commit ou nenhum"
       ],
       "observacoes": []
+    },
+    "commits_detalhados": [],
+    "num_commits": 0,
+    "imagens": [],
+    "artefatos_ia": [],
+    "analise_readme": {
+      "tamanho": 3898,
+      "tem_secoes": true,
+      "tem_codigo": false,
+      "tem_imagens": false
     }
   },
   {
@@ -2489,6 +2964,22 @@
         "Apenas um commit ou nenhum"
       ],
       "observacoes": []
+    },
+    "commits_detalhados": [],
+    "num_commits": 0,
+    "imagens": [
+      "https://github.com/user-attachments/assets/5d629626-513a-445c-ba0f-e5bb3e225187",
+      "https://github.com/user-attachments/assets/abbd331b-a005-4633-89c6-afd16acbe828",
+      "https://github.com/user-attachments/assets/624a3399-fdef-422e-a347-b53be7c8d00d",
+      "https://github.com/user-attachments/assets/a89df254-c907-41a7-9023-cede9ffd6a83",
+      "https://github.com/user-attachments/assets/b14debd7-930c-48ff-b66e-fc2ddcd4683f"
+    ],
+    "artefatos_ia": [],
+    "analise_readme": {
+      "tamanho": 10923,
+      "tem_secoes": true,
+      "tem_codigo": true,
+      "tem_imagens": true
     }
   },
   {
@@ -2552,6 +3043,19 @@
         "Apenas um commit ou nenhum"
       ],
       "observacoes": []
+    },
+    "commits_detalhados": [],
+    "num_commits": 0,
+    "imagens": [
+      "https://github.com/user-attachments/assets/5d629626-513a-445c-ba0f-e5bb3e225187",
+      "https://github.com/user-attachments/assets/abbd331b-a005-4633-89c6-afd16acbe828"
+    ],
+    "artefatos_ia": [],
+    "analise_readme": {
+      "tamanho": 9252,
+      "tem_secoes": true,
+      "tem_codigo": true,
+      "tem_imagens": true
     }
   },
   {
@@ -2615,6 +3119,19 @@
         "Apenas um commit ou nenhum"
       ],
       "observacoes": []
+    },
+    "commits_detalhados": [],
+    "num_commits": 0,
+    "imagens": [
+      "https://github.com/user-attachments/assets/5d629626-513a-445c-ba0f-e5bb3e225187",
+      "https://github.com/user-attachments/assets/abbd331b-a005-4633-89c6-afd16acbe828"
+    ],
+    "artefatos_ia": [],
+    "analise_readme": {
+      "tamanho": 12270,
+      "tem_secoes": true,
+      "tem_codigo": true,
+      "tem_imagens": true
     }
   },
   {
@@ -2678,6 +3195,19 @@
         "Apenas um commit ou nenhum"
       ],
       "observacoes": []
+    },
+    "commits_detalhados": [],
+    "num_commits": 0,
+    "imagens": [
+      "https://github.com/user-attachments/assets/5d629626-513a-445c-ba0f-e5bb3e225187",
+      "https://github.com/user-attachments/assets/abbd331b-a005-4633-89c6-afd16acbe828"
+    ],
+    "artefatos_ia": [],
+    "analise_readme": {
+      "tamanho": 8319,
+      "tem_secoes": true,
+      "tem_codigo": true,
+      "tem_imagens": true
     }
   },
   {
@@ -2741,6 +3271,22 @@
         "Apenas um commit ou nenhum"
       ],
       "observacoes": []
+    },
+    "commits_detalhados": [],
+    "num_commits": 0,
+    "imagens": [],
+    "artefatos_ia": [
+      {
+        "tipo": "Texto_generico",
+        "descricao": "Frase genérica detectada: \"este projeto foi desenvolvido\"",
+        "severidade": "baixa"
+      }
+    ],
+    "analise_readme": {
+      "tamanho": 2459,
+      "tem_secoes": true,
+      "tem_codigo": false,
+      "tem_imagens": false
     }
   },
   {
@@ -2804,6 +3350,19 @@
         "Apenas um commit ou nenhum"
       ],
       "observacoes": []
+    },
+    "commits_detalhados": [],
+    "num_commits": 0,
+    "imagens": [
+      "https://github.com/user-attachments/assets/5d629626-513a-445c-ba0f-e5bb3e225187",
+      "https://github.com/user-attachments/assets/abbd331b-a005-4633-89c6-afd16acbe828"
+    ],
+    "artefatos_ia": [],
+    "analise_readme": {
+      "tamanho": 18473,
+      "tem_secoes": true,
+      "tem_codigo": true,
+      "tem_imagens": true
     }
   },
   {
@@ -2867,6 +3426,16 @@
         "Apenas um commit ou nenhum"
       ],
       "observacoes": []
+    },
+    "commits_detalhados": [],
+    "num_commits": 0,
+    "imagens": [],
+    "artefatos_ia": [],
+    "analise_readme": {
+      "tamanho": 8484,
+      "tem_secoes": true,
+      "tem_codigo": false,
+      "tem_imagens": false
     }
   },
   {
@@ -2930,6 +3499,16 @@
         "Apenas um commit ou nenhum"
       ],
       "observacoes": []
+    },
+    "commits_detalhados": [],
+    "num_commits": 0,
+    "imagens": [],
+    "artefatos_ia": [],
+    "analise_readme": {
+      "tamanho": 5156,
+      "tem_secoes": true,
+      "tem_codigo": false,
+      "tem_imagens": false
     }
   },
   {
@@ -2993,7 +3572,9 @@
         "Apenas um commit ou nenhum"
       ],
       "observacoes": []
-    }
+    },
+    "commits_detalhados": [],
+    "num_commits": 0
   },
   {
     "nome": "Elder Rayan Oliveira Silva_138",
@@ -3056,6 +3637,21 @@
         "Apenas um commit ou nenhum"
       ],
       "observacoes": []
+    },
+    "commits_detalhados": [],
+    "num_commits": 0,
+    "imagens": [
+      "https://img.shields.io/badge/status-stable-brightgreen",
+      "https://img.shields.io/badge/micropython-1.x-blue",
+      "https://img.shields.io/badge/license-MIT-green",
+      "https://github.com/eldrayan/processoseletivoIoT/actions"
+    ],
+    "artefatos_ia": [],
+    "analise_readme": {
+      "tamanho": 13638,
+      "tem_secoes": true,
+      "tem_codigo": true,
+      "tem_imagens": true
     }
   },
   {
@@ -3119,6 +3715,19 @@
         "Apenas um commit ou nenhum"
       ],
       "observacoes": []
+    },
+    "commits_detalhados": [],
+    "num_commits": 0,
+    "imagens": [
+      "https://github.com/user-attachments/assets/5d629626-513a-445c-ba0f-e5bb3e225187",
+      "https://github.com/user-attachments/assets/abbd331b-a005-4633-89c6-afd16acbe828"
+    ],
+    "artefatos_ia": [],
+    "analise_readme": {
+      "tamanho": 19356,
+      "tem_secoes": true,
+      "tem_codigo": true,
+      "tem_imagens": true
     }
   },
   {
@@ -3182,6 +3791,16 @@
         "Apenas um commit ou nenhum"
       ],
       "observacoes": []
+    },
+    "commits_detalhados": [],
+    "num_commits": 0,
+    "imagens": [],
+    "artefatos_ia": [],
+    "analise_readme": {
+      "tamanho": 6406,
+      "tem_secoes": true,
+      "tem_codigo": false,
+      "tem_imagens": false
     }
   },
   {
@@ -3245,7 +3864,9 @@
         "Apenas um commit ou nenhum"
       ],
       "observacoes": []
-    }
+    },
+    "commits_detalhados": [],
+    "num_commits": 0
   },
   {
     "nome": "Jo├гo Henrique de Brito Leandro Bitu Corr├кa_213",
@@ -3308,6 +3929,18 @@
         "Apenas um commit ou nenhum"
       ],
       "observacoes": []
+    },
+    "commits_detalhados": [],
+    "num_commits": 0,
+    "imagens": [
+      "https://github.com/user-attachments/assets/7db9bcbf-b3b2-4663-ab14-300bad7a3ddd"
+    ],
+    "artefatos_ia": [],
+    "analise_readme": {
+      "tamanho": 5355,
+      "tem_secoes": true,
+      "tem_codigo": false,
+      "tem_imagens": true
     }
   },
   {
@@ -3371,6 +4004,16 @@
         "Apenas um commit ou nenhum"
       ],
       "observacoes": []
+    },
+    "commits_detalhados": [],
+    "num_commits": 0,
+    "imagens": [],
+    "artefatos_ia": [],
+    "analise_readme": {
+      "tamanho": 9635,
+      "tem_secoes": true,
+      "tem_codigo": true,
+      "tem_imagens": false
     }
   },
   {
@@ -3434,6 +4077,16 @@
         "Apenas um commit ou nenhum"
       ],
       "observacoes": []
+    },
+    "commits_detalhados": [],
+    "num_commits": 0,
+    "imagens": [],
+    "artefatos_ia": [],
+    "analise_readme": {
+      "tamanho": 3733,
+      "tem_secoes": true,
+      "tem_codigo": true,
+      "tem_imagens": false
     }
   },
   {
@@ -3497,6 +4150,19 @@
         "Apenas um commit ou nenhum"
       ],
       "observacoes": []
+    },
+    "commits_detalhados": [],
+    "num_commits": 0,
+    "imagens": [
+      "https://github.com/user-attachments/assets/5d629626-513a-445c-ba0f-e5bb3e225187",
+      "https://github.com/user-attachments/assets/abbd331b-a005-4633-89c6-afd16acbe828"
+    ],
+    "artefatos_ia": [],
+    "analise_readme": {
+      "tamanho": 14655,
+      "tem_secoes": true,
+      "tem_codigo": true,
+      "tem_imagens": true
     }
   },
   {
@@ -3560,6 +4226,16 @@
         "Apenas um commit ou nenhum"
       ],
       "observacoes": []
+    },
+    "commits_detalhados": [],
+    "num_commits": 0,
+    "imagens": [],
+    "artefatos_ia": [],
+    "analise_readme": {
+      "tamanho": 10643,
+      "tem_secoes": true,
+      "tem_codigo": false,
+      "tem_imagens": false
     }
   },
   {
@@ -3623,6 +4299,20 @@
         "Apenas um commit ou nenhum"
       ],
       "observacoes": []
+    },
+    "commits_detalhados": [],
+    "num_commits": 0,
+    "imagens": [
+      "https://github.com/user-attachments/assets/8ecd1d94-2ecc-4651-88fd-e100c0a8e375",
+      "https://github.com/user-attachments/assets/53a83670-eea4-477e-982a-49670b874f21",
+      "https://github.com/user-attachments/assets/49f7b2ae-c20c-43a4-87bd-2d7ffdea344c"
+    ],
+    "artefatos_ia": [],
+    "analise_readme": {
+      "tamanho": 7408,
+      "tem_secoes": true,
+      "tem_codigo": false,
+      "tem_imagens": true
     }
   },
   {
@@ -3683,6 +4373,16 @@
         "Apenas um commit ou nenhum"
       ],
       "observacoes": []
+    },
+    "commits_detalhados": [],
+    "num_commits": 0,
+    "imagens": [],
+    "artefatos_ia": [],
+    "analise_readme": {
+      "tamanho": 851,
+      "tem_secoes": true,
+      "tem_codigo": false,
+      "tem_imagens": false
     }
   },
   {
@@ -3746,6 +4446,16 @@
         "Apenas um commit ou nenhum"
       ],
       "observacoes": []
+    },
+    "commits_detalhados": [],
+    "num_commits": 0,
+    "imagens": [],
+    "artefatos_ia": [],
+    "analise_readme": {
+      "tamanho": 5253,
+      "tem_secoes": true,
+      "tem_codigo": false,
+      "tem_imagens": false
     }
   },
   {
@@ -3809,6 +4519,16 @@
         "Apenas um commit ou nenhum"
       ],
       "observacoes": []
+    },
+    "commits_detalhados": [],
+    "num_commits": 0,
+    "imagens": [],
+    "artefatos_ia": [],
+    "analise_readme": {
+      "tamanho": 3760,
+      "tem_secoes": true,
+      "tem_codigo": false,
+      "tem_imagens": false
     }
   },
   {
@@ -3872,6 +4592,16 @@
         "Apenas um commit ou nenhum"
       ],
       "observacoes": []
+    },
+    "commits_detalhados": [],
+    "num_commits": 0,
+    "imagens": [],
+    "artefatos_ia": [],
+    "analise_readme": {
+      "tamanho": 4451,
+      "tem_secoes": true,
+      "tem_codigo": false,
+      "tem_imagens": false
     }
   },
   {
@@ -3935,6 +4665,22 @@
         "Apenas um commit ou nenhum"
       ],
       "observacoes": []
+    },
+    "commits_detalhados": [],
+    "num_commits": 0,
+    "imagens": [
+      "https://github.com/user-attachments/assets/5d5acc87-bab5-4351-b3d3-845291e82193",
+      "https://github.com/user-attachments/assets/b6ca462e-9cee-4e5e-bae0-4f4cd8dbe2ad",
+      "https://github.com/user-attachments/assets/55293af8-510b-44da-8af3-6c8b662fcfae",
+      "https://github.com/user-attachments/assets/9ae97f5d-942f-4b29-8efc-a71128d47402",
+      "https://github.com/user-attachments/assets/1efcaff9-0149-4187-a606-a888b2314935"
+    ],
+    "artefatos_ia": [],
+    "analise_readme": {
+      "tamanho": 15228,
+      "tem_secoes": true,
+      "tem_codigo": true,
+      "tem_imagens": true
     }
   },
   {
@@ -3997,6 +4743,19 @@
         "Apenas um commit ou nenhum"
       ],
       "observacoes": []
+    },
+    "commits_detalhados": [],
+    "num_commits": 0,
+    "imagens": [
+      "https://github.com/user-attachments/assets/5d629626-513a-445c-ba0f-e5bb3e225187",
+      "https://github.com/user-attachments/assets/abbd331b-a005-4633-89c6-afd16acbe828"
+    ],
+    "artefatos_ia": [],
+    "analise_readme": {
+      "tamanho": 8319,
+      "tem_secoes": true,
+      "tem_codigo": true,
+      "tem_imagens": true
     }
   },
   {
@@ -4060,6 +4819,19 @@
         "Apenas um commit ou nenhum"
       ],
       "observacoes": []
+    },
+    "commits_detalhados": [],
+    "num_commits": 0,
+    "imagens": [
+      "https://github.com/user-attachments/assets/5d629626-513a-445c-ba0f-e5bb3e225187",
+      "https://github.com/user-attachments/assets/abbd331b-a005-4633-89c6-afd16acbe828"
+    ],
+    "artefatos_ia": [],
+    "analise_readme": {
+      "tamanho": 10565,
+      "tem_secoes": true,
+      "tem_codigo": true,
+      "tem_imagens": true
     }
   },
   {
@@ -4123,6 +4895,16 @@
         "Apenas um commit ou nenhum"
       ],
       "observacoes": []
+    },
+    "commits_detalhados": [],
+    "num_commits": 0,
+    "imagens": [],
+    "artefatos_ia": [],
+    "analise_readme": {
+      "tamanho": 6061,
+      "tem_secoes": true,
+      "tem_codigo": false,
+      "tem_imagens": false
     }
   },
   {
@@ -4186,6 +4968,19 @@
         "Apenas um commit ou nenhum"
       ],
       "observacoes": []
+    },
+    "commits_detalhados": [],
+    "num_commits": 0,
+    "imagens": [
+      "https://github.com/user-attachments/assets/5d629626-513a-445c-ba0f-e5bb3e225187",
+      "https://github.com/user-attachments/assets/abbd331b-a005-4633-89c6-afd16acbe828"
+    ],
+    "artefatos_ia": [],
+    "analise_readme": {
+      "tamanho": 10280,
+      "tem_secoes": true,
+      "tem_codigo": true,
+      "tem_imagens": true
     }
   },
   {
@@ -4249,6 +5044,16 @@
         "Apenas um commit ou nenhum"
       ],
       "observacoes": []
+    },
+    "commits_detalhados": [],
+    "num_commits": 0,
+    "imagens": [],
+    "artefatos_ia": [],
+    "analise_readme": {
+      "tamanho": 3995,
+      "tem_secoes": true,
+      "tem_codigo": true,
+      "tem_imagens": false
     }
   },
   {
@@ -4312,7 +5117,9 @@
         "Apenas um commit ou nenhum"
       ],
       "observacoes": []
-    }
+    },
+    "commits_detalhados": [],
+    "num_commits": 0
   },
   {
     "nome": "Ana Beatriz Batista Caitano_181",
@@ -4375,31 +5182,58 @@
         "Apenas um commit ou nenhum"
       ],
       "observacoes": []
+    },
+    "commits_detalhados": [],
+    "num_commits": 0,
+    "imagens": [
+      "https://github.com/user-attachments/assets/5d629626-513a-445c-ba0f-e5bb3e225187",
+      "https://github.com/user-attachments/assets/abbd331b-a005-4633-89c6-afd16acbe828"
+    ],
+    "artefatos_ia": [],
+    "analise_readme": {
+      "tamanho": 10247,
+      "tem_secoes": true,
+      "tem_codigo": true,
+      "tem_imagens": true
     }
   },
   {
     "nome": "Pedro Henrique Fernandes Bezerra_249",
     "email": "pedro.henrique.fernandes.bezerra_249@aluno.com",
-    "github_url": "https://github.com/dashboard/my_top_repositories",
-    "status": "erro_clone",
+    "github_url": "https://github.com/pedrohfernandesbzr/processoseletivoIA-PHFB",
+    "status": "sucesso",
     "nota_final": 0,
     "criterios": {},
-    "commits": [],
+    "commits": [
+      "fde8f93 Remove rtc1 component from diagram.json"
+    ],
     "resumo": "",
-    "readme_content": null,
-    "main_py_exists": false,
-    "diagram_json_exists": false,
-    "wokwi_toml_exists": false,
-    "github_actions_exists": false,
+    "readme_content": "## 📝 Relatório do Candidato - Desaifio IoT\n\n\n\n### 👤 Identificação do Candidato\n\n* **Nome completo: Pedro Henrique Fernandes Bezerra**\n* **GitHub: https://github.com/pedrohfernandesbzr**\n\n\\---\n\n## 1️. Visão Geral da Solução\n\n**Introdução**\n\nOs propósitos deste projeto são, de forma primária, ser um sistema auxiliar para labotórios de engenharia civil, e de forma secundária, servir de base para a criação de sistemas embarcados para o canteiro de obra, capazes de expandir as aplicações da metodologia BIM mais fielmente ao mundo real, seja antes, durante e até após a consolidação da edificação. Esta solução, em especial, servirá como instrumento de coleta de dados em processos de ensaios em corpos de prova de concreto, especificamente concretos compostos por aglomerantes quimicamente ativos do tipo hidráulicos, ou seja, compostos com misturas que solidificam reagindo com água, como cimento, areia e brita.\n\nAtravés de sensores, poderá ser utilizado para monitorar e coletar informações sobre os processos de solidificação, endurecimento, cura e compressão do concreto, sendo a cura submersa ou não. Com o monitoramento ininterrúpto de variáveis físicas através de sensores, como temperatura e humidade, será possível observar e descrever fenômenos físicos do concreto de forma mais completa, presisa e detalhada.\n\nInicialmente, numa primeira versão, o sistema será focado em fenômenos internos causados pela temperatura, humidade e preessão. Com sensores, o sistema medirá as temperaturas, humidades e pressões internas e externas ao longo de cada processo e o expaço de tempo entre os processos de ensaio. Então os dados serão armazenados, sendo possível estração para análises mais detalhadas, como criação de séries temporais, análise em programas dedicados da área e cálculos mais complexos. Com isso, será possível compreender melhor como o concreto se comporta.\n\nO projeto está sendo pensado para seguir as normas ABNT que regem esse tipo de ensaio, como as NBRs 5738 (sobre os procedimentos para moldagem e cura), 5739 (método de ensaio de compressão para determinar resistência), e a 7680 (extração, preparo e ensaio de testemunhos, que são os corpos de prova retirados da estrutura já pronta).\n\n\n\n**Como utilizar o sistema**\n\n\n\n1. **Cadastramento de Novo Ensaio**: o usuário deverá, primeiro, cadastrar um novo ensaio, informando dados de identificação, materiais, agregados, aditivos, tipos de aglomerantes, entre outros dados técnicos.\n\n\n\n2. **Preparação da amostra:** após o cadastramento, o usuário deverá preparar a amostra de concreto e enformar. Imediatamente após, colocará o Sensor de Temperatura e Umidade DHT22 e o no interior da amostra.\n\n\n\n3. **Solidificação**: com isso, o usuário deverá apertar o botão \"Ensaio\". Aqui, iniciará a coleta de dados do processo de solidificação.\n\n\n\n4. **Endurecimento**: quando a pasta estiver solidificada (ainda com aspecto pastoso e deformável sobre pequena pressão, mas estável), aperte o botão P1. Com ele, a coleta de dados da solidificação será encerrada e registrada e registrada e iniciará a coleta de dados vinculada ao endurecimento.\n\n\n\n5. **Cura**: quando o processo de cura iniciar, aperte o botão P2. Isso pausará a coleta de dados para o endurecimento e iniciará coleta da cura.\n\n\n\n6. **Compressão**: clique no botão P3. A coleta de dados para a compressão iniciará.\n\n\n\n7. **Fim do Ensaio**: ao clicar no botão \"Ensaio\", a coleta de dados irá parar e os dados ficarão prontos para serem exportados quando necessário.\n\n\n\n*Em próximas versões, novos sensores e funções serão implementados.*\n\n\n\n\\---\n\n## 2️. Arquitetura do Sistema Embarcado\n\n\n\n* Fluxo principal do programa (`main.py`)\n\n\n\n* Estrutura de estados, loops ou temporizações\n\n\n\n* Como os componentes interagem entre si\n\n\n\nSe desejar, utilize tópicos ou um pequeno diagrama em texto.\n\n\\---\n\n## 3️.\n\nComponentes Utilizados na Simulação\n\nListe os principais componentes definidos no `diagram.json`, por exemplo:\n\n* Tipo de placa utilizada\n* LEDs, botões, sensores, atuadores, etc.\n* Função de cada componente no sistema\n\n\\---\n\n## 4️⃣ Decisões Técnicas Relevantes\n\nExplique brevemente decisões importantes tomadas durante o desenvolvimento, como:\n\n* Organização do código\n* Uso de funções, estados ou constantes\n* Estratégias para temporização ou controle lógico\n\n\\---\n\n## 5️⃣ Resultados Obtidos\n\nDescreva o comportamento final do sistema:\n\n* O que funciona corretamente\n* Quais requisitos foram atendidos\n* Resultado observado na simulação do Wokwi\n\n\\---\n\n## 6️⃣ Comentários Adicionais (Opcional)\n\nUtilize este espaço para comentar, se desejar:\n\n* Dificuldades encontradas\n* Limitações da solução\n* Melhorias que você faria com mais tempo\n* Principais aprendizados durante o desafio\n\n\\---\n\n> ✅ Este relatório faz parte da avaliação técnica.  \n> Clareza, objetividade e organização são tão importantes quanto o funcionamento do código.\n\n",
+    "main_py_exists": true,
+    "diagram_json_exists": true,
+    "wokwi_toml_exists": true,
+    "github_actions_exists": true,
     "analise_projeto": {
-      "pontos_fortes": [],
+      "pontos_fortes": [
+        "Possui main.py implementado",
+        "Diagrama do Wokwi presente",
+        "Configuração do Wokwi (wokwi.toml) presente",
+        "GitHub Actions configurado"
+      ],
       "pontos_melhoria": [
-        "main.py ausente ou não encontrado",
-        "diagram.json ausente",
-        "GitHub Actions não configurado",
         "Apenas um commit ou nenhum"
       ],
       "observacoes": []
+    },
+    "commits_detalhados": [],
+    "num_commits": 0,
+    "imagens": [],
+    "artefatos_ia": [],
+    "analise_readme": {
+      "tamanho": 4869,
+      "tem_secoes": true,
+      "tem_codigo": false,
+      "tem_imagens": false
     }
   },
   {
@@ -4463,6 +5297,20 @@
         "Apenas um commit ou nenhum"
       ],
       "observacoes": []
+    },
+    "commits_detalhados": [],
+    "num_commits": 0,
+    "imagens": [
+      "https://github.com/user-attachments/assets/5d629626-513a-445c-ba0f-e5bb3e225187",
+      "https://github.com/user-attachments/assets/abbd331b-a005-4633-89c6-afd16acbe828",
+      "https://github.com/user-attachments/assets/24f7b692-1139-4fb9-8375-e32825fef75e"
+    ],
+    "artefatos_ia": [],
+    "analise_readme": {
+      "tamanho": 21688,
+      "tem_secoes": true,
+      "tem_codigo": true,
+      "tem_imagens": true
     }
   },
   {
@@ -4526,6 +5374,16 @@
         "Apenas um commit ou nenhum"
       ],
       "observacoes": []
+    },
+    "commits_detalhados": [],
+    "num_commits": 0,
+    "imagens": [],
+    "artefatos_ia": [],
+    "analise_readme": {
+      "tamanho": 4367,
+      "tem_secoes": true,
+      "tem_codigo": true,
+      "tem_imagens": false
     }
   },
   {
@@ -4589,6 +5447,16 @@
         "Apenas um commit ou nenhum"
       ],
       "observacoes": []
+    },
+    "commits_detalhados": [],
+    "num_commits": 0,
+    "imagens": [],
+    "artefatos_ia": [],
+    "analise_readme": {
+      "tamanho": 4616,
+      "tem_secoes": true,
+      "tem_codigo": true,
+      "tem_imagens": false
     }
   },
   {
@@ -4652,6 +5520,16 @@
         "Apenas um commit ou nenhum"
       ],
       "observacoes": []
+    },
+    "commits_detalhados": [],
+    "num_commits": 0,
+    "imagens": [],
+    "artefatos_ia": [],
+    "analise_readme": {
+      "tamanho": 4422,
+      "tem_secoes": true,
+      "tem_codigo": false,
+      "tem_imagens": false
     }
   }
 ]

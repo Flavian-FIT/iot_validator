@@ -1,27 +1,26 @@
 #!/usr/bin/env python3
 """
-FASE 1: Re-processar commits com data limite específica (May 4, 2026)
-FASE 2: Extrair email do GitHub via API (se disponível) ou do README
-FASE 3: Detectar artefatos do projeto com LLM
-FASE 4: Extrair imagens dos relatórios
+FASE 2: Processar dados completos
+Reorganizado - Usa config.py para caminhos
 """
 import os
 import re
 import json
 import subprocess
 import shutil
+import sys
 from datetime import datetime
 from pathlib import Path
 
-# Data limite: May 4, 2026, 23:59:59
-TARGET_DATE = "2026-05-04 23:59:59"
-# Commit inicial de referência (exemplo)
-BASE_COMMIT = "e560365081a8497c2e5dafba60c1230a7f31cdb7"
+# Adicionar pasta pai ao path para importar config.py
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+import config
 
-def get_all_commits(repo_dir, base_commit=None, target_date=TARGET_DATE):
+def get_all_commits(repo_dir, base_commit=None, target_date=config.DATA_LIMITE):
     """
     Obtém todos os commits entre um commit base e a data limite
     """
+    original_cwd = os.getcwd()
     try:
         os.chdir(repo_dir)
         
@@ -63,7 +62,7 @@ def get_all_commits(repo_dir, base_commit=None, target_date=TARGET_DATE):
         print(f"Erro ao obter commits: {e}")
         return []
     finally:
-        os.chdir('/workspace/resultado_validacao')
+        os.chdir(original_cwd)
 
 def extract_email_from_readme(readme_content):
     """Extrai email do conteúdo do README"""
@@ -116,7 +115,6 @@ def extract_images_from_readme(readme_content, repo_url):
 def detectar_artefatos_ia(readme_content, commits, main_py_content):
     """
     Detecta possíveis "artefatos" de IA no projeto
-    Baseado em padrões comuns de código/documentação gerada por IA
     """
     artefatos = []
     
@@ -168,13 +166,27 @@ def detectar_artefatos_ia(readme_content, commits, main_py_content):
     return artefatos
 
 def processar_alunos():
-    resultado_path = "/workspace/resultado_validacao"
+    # Caminhos via config
+    data_path = config.DATA_PATH
+    repos_path = config.REPOS_PATH
+    
+    input_alunos = os.path.join(data_path, "avaliacoes_com_feedback.json")
+    input_repos = os.path.join(data_path, "repositorios_processados.json")
+    output_file = os.path.join(data_path, "avaliacoes_completo.json")
     
     # Carregar dados existentes
-    with open(f"{resultado_path}/avaliacoes_com_feedback.json", "r", encoding="utf-8") as f:
+    if not os.path.exists(input_alunos):
+        print(f"❌ Erro: Arquivo {input_alunos} não encontrado.")
+        return
+        
+    if not os.path.exists(input_repos):
+        print(f"❌ Erro: Arquivo {input_repos} não encontrado.")
+        return
+
+    with open(input_alunos, "r", encoding="utf-8") as f:
         alunos = json.load(f)
     
-    with open(f"{resultado_path}/repositorios_processados.json", "r", encoding="utf-8") as f:
+    with open(input_repos, "r", encoding="utf-8") as f:
         repos_data = json.load(f)
     
     print(f"Processando {len(alunos)} alunos...")
@@ -188,14 +200,14 @@ def processar_alunos():
         if not repo_info or repo_info.get('status') != 'sucesso':
             continue
         
-        repo_dir = f"/workspace/resultado_validacao/repos/{nome.replace('/', '_').replace(' ', '_')}"
+        repo_dir = os.path.join(repos_path, nome.replace('/', '_').replace(' ', '_'))
         
         if not os.path.exists(repo_dir):
             continue
         
         try:
-            # 1. Obter commits entre base_commit e data limite
-            commits = get_all_commits(repo_dir, base_commit=BASE_COMMIT)
+            # 1. Obter commits
+            commits = get_all_commits(repo_dir, base_commit=config.COMMIT_INICIAL)
             aluno['commits_detalhados'] = commits
             aluno['num_commits'] = len(commits)
             
@@ -233,11 +245,10 @@ def processar_alunos():
             continue
     
     # Salvar dados atualizados
-    output_file = f"{resultado_path}/avaliacoes_completo.json"
     with open(output_file, "w", encoding="utf-8") as f:
         json.dump(alunos, f, indent=2, ensure_ascii=False)
     
-    print(f"\nDados salvos em: {output_file}")
+    print(f"\n✅ Dados salvos em: {output_file}")
     print(f"Total de alunos processados: {len(alunos)}")
     
     # Estatísticas

@@ -1,29 +1,26 @@
 #!/usr/bin/env python3
 """
-Script completo para melhorias do dashboard:
-1. Extrair commits entre commit inicial e data limite
-2. Adicionar o que fez a nota abaixar em cada critério
-3. Extrair emails reais da API do GitHub
-4. Detectar artefatos com LLM (README, main.py, imagens)
-5. Ordenação por nome e nota
-6. Ranking geral
-7. Renderizador de Markdown
+Script completo para melhorias do dashboard
+Reorganizado - Usa config.py
 """
 import os
 import subprocess
 import json
 import re
+import sys
 from pathlib import Path
 
-COMMIT_INICIAL = "e560365081a8497c2e5dafba60c1430a7f31cdb7"
-DATA_LIMITE = "2026-05-04 23:59:59"
+# Adicionar pasta pai ao path para importar config.py
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+import config
 
 def get_all_commits(repo_path):
     """Extrai todos os commits até a data limite"""
+    original_cwd = os.getcwd()
     try:
         os.chdir(repo_path)
         result = subprocess.run(
-            ['git', 'log', f'--before="{DATA_LIMITE}"', '--pretty=format:%h|%an|%ae|%ar|%s|%b'],
+            ['git', 'log', f'--before="{config.DATA_LIMITE}"', '--pretty=format:%h|%an|%ae|%ar|%s|%b'],
             capture_output=True, text=True, timeout=30
         )
         
@@ -45,13 +42,7 @@ def get_all_commits(repo_path):
     except Exception as e:
         return []
     finally:
-        os.chdir('/workspace/resultado_validacao')
-
-def get_github_email(github_url):
-    """Tenta extrair email do GitHub (simulado - precisaria de API token real)"""
-    # Em produção, usaria: https://api.github.com/users/{username}
-    # Por enquanto, retorna None para usar email alternativo
-    return None
+        os.chdir(original_cwd)
 
 def analisar_artefatos(repo_path, readme_content, main_py_content):
     """
@@ -129,33 +120,8 @@ def gerar_feedback_completo(criterio, score, max_score, artefatos, commits):
     percentage = score / max_score if max_score > 0 else 0
     pontos_perdidos = max_score - score
     
-    feedbacks = {
-        'logica_firmware': {
-            'high': "Código bem estruturado com lógica clara. Implementa funções/modularização adequada.",
-            'medium': "Código funcional mas poderia ser mais organizado. Falta modularização ou comentários.",
-            'low': "Código com problemas de estrutura ou lógica. Pouca ou nenhuma modularização."
-        },
-        'metrica_wokwi': {
-            'high': "Diagrama completo e bem organizado no Wokwi. Componentes corretamente conectados.",
-            'medium': "Diagrama funcional mas com organização básica. Poderia melhorar disposição.",
-            'low': "Diagrama incompleto ou com problemas de conexão."
-        },
-        'ci_cd': {
-            'high': "Pipeline CI/CD bem configurado. Workflow do Wokwi com secrets.",
-            'medium': "CI/CD configurado mas com limitações. Workflow pode precisar ajustes.",
-            'low': "CI/CD ausente ou mal configurado."
-        },
-        'documentacao': {
-            'high': "Documentação completa. Todas seções preenchidas com conteúdo relevante.",
-            'medium': "Documentação presente mas incompleta. Algumas seções superficiais.",
-            'low': "Documentação mínima ou ausente. Seções importantes não preenchidas."
-        },
-        'estrutura': {
-            'high': "Repositório bem organizado. .gitignore presente. Commits regulares.",
-            'medium': "Estrutura básica presente. Poderia melhorar organização.",
-            'low': "Estrutura desorganizada. Arquivos fora do lugar."
-        }
-    }
+    # Feedback centralizado no config ou local fallback
+    feedbacks = config.FEEDBACKS
     
     base_feedback = feedbacks[criterio]['high' if percentage >= 0.8 else ('medium' if percentage >= 0.5 else 'low')]
     
@@ -193,11 +159,18 @@ def gerar_feedback_completo(criterio, score, max_score, artefatos, commits):
     return f"{base_feedback} {detalhes_perda}".strip()
 
 if __name__ == '__main__':
-    repos_path = "/workspace/resultado_validacao/repos"
-    resultado_path = "/workspace/resultado_validacao"
+    data_path = config.DATA_PATH
+    repos_path = config.REPOS_PATH
+    
+    input_file = os.path.join(data_path, "avaliacoes_com_feedback.json")
+    output_file = config.SAIDAS['json_completo']
     
     # Carregar dados
-    with open(f"{resultado_path}/avaliacoes_com_feedback.json", "r", encoding="utf-8") as f:
+    if not os.path.exists(input_file):
+        print(f"❌ Erro: Arquivo {input_file} não encontrado.")
+        sys.exit(1)
+
+    with open(input_file, "r", encoding="utf-8") as f:
         alunos = json.load(f)
     
     print("Aplicando melhorias completas...")
@@ -235,16 +208,9 @@ if __name__ == '__main__':
         aluno['artefatos'] = artefatos
         
         # 3. Gerar feedback completo com explicação de perda de pontos
-        criterios_map = {
-            'logica_firmware': 30,
-            'metrica_wokwi': 20,
-            'ci_cd': 25,
-            'documentacao': 10,
-            'estrutura': 10
-        }
-        
-        for criterio, max_score in criterios_map.items():
-            if criterio in aluno.get('criterios', {}):
+        for criterio, metadata in config.CRITERIOS.items():
+            max_score = metadata['peso']
+            if 'criterios' in aluno and criterio in aluno['criterios']:
                 score = aluno['criterios'][criterio].get('score', 0)
                 feedback_completo = gerar_feedback_completo(
                     criterio, score, max_score, artefatos, commits
@@ -262,16 +228,10 @@ if __name__ == '__main__':
     # Adicionar ranking
     for i, aluno in enumerate(alunos):
         aluno['ranking'] = i + 1
-        aluno['nota_ordenada'] = i + 1
     
     # Salvar com melhorias
-    with open(f"{resultado_path}/avaliacoes_melhoradas.json", "w", encoding="utf-8") as f:
+    with open(output_file, "w", encoding="utf-8") as f:
         json.dump(alunos, f, indent=2, ensure_ascii=False)
     
-    print(f"\nMelhorias aplicadas em {len(alunos)} alunos")
-    print(f"Arquivo: avaliacoes_melhoradas.json")
-    
-    # Estatísticas
-    print(f"\nTop 5 Ranking:")
-    for aluno in alunos[:5]:
-        print(f"  {aluno['ranking']}. {aluno['nome']} - {aluno['nota_final']:.1f}")
+    print(f"\n✅ Melhorias aplicadas em {len(alunos)} alunos")
+    print(f"Arquivo: {output_file}")

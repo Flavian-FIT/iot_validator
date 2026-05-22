@@ -11,9 +11,10 @@ from pathlib import Path
 from datetime import datetime
 
 def clean_url(url):
-    """Remove .git e .git do final da URL"""
+    """Remove .git e barra do final da URL"""
     if url:
-        url = url.rstrip('.git')
+        if url.endswith('.git'):
+            url = url[:-4]
         url = url.rstrip('/')
     return url
 
@@ -44,7 +45,9 @@ def clone_and_extract(repo_data, target_date="2026-05-04 23:59:59"):
         'github_actions_exists': False
     }
     
-    repo_dir = f"/workspace/resultado_validacao/repos/{nome.replace('/', '_').replace(' ', '_')}"
+    # Usar caminho relativo ao script
+    base_path = os.path.dirname(os.path.abspath(__file__))
+    repo_dir = os.path.join(base_path, "repos", nome.replace('/', '_').replace(' ', '_'))
     
     try:
         # Remover se já existir
@@ -115,20 +118,16 @@ def clone_and_extract(repo_data, target_date="2026-05-04 23:59:59"):
             if file.lower().endswith(('.png', '.jpg', '.jpeg', '.gif', '.svg')):
                 resultado['imagens'].append(file)
         
-        os.chdir('/workspace/resultado_validacao')
-        
-    except subprocess.TimeoutExpired:
-        resultado['status'] = 'timeout'
-        resultado['erro'] = 'Timeout ao clonar repositório'
-    except Exception as e:
-        resultado['status'] = 'erro'
-        resultado['erro'] = str(e)[:500]
-        os.chdir('/workspace/resultado_validacao')
+    finally:
+        # Voltar para o diretório do script
+        os.chdir(base_path)
     
     return resultado
 
 if __name__ == '__main__':
-    resultado_path = "/workspace/resultado_validacao"
+    # Usar caminho absoluto baseado na localização do script
+    base_path = os.path.dirname(os.path.abspath(__file__))
+    resultado_path = base_path
     
     # Carregar links mapeados
     with open(f"{resultado_path}/links_mapeados.json", "r", encoding="utf-8") as f:

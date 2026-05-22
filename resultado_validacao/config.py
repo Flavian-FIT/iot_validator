@@ -1,11 +1,20 @@
 """
 Configurações do Pipeline de Validação IoT
+Centralização de caminhos e critérios de avaliação
 """
 import os
 
-# Caminhos
-RESULTADO_PATH = "/workspace/resultado_validacao"
-REPOS_PATH = os.path.join(RESULTADO_PATH, "repos")
+# Caminho Base
+RESULTADO_PATH = os.path.dirname(os.path.abspath(__file__))
+
+# Subpastas para Organização
+SCRIPTS_PATH = os.path.join(RESULTADO_PATH, "scripts")
+DATA_PATH = os.path.join(RESULTADO_PATH, "data")
+REPORTS_PATH = os.path.join(RESULTADO_PATH, "reports")
+
+# Caminhos de Dados
+REPOS_PATH = os.path.join(DATA_PATH, "repos")
+RELATORIOS_PATH = os.path.join(REPORTS_PATH, "relatorios")
 
 # Git
 COMMIT_INICIAL = "e560365081a8497c2e5dafba60c1430a7f31cdb7"
@@ -35,8 +44,6 @@ CRITERIOS = {
     }
 }
 
-# Total: 100 pontos
-
 # Faixas de Nota
 FAIXAS_NOTA = {
     'excelente': (90, 100),
@@ -45,14 +52,14 @@ FAIXAS_NOTA = {
     'ruim': (0, 49)
 }
 
-# Arquivos de Saída
+# Arquivos de Saída (Caminhos Absolutos)
 SAIDAS = {
-    'dashboard': 'dashboard_final.html',
-    'json_completo': 'avaliacoes_melhoradas.json',
-    'json_consolidado': 'avaliacoes_completas.json'
+    'dashboard': os.path.join(REPORTS_PATH, 'dashboard_final.html'),
+    'json_completo': os.path.join(DATA_PATH, 'avaliacoes_melhoradas.json'),
+    'json_consolidado': os.path.join(DATA_PATH, 'avaliacoes_completas.json')
 }
 
-# Templates
+# Templates de Feedback
 FEEDBACKS = {
     'logica_firmware': {
         'high': "Código bem estruturado com lógica clara. Implementa funções/modularização adequada.",

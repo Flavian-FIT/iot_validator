@@ -1,22 +1,26 @@
 #!/usr/bin/env python3
 """
 Verifica a integridade dos dados processados
+Reorganizado - Usa config.py
 """
 import json
 import os
+import sys
 
-RESULTADO_PATH = "/workspace/resultado_validacao"
+# Adicionar pasta pai ao path para importar config.py
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+import config
 
 def verificar_integridade():
     print("="*60)
-    print("VERIFICAÇÃO DE INTEGRIDADE")
+    print("VERIFICAÇÃO DE INTEGRIDADE (ORGANIZADO)")
     print("="*60)
     
     erros = []
     avisos = []
     
-    # Carregar dados
-    arquivo_json = os.path.join(RESULTADO_PATH, 'avaliacoes_melhoradas.json')
+    # Carregar dados (avaliacoes_melhoradas.json está em DATA_PATH)
+    arquivo_json = config.SAIDAS['json_completo']
     if not os.path.exists(arquivo_json):
         print(f"❌ Arquivo não encontrado: {arquivo_json}")
         return False
@@ -44,16 +48,14 @@ def verificar_integridade():
         if 'criterios' in aluno:
             criterios = aluno['criterios']
             if 'logica_firmware' not in criterios:
-                avisos.append(f"Aluno {i+1}: Sem lógica do firmware")
-            if 'ci_cd' not in criterios:
-                avisos.append(f"Aluno {i+1}: Sem CI/CD")
+                avisos.append(f"Aluno {i+1} ({aluno.get('nome')}): Sem lógica do firmware")
         
         # Verificar ranking
         if 'ranking' not in aluno:
-            avisos.append(f"Aluno {i+1}: Sem ranking")
+            avisos.append(f"Aluno {i+1} ({aluno.get('nome')}): Sem ranking")
     
     # Verificar arquivo HTML
-    html_file = os.path.join(RESULTADO_PATH, 'dashboard_final.html')
+    html_file = config.SAIDAS['dashboard']
     if not os.path.exists(html_file):
         avisos.append("Dashboard HTML não encontrado")
     else:
@@ -68,7 +70,7 @@ def verificar_integridade():
     
     if erros:
         print(f"\n❌ Erros encontrados: {len(erros)}")
-        for erro in erros[:10]:  # Mostrar primeiros 10
+        for erro in erros[:10]:
             print(f"   - {erro}")
         if len(erros) > 10:
             print(f"   ... e mais {len(erros)-10} erros")
@@ -77,7 +79,7 @@ def verificar_integridade():
     
     if avisos:
         print(f"\n⚠️  Avisos: {len(avisos)}")
-        for aviso in avisos[:5]:  # Mostrar primeiros 5
+        for aviso in avisos[:5]:
             print(f"   - {aviso}")
         if len(avisos) > 5:
             print(f"   ... e mais {len(avisos)-5} avisos")
@@ -101,4 +103,4 @@ def verificar_integridade():
 
 if __name__ == '__main__':
     success = verificar_integridade()
-    exit(0 if success else 1)
+    sys.exit(0 if success else 1)

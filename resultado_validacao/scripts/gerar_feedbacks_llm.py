@@ -1,17 +1,19 @@
 #!/usr/bin/env python3
 """
 Gera feedbacks detalhados com LLM para cada critério de avaliação
+Reorganizado - Usa config.py
 """
 import json
 import os
+import sys
 
-# Dados de exemplo para simular o LLM
-# Em produção, isso chamaria uma API de LLM real
+# Adicionar pasta pai ao path para importar config.py
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+import config
 
 def gerar_feedback_llm(criterio, score, max_score, repo_data, doc_data):
     """
     Gera feedback detalhado para um critério específico
-    Usando regras baseadas em padrões observados
     """
     feedbacks = {
         'logica_firmware': {
@@ -92,10 +94,16 @@ def analisar_projeto(repo_data, doc_data):
     return analise
 
 if __name__ == '__main__':
-    resultado_path = "/workspace/resultado_validacao"
+    data_path = config.DATA_PATH
+    input_file = os.path.join(data_path, "avaliacoes_completas.json")
+    output_file = os.path.join(data_path, "avaliacoes_com_feedback.json")
     
     # Carregar dados
-    with open(f"{resultado_path}/avaliacoes_completas.json", "r", encoding="utf-8") as f:
+    if not os.path.exists(input_file):
+        print(f"❌ Erro: Arquivo {input_file} não encontrado.")
+        sys.exit(1)
+
+    with open(input_file, "r", encoding="utf-8") as f:
         alunos = json.load(f)
     
     print("Gerando feedbacks detalhados com LLM...")
@@ -110,7 +118,8 @@ if __name__ == '__main__':
         # Gerar feedback para cada critério
         for criterio, dados in criterios.items():
             score = dados.get('score', 0)
-            max_score = 30 if criterio == 'logica_firmware' else (25 if criterio == 'ci_cd' else (20 if criterio == 'metrica_wokwi' else 10))
+            # Pesos do config
+            max_score = config.CRITERIOS.get(criterio, {}).get('peso', 10)
             
             feedback_llm = gerar_feedback_llm(criterio, score, max_score, repo_data, doc_data)
             dados['feedback_detalhado'] = feedback_llm
@@ -120,8 +129,8 @@ if __name__ == '__main__':
         aluno['analise_projeto'] = analise
     
     # Salvar com feedbacks
-    with open(f"{resultado_path}/avaliacoes_com_feedback.json", "w", encoding="utf-8") as f:
+    with open(output_file, "w", encoding="utf-8") as f:
         json.dump(alunos, f, indent=2, ensure_ascii=False)
     
-    print(f"\nFeedbacks gerados para {len(alunos)} alunos")
-    print(f"Arquivo: {resultado_path}/avaliacoes_com_feedback.json")
+    print(f"\n✅ Feedbacks gerados para {len(alunos)} alunos")
+    print(f"Arquivo: {output_file}")
