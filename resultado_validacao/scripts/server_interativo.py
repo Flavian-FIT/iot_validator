@@ -1,23 +1,61 @@
 #!/usr/bin/env python3
+"""
+Servidor Interativo para o Dashboard de Validação IoT
+Reorganizado - Gerencia rotas para servir arquivos das subpastas data/ e reports/
+"""
 import http.server
 import socketserver
 import json
 import os
+import sys
 import subprocess
 import urllib.parse
 from datetime import datetime
-from gerar_dashboard_completo import PipelineValidacao
+
+# Adicionar pasta pai ao path para importar config.py
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+try:
+    import config
+except ImportError:
+    # Fallback se rodar de fora da pasta scripts
+    sys.path.append(os.path.join(os.getcwd(), '..'))
+    import config
 
 PORT = 8000
-RESULTADO_PATH = "/workspace/resultado_validacao"
 
 class DashboardHandler(http.server.SimpleHTTPRequestHandler):
-    def do_GET(self):
-        if self.path == '/':
-            self.path = '/dashboard_integrado.html'
+    def translate_path(self, path):
+        """
+        Mapeia rotas virtuais para os caminhos físicos organizados
+        """
+        # Parse path to ignore query parameters
+        parsed_path = urllib.parse.urlparse(path).path
         
+        # Se pedir a raiz ou index.html, serve o dashboard integrado
+        if parsed_path == '/' or parsed_path == '/index.html':
+            return os.path.join(config.REPORTS_PATH, 'dashboard_integrado.html')
+        
+        # Tenta encontrar o arquivo em reports/ (HTML, CSS, JS)
+        reports_file = os.path.join(config.REPORTS_PATH, parsed_path.lstrip('/'))
+        if os.path.exists(reports_file) and os.path.isfile(reports_file):
+            return reports_file
+            
+        # Tenta encontrar o arquivo em data/ (JSONs, CSVs)
+        data_file = os.path.join(config.DATA_PATH, parsed_path.lstrip('/'))
+        if os.path.exists(data_file) and os.path.isfile(data_file):
+            return data_file
+            
+        # Tenta encontrar o arquivo na raiz do resultado_validacao
+        root_file = os.path.join(config.RESULTADO_PATH, parsed_path.lstrip('/'))
+        if os.path.exists(root_file) and os.path.isfile(root_file):
+            return root_file
+            
+        # Comportamento padrão (relativo ao CWD do servidor)
+        return super().translate_path(path)
+
+    def do_GET(self):
+        # Rotas de API
         if self.path == '/api/students':
-            # Serve merged data on the fly
             self.send_students_data()
             return
         
@@ -31,7 +69,6 @@ class DashboardHandler(http.server.SimpleHTTPRequestHandler):
             conteudos = self.load_json('conteudos_manuais.json', {})
             aluno_content = conteudos.get(name, {})
             
-            # Extract plain text content
             result = {
                 'readme': aluno_content.get('readme', {}).get('conteudo', ''),
                 'main_py': aluno_content.get('main_py', {}).get('conteudo', '')
@@ -83,29 +120,25 @@ class DashboardHandler(http.server.SimpleHTTPRequestHandler):
         self.wfile.write(json.dumps(data).encode())
 
     def send_students_data(self):
-        # 1. Load the most recent fully processed data
-        path = os.path.join(RESULTADO_PATH, 'avaliacoes_melhoradas.json')
+        # 1. Carregar dados processados
+        path = config.SAIDAS['json_completo']
         if not os.path.exists(path):
-            path = os.path.join(RESULTADO_PATH, 'avaliacoes_com_feedback.json')
+            path = os.path.join(config.DATA_PATH, 'avaliacoes_com_feedback.json')
         
         students = []
         if os.path.exists(path):
             with open(path, 'r', encoding='utf-8') as f:
                 students = json.load(f)
         
-        # 2. Patch with latest manual notes
+        # 2. Patch com notas manuais
         notas_manuais = self.load_json('notas_manuais.json', {})
         conteudos_manuais = self.load_json('conteudos_manuais.json', {})
         
         for aluno in students:
             nome = aluno['nome']
-            
-            # Apply latest manual notes/checklist/criterios
             if nome in notas_manuais:
                 dados_manuais = notas_manuais[nome]
                 aluno['tem_avaliacao_manual'] = True
-                
-                # Ensure each criterion has score_auto before patching
                 criterios = aluno.get('criterios', {})
                 for crit_id, d in criterios.items():
                     if 'score_auto' not in d:
@@ -116,17 +149,14 @@ class DashboardHandler(http.server.SimpleHTTPRequestHandler):
                 aluno['checklist_manual'] = dados_manuais.get('checklist', aluno.get('checklist_manual', {}))
                 aluno['criterios_manuais'] = dados_manuais.get('criterios', aluno.get('criterios_manuais', {}))
                 
-                # Patch criteria scores
                 if aluno['criterios_manuais']:
                     for crit_id, manual_score in aluno['criterios_manuais'].items():
                         if crit_id in criterios:
                             aluno['criterios'][crit_id]['score_manual'] = manual_score
                             aluno['criterios'][crit_id]['score'] = manual_score
                             aluno['criterios'][crit_id]['is_manual'] = True
-                
                 aluno['nota_final'] = aluno['nota_manual']
             else:
-                # Ensure score_auto exists even if no manual note yet
                 criterios = aluno.get('criterios', {})
                 for crit_id, d in criterios.items():
                     if 'score_auto' not in d:
@@ -134,7 +164,6 @@ class DashboardHandler(http.server.SimpleHTTPRequestHandler):
                     d['score'] = d['score_auto']
                     d['is_manual'] = False
             
-            # Apply latest manual content
             if nome in conteudos_manuais:
                 c_manuais = conteudos_manuais[nome]
                 if 'readme' in c_manuais and c_manuais['readme'].get('conteudo'):
@@ -147,29 +176,20 @@ class DashboardHandler(http.server.SimpleHTTPRequestHandler):
 
         self.send_json(students)
 
-    def send_json_file(self, filename):
-        path = os.path.join(RESULTADO_PATH, filename)
-        if os.path.exists(path):
-            with open(path, 'r', encoding='utf-8') as f:
-                data = json.load(f)
-            self.send_json(data)
-        else:
-            self.send_json([])
-
     def send_success(self):
         self.send_response(200)
         self.end_headers()
         self.wfile.write(b'{"status": "ok"}')
 
     def load_json(self, filename, default=None):
-        path = os.path.join(RESULTADO_PATH, filename)
+        path = os.path.join(config.DATA_PATH, filename)
         if os.path.exists(path):
             with open(path, 'r', encoding='utf-8') as f:
                 return json.load(f)
         return default
 
     def save_json(self, filename, data):
-        path = os.path.join(RESULTADO_PATH, filename)
+        path = os.path.join(config.DATA_PATH, filename)
         with open(path, 'w', encoding='utf-8') as f:
             json.dump(data, f, indent=2, ensure_ascii=False)
 
@@ -200,50 +220,44 @@ class DashboardHandler(http.server.SimpleHTTPRequestHandler):
             conteudos[name] = {}
         
         if readme is not None:
-            conteudos[name]['readme'] = {
-                'conteudo': readme,
-                'data_insercao': datetime.now().isoformat(),
-                'tamanho': len(readme)
-            }
+            conteudos[name]['readme'] = {'conteudo': readme, 'data_insercao': datetime.now().isoformat()}
         
         if main_py is not None:
-            conteudos[name]['main_py'] = {
-                'conteudo': main_py,
-                'data_insercao': datetime.now().isoformat(),
-                'tamanho': len(main_py)
-            }
+            conteudos[name]['main_py'] = {'conteudo': main_py, 'data_insercao': datetime.now().isoformat()}
             
         self.save_json('conteudos_manuais.json', conteudos)
 
     def analyze_student(self, data):
         name = data.get('name')
-        if not name:
-            return None
-        
+        if not name: return None
         try:
+            # Tenta importar Pipeline de onde quer que ele esteja agora
+            sys.path.append(config.SCRIPTS_PATH)
+            from fase5_avaliar import PipelineValidacao # Exemplo de onde a classe pode estar
             pipeline = PipelineValidacao()
-            student_data = pipeline.reanalisar_aluno(name)
-            return student_data
+            return pipeline.reanalisar_aluno(name)
         except Exception as e:
             print(f"Error analyzing student: {e}")
             return None
 
     def run_consolidation(self):
         try:
-            # Execute the full pipeline to ensure everything is updated
-            print("Running full pipeline consolidation...")
-            subprocess.run(['python3', 'gerar_dashboard_completo.py'], cwd=RESULTADO_PATH, check=True)
+            subprocess.run([sys.executable, os.path.join(config.RESULTADO_PATH, '00_run_all.py')], check=True)
             return True
         except Exception as e:
             print(f"Error in consolidation: {e}")
             return False
 
 if __name__ == "__main__":
-    os.chdir(RESULTADO_PATH)
+    # O servidor DEVE rodar da pasta resultado_validacao para que caminhos relativos no front-end funcionem
+    os.chdir(config.RESULTADO_PATH)
+    socketserver.TCPServer.allow_reuse_address = True # Resolve o problema de "Address already in use" rápido
     with socketserver.TCPServer(("", PORT), DashboardHandler) as httpd:
-        print(f"Servidor interativo rodando em http://localhost:{PORT}")
-        print("Pressione Ctrl+C para encerrar")
+        print(f"✅ Servidor interativo REORGANIZADO rodando em http://localhost:{PORT}")
+        print(f"📁 Root: {config.RESULTADO_PATH}")
+        print(f"📁 Reports: {config.REPORTS_PATH}")
+        print(f"📁 Data: {config.DATA_PATH}")
         try:
             httpd.serve_forever()
         except KeyboardInterrupt:
-            pass
+            print("\nServidor encerrado.")
