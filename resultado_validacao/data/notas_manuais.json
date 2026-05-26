@@ -24,7 +24,7 @@
     "data_avaliacao": "2026-05-21T16:38:11.466164"
   },
   "Ana Beatriz Batista Caitano_181": {
-    "nota_final_manual": 0,
+    "nota_final_manual": 94,
     "comentario": "",
     "checklist": {
       "firmware": false,
@@ -40,85 +40,33 @@
       "documentacao": 10,
       "estrutura": 10
     },
-    "data_avaliacao": "2026-05-26T13:41:24.460Z",
+    "data_avaliacao": "2026-05-26T13:44:02.273Z",
     "avaliacoes_professores": {
       "Professor 1": {
-        "nota_total": 0,
+        "nota_total": 94,
         "criterios": {
           "logica_firmware": {
-            "nota": 0,
+            "nota": 30,
             "observacao": ""
           },
           "metrica_wokwi": {
-            "nota": 0,
+            "nota": 20,
             "observacao": ""
           },
           "ci_cd": {
-            "nota": 0,
+            "nota": 25,
             "observacao": ""
           },
           "documentacao": {
-            "nota": 0,
+            "nota": 10,
             "observacao": ""
           },
           "estrutura": {
-            "nota": 0,
+            "nota": 9,
             "observacao": ""
           }
         },
-        "data_avaliacao": "2026-05-26T13:41:24.460Z"
-      },
-      "Professor 2": {
-        "nota_total": 0,
-        "criterios": {
-          "logica_firmware": {
-            "nota": 0,
-            "observacao": ""
-          },
-          "metrica_wokwi": {
-            "nota": 0,
-            "observacao": ""
-          },
-          "ci_cd": {
-            "nota": 0,
-            "observacao": ""
-          },
-          "documentacao": {
-            "nota": 0,
-            "observacao": ""
-          },
-          "estrutura": {
-            "nota": 0,
-            "observacao": ""
-          }
-        },
-        "data_avaliacao": "2026-05-26T13:41:24.460Z"
-      },
-      "Professor 3": {
-        "nota_total": 0,
-        "criterios": {
-          "logica_firmware": {
-            "nota": 0,
-            "observacao": ""
-          },
-          "metrica_wokwi": {
-            "nota": 0,
-            "observacao": ""
-          },
-          "ci_cd": {
-            "nota": 0,
-            "observacao": ""
-          },
-          "documentacao": {
-            "nota": 0,
-            "observacao": ""
-          },
-          "estrutura": {
-            "nota": 0,
-            "observacao": ""
-          }
-        },
-        "data_avaliacao": "2026-05-26T13:41:24.460Z"
+        "data_avaliacao": "2026-05-26T13:44:02.274Z"
       }
     }
   },

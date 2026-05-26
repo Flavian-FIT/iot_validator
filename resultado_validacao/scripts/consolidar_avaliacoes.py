@@ -102,9 +102,18 @@ def consolidar_avaliacoes():
             
             # Suporte ao novo formato (avaliacoes_professores) e ao antigo
             if 'avaliacoes_professores' in dados_manuais:
-                aluno_consolidado['nota_manual'] = dados_manuais.get('nota_final_manual', 0)
-                aluno_consolidado['avaliacoes_professores'] = dados_manuais['avaliacoes_professores']
-                aluno_consolidado['comentario_professor'] = f"Média de {len(dados_manuais['avaliacoes_professores'])} professores"
+                # Filtrar professores que realmente avaliaram (evitar média com zeros indevidos)
+                profs_validos = {p: av for p, av in dados_manuais['avaliacoes_professores'].items() 
+                                 if av.get('nota_total', 0) > 0 or any(c.get('observacao', '').strip() for c in av.get('criterios', {}).values())}
+                
+                if profs_validos:
+                    notas_finais = [av['nota_total'] for av in profs_validos.values()]
+                    aluno_consolidado['nota_manual'] = sum(notas_finais) / len(notas_finais)
+                    aluno_consolidado['avaliacoes_professores'] = profs_validos
+                    aluno_consolidado['comentario_professor'] = f"Média de {len(profs_validos)} professores"
+                else:
+                    aluno_consolidado['nota_manual'] = dados_manuais.get('nota_final_manual', 0)
+                    aluno_consolidado['comentario_professor'] = dados_manuais.get('comentario', '')
             else:
                 # Formato antigo
                 aluno_consolidado['nota_manual'] = dados_manuais.get('nota_final_manual', 0)

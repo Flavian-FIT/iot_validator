@@ -15,6 +15,7 @@
             --gray-100: #f3f4f6;
             --gray-200: #e5e7eb;
             --gray-300: #d1d5db;
+            --gray-500: #6b7280;
             --gray-600: #4b5563;
             --gray-700: #374151;
             --gray-800: #1f2937;
@@ -165,15 +166,15 @@
         .modal-content {
             background: white;
             border-radius: 1rem;
-            max-width: 1300px;
-            width: 98%;
-            max-height: 98vh;
-            padding: 1.25rem;
+            max-width: 1500px;
+            width: 96%;
+            max-height: 94vh;
+            padding: 1.5rem;
             position: relative;
             margin: auto;
             display: flex;
             flex-direction: column;
-            overflow: hidden;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
         }
 
         .modal-close {
@@ -221,26 +222,74 @@
         .modal-grade { font-size: 2.5rem; font-weight: bold; }
 
         .modal-body { 
-            display: grid; 
-            grid-template-columns: 1fr 1fr 1fr; 
-            gap: 1.25rem; 
+            display: flex; 
+            gap: 1.5rem; 
             overflow: hidden; 
             flex: 1;
+            min-height: 0;
         }
         
         .modal-column {
             display: flex;
             flex-direction: column;
-            gap: 1.25rem;
+            gap: 1.5rem;
             overflow-y: auto;
-            padding-right: 0.5rem;
+            padding-right: 0.75rem;
+            border-right: 1px solid var(--gray-100);
+            
+            /* Scroll Indication Shadow */
+            background-image: linear-gradient(to bottom, white, white),
+                              linear-gradient(to bottom, white, white),
+                              linear-gradient(to bottom, rgba(0,0,0,0.05), transparent),
+                              linear-gradient(to top, rgba(0,0,0,0.05), transparent);
+            background-position: bottom center, top center, top center, bottom center;
+            background-color: white;
+            background-repeat: no-repeat;
+            background-size: 100% 20px, 100% 20px, 100% 10px, 100% 10px;
+            background-attachment: local, local, scroll, scroll;
         }
         
-        .modal-column::-webkit-scrollbar { width: 6px; }
-        .modal-column::-webkit-scrollbar-thumb { background: var(--gray-300); border-radius: 3px; }
+        .modal-column:last-child { border-right: none; }
+        
+        /* Better Scrollbar Visibility */
+        .modal-column::-webkit-scrollbar { width: 8px; }
+        .modal-column::-webkit-scrollbar-track { background: var(--gray-50); border-radius: 10px; }
+        .modal-column::-webkit-scrollbar-thumb { 
+            background: var(--gray-300); 
+            border-radius: 10px; 
+            border: 2px solid var(--gray-50);
+        }
+        .modal-column::-webkit-scrollbar-thumb:hover { background: var(--gray-400); }
+
+        @media (max-width: 1200px) {
+            .modal-body { 
+                flex-direction: column; 
+                overflow-y: auto;
+                padding-right: 0.5rem;
+            }
+            .modal-column { 
+                overflow-y: visible; 
+                border-right: none; 
+                border-bottom: 2px solid var(--gray-100);
+                padding-bottom: 1.5rem;
+                padding-right: 0;
+                background-image: none;
+            }
+            .modal-column:last-child { border-bottom: none; }
+            .modal-content { max-height: 90vh; }
+        }
 
         .modal-section { margin-bottom: 0.5rem; }
-        .modal-section h3 { color: var(--gray-800); margin-bottom: 0.75rem; font-size: 1rem; display: flex; align-items: center; gap: 0.5rem; }
+        .modal-section h3 { 
+            color: var(--gray-500); 
+            margin-bottom: 0.75rem; 
+            font-size: 0.9rem; 
+            display: flex; 
+            align-items: center; 
+            gap: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
 
         .criteria-list { list-style: none; }
         .criterion-item { background: var(--gray-50); border-radius: 0.5rem; margin-bottom: 1rem; overflow: hidden; border: 1px solid var(--gray-200); }
@@ -250,7 +299,7 @@
         .criterion-score { font-weight: bold; padding: 0.25rem 0.75rem; border-radius: 1rem; font-size: 0.9rem; }
         .criterion-feedback { padding: 1rem; border-top: 1px solid var(--gray-200); color: var(--gray-700); font-size: 0.9rem; }
 
-        .commits-list { list-style: none; max-height: 200px; overflow-y: auto; background: var(--gray-50); border-radius: 0.5rem; padding: 0.5rem; }
+        .commits-list { list-style: none; background: var(--gray-50); border-radius: 0.5rem; padding: 0.5rem; }
         .commit-item { padding: 0.75rem; background: white; border-radius: 0.375rem; margin-bottom: 0.5rem; font-size: 0.85rem; border-left: 3px solid var(--primary); }
         .commit-hash { font-family: monospace; color: var(--primary); font-weight: 600; }
 
@@ -264,29 +313,6 @@
         .btn-primary:hover { background: var(--primary-dark); }
         .btn-success { background: var(--success); color: white; }
         .btn-secondary { background: var(--gray-100); color: var(--gray-800); }
-        .btn-edit { background: var(--warning); color: white; width: 100%; margin-top: 1rem; }
-
-        /* Integrated Edit Section */
-        .edit-section {
-            background: #fffbeb;
-            padding: 1.5rem;
-            border-radius: 1rem;
-            border: 1px solid #fef3c7;
-            margin-top: 1rem;
-        }
-        .edit-section h3 { color: #92400e; margin-bottom: 1rem; }
-        .edit-section label { font-size: 0.85rem; color: #92400e; font-weight: 600; }
-
-        .form-group { margin-bottom: 1rem; }
-        .form-group label { display: block; margin-bottom: 0.5rem; }
-        .form-group input, .form-group textarea {
-            width: 100%;
-            padding: 0.75rem;
-            border: 2px solid var(--gray-200);
-            border-radius: 0.5rem;
-            font-size: 1rem;
-        }
-        .code-editor { font-family: monospace; font-size: 0.85rem; background: #2d3436; color: #dfe6e9; border: none; }
 
         .status-badge { display: inline-block; padding: 0.25rem 0.75rem; border-radius: 1rem; font-size: 0.75rem; font-weight: 600; }
         .status-success { background: #d1fae5; color: #059669; }
@@ -298,48 +324,89 @@
             border-radius: 0.5rem; display: none; z-index: 2000;
         }
 
-        .analysis-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem; }
+        .analysis-grid { display: grid; grid-template-columns: 1fr; gap: 1rem; margin-bottom: 1rem; }
         .analysis-item { padding: 0.75rem; background: var(--gray-50); border-radius: 0.5rem; font-size: 0.9rem; }
         .positive { background: #d1fae5; color: #059669; }
         .warning { background: #fef3c7; color: #d97706; }
 
+        /* Grading Matrix Table Styles */
         .grading-table {
             width: 100%;
-            border-collapse: collapse;
-            font-size: 0.8rem;
+            border-collapse: separate;
+            border-spacing: 0;
+            font-size: 0.85rem;
             margin-top: 0.5rem;
+            border: 1px solid var(--gray-200);
+            border-radius: 0.5rem;
+            overflow: hidden;
         }
         .grading-table th, .grading-table td {
-            border: 1px solid var(--gray-200);
-            padding: 0.4rem;
+            border: 1px solid var(--gray-100);
+            padding: 0.6rem;
             text-align: center;
+            vertical-align: top;
         }
-        .grading-table th { background: var(--gray-50); font-weight: 600; color: var(--gray-700); }
-        .grading-table td.crit-name { text-align: left; font-weight: 600; background: var(--gray-50); width: 120px; }
+        .grading-table th { 
+            background: var(--gray-50); 
+            font-weight: 700; 
+            color: var(--gray-700);
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            letter-spacing: 0.025em;
+        }
+        .grading-table td.crit-name { 
+            text-align: left; 
+            font-weight: 600; 
+            background: var(--gray-50); 
+            width: 140px;
+            color: var(--gray-800);
+        }
         .grading-table input.grade-input {
-            width: 50px;
-            padding: 0.25rem;
-            border: 1px solid var(--gray-300);
-            border-radius: 0.25rem;
+            width: 60px;
+            padding: 0.4rem;
+            border: 2px solid var(--gray-200);
+            border-radius: 0.4rem;
             text-align: center;
-            font-weight: bold;
+            font-weight: 700;
+            font-size: 1rem;
+            color: var(--primary);
+            transition: border-color 0.2s;
+        }
+        .grading-table input.grade-input:focus {
+            outline: none;
+            border-color: var(--primary);
+            background: #eff6ff;
         }
         .grading-table textarea.comment-input {
             width: 100%;
-            padding: 0.25rem;
-            border: 1px solid var(--gray-300);
-            border-radius: 0.25rem;
-            font-size: 0.75rem;
-            resize: none;
-            margin-top: 0.25rem;
+            padding: 0.5rem;
+            border: 1px solid var(--gray-200);
+            border-radius: 0.4rem;
+            font-size: 0.8rem;
+            resize: vertical;
+            min-height: 45px;
+            margin-top: 0.4rem;
             display: block;
+            line-height: 1.4;
+            color: var(--gray-700);
         }
-        .grading-table tr.total-row { background: var(--gray-100); font-weight: bold; }
-        .grading-table .auto-score { color: var(--gray-600); font-weight: normal; }
-
-        @media (max-width: 1024px) {
-            .modal-body { grid-template-columns: 1fr 1fr; }
+        .grading-table textarea.comment-input:focus {
+            outline: none;
+            border-color: var(--primary);
+            background: white;
         }
+        .grading-table tr.total-row { 
+            background: var(--gray-800); 
+            color: white;
+            font-weight: bold; 
+        }
+        .grading-table tr.total-row td { border-color: var(--gray-700); }
+        .grading-table .auto-score { 
+            color: var(--gray-500); 
+            font-weight: 600;
+            background: #f8fafc;
+        }
+        .grading-table .total-row .auto-score { color: #cbd5e1; background: var(--gray-800); }
     </style>
 </head>
 <body>
@@ -404,7 +471,7 @@
                 <div class="modal-column" style="flex: 0.8;">
                     <div class="modal-section">
                         <h3>ℹ️ Detalhes Técnicos</h3>
-                        <div class="analysis-grid" style="grid-template-columns: 1fr; gap: 0.5rem; margin-bottom: 0.5rem;">
+                        <div class="analysis-grid" style="gap: 0.5rem; margin-bottom: 0.5rem;">
                             <div class="analysis-item" id="modal-repo-status" style="padding: 0.5rem;">
                                 <strong>Repo:</strong> <a id="modal-repo-link" target="_blank">Link</a>
                             </div>
@@ -493,7 +560,6 @@
                 if (configRes.ok) {
                     const configData = await configRes.json();
                     professors_list = configData.professors || ["Geral"];
-                    updateProfessorSelect();
                 }
 
                 const res = await fetch('/api/students');
@@ -504,13 +570,6 @@
             } catch (e) {
                 console.error("Erro ao carregar dados:", e);
                 showToast("Erro ao carregar dados do servidor.");
-            }
-        }
-
-        function updateProfessorSelect() {
-            const select = document.getElementById('main-edit-professor');
-            if (select) {
-                select.innerHTML = professors_list.map(p => `<option value="${p}">${p}</option>`).join('');
             }
         }
 
@@ -560,14 +619,17 @@
         }
 
         function openModal(name) {
+            console.log("Opening modal for:", name);
             const s = students.find(x => x.nome === name);
             if (!s) return;
             currentStudent = s;
 
             // Navigation Buttons
             const currentIndex = filteredStudentsList.findIndex(x => x.nome === name);
-            document.getElementById('prev-btn').disabled = currentIndex <= 0;
-            document.getElementById('next-btn').disabled = currentIndex >= filteredStudentsList.length - 1;
+            const prevBtn = document.getElementById('prev-btn');
+            const nextBtn = document.getElementById('next-btn');
+            if (prevBtn) prevBtn.disabled = currentIndex <= 0;
+            if (nextBtn) nextBtn.disabled = currentIndex >= filteredStudentsList.length - 1;
 
             document.getElementById('modal-name').textContent = s.nome_exibicao || s.nome;
             document.getElementById('modal-email').textContent = s.email || '';
@@ -578,37 +640,72 @@
 
             // Commits
             const commits = s.commits_detalhados || s.commits || [];
-            document.getElementById('modal-commits-container').innerHTML = commits.length > 0 
-                ? `<ul class="commits-list">${commits.map(c => `
-                    <li class="commit-item" style="padding: 0.3rem;">
-                        <span class="commit-hash">${c.hash.substring(0, 7)}</span> 
-                        <span style="font-size: 0.75rem;">${c.message.substring(0, 40)}${c.message.length > 40 ? '...' : ''}</span>
-                    </li>
-                  `).join('')}</ul>`
-                : '<p style="font-size: 0.8rem; color: var(--gray-600);">Sem commits.</p>';
+            const commitsContainer = document.getElementById('modal-commits-container');
+            if (commitsContainer) {
+                commitsContainer.innerHTML = commits.length > 0 
+                    ? `<ul class="commits-list">${commits.map(c => `
+                        <li class="commit-item" style="padding: 0.3rem;">
+                            <span class="commit-hash">${c.hash.substring(0, 7)}</span> 
+                            <span style="font-size: 0.75rem;">${c.message.substring(0, 40)}${c.message.length > 40 ? '...' : ''}</span>
+                        </li>
+                      `).join('')}</ul>`
+                    : '<p style="font-size: 0.8rem; color: var(--gray-600);">Sem commits.</p>';
+            }
 
             // Tech Info
-            document.getElementById('modal-repo-link').href = s.github_url || '#';
-            document.getElementById('modal-repo-link').textContent = s.github_url ? 'GitHub' : 'N/A';
-            document.getElementById('btn-github').href = s.github_url || '#';
-            document.getElementById('btn-report').href = `/relatorios/${s.nome}_relatorio.md`;
+            const repoLink = document.getElementById('modal-repo-link');
+            if (repoLink) {
+                repoLink.href = s.github_url || '#';
+                repoLink.textContent = s.github_url ? 'GitHub' : 'N/A';
+            }
             
-            document.getElementById('modal-status-text').textContent = s.status;
-            document.getElementById('modal-status-item').className = `analysis-item ${s.status === 'sucesso' ? 'positive' : 'warning'}`;
+            const btnGithub = document.getElementById('btn-github');
+            if (btnGithub) btnGithub.href = s.github_url || '#';
+            
+            const btnReport = document.getElementById('btn-report');
+            if (btnReport) btnReport.href = `/relatorios/${s.nome}_relatorio.md`;
+            
+            const statusText = document.getElementById('modal-status-text');
+            const statusItem = document.getElementById('modal-status-item');
+            if (statusText) statusText.textContent = s.status;
+            if (statusItem) statusItem.className = `analysis-item ${s.status === 'sucesso' ? 'positive' : 'warning'}`;
             
             // Checklist
-            const ck = s.checklist_manual || {};
-            document.getElementById('main-check-firmware').checked = !!ck.firmware;
-            document.getElementById('main-check-wokwi').checked = !!ck.wokwi;
-            document.getElementById('main-check-cicd').checked = !!ck.cicd;
-            document.getElementById('main-check-docs').checked = !!ck.docs;
-            document.getElementById('main-check-structure').checked = !!ck.structure;
+            const ck = s.checklist_manual || s.checklist || {};
+            const checks = ['firmware', 'wokwi', 'cicd', 'docs', 'structure'];
+            checks.forEach(id => {
+                const el = document.getElementById(`main-check-${id}`);
+                if (el) el.checked = !!ck[id];
+            });
 
             // AI Analysis content
-            const analysis = s.analise_pontos || s.feedback || "Sem análise detalhada disponível.";
-            document.getElementById('modal-analysis-content').innerHTML = analysis.replace(/\n/g, '<br>');
+            const analysisContent = document.getElementById('modal-analysis-content');
+            if (analysisContent) {
+                const analysis = s.analise_pontos || s.feedback || "Sem análise detalhada disponível.";
+                analysisContent.innerHTML = analysis.replace(/\n/g, '<br>');
+            }
 
             document.getElementById('student-modal').classList.add('active');
+        }
+
+        function prevStudent() {
+            const currentIndex = filteredStudentsList.findIndex(x => x.nome === currentStudent.nome);
+            if (currentIndex > 0) {
+                openModal(filteredStudentsList[currentIndex - 1].nome);
+            }
+        }
+
+        function nextStudent() {
+            const currentIndex = filteredStudentsList.findIndex(x => x.nome === currentStudent.nome);
+            if (currentIndex < filteredStudentsList.length - 1) {
+                openModal(filteredStudentsList[currentIndex + 1].nome);
+            }
+        }
+
+        function closeModal() {
+            console.log("Closing modal");
+            document.getElementById('student-modal').classList.remove('active');
+            currentStudent = null;
         }
 
         function updateModalGrades(s) {
@@ -688,10 +785,21 @@
                 <div style="background: var(--gray-50); padding: 0.5rem; border-radius: 0.4rem; border-left: 3px solid var(--primary);">
                     <div style="display: flex; justify-content: space-between; font-weight: 600;">
                         <span>${p}</span>
-                        <span class="color: var(--primary);">${(ev.nota_total || 0).toFixed(1)}</span>
+                        <span style="color: var(--primary);">${(ev.nota_total || 0).toFixed(1)}</span>
                     </div>
                 </div>
             `).join('');
+        }
+
+        let saveTimeout;
+        function debouncedAutoSave() {
+            clearTimeout(saveTimeout);
+            saveTimeout = setTimeout(autoSave, 1000);
+        }
+
+        async function autoSave() {
+            if (!currentStudent) return;
+            saveAllStudentChanges(true);
         }
 
         async function saveAllStudentChanges(isAuto = false) {
@@ -713,8 +821,12 @@
             };
 
             // Recalculate totals and build evaluation object
+            let activeProfsCount = 0;
+            let sumOfTotals = 0;
+
             professors_list.forEach(p => {
                 let profTotal = 0;
+                let hasInput = false;
                 const profCriterios = {};
                 
                 document.querySelectorAll(`.grade-input[data-prof="${p}"]`).forEach(input => {
@@ -722,38 +834,45 @@
                     const val = parseFloat(input.value || 0);
                     const obs = document.querySelector(`.comment-input[data-prof="${p}"][data-crit="${critId}"]`).value;
                     
+                    if (val > 0 || obs.trim() !== "") hasInput = true;
+                    
                     profCriterios[critId] = { nota: val, observacao: obs };
                     profTotal += val;
                 });
 
-                all_evaluations.avaliacoes_professores[p] = {
-                    nota_total: profTotal,
-                    criterios: profCriterios,
-                    data_avaliacao: new Date().toISOString()
-                };
+                if (hasInput) {
+                    all_evaluations.avaliacoes_professores[p] = {
+                        nota_total: profTotal,
+                        criterios: profCriterios,
+                        data_avaliacao: new Date().toISOString()
+                    };
+                    sumOfTotals += profTotal;
+                    activeProfsCount++;
+                }
                 
                 // Update UI total
                 const totalEl = document.getElementById(`total-${p}`);
                 if (totalEl) totalEl.textContent = profTotal.toFixed(1);
             });
 
-            // Calculate overall manual average
-            const totals = Object.values(all_evaluations.avaliacoes_professores).map(ev => ev.nota_total);
-            const manualAverage = totals.length > 0 ? totals.reduce((a, b) => a + b, 0) / totals.length : 0;
+            // Calculate overall manual average only from active professors
+            const manualAverage = activeProfsCount > 0 ? sumOfTotals / activeProfsCount : 0;
             all_evaluations.nota_final_manual = manualAverage;
 
             const statusLabel = document.getElementById('save-status');
-            statusLabel.style.opacity = '1';
+            if (statusLabel) statusLabel.style.opacity = '1';
             
             try {
-                await fetch('/api/update_grade', {
+                const saveRes = await fetch('/api/update_grade', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ name, all_evaluations })
                 });
 
-                statusLabel.textContent = 'Saved!';
-                setTimeout(() => { if (statusLabel) statusLabel.style.opacity = '0'; }, 2000);
+                if (statusLabel) {
+                    statusLabel.textContent = 'Saved!';
+                    setTimeout(() => { if (statusLabel) { statusLabel.style.opacity = '0'; statusLabel.textContent = 'Saving...'; } }, 2000);
+                }
                 
                 // Refresh local data silently
                 const res = await fetch('/api/students');
@@ -769,8 +888,10 @@
                 
                 updateStats();
             } catch (e) {
-                statusLabel.textContent = 'Error!';
-                statusLabel.style.color = 'var(--danger)';
+                if (statusLabel) {
+                    statusLabel.textContent = 'Error!';
+                    statusLabel.style.color = 'var(--danger)';
+                }
             }
         }
 
@@ -785,9 +906,8 @@
                     body: JSON.stringify({ name })
                 });
                 if (res.ok) {
-                    const updatedData = await res.json();
                     showToast("IA concluiu a análise!");
-                    loadData();
+                    await loadData();
                     openModal(name);
                 } else {
                     showToast("Erro na análise IA.");
@@ -840,6 +960,11 @@
         }
 
         loadData();
+
+        // Fechar modal clicando fora
+        document.getElementById('student-modal').addEventListener('click', (e) => {
+            if (e.target.id === 'student-modal') closeModal();
+        });
 
         // Keyboard navigation
         document.addEventListener('keydown', (e) => {

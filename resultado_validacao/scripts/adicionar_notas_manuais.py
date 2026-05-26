@@ -94,12 +94,18 @@ def selecionar_professor():
             print("❌ Entrada inválida. Digite o número do professor.")
 
 def calcular_media_aluno(dados_aluno):
-    """Calcula a média das notas dos professores para um aluno"""
+    """Calcula a média das notas dos professores para um aluno, apenas dos ativos"""
     if 'avaliacoes_professores' not in dados_aluno or not dados_aluno['avaliacoes_professores']:
         return 0
     
-    notas = [av['nota_total'] for av in dados_aluno['avaliacoes_professores'].values()]
-    return sum(notas) / len(notas)
+    # Filtrar apenas professores que realmente avaliaram (evitar zeros de quem não avaliou)
+    profs_ativos = [av['nota_total'] for av in dados_aluno['avaliacoes_professores'].values() 
+                    if av.get('nota_total', 0) > 0 or any(c.get('observacao', '').strip() for c in av.get('criterios', {}).values())]
+    
+    if not profs_ativos:
+        return 0
+        
+    return sum(profs_ativos) / len(profs_ativos)
 
 def modo_interativo(avaliacoes, notas_manuais):
     """Modo interativo para adicionar notas manualmente"""

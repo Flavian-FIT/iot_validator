@@ -819,8 +819,12 @@
             };
 
             // Recalculate totals and build evaluation object
+            let activeProfsCount = 0;
+            let sumOfTotals = 0;
+
             professors_list.forEach(p => {
                 let profTotal = 0;
+                let hasInput = false;
                 const profCriterios = {};
                 
                 document.querySelectorAll(`.grade-input[data-prof="${p}"]`).forEach(input => {
@@ -828,24 +832,29 @@
                     const val = parseFloat(input.value || 0);
                     const obs = document.querySelector(`.comment-input[data-prof="${p}"][data-crit="${critId}"]`).value;
                     
+                    if (val > 0 || obs.trim() !== "") hasInput = true;
+                    
                     profCriterios[critId] = { nota: val, observacao: obs };
                     profTotal += val;
                 });
 
-                all_evaluations.avaliacoes_professores[p] = {
-                    nota_total: profTotal,
-                    criterios: profCriterios,
-                    data_avaliacao: new Date().toISOString()
-                };
+                if (hasInput) {
+                    all_evaluations.avaliacoes_professores[p] = {
+                        nota_total: profTotal,
+                        criterios: profCriterios,
+                        data_avaliacao: new Date().toISOString()
+                    };
+                    sumOfTotals += profTotal;
+                    activeProfsCount++;
+                }
                 
                 // Update UI total
                 const totalEl = document.getElementById(`total-${p}`);
                 if (totalEl) totalEl.textContent = profTotal.toFixed(1);
             });
 
-            // Calculate overall manual average
-            const totals = Object.values(all_evaluations.avaliacoes_professores).map(ev => ev.nota_total);
-            const manualAverage = totals.length > 0 ? totals.reduce((a, b) => a + b, 0) / totals.length : 0;
+            // Calculate overall manual average only from active professors
+            const manualAverage = activeProfsCount > 0 ? sumOfTotals / activeProfsCount : 0;
             all_evaluations.nota_final_manual = manualAverage;
 
             const statusLabel = document.getElementById('save-status');
