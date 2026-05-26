@@ -207,8 +207,28 @@ class DashboardHandler(http.server.SimpleHTTPRequestHandler):
 
     def update_grade(self, data):
         name = data['name']
-        grade = data['grade']
-        comment = data['comment']
+        
+        # Novo formato: Recebe todas as avaliações de uma vez
+        if 'all_evaluations' in data:
+            all_ev = data['all_evaluations']
+            notas = self.load_json('notas_manuais.json', {})
+            
+            # Garantir que temos a estrutura base
+            if name not in notas:
+                notas[name] = {}
+            
+            # Atualizar campos
+            notas[name]['avaliacoes_professores'] = all_ev.get('avaliacoes_professores', {})
+            notas[name]['nota_final_manual'] = all_ev.get('nota_final_manual', 0)
+            notas[name]['checklist'] = all_ev.get('checklist_manual', {})
+            notas[name]['data_avaliacao'] = all_ev.get('data_atualizacao', datetime.now().isoformat())
+            
+            self.save_json('notas_manuais.json', notas)
+            return
+
+        # Fallback para o formato antigo (um professor por vez)
+        grade = data.get('grade', 0)
+        comment = data.get('comment', '')
         checklist = data.get('checklist', {})
         criterios = data.get('criterios', {})
         professor = data.get('professor', 'Geral')
@@ -226,7 +246,6 @@ class DashboardHandler(http.server.SimpleHTTPRequestHandler):
             notas[name]['avaliacoes_professores'] = {}
             
         # Adicionar ou atualizar avaliação deste professor
-        # Converter formato do front-end para o formato do JSON
         av_prof = {
             'nota_total': grade,
             'observacoes': comment,
@@ -238,14 +257,15 @@ class DashboardHandler(http.server.SimpleHTTPRequestHandler):
         for crit_id, score in criterios.items():
             av_prof['criterios'][crit_id] = {
                 'nota': score,
-                'observacao': '' # Observações por critério podem ser adicionadas depois no front
+                'observacao': '' 
             }
             
         notas[name]['avaliacoes_professores'][professor] = av_prof
         
         # Recalcular média
         total_notas = [av['nota_total'] for av in notas[name]['avaliacoes_professores'].values()]
-        notas[name]['nota_final_manual'] = sum(total_notas) / len(total_notas)
+        if total_notas:
+            notas[name]['nota_final_manual'] = sum(total_notas) / len(total_notas)
         
         self.save_json('notas_manuais.json', notas)
 
