@@ -59,6 +59,13 @@ class DashboardHandler(http.server.SimpleHTTPRequestHandler):
             self.send_students_data()
             return
         
+        if self.path == '/api/config':
+            self.send_json({
+                'professors': config.PROFESSORES,
+                'criteria': config.CRITERIOS
+            })
+            return
+        
         if self.path.startswith('/api/get_content'):
             query = urllib.parse.parse_qs(urllib.parse.urlparse(self.path).query)
             name = query.get('name', [None])[0]
@@ -149,7 +156,12 @@ class DashboardHandler(http.server.SimpleHTTPRequestHandler):
                 aluno['checklist_manual'] = dados_manuais.get('checklist', aluno.get('checklist_manual', {}))
                 aluno['criterios_manuais'] = dados_manuais.get('criterios', aluno.get('criterios_manuais', {}))
                 
-                if aluno['criterios_manuais']:
+                # Suporte a múltiplos professores
+                if 'avaliacoes_professores' in dados_manuais:
+                    aluno['avaliacoes_professores'] = dados_manuais['avaliacoes_professores']
+                    aluno['comentario_professor'] = f"Média de {len(dados_manuais['avaliacoes_professores'])} professores"
+
+                if aluno.get('criterios_manuais'):
                     for crit_id, manual_score in aluno['criterios_manuais'].items():
                         if crit_id in criterios:
                             aluno['criterios'][crit_id]['score_manual'] = manual_score
@@ -199,15 +211,42 @@ class DashboardHandler(http.server.SimpleHTTPRequestHandler):
         comment = data['comment']
         checklist = data.get('checklist', {})
         criterios = data.get('criterios', {})
+        professor = data.get('professor', 'Geral')
         
         notas = self.load_json('notas_manuais.json', {})
-        notas[name] = {
-            'nota_final_manual': grade,
-            'comentario': comment,
+        
+        if name not in notas:
+            notas[name] = {
+                'avaliacoes_professores': {},
+                'nota_final_manual': 0,
+                'comentario': "Média das avaliações dos professores"
+            }
+        
+        if 'avaliacoes_professores' not in notas[name]:
+            notas[name]['avaliacoes_professores'] = {}
+            
+        # Adicionar ou atualizar avaliação deste professor
+        # Converter formato do front-end para o formato do JSON
+        av_prof = {
+            'nota_total': grade,
+            'observacoes': comment,
             'checklist': checklist,
-            'criterios': criterios,
+            'criterios': {},
             'data_avaliacao': datetime.now().isoformat()
         }
+        
+        for crit_id, score in criterios.items():
+            av_prof['criterios'][crit_id] = {
+                'nota': score,
+                'observacao': '' # Observações por critério podem ser adicionadas depois no front
+            }
+            
+        notas[name]['avaliacoes_professores'][professor] = av_prof
+        
+        # Recalcular média
+        total_notas = [av['nota_total'] for av in notas[name]['avaliacoes_professores'].values()]
+        notas[name]['nota_final_manual'] = sum(total_notas) / len(total_notas)
+        
         self.save_json('notas_manuais.json', notas)
 
     def update_content(self, data):

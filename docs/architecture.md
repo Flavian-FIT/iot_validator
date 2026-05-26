@@ -11,12 +11,18 @@ O sistema é composto por um pipeline de processamento em Python que utiliza scr
 - **Fase 6/7 (Relatórios)**: `fase6_7_csv_relatorios.py` (Consolidação final).
 
 ## 3. Fluxo de Dados e Estrutura (Organizado)
-1. `resultado_validacao/scripts/` (Lógica do pipeline)
-2. `resultado_validacao/data/` (JSONs, CSVs e repos/)
-3. `resultado_validacao/reports/` (HTMLs, MDs e relatorios/)
-4. `dashboard_final.html` (Localizado em `reports/`)
+1. `resultado_validacao/scripts/`: Lógica modular do pipeline (Fases 1-6).
+2. `resultado_validacao/data/`: JSONs intermediários, CSVs e a pasta `repos/`.
+3. `resultado_validacao/reports/`: Dashboards HTML, MDs e a pasta `relatorios/`.
+4. `dashboard_final.html`: Principal artefato de visualização (Localizado em `reports/`).
 
-## 4. Tecnologias
+## 4. Gestão de Caminhos e Portabilidade
+O sistema utiliza um padrão de **Gestão Centralizada de Caminhos**:
+- **config.py**: Define caminhos absolutos baseados no diretório raiz do projeto.
+- **Injeção de Contexto**: O orquestrador `00_run_all.py` injeta o diretório raiz no `PYTHONPATH` de cada subprocesso.
+- **Servidor Interativo**: Sobrescreve o método `translate_path` para servir arquivos de múltiplas pastas físicas (`data/` e `reports/`) sob uma mesma URL virtual.
+
+## 5. Tecnologias
 - **Linguagem**: Python 3.10+
 - **Bibliotecas**: BeautifulSoap4, Requests, GitPython, Pandas.
-- **UI**: HTML/JS Vanilla para o Dashboard.
+- **UI**: HTML/JS Vanilla para o Dashboard (Offline-first).

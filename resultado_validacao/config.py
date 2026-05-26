@@ -20,6 +20,13 @@ RELATORIOS_PATH = os.path.join(REPORTS_PATH, "relatorios")
 COMMIT_INICIAL = "e560365081a8497c2e5dafba60c1430a7f31cdb7"
 DATA_LIMITE = "2026-05-04 23:59:59"
 
+# Professores
+PROFESSORES = [
+    "Professor 1",
+    "Professor 2",
+    "Professor 3"
+]
+
 # Critérios de Avaliação
 CRITERIOS = {
     'logica_firmware': {

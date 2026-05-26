@@ -1,412 +1,122 @@
-# 📝 Sistema de Avaliação Manual e Inserção de Conteúdo
+# 📝 Sistema de Avaliação Manual Multi-Professor
 
 ## Visão Geral
 
-Este sistema permite **adicionar notas manualmente** e **inserir conteúdo de alunos** de forma manual, combinando com a avaliação automática do script.
+O sistema foi atualizado para suportar múltiplos professores avaliando o mesmo aluno. Cada professor pode atribuir notas individuais por critério e a nota final do aluno será a **média aritmética** das avaliações de todos os professores.
 
-## 🎯 Funcionalidades Adicionadas
+## 🎯 Novas Funcionalidades
 
-### 1. **Notas Manuais do Professor**
-- Adicionar notas manualmente para cada aluno
-- Inserir comentários do professor
-- Comparar notas automáticas vs manuais
-- Visualizar diferenças entre as duas avaliações
+### 1. **Avaliação por Professor**
+- Lista de professores configurável em `config.py`.
+- Cada professor possui seu próprio registro de avaliação.
+- Identificação do professor no momento da avaliação.
 
-### 2. **Inserção de Conteúdo Manual**
-- Inserir README.md manualmente
-- Adicionar código main.py
-- Inserir diagram.json (Wokwi)
-- Importar de arquivos externos
+### 2. **Avaliação por Critério**
+- Notas individuais para cada um dos 5 critérios (Lógica, Wokwi, CI/CD, Docs, Estrutura).
+- Observações específicas para cada critério.
+- Cálculo automático da nota total do professor.
 
-### 3. **Consolidação de Avaliações**
-- Combina notas automáticas e manuais
-- Gera relatório comparativo
-- Mantém histórico de ambas as avaliações
+### 3. **Cálculo de Média**
+- A nota final manual do aluno é a média das notas totais de todos os professores que o avaliaram.
+- Transparência no dashboard sobre quem avaliou e quais foram as notas.
 
 ---
 
 ## 📚 Como Usar
 
-### Passo 1: Adicionar Notas Manuais
+### Passo 1: Configurar Professores
+
+Edite o arquivo `config.py` na raiz do projeto:
+
+```python
+# Professores
+PROFESSORES = [
+    "Professor 1",
+    "Professor 2",
+    "Professor 3"
+]
+```
+
+### Passo 2: Adicionar Notas Manuais (CLI)
 
 ```bash
-cd /workspace/resultado_validacao
-python3 adicionar_notas_manuais.py
+python3 scripts/adicionar_notas_manuais.py
 ```
 
-**Opções disponíveis:**
+1. **Selecione o Professor**: No início, escolha quem está avaliando.
+2. **Escolha o Aluno**: Digite o número do aluno na lista.
+3. **Avalie por Critério**:
+   - Insira a nota para o critério (ex: Lógica de Firmware).
+   - Insira uma observação para aquele critério.
+4. **Salve**: Use o comando `s` para salvar as alterações.
 
-1. **Modo Interativo**
-   - Digite o número do aluno
-   - Insira a nota (0-100)
-   - Adicione comentário (opcional)
-   - Repita para vários alunos
+### Passo 3: Avaliação via Dashboard Interativo
 
-2. **Modo Planilha CSV**
-   - Gera template CSV
-   - Preencha externamente
-   - Ideal para muitas avaliações
-
-**Exemplo de uso:**
-```
-ESCOLHA O MODO DE OPERAÇÃO
-1. Modo Interativo (adicionar notas uma a uma)
-2. Gerar planilha CSV (preencher externamente)
-3. Sair
-
-Opção (1/2/3): 1
-
-Aluno (número), comando (l/v/s/q): 1
-
-================================================================================
-Avaliando: Maria Madalena Silva_203
-================================================================================
-
-📊 AVALIAÇÃO AUTOMÁTICA:
-  logica_firmware: 27/30
-  metrica_wokvi: 20/20
-  ci_cd: 20/25
-  documentacao: 10/10
-  estrutura: 8/10
-  TOTAL: 89.5/100
-
-📝 INSERIR NOTAS MANUAIS (0-100):
-  Nota Final Manual (0-100): 92
-  Comentário do Professor: Excelente trabalho, mas pode melhorar CI/CD
-
-✅ Nota manual salva para Maria Madalena Silva_203: 92.0
-```
+1. Inicie o servidor:
+   ```bash
+   python3 scripts/server_interativo.py
+   ```
+2. Acesse o dashboard no navegador.
+3. Abra o modal de um aluno.
+4. Na seção **Edição Manual**:
+   - Selecione o seu nome na lista de professores.
+   - Insira a nota e o comentário geral.
+   - O sistema salvará automaticamente e calculará a média.
 
 ---
 
-### Passo 2: Inserir Conteúdo Manualmente
+## 📊 Dashboard Aprimorado
 
-```bash
-python3 inserir_conteudo_manual.py
-```
+O dashboard modal foi redesenhado para fornecer uma visão completa e sem rolagem:
 
-**Tipos de conteúdo suportados:**
-- README.md - Documentação do projeto
-- main.py - Código do firmware
-- diagram.json - Diagrama do Wokwi
-- Outros arquivos
+### 1. **Navegação Rápida**
+- Botões **◀ Anterior** e **Próximo ▶** no topo do modal, ao lado do nome do aluno.
+- Suporte a navegação por teclado (Setas Esquerda/Direita).
 
-**Exemplo de uso:**
-```
-1. Inserir conteúdo de um aluno
-2. Visualizar conteúdos inseridos
-3. Remover conteúdo de um aluno
-4. Listar todos os alunos
-5. Salvar e sair
+### 2. **Layout Compacto (3 Colunas)**
+- **Coluna 1**: Critérios Automáticos e Detalhes das Avaliações dos Professores.
+- **Coluna 2**: Detalhes Técnicos, Checklist de Validação e Status do Repositório.
+- **Coluna 3**: Edição Manual, Commits Recentes e Ações de IA.
 
-Escolha uma opção (1-5): 1
-
-Digite o número do aluno (1-50): 1
-
-================================================================================
-Inserindo conteúdo para: Maria Madalena Silva_203
-================================================================================
-
-Tipo de conteúdo:
-  1. README.md
-  2. main.py (código)
-  3. diagram.json (Wokwi)
-  4. Outro arquivo
-
-Escolha o tipo (1-4): 1
-
-================================================================================
-COLE O CONTEÚDO ABAIXO
-================================================================================
-Digite o conteúdo e pressione Enter, depois digite 'FIM':
-
-# Projeto IoT
-Conteúdo do README aqui...
-
-FIM
-
-✅ Conteúdo 'readme' inserido para Maria Madalena Silva_203 (1234 caracteres)
-```
-
-**Importar de arquivo:**
-```bash
-python3 inserir_conteudo_manual.py --import
-```
+### 3. **Visibilidade Total**
+- O modal foi otimizado para caber inteiramente na tela (98% da altura do monitor padrão), eliminando a necessidade de rolagem interna.
 
 ---
 
-### Passo 3: Consolidar Avaliações
+## 📊 Estrutura de Dados (Novo Formato)
 
-```bash
-python3 consolidar_avaliacoes.py
-```
-
-**O que este script faz:**
-- Carrega avaliações automáticas
-- Carrega notas manuais (se existirem)
-- Combina as duas fontes
-- Calcula diferenças
-- Gera relatório comparativo
-
-**Saída:**
-```
-================================================================================
-CONSOLIDANDO AVALIAÇÕES - AUTOMÁTICO + MANUAL
-================================================================================
-
-✅ 50 avaliações automáticas carregadas
-📝 15 notas manuais encontradas
-
-✓ Maria Madalena Silva_203: Auto=89.5, Manual=92.0, Diferença=+2.5
-  João Silva_145: Auto=75.0 (sem avaliação manual)
-
-================================================================================
-RESUMO DA CONSOLIDAÇÃO
-================================================================================
-Total de alunos: 50
-Com avaliação manual: 15
-Sem avaliação manual: 35
-
-Estatísticas das diferenças (Manual - Automática):
-  Média: +3.2
-  Máxima: +8.5
-  Mínima: -2.0
-
-Notas Finais (com manual quando disponível):
-  Média: 82.45
-  Máxima: 95.00
-  Mínima: 45.00
-```
-
----
-
-## 📊 Estrutura de Arquivos
-
-### Arquivos Gerados
-
-| Arquivo | Descrição |
-|---------|-----------|
-| `notas_manuais.json` | Notas e comentários dos professores |
-| `conteudos_manuais.json` | Conteúdos manuais inseridos |
-| `avaliacoes_consolidadas.json` | Avaliações combinadas (auto + manual) |
-| `relatorio_comparativo.txt` | Relatório comparativo |
-
-### Estrutura de Dados
-
-**notas_manuais.json:**
+**data/notas_manuais.json:**
 ```json
 {
-  "Maria Madalena Silva_203": {
-    "nota_final_manual": 92.0,
-    "comentario": "Excelente trabalho, mas pode melhorar CI/CD",
-    "nota_automatica": 89.5,
-    "data_avaliacao": "2026-05-20T14:30:00"
+  "Nome do Aluno": {
+    "avaliacoes_professores": {
+      "Professor 1": {
+        "nota_total": 85.0,
+        "data_avaliacao": "2026-05-26T14:30:00",
+        "criterios": {
+          "logica_firmware": { "nota": 25, "observacao": "Boa lógica" },
+          "metrica_wokwi": { "nota": 15, "observacao": "Circuito básico" },
+          ...
+        }
+      },
+      "Professor 2": { ... }
+    },
+    "nota_final_manual": 85.0,
+    "comentario": "Média das avaliações dos professores"
   }
 }
 ```
 
-**conteudos_manuais.json:**
-```json
-{
-  "Maria Madalena Silva_203": {
-    "readme": {
-      "conteudo": "# Projeto IoT...",
-      "data_insercao": "2026-05-20T14:30:00",
-      "tamanho": 1234
-    }
-  }
-}
-```
+---
 
-**avaliacoes_consolidadas.json:**
-```json
-{
-  "nome": "Maria Madalena Silva_203",
-  "nota_automatica": 89.5,
-  "nota_manual": 92.0,
-  "nota_final": 92.0,
-  "diferenca": 2.5,
-  "tem_avaliacao_manual": true,
-  "comentario_professor": "Excelente trabalho..."
-}
-```
+## 🔄 Fluxo de Trabalho Atualizado
+
+1. **Pipeline Automático**: `python3 00_run_all.py`
+2. **Avaliação Manual**: `python3 scripts/adicionar_notas_manuais.py` (Múltiplos professores podem rodar este script).
+3. **Consolidação**: `python3 scripts/consolidar_avaliacoes.py` (Calcula a média final).
+4. **Visualização**: `python3 scripts/server_interativo.py` ou abra `reports/dashboard_final.html`.
 
 ---
 
-## 🔄 Fluxo de Trabalho Recomendado
-
-### Cenário 1: Avaliação Completa
-
-1. **Executar pipeline automático**
-   ```bash
-   python3 00_run_all.py
-   ```
-
-2. **Adicionar notas manuais**
-   ```bash
-   python3 adicionar_notas_manuais.py
-   ```
-
-3. **Inserir conteúdo faltante (opcional)**
-   ```bash
-   python3 inserir_conteudo_manual.py
-   ```
-
-4. **Consolidar resultados**
-   ```bash
-   python3 consolidar_avaliacoes.py
-   ```
-
-5. **Gerar dashboard final**
-   ```bash
-   python3 gerar_dashboard_final.py
-   ```
-
-### Cenário 2: Apenas Notas Manuais
-
-Se quiser usar APENAS notas manuais (ignorar automática):
-
-```bash
-# 1. Adicione as notas manuais
-python3 adicionar_notas_manuais.py
-
-# 2. Consolide (usará manual quando existir)
-python3 consolidar_avaliacoes.py
-```
-
-### Cenário 3: Conteúdo Manual Apenas
-
-Se o repositório não existe ou está incompleto:
-
-```bash
-# 1. Insira o conteúdo manualmente
-python3 inserir_conteudo_manual.py
-
-# 2. O conteúdo será usado na próxima execução do pipeline
-```
-
----
-
-## 📋 Comandos Rápidos
-
-```bash
-# Listar alunos
-python3 adicionar_notas_manuais.py  # e use comando 'l'
-
-# Adicionar nota para aluno específico
-python3 adicionar_notas_manuais.py  # modo interativo
-
-# Inserir README manual
-python3 inserir_conteudo_manual.py
-
-# Importar conteúdo de arquivo
-python3 inserir_conteudo_manual.py --import
-
-# Consolidar tudo
-python3 consolidar_avaliacoes.py
-
-# Visualizar relatório
-cat relatorio_comparativo.txt
-```
-
----
-
-## ⚠️ Pontos de Atenção
-
-1. **Notas Manuais:**
-   - Devem estar entre 0 e 100
-   - Comentários são opcionais
-   - Podem ser alteradas a qualquer momento
-
-2. **Conteúdo Manual:**
-   - Suporta UTF-8 (acentos, emojis)
-   - Tamanho máximo: ilimitado (depende do disco)
-   - Substitui conteúdo automático se existir
-
-3. **Consolidação:**
-   - Usa nota manual quando disponível
-   - Usa nota automática como fallback
-   - Mantém histórico de ambas
-
-4. **Arquivos:**
-   - Sempre faça backup antes de editar manualmente
-   - Use encoding UTF-8
-   - Não edite JSON manualmente (use os scripts)
-
----
-
-## 🎓 Exemplos de Uso
-
-### Exemplo 1: Corrigir nota de um aluno
-
-```bash
-$ python3 adicionar_notas_manuais.py
-
-Escolha uma opção (1/2/3): 1
-
-Aluno (número), comando (l/v/s/q): 1
-Avaliando: Maria Madalena Silva_203
-
-Nota Final Manual (0-100): 95
-Comentário: Aluna demonstrou excelente domínio do conteúdo.
-
-✅ Nota manual salva
-```
-
-### Exemplo 2: Inserir README de repositório privado
-
-```bash
-$ python3 inserir_conteudo_manual.py
-
-Opção: 1
-Aluno: 1
-Tipo: 1 (README.md)
-
-[cole o conteúdo do README]
-FIM
-
-✅ Conteúdo 'readme' inserido
-```
-
-### Exemplo 3: Importar código de arquivo
-
-```bash
-$ python3 inserir_conteudo_manual.py --import
-
-Aluno: 5
-Caminho: /caminho/para/main.py
-
-✅ Conteúdo importado de /caminho/para/main.py
-```
-
----
-
-## 📞 Suporte
-
-Em caso de dúvidas ou problemas:
-
-1. Verifique os logs dos scripts
-2. Confira se os arquivos JSON são válidos
-3. Use encoding UTF-8
-4. Mantenha backup dos arquivos originais
-
----
-
-## 📊 Dashboard
-
-Após consolidar as avaliações, execute:
-
-```bash
-python3 gerar_dashboard_final.py
-```
-
-O dashboard mostrará:
-- ✅ Notas automáticas
-- 📝 Notas manuais (quando disponíveis)
-- 📈 Comparativo entre as duas
-- 💡 Comentários do professor
-
----
-
-**Documentação criada em: 2026-05-20**
-**Versão: 1.0**
+**Documentação atualizada em: 26/05/2026**
+**Versão: 2.0 (Sistema Multi-Professor)**

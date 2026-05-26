@@ -16,6 +16,7 @@
 - **Problema**: O diretório `resultado_validacao/` estava poluído com scripts, JSONs e HTMLs misturados na raiz.
 - **Solução**: Implementada arquitetura de subpastas (`scripts/`, `data/`, `reports/`) com gestão centralizada de caminhos via `config.py`.
 - **Benefício**: Melhor manutenibilidade e separação de lógica vs. dados. O orquestrador `00_run_all.py` foi atualizado para gerenciar a execução cross-directory via `PYTHONPATH`.
+- **Correção Crítica**: Resolvido o erro de `NameError` e falha no mapeamento de commits detalhados durante a consolidação final.
 
 ## 🚀 Resultados Finais (2026-05-22)
 

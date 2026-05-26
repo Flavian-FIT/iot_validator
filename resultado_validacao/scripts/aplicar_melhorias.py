@@ -183,12 +183,15 @@ if __name__ == '__main__':
         
         # 1. Extrair commits detalhados
         if os.path.exists(repo_dir) and os.path.isdir(os.path.join(repo_dir, '.git')):
-            commits = get_all_commits(repo_dir)
-            aluno['commits_detalhados'] = commits
-            aluno['total_commits'] = len(commits)
+            commits_detalhados = get_all_commits(repo_dir)
+            aluno['commits_detalhados'] = commits_detalhados
+            aluno['total_commits'] = len(commits_detalhados)
+            
+            # Formato simples para compatibilidade
+            aluno['commits'] = [f"{c['hash']} {c['message']}" for c in commits_detalhados]
             
             # Extrair email do GitHub se disponível
-            github_email = commits[0]['email'] if commits else None
+            github_email = commits_detalhados[0]['email'] if commits_detalhados else None
             if github_email and '@' in github_email:
                 aluno['github_email'] = github_email
         else:
@@ -213,7 +216,7 @@ if __name__ == '__main__':
             if 'criterios' in aluno and criterio in aluno['criterios']:
                 score = aluno['criterios'][criterio].get('score', 0)
                 feedback_completo = gerar_feedback_completo(
-                    criterio, score, max_score, artefatos, commits
+                    criterio, score, max_score, artefatos, commits_detalhados
                 )
                 aluno['criterios'][criterio]['feedback_completo'] = feedback_completo
         
