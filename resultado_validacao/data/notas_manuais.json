@@ -24,7 +24,7 @@
     "data_avaliacao": "2026-05-21T16:38:11.466164"
   },
   "Ana Beatriz Batista Caitano_181": {
-    "nota_final_manual": 95.0,
+    "nota_final_manual": 0,
     "comentario": "",
     "checklist": {
       "firmware": false,
@@ -40,109 +40,85 @@
       "documentacao": 10,
       "estrutura": 10
     },
-    "data_avaliacao": "2026-05-21T16:40:19.506709",
+    "data_avaliacao": "2026-05-26T13:41:24.460Z",
     "avaliacoes_professores": {
-      "Professor 2": {
-        "nota_total": 95,
-        "observacoes": "",
-        "checklist": {
-          "firmware": false,
-          "wokwi": true,
-          "cicd": false,
-          "docs": false,
-          "structure": false
-        },
+      "Professor 1": {
+        "nota_total": 0,
         "criterios": {
           "logica_firmware": {
-            "nota": 30,
+            "nota": 0,
             "observacao": ""
           },
           "metrica_wokwi": {
-            "nota": 20,
+            "nota": 0,
             "observacao": ""
           },
           "ci_cd": {
-            "nota": 25,
+            "nota": 0,
             "observacao": ""
           },
           "documentacao": {
-            "nota": 10,
+            "nota": 0,
             "observacao": ""
           },
           "estrutura": {
-            "nota": 10,
+            "nota": 0,
             "observacao": ""
           }
         },
-        "data_avaliacao": "2026-05-26T13:24:56.679129"
+        "data_avaliacao": "2026-05-26T13:41:24.460Z"
+      },
+      "Professor 2": {
+        "nota_total": 0,
+        "criterios": {
+          "logica_firmware": {
+            "nota": 0,
+            "observacao": ""
+          },
+          "metrica_wokwi": {
+            "nota": 0,
+            "observacao": ""
+          },
+          "ci_cd": {
+            "nota": 0,
+            "observacao": ""
+          },
+          "documentacao": {
+            "nota": 0,
+            "observacao": ""
+          },
+          "estrutura": {
+            "nota": 0,
+            "observacao": ""
+          }
+        },
+        "data_avaliacao": "2026-05-26T13:41:24.460Z"
       },
       "Professor 3": {
-        "nota_total": 95,
-        "observacoes": "",
-        "checklist": {
-          "firmware": false,
-          "wokwi": true,
-          "cicd": false,
-          "docs": false,
-          "structure": false
-        },
+        "nota_total": 0,
         "criterios": {
           "logica_firmware": {
-            "nota": 30,
+            "nota": 0,
             "observacao": ""
           },
           "metrica_wokwi": {
-            "nota": 20,
+            "nota": 0,
             "observacao": ""
           },
           "ci_cd": {
-            "nota": 25,
+            "nota": 0,
             "observacao": ""
           },
           "documentacao": {
-            "nota": 10,
+            "nota": 0,
             "observacao": ""
           },
           "estrutura": {
-            "nota": 10,
+            "nota": 0,
             "observacao": ""
           }
         },
-        "data_avaliacao": "2026-05-26T13:24:59.264559"
-      },
-      "Professor 1": {
-        "nota_total": 95,
-        "observacoes": "",
-        "checklist": {
-          "firmware": false,
-          "wokwi": true,
-          "cicd": false,
-          "docs": false,
-          "structure": false
-        },
-        "criterios": {
-          "logica_firmware": {
-            "nota": 30,
-            "observacao": ""
-          },
-          "metrica_wokwi": {
-            "nota": 20,
-            "observacao": ""
-          },
-          "ci_cd": {
-            "nota": 25,
-            "observacao": ""
-          },
-          "documentacao": {
-            "nota": 10,
-            "observacao": ""
-          },
-          "estrutura": {
-            "nota": 10,
-            "observacao": ""
-          }
-        },
-        "data_avaliacao": "2026-05-26T13:25:01.550356"
+        "data_avaliacao": "2026-05-26T13:41:24.460Z"
       }
     }
   },

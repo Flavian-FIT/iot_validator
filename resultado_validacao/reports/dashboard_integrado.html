@@ -166,15 +166,15 @@
         .modal-content {
             background: white;
             border-radius: 1rem;
-            max-width: 1400px;
-            width: 98%;
-            max-height: 98vh;
-            padding: 1.25rem;
+            max-width: 1500px;
+            width: 96%;
+            max-height: 94vh;
+            padding: 1.5rem;
             position: relative;
             margin: auto;
             display: flex;
             flex-direction: column;
-            overflow: hidden;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
         }
 
         .modal-close {
@@ -223,21 +223,61 @@
 
         .modal-body { 
             display: flex; 
-            gap: 1.25rem; 
+            gap: 1.5rem; 
             overflow: hidden; 
             flex: 1;
+            min-height: 0;
         }
         
         .modal-column {
             display: flex;
             flex-direction: column;
-            gap: 1.25rem;
+            gap: 1.5rem;
             overflow-y: auto;
-            padding-right: 0.5rem;
+            padding-right: 0.75rem;
+            border-right: 1px solid var(--gray-100);
+            
+            /* Scroll Indication Shadow */
+            background-image: linear-gradient(to bottom, white, white),
+                              linear-gradient(to bottom, white, white),
+                              linear-gradient(to bottom, rgba(0,0,0,0.05), transparent),
+                              linear-gradient(to top, rgba(0,0,0,0.05), transparent);
+            background-position: bottom center, top center, top center, bottom center;
+            background-color: white;
+            background-repeat: no-repeat;
+            background-size: 100% 20px, 100% 20px, 100% 10px, 100% 10px;
+            background-attachment: local, local, scroll, scroll;
         }
         
-        .modal-column::-webkit-scrollbar { width: 6px; }
-        .modal-column::-webkit-scrollbar-thumb { background: var(--gray-300); border-radius: 3px; }
+        .modal-column:last-child { border-right: none; }
+        
+        /* Better Scrollbar Visibility */
+        .modal-column::-webkit-scrollbar { width: 8px; }
+        .modal-column::-webkit-scrollbar-track { background: var(--gray-50); border-radius: 10px; }
+        .modal-column::-webkit-scrollbar-thumb { 
+            background: var(--gray-300); 
+            border-radius: 10px; 
+            border: 2px solid var(--gray-50);
+        }
+        .modal-column::-webkit-scrollbar-thumb:hover { background: var(--gray-400); }
+
+        @media (max-width: 1200px) {
+            .modal-body { 
+                flex-direction: column; 
+                overflow-y: auto;
+                padding-right: 0.5rem;
+            }
+            .modal-column { 
+                overflow-y: visible; 
+                border-right: none; 
+                border-bottom: 2px solid var(--gray-100);
+                padding-bottom: 1.5rem;
+                padding-right: 0;
+                background-image: none;
+            }
+            .modal-column:last-child { border-bottom: none; }
+            .modal-content { max-height: 90vh; }
+        }
 
         .modal-section { margin-bottom: 0.5rem; }
         .modal-section h3 { 
@@ -350,14 +390,23 @@
             line-height: 1.4;
             color: var(--gray-700);
         }
-        .grading-table tr.total-row { background: var(--gray-800); color: white; font-weight: bold; }
-        .grading-table tr.total-row td { border-color: var(--gray-700); }
-        .grading-table .auto-score { color: var(--gray-500); font-weight: 600; background: #f8fafc; }
-        .grading-table .total-row .auto-score { color: #cbd5e1; background: var(--gray-800); }
-
-        @media (max-width: 1024px) {
-            .modal-body { flex-direction: column; }
+        .grading-table textarea.comment-input:focus {
+            outline: none;
+            border-color: var(--primary);
+            background: white;
         }
+        .grading-table tr.total-row { 
+            background: var(--gray-800); 
+            color: white;
+            font-weight: bold; 
+        }
+        .grading-table tr.total-row td { border-color: var(--gray-700); }
+        .grading-table .auto-score { 
+            color: var(--gray-500); 
+            font-weight: 600;
+            background: #f8fafc;
+        }
+        .grading-table .total-row .auto-score { color: #cbd5e1; background: var(--gray-800); }
     </style>
 </head>
 <body>
@@ -464,7 +513,7 @@
                     <div class="modal-section">
                         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
                             <h3>📝 Matriz de Avaliação (Notas e Observações)</h3>
-                            <span id="save-status" style="font-size: 0.7rem; color: #92400e; font-weight: bold; opacity: 0; transition: opacity 0.3s;">Saving...</span>
+                            <span id="save-status" style="font-size: 0.7rem; color: #92400e; font-weight: bold; opacity: 0;">Saving...</span>
                         </div>
                         <div id="grading-matrix-container" style="overflow-x: auto;">
                             <!-- Table injected via JS -->
@@ -568,6 +617,7 @@
         }
 
         function openModal(name) {
+            console.log("Opening modal for:", name);
             const s = students.find(x => x.nome === name);
             if (!s) return;
             currentStudent = s;
@@ -651,6 +701,7 @@
         }
 
         function closeModal() {
+            console.log("Closing modal");
             document.getElementById('student-modal').classList.remove('active');
             currentStudent = null;
         }
@@ -809,7 +860,7 @@
 
                 if (statusLabel) {
                     statusLabel.textContent = 'Saved!';
-                    setTimeout(() => { statusLabel.style.opacity = '0'; statusLabel.textContent = 'Saving...'; }, 2000);
+                    setTimeout(() => { if (statusLabel) { statusLabel.style.opacity = '0'; statusLabel.textContent = 'Saving...'; } }, 2000);
                 }
                 
                 // Refresh local data silently
@@ -898,6 +949,11 @@
         }
 
         loadData();
+
+        // Fechar modal clicando fora
+        document.getElementById('student-modal').addEventListener('click', (e) => {
+            if (e.target.id === 'student-modal') closeModal();
+        });
 
         // Keyboard navigation
         document.addEventListener('keydown', (e) => {
