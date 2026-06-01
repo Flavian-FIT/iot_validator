@@ -31,23 +31,23 @@ PROFESSORES = [
 CRITERIOS = {
     'logica_firmware': {
         'peso': 30,
-        'descricao': 'Lógica do Firmware'
+        'descricao': 'Lógica do Firmware (30 pts)'
     },
     'metrica_wokwi': {
         'peso': 20,
-        'descricao': 'Métrica/Wokwi'
+        'descricao': 'Métrica/Wokwi (20 pts)'
     },
     'ci_cd': {
         'peso': 25,
-        'descricao': 'CI/CD'
+        'descricao': 'CI/CD (25 pts)'
     },
     'documentacao': {
         'peso': 10,
-        'descricao': 'Documentação'
+        'descricao': 'Documentação (10 pts)'
     },
     'estrutura': {
         'peso': 10,
-        'descricao': 'Estrutura/Versionamento'
+        'descricao': 'Estrutura (10 pts)'
     }
 }
 

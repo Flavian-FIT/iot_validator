@@ -408,6 +408,13 @@
             <div class="search-box">
                 <input type="text" id="search" placeholder="🔍 Buscar por nome do aluno...">
             </div>
+            <select class="filter-select" id="sort-order">
+                <option value="none">Ordenação Padrão</option>
+                <option value="name-asc">Nome (A-Z)</option>
+                <option value="name-desc">Nome (Z-A)</option>
+                <option value="grade-desc">Maior Nota</option>
+                <option value="grade-asc">Menor Nota</option>
+            </select>
             <select class="filter-select" id="grade-filter">
                 <option value="all">Todas as Notas</option>
                 <option value="excellent">Excelente (90-100)</option>
@@ -544,23 +551,23 @@
                     <div class="criteria-grid">
                         <div class="criterion">
                             <div class="criterion-value">${student.criterios?.logica_firmware?.score || 0}</div>
-                            <div class="criterion-label">Lógica</div>
+                            <div class="criterion-label">Lógica (30)</div>
                         </div>
                         <div class="criterion">
                             <div class="criterion-value">${student.criterios?.metrica_wokwi?.score || 0}</div>
-                            <div class="criterion-label">Wokwi</div>
+                            <div class="criterion-label">Wokwi (20)</div>
                         </div>
                         <div class="criterion">
                             <div class="criterion-value">${student.criterios?.ci_cd?.score || 0}</div>
-                            <div class="criterion-label">CI/CD</div>
+                            <div class="criterion-label">CI/CD (25)</div>
                         </div>
                         <div class="criterion">
                             <div class="criterion-value">${student.criterios?.documentacao?.score || 0}</div>
-                            <div class="criterion-label">Docs</div>
+                            <div class="criterion-label">Docs (10)</div>
                         </div>
                         <div class="criterion">
                             <div class="criterion-value">${student.criterios?.estrutura?.score || 0}</div>
-                            <div class="criterion-label">Estrut.</div>
+                            <div class="criterion-label">Estrut. (10)</div>
                         </div>
                     </div>
                 </div>
@@ -579,11 +586,11 @@
             const criteriaList = document.getElementById('modal-criteria');
             const criterios = student.criterios || {};
             criteriaList.innerHTML = `
-                <li><span>Lógica do Firmware</span><strong>${criterios.logica_firmware?.score || 0}/30</strong></li>
-                <li><span>Métrica (Wokwi)</span><strong>${criterios.metrica_wokwi?.score || 0}/20</strong></li>
-                <li><span>CI/CD</span><strong>${criterios.ci_cd?.score || 0}/25</strong></li>
-                <li><span>Documentação</span><strong>${criterios.documentacao?.score || 0}/10</strong></li>
-                <li><span>Estrutura</span><strong>${criterios.estrutura?.score || 0}/10</strong></li>
+                <li><span>Lógica do Firmware (30)</span><strong>${criterios.logica_firmware?.score || 0}/30</strong></li>
+                <li><span>Métrica (Wokwi) (20)</span><strong>${criterios.metrica_wokwi?.score || 0}/20</strong></li>
+                <li><span>CI/CD (25)</span><strong>${criterios.ci_cd?.score || 0}/25</strong></li>
+                <li><span>Documentação (10)</span><strong>${criterios.documentacao?.score || 0}/10</strong></li>
+                <li><span>Estrutura (10)</span><strong>${criterios.estrutura?.score || 0}/10</strong></li>
             `;
 
             // Informações
@@ -614,6 +621,7 @@
             const searchTerm = document.getElementById('search').value.toLowerCase();
             const gradeFilter = document.getElementById('grade-filter').value;
             const statusFilter = document.getElementById('status-filter').value;
+            const sortOrder = document.getElementById('sort-order').value;
 
             let filtered = students.filter(student => {
                 const matchSearch = student.nome.toLowerCase().includes(searchTerm);
@@ -631,6 +639,16 @@
                 return matchSearch && matchGrade && matchStatus;
             });
 
+            if (sortOrder !== 'none') {
+                filtered.sort((a, b) => {
+                    if (sortOrder === 'name-asc') return a.nome.localeCompare(b.nome);
+                    if (sortOrder === 'name-desc') return b.nome.localeCompare(a.nome);
+                    if (sortOrder === 'grade-desc') return b.nota_final - a.nota_final;
+                    if (sortOrder === 'grade-asc') return a.nota_final - b.nota_final;
+                    return 0;
+                });
+            }
+
             renderStudents(filtered);
         }
 
@@ -638,6 +656,7 @@
         document.getElementById('search').addEventListener('input', filterStudents);
         document.getElementById('grade-filter').addEventListener('change', filterStudents);
         document.getElementById('status-filter').addEventListener('change', filterStudents);
+        document.getElementById('sort-order').addEventListener('change', filterStudents);
 
         // Fechar modal com ESC
         document.addEventListener('keydown', (e) => {

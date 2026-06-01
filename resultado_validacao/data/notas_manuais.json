@@ -1,8 +1,43 @@
 {
   "Amaro J├║nior Silva Luna_147": {
-    "nota_final_manual": 88,
+    "nota_final_manual": 85,
     "comentario": "",
-    "data_avaliacao": "2026-05-21T14:18:54.323749"
+    "data_avaliacao": "2026-06-01T18:00:09.652Z",
+    "avaliacoes_professores": {
+      "Professor 1": {
+        "nota_total": 85,
+        "criterios": {
+          "logica_firmware": {
+            "nota": 25,
+            "observacao": ""
+          },
+          "metrica_wokwi": {
+            "nota": 20,
+            "observacao": ""
+          },
+          "ci_cd": {
+            "nota": 20,
+            "observacao": ""
+          },
+          "documentacao": {
+            "nota": 8,
+            "observacao": ""
+          },
+          "estrutura": {
+            "nota": 12,
+            "observacao": ""
+          }
+        },
+        "data_avaliacao": "2026-06-01T18:00:09.652Z"
+      }
+    },
+    "checklist": {
+      "firmware": true,
+      "wokwi": true,
+      "cicd": true,
+      "docs": true,
+      "structure": true
+    }
   },
   "Riquelme Jatay Ribeiro Scarcela Bezerra_191": {
     "nota_final_manual": 51,
@@ -24,14 +59,14 @@
     "data_avaliacao": "2026-05-21T16:38:11.466164"
   },
   "Ana Beatriz Batista Caitano_181": {
-    "nota_final_manual": 94,
+    "nota_final_manual": 98,
     "comentario": "",
     "checklist": {
-      "firmware": false,
+      "firmware": true,
       "wokwi": true,
-      "cicd": false,
-      "docs": false,
-      "structure": false
+      "cicd": true,
+      "docs": true,
+      "structure": true
     },
     "criterios": {
       "logica_firmware": 30,
@@ -40,10 +75,126 @@
       "documentacao": 10,
       "estrutura": 10
     },
-    "data_avaliacao": "2026-05-26T17:29:50.943Z",
+    "data_avaliacao": "2026-06-01T18:12:23.932Z",
     "avaliacoes_professores": {
       "Professor 1": {
-        "nota_total": 94,
+        "nota_total": 98,
+        "criterios": {
+          "logica_firmware": {
+            "nota": 30,
+            "observacao": ""
+          },
+          "metrica_wokwi": {
+            "nota": 20,
+            "observacao": ""
+          },
+          "ci_cd": {
+            "nota": 25,
+            "observacao": ""
+          },
+          "documentacao": {
+            "nota": 8,
+            "observacao": "Deixou no mesmo readme"
+          },
+          "estrutura": {
+            "nota": 15,
+            "observacao": ""
+          }
+        },
+        "data_avaliacao": "2026-06-01T18:12:23.932Z"
+      }
+    }
+  },
+  "Alexandro dos Santos Gois_243": {
+    "nota_final_manual": 60.5,
+    "comentario": "",
+    "checklist": {
+      "firmware": true,
+      "wokwi": true,
+      "cicd": true,
+      "docs": true,
+      "structure": true
+    },
+    "criterios": {
+      "logica_firmware": 0,
+      "metrica_wokwi": 15,
+      "ci_cd": 25,
+      "documentacao": 10,
+      "estrutura": 6
+    },
+    "data_avaliacao": "2026-06-01T17:59:50.232Z",
+    "avaliacoes_professores": {
+      "Professor 1": {
+        "nota_total": 60.5,
+        "criterios": {
+          "logica_firmware": {
+            "nota": 25,
+            "observacao": ""
+          },
+          "metrica_wokwi": {
+            "nota": 20,
+            "observacao": ""
+          },
+          "ci_cd": {
+            "nota": 0,
+            "observacao": "não rodou os tests no github"
+          },
+          "documentacao": {
+            "nota": 8,
+            "observacao": "Documentação em outro arquivo"
+          },
+          "estrutura": {
+            "nota": 7.5,
+            "observacao": "arquivos espalhados"
+          }
+        },
+        "data_avaliacao": "2026-06-01T17:59:50.232Z"
+      }
+    }
+  },
+  "Gabriel Souza Santos_140": {
+    "avaliacoes_professores": {
+      "Professor 1": {
+        "nota_total": 20,
+        "criterios": {
+          "logica_firmware": {
+            "nota": 10,
+            "observacao": ""
+          },
+          "metrica_wokwi": {
+            "nota": 0,
+            "observacao": ""
+          },
+          "ci_cd": {
+            "nota": 0,
+            "observacao": ""
+          },
+          "documentacao": {
+            "nota": 10,
+            "observacao": ""
+          },
+          "estrutura": {
+            "nota": 0,
+            "observacao": ""
+          }
+        },
+        "data_avaliacao": "2026-05-26T19:28:56.615Z"
+      }
+    },
+    "nota_final_manual": 20,
+    "checklist": {
+      "firmware": true,
+      "wokwi": false,
+      "cicd": false,
+      "docs": true,
+      "structure": false
+    },
+    "data_avaliacao": "2026-05-26T19:28:56.615Z"
+  },
+  "Alan Mendes_160": {
+    "avaliacoes_professores": {
+      "Professor 1": {
+        "nota_total": 100,
         "criterios": {
           "logica_firmware": {
             "nota": 30,
@@ -62,31 +213,333 @@
             "observacao": ""
           },
           "estrutura": {
-            "nota": 9,
+            "nota": 15,
             "observacao": ""
           }
         },
-        "data_avaliacao": "2026-05-26T17:29:50.943Z"
+        "data_avaliacao": "2026-05-26T19:40:36.724Z"
       }
-    }
+    },
+    "nota_final_manual": 100,
+    "checklist": {
+      "firmware": true,
+      "wokwi": true,
+      "cicd": true,
+      "docs": true,
+      "structure": true
+    },
+    "data_avaliacao": "2026-05-26T19:40:36.724Z"
   },
-  "Alexandro dos Santos Gois_243": {
-    "nota_final_manual": 56,
-    "comentario": "",
+  "Ana Aisha Tomaz de Morais_251": {
+    "avaliacoes_professores": {
+      "Professor 1": {
+        "nota_total": 94,
+        "criterios": {
+          "logica_firmware": {
+            "nota": 24,
+            "observacao": "Da um delay na aplicação completa"
+          },
+          "metrica_wokwi": {
+            "nota": 20,
+            "observacao": ""
+          },
+          "ci_cd": {
+            "nota": 25,
+            "observacao": ""
+          },
+          "documentacao": {
+            "nota": 10,
+            "observacao": ""
+          },
+          "estrutura": {
+            "nota": 15,
+            "observacao": ""
+          }
+        },
+        "data_avaliacao": "2026-06-01T18:07:59.313Z"
+      }
+    },
+    "nota_final_manual": 94,
+    "checklist": {
+      "firmware": true,
+      "wokwi": true,
+      "cicd": true,
+      "docs": true,
+      "structure": true
+    },
+    "data_avaliacao": "2026-06-01T18:07:59.313Z"
+  },
+  "Andr├й Castro_205": {
+    "avaliacoes_professores": {
+      "Professor 1": {
+        "nota_total": 16,
+        "criterios": {
+          "logica_firmware": {
+            "nota": 0,
+            "observacao": ""
+          },
+          "metrica_wokwi": {
+            "nota": 0,
+            "observacao": ""
+          },
+          "ci_cd": {
+            "nota": 0,
+            "observacao": ""
+          },
+          "documentacao": {
+            "nota": 8,
+            "observacao": ""
+          },
+          "estrutura": {
+            "nota": 8,
+            "observacao": ""
+          }
+        },
+        "data_avaliacao": "2026-06-01T18:18:08.920Z"
+      }
+    },
+    "nota_final_manual": 16,
+    "checklist": {
+      "firmware": true,
+      "wokwi": true,
+      "cicd": true,
+      "docs": true,
+      "structure": true
+    },
+    "data_avaliacao": "2026-06-01T18:18:08.920Z"
+  },
+  "Andr├й Lima_162": {
+    "avaliacoes_professores": {
+      "Professor 1": {
+        "nota_total": 95,
+        "criterios": {
+          "logica_firmware": {
+            "nota": 30,
+            "observacao": ""
+          },
+          "metrica_wokwi": {
+            "nota": 20,
+            "observacao": ""
+          },
+          "ci_cd": {
+            "nota": 25,
+            "observacao": ""
+          },
+          "documentacao": {
+            "nota": 8,
+            "observacao": ""
+          },
+          "estrutura": {
+            "nota": 12,
+            "observacao": ""
+          }
+        },
+        "data_avaliacao": "2026-06-01T18:54:37.716Z"
+      }
+    },
+    "nota_final_manual": 95,
+    "checklist": {
+      "firmware": true,
+      "wokwi": true,
+      "cicd": true,
+      "docs": true,
+      "structure": true
+    },
+    "data_avaliacao": "2026-06-01T18:54:37.716Z"
+  },
+  "Andr├й Wesley_172": {
+    "avaliacoes_professores": {
+      "Professor 1": {
+        "nota_total": 42.5,
+        "criterios": {
+          "logica_firmware": {
+            "nota": 15,
+            "observacao": "O último commit não contém o código do projeto"
+          },
+          "metrica_wokwi": {
+            "nota": 0,
+            "observacao": ""
+          },
+          "ci_cd": {
+            "nota": 20,
+            "observacao": ""
+          },
+          "documentacao": {
+            "nota": 0,
+            "observacao": "O último commit não contém a documentação"
+          },
+          "estrutura": {
+            "nota": 7.5,
+            "observacao": ""
+          }
+        },
+        "data_avaliacao": "2026-06-01T19:41:36.935Z"
+      }
+    },
+    "nota_final_manual": 42.5,
     "checklist": {
       "firmware": false,
-      "wokwi": false,
-      "cicd": false,
+      "wokwi": true,
+      "cicd": true,
       "docs": false,
-      "structure": false
+      "structure": true
     },
-    "criterios": {
-      "logica_firmware": 0,
-      "metrica_wokwi": 15,
-      "ci_cd": 25,
-      "documentacao": 10,
-      "estrutura": 6
+    "data_avaliacao": "2026-06-01T19:41:36.935Z"
+  },
+  "Antonio Rafael Oliveira da Cunha_230": {
+    "avaliacoes_professores": {
+      "Professor 1": {
+        "nota_total": 90,
+        "criterios": {
+          "logica_firmware": {
+            "nota": 24,
+            "observacao": ""
+          },
+          "metrica_wokwi": {
+            "nota": 16,
+            "observacao": ""
+          },
+          "ci_cd": {
+            "nota": 25,
+            "observacao": ""
+          },
+          "documentacao": {
+            "nota": 10,
+            "observacao": ""
+          },
+          "estrutura": {
+            "nota": 15,
+            "observacao": ""
+          }
+        },
+        "data_avaliacao": "2026-06-01T20:21:49.286Z"
+      }
     },
-    "data_avaliacao": "2026-05-25T13:10:55.016014"
+    "nota_final_manual": 90,
+    "checklist": {
+      "firmware": true,
+      "wokwi": true,
+      "cicd": true,
+      "docs": true,
+      "structure": true
+    },
+    "data_avaliacao": "2026-06-01T20:21:49.286Z"
+  },
+  "Arthur Lobo Feitosa de Oliveira_234": {
+    "avaliacoes_professores": {
+      "Professor 1": {
+        "nota_total": 88,
+        "criterios": {
+          "logica_firmware": {
+            "nota": 30,
+            "observacao": ""
+          },
+          "metrica_wokwi": {
+            "nota": 20,
+            "observacao": ""
+          },
+          "ci_cd": {
+            "nota": 20,
+            "observacao": ""
+          },
+          "documentacao": {
+            "nota": 10,
+            "observacao": ""
+          },
+          "estrutura": {
+            "nota": 8,
+            "observacao": ""
+          }
+        },
+        "data_avaliacao": "2026-06-01T20:21:58.654Z"
+      }
+    },
+    "nota_final_manual": 88,
+    "checklist": {
+      "firmware": true,
+      "wokwi": true,
+      "cicd": true,
+      "docs": true,
+      "structure": true
+    },
+    "data_avaliacao": "2026-06-01T20:21:58.654Z"
+  },
+  "Bruno Macedo_224": {
+    "avaliacoes_professores": {
+      "Professor 1": {
+        "nota_total": 76,
+        "criterios": {
+          "logica_firmware": {
+            "nota": 20,
+            "observacao": ""
+          },
+          "metrica_wokwi": {
+            "nota": 20,
+            "observacao": ""
+          },
+          "ci_cd": {
+            "nota": 20,
+            "observacao": ""
+          },
+          "documentacao": {
+            "nota": 8,
+            "observacao": ""
+          },
+          "estrutura": {
+            "nota": 8,
+            "observacao": ""
+          }
+        },
+        "data_avaliacao": "2026-06-01T20:30:36.613Z"
+      }
+    },
+    "nota_final_manual": 76,
+    "checklist": {
+      "firmware": true,
+      "wokwi": true,
+      "cicd": true,
+      "docs": true,
+      "structure": true
+    },
+    "data_avaliacao": "2026-06-01T20:30:36.613Z"
+  },
+  "Thomas Magalh├гes_139": {
+    "avaliacoes_professores": {
+      "Professor 1": {
+        "nota_total": 85,
+        "criterios": {
+          "logica_firmware": {
+            "nota": 24,
+            "observacao": "Os leds centrais não apagam"
+          },
+          "metrica_wokwi": {
+            "nota": 20,
+            "observacao": ""
+          },
+          "ci_cd": {
+            "nota": 25,
+            "observacao": ""
+          },
+          "documentacao": {
+            "nota": 8,
+            "observacao": ""
+          },
+          "estrutura": {
+            "nota": 8,
+            "observacao": ""
+          }
+        },
+        "data_avaliacao": "2026-06-01T20:37:32.872Z"
+      }
+    },
+    "nota_final_manual": 85,
+    "checklist": {
+      "firmware": true,
+      "wokwi": true,
+      "cicd": true,
+      "docs": true,
+      "structure": true
+    },
+    "data_avaliacao": "2026-06-01T20:37:32.872Z"
   }
 }

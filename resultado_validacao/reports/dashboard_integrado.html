@@ -430,6 +430,13 @@
             <div class="search-box">
                 <input type="text" id="search" placeholder="🔍 Buscar por nome do aluno..." oninput="filterStudents()">
             </div>
+            <select class="filter-select" id="sort-order" onchange="filterStudents()">
+                <option value="none">Ordenação Padrão</option>
+                <option value="name-asc">Nome (A-Z)</option>
+                <option value="name-desc">Nome (Z-A)</option>
+                <option value="grade-desc">Maior Nota</option>
+                <option value="grade-asc">Menor Nota</option>
+            </select>
             <select class="filter-select" id="grade-filter" onchange="filterStudents()">
                 <option value="all">Todas as Notas</option>
                 <option value="excellent">Excelente (90-100)</option>
@@ -605,11 +612,11 @@
                         <p>Status: <span class="status-badge ${s.status === 'sucesso' ? 'status-success' : 'status-error'}">${s.status}</span></p>
                     </div>
                     <div class="criteria-grid">
-                        <div class="criterion"><div class="criterion-value">${s.criterios?.logica_firmware?.score || 0}</div><div class="criterion-label">Lógica</div></div>
-                        <div class="criterion"><div class="criterion-value">${s.criterios?.metrica_wokwi?.score || 0}</div><div class="criterion-label">Wokwi</div></div>
-                        <div class="criterion"><div class="criterion-value">${s.criterios?.ci_cd?.score || 0}</div><div class="criterion-label">CI/CD</div></div>
-                        <div class="criterion"><div class="criterion-value">${s.criterios?.documentacao?.score || 0}</div><div class="criterion-label">Docs</div></div>
-                        <div class="criterion"><div class="criterion-value">${s.criterios?.estrutura?.score || 0}</div><div class="criterion-label">Estrut.</div></div>
+                        <div class="criterion"><div class="criterion-value">${s.criterios?.logica_firmware?.score || 0}</div><div class="criterion-label">Lógica (30)</div></div>
+                        <div class="criterion"><div class="criterion-value">${s.criterios?.metrica_wokwi?.score || 0}</div><div class="criterion-label">Wokwi (20)</div></div>
+                        <div class="criterion"><div class="criterion-value">${s.criterios?.ci_cd?.score || 0}</div><div class="criterion-label">CI/CD (25)</div></div>
+                        <div class="criterion"><div class="criterion-value">${s.criterios?.documentacao?.score || 0}</div><div class="criterion-label">Docs (10)</div></div>
+                        <div class="criterion"><div class="criterion-value">${s.criterios?.estrutura?.score || 0}</div><div class="criterion-label">Estrut. (10)</div></div>
                     </div>
                     ${s.tem_avaliacao_manual ? '<div style="margin-top: 1rem; font-size: 0.75rem; color: var(--warning); font-weight: bold;">📝 Nota Manual Aplicada</div>' : ''}
                 </div>
@@ -720,11 +727,11 @@
 
         function renderGradingMatrix(s) {
             const criteria = [
-                { id: 'logica_firmware', name: 'Lógica', max: 30 },
-                { id: 'metrica_wokwi', name: 'Wokwi', max: 20 },
-                { id: 'ci_cd', name: 'CI/CD', max: 25 },
-                { id: 'documentacao', name: 'Docs', max: 10 },
-                { id: 'estrutura', name: 'Estrutura', max: 10 }
+                { id: 'logica_firmware', name: 'Lógica (30)', max: 30 },
+                { id: 'metrica_wokwi', name: 'Wokwi (20)', max: 20 },
+                { id: 'ci_cd', name: 'CI/CD (25)', max: 25 },
+                { id: 'documentacao', name: 'Docs (10)', max: 10 },
+                { id: 'estrutura', name: 'Estrutura (10)', max: 10 }
             ];
 
             const evals = s.avaliacoes_professores || {};
@@ -934,6 +941,7 @@
             const search = document.getElementById('search').value.toLowerCase();
             const grade = document.getElementById('grade-filter').value;
             const status = document.getElementById('status-filter').value;
+            const sort = document.getElementById('sort-order').value;
 
             filteredStudentsList = students.filter(s => {
                 const searchName = (s.nome_exibicao || s.nome).toLowerCase();
@@ -946,6 +954,16 @@
                 const matchStatus = status === 'all' || (status === 'success' ? s.status === 'sucesso' : s.status !== 'sucesso');
                 return matchSearch && matchGrade && matchStatus;
             });
+
+            if (sort !== 'none') {
+                filteredStudentsList.sort((a, b) => {
+                    if (sort === 'name-asc') return (a.nome_exibicao || a.nome).localeCompare(b.nome_exibicao || b.nome);
+                    if (sort === 'name-desc') return (b.nome_exibicao || b.nome).localeCompare(a.nome_exibicao || a.nome);
+                    if (sort === 'grade-desc') return b.nota_final - a.nota_final;
+                    if (sort === 'grade-asc') return a.nota_final - b.nota_final;
+                    return 0;
+                });
+            }
 
             renderStudents(filteredStudentsList);
         }
